@@ -5,6 +5,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
+    font_size: 35
 
 <NoteList>
     viewclass: 'Note'
@@ -13,12 +14,13 @@
 <ListTitle@Label>
     size_hint_y: None
     height: self.font_size
-    font_size: 15
+    font_size: 40
 
 <MoveButton@Button>
     size_hint_y: None
+    background_color: (0,0,0,1)
     height: self.font_size + 30
-    font_size: 15
+    font_size: 35
 
 <NoteScreen>:
 	name: 'note_screen'

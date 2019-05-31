@@ -4,25 +4,17 @@
     "c": 21,
     "height": 55.222,
     "plot_num": 11111111,
-    "operator": "Ben",
+    "operator": "Jared",
     "notes": {
         "pretest": [
             "Wet Soil",
-            "",
-            "",
-            "",
-            ""
+            "Root Lodge"
         ],
         "posttest": [
-            "",
-            "Root Lodge",
-            "",
-            "",
-            ""
+            "Stalk Lodge"
         ],
         "bank": [
-            "water",
-            "Stalk Lodge"
+            "water"
         ]
     },
     "break_height": "N/A",
