@@ -16,6 +16,9 @@ class GranuSideArea(GridLayout):
 class GranuSideButton(Button):
 	pass
 
+class GranuNoteButton(Button):
+	pass
+
 class GranuNone(Widget):
     pass
 
