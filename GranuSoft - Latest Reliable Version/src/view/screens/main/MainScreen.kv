@@ -1,0 +1,60 @@
+<MainScreenInfoBox@Label>:
+    font_size: 25
+	color: 0,0,0,1
+	halign: 'center'
+	valign: 'center'
+    canvas.before:
+        Color:
+            rgba: .74,.74,.74,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MainScreen>:
+    name: 'main_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Settings'
+	    		on_release:
+                    root.move_to('settings_screen') # Move to settings screen
+            GranuSideButton:
+                text: 'Testing'
+                on_release:
+                    root.move_to('testing_screen') # Move to testing screen
+            GranuSideButton:
+                text: 'Live Feed'
+                on_release:
+                    root.move_to('live_feed_screen') # Move to liveFeed screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('exit_screen') # Move to exit screen
+        GranuContent:
+            GranuTitle:
+                text: 'Main Menu'
+            Label:
+                id: device_name
+                font_size: 40
+                text: 'Stalk Strength\nDevice 2.0'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            GridLayout:
+                cols: 2
+                spacing: 10
+                MainScreenInfoBox:
+                    id: temperature
+                    text: 'Temperature: ' + root.temperature +  u'\N{DEGREE SIGN}' + 'F'
+                MainScreenInfoBox:
+                    id: humidity
+                    text: 'Humidity: ' + root.humidity +  "%"
+                MainScreenInfoBox:
+                    id: location
+                    text: 'Location: ' + root.location
+                MainScreenInfoBox:
+                    id: time
+                    text: 'Time: ' + root.time

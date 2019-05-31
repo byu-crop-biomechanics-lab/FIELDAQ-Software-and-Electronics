@@ -1,0 +1,49 @@
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
+<TestInProgressInfoBox@Label>:
+    font_size: 50
+	color: 0,0,0,1
+	halign: 'center'
+	valign: 'center'
+    color: 1,1,1,1
+    canvas.before:
+        Color:
+            rgba: .5,.4,.4,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TestInProgressScreen>:
+	name: 'test_in_progress_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuNone:
+            GranuNone:
+            GranuNone:
+            GranuSideButton:
+                text: 'Stop'
+	    		on_release:
+                    root.move_to('testing_results_screen') # Move to testing results screen
+        GranuContent:
+            GranuTitle:
+                text: 'Test in Progress'
+            TestInProgressInfoBox:
+                id: test_time_box
+                text: "Test in progress for\n" + str(root.test_time) + " seconds"
+            Graph:
+                id: graph_test
+                plot: MeshLinePlot
+                background_color: .5, .5, .5, 1
+                xlabel:'Time(s)'
+                ylabel:'X_Load(adc)'
+                x_ticks_major:root.x_major
+                y_ticks_major:root.y_major
+                y_grid_label:True
+                x_grid_label:True
+                padding:5
+                x_grid:True
+                y_grid:True
+                xmin:0
+                ymin:0
+                xmax:root.x_max
+                ymax:root.y_max

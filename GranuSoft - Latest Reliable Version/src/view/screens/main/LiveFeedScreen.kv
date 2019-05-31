@@ -1,0 +1,60 @@
+<LiveFeedInfoBox@Label>:
+    font_size: 25
+	color: 0,0,0,1
+	halign: 'center'
+	valign: 'center'
+    canvas.before:
+        Color:
+            rgba: .74,.74,.74,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<LiveFeedScreen>:
+	name: 'live_feed_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuNone:
+            GranuNone:
+            GranuSideButton:
+                text: root.transition_to_state
+	    		on_release:
+                    root.transition()
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.manager.transition.direction = 'right'
+                    root.move_to('main_screen') # Move to main screen
+        GranuContent:
+            GranuTitle:
+                text: 'Live Feed'
+            GridLayout:
+                cols: 3
+                spacing: 10
+                LiveFeedInfoBox:
+                    id: temperature
+                    text: root.temperature_label + ':\n' + root.temperature + u'\N{DEGREE SIGN}' + "C"
+                LiveFeedInfoBox:
+                    id: humidity
+                    text: root.humidity_label + ':\n' + root.humidity + "%"
+                LiveFeedInfoBox:
+                    id: location
+                    text: root.location_label + ':\n' + root.location
+                LiveFeedInfoBox:
+                    id: time
+                    text: root.time_label + ':\n' + root.time
+                LiveFeedInfoBox:
+                    id: x_load
+                    text: root.x_load_label + ':\n' + root.x_load
+                LiveFeedInfoBox:
+                    id: y_load
+                    text: root.y_load_label + ':\n' + root.y_load
+                LiveFeedInfoBox:
+                    id: pot_angle
+                    text: root.pot_angle_label + ':\n' + root.pot_angle
+                LiveFeedInfoBox:
+                    id: imu_angle
+                    text: root.imu_angle_label + ':\n' + root.imu_angle + "G"
+                LiveFeedInfoBox:
+                    id: cpu_time
+                    text: root.data_rate_label + ':\n' + root.data_rate + " Hz"

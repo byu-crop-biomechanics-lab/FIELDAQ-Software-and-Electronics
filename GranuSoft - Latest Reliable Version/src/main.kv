@@ -1,0 +1,59 @@
+# Include custom Kivy widgets for all screens
+#:import * view.elements
+
+#:import ExitScreen view.screens.main.ExitScreen
+#:import LiveFeedScreen view.screens.main.LiveFeedScreen
+#:import MainScreen view.screens.main.MainScreen
+#:import SettingsScreen view.screens.main.SettingsScreen
+#:import TestingScreen view.screens.main.TestingScreen
+
+#:import ColorsScreen view.screens.settings.ColorsScreen
+#:import HeightScreen view.screens.settings.HeightScreen
+#:import NoteScreen view.screens.settings.NoteScreen
+#:import OperatorScreen view.screens.settings.OperatorScreen
+#:import PlotScreen view.screens.settings.PlotScreen
+#:import SensorsScreen view.screens.settings.SensorsScreen
+#:import UpdateScreen view.screens.settings.UpdateScreen
+
+#:import NewNoteScreen view.screens.settings.NewNoteScreen
+
+#:import CalibrateScreen view.screens.settings.CalibrateScreen
+#:import CalibratePointScreen view.screens.settings.CalibratePointScreen
+
+#:import TestInProgressScreen view.screens.main.testing.TestInProgressScreen
+#:import TestingResultsScreen view.screens.main.testing.TestingResultsScreen
+#:import BreakHeightScreen view.screens.main.testing.BreakHeightScreen
+#:import TestsScreen view.screens.main.testing.TestsScreen
+
+<GranuScreenManager>:
+    # Properties
+    current: 'main_screen' # Start with the main screen
+
+    # Root
+    ExitScreen:
+    LiveFeedScreen:
+    MainScreen:
+    SettingsScreen:
+    TestingScreen:
+
+    # Settings
+    ColorsScreen:
+    HeightScreen:
+    NoteScreen:
+    OperatorScreen:
+    PlotScreen:
+    SensorsScreen:
+    UpdateScreen:
+
+    # Settings - Notes
+    NewNoteScreen:
+
+    # Settings - Sensors
+    CalibrateScreen:
+    CalibratePointScreen:
+
+    # Testing
+    TestInProgressScreen:
+    TestingResultsScreen:
+    BreakHeightScreen:
+    TestsScreen:

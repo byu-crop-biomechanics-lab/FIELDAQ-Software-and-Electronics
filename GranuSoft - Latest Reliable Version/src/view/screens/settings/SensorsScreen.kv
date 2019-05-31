@@ -1,0 +1,20 @@
+<SensorButton>:
+    font_size: 30
+    halign: 'center'
+
+<SensorsScreen>:
+	name: 'sensors_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.back()
+        GranuContent:
+            GranuTitle:
+                text: 'Sensor Calibration'
+            GridLayout:
+                id: sensor_list
+                cols: 3
+                rows: 3
+                spacing: 10

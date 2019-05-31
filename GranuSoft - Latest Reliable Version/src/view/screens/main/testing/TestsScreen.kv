@@ -1,0 +1,28 @@
+<Test>
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TestList>
+    viewclass: 'Note'
+    SingleSelectableRecycleBoxLayout:
+
+<TestsScreen>:
+	name: 'tests_screen'
+    GranuContainer:
+        GranuSideArea:
+            id: tests_buttons
+        GranuContent:
+            GranuTitle:
+                text: 'Tests'
+            BoxLayout:
+                orientation: 'horizontal'
+                NoteList:
+                    id: tests_list
+                    on_interaction:
+                        root.test_buttons()
+                    on_deselect_all:
+                        root.default_buttons()

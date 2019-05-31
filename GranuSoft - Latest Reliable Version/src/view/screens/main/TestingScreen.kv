@@ -1,0 +1,65 @@
+<TestingInfoBox@Label>:
+    font_size: 25
+	color: 0,0,0,1
+	halign: 'center'
+	valign: 'center'
+    canvas.before:
+        Color:
+            rgba: .74,.74,.74,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TestingScreen>:
+	name: 'testing_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Update\nNotes'
+	    		on_release:
+                    root.move_to('note_screen') # Move to notes screen
+            GranuSideButton:
+                text: "Start"
+                on_release:
+                    root.move_to('test_in_progress_screen') # Move to test in progress screen
+            GranuSideButton:
+                text: "Tests"
+                on_release:
+                    root.move_to('tests_screen') # Move to tests screen
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.move_to('main_screen') # Move to main screen
+        GranuContent:
+            GranuTitle:
+                text: 'Testing'
+            GridLayout:
+                cols: 2
+                spacing: 10
+                TestingInfoBox:
+                    id: height
+                    text: "Height: " + root.height_num + " cm"
+                TestingInfoBox:
+                    id: operator
+                    text: "Operator: " + root.operator
+                TestingInfoBox:
+                    id: plot
+                    text: "Plot: " + root.plot
+                TestingInfoBox:
+                    id: time
+                    text: "Time: " + root.time
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: self.minimum_height
+                ListTitle:
+                    text: 'Pre-test Notes'
+                ListTitle:
+                    text: 'Post-test Notes'
+            BoxLayout:
+                orientation: 'horizontal'
+                StaticList:
+                    id: pretest
+                StaticList:
+                    id: posttest
+
