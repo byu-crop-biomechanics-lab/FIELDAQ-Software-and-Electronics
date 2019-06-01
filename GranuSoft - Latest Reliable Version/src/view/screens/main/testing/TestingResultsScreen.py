@@ -32,7 +32,30 @@ class TestingResultsScreen(BaseScreen):
     x_major = NumericProperty(1)
     y_major = NumericProperty(1)
     datasets = []
-    
+
+    def __init__(self, **kwargs):
+        '''Creates Kivy Buttons to be able to dynamically change the sidebar actions
+        based on interaction with the lists.'''
+        super(BaseScreen, self).__init__(**kwargs)
+
+        self.stalkLodge_button = GranuNoteButton(text = 'Stalk\nLodge')
+        '''self.stalkLodge_button.bind(on_release = self.save)'''
+        self.rootLodge_button = GranuNoteButton(text = 'Root\nLodge')
+        '''self.rootLodge_button.bind(on_release = self.new)'''
+        self.wetSoil_button = GranuNoteButton(text = 'Wet\nSoil')
+        '''self.wetSoil_button.bind(on_release = self.remove)'''
+        self.postNote_button = GranuNoteButton(text = 'Add Post-\nTest Note')
+        '''self.postNote_button.bind(on_release = root(BaseScreen, root).move_to('note_screen'))'''
+
+    # Button Changes
+
+    def default_buttons(self):
+        buttons = self.ids['postTest_buttons']
+        buttons.clear_widgets()
+        buttons.add_widget(self.stalkLodge_button)
+        buttons.add_widget(self.rootLodge_button)
+        buttons.add_widget(self.wetSoil_button)
+        buttons.add_widget(self.postNote_button)
 
     def find_max_x_load(self):
         max = 0
@@ -40,13 +63,16 @@ class TestingResultsScreen(BaseScreen):
             if(dataset.x_load > max):
                 max = dataset.x_load
         return max
-    
+
     def on_enter(self):
         self.graph = self.ids['graph_test']
         self.plot = MeshLinePlot(color=[1, 1, 1, 1])
         ts = TestSingleton()
-        self.datasets = ts.get_datasets()       
+        self.datasets = ts.get_datasets()
         last_index = len(self.datasets) - 1
+
+        # Add buttons
+        self.default_buttons
 
         self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
         #self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
@@ -54,14 +80,12 @@ class TestingResultsScreen(BaseScreen):
         self.x_major = int(self.x_max/5)
         self.y_major = int(self.y_max/5)
 
-        
         self.plot.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
         #for i in range(0,len(self.datasets)):
         #    print("Time:",self.datasets[i].timestamp," -- X_Load:", self.datasets[i].x_load)
 
         self.graph.add_plot(self.plot)
 
-        
     def save_test(self):
         ts = TestSingleton()
         self.datasets = ts.get_datasets()
@@ -127,14 +151,10 @@ class TestingResultsScreen(BaseScreen):
                 writer.writerow([ds.timestamp, ds.pot_angle, ds.imu_angle, ds.x_load, ds.y_load])
 
 
-        csvFile.close()        
-        
+        csvFile.close()
+
     def on_leave(self):
 
 
         self.graph.remove_plot(self.plot)
         self.graph._clear_buffer()
-
-
-
-

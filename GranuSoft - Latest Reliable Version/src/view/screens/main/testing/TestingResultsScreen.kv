@@ -37,19 +37,12 @@
             GranuTitle:
                 text: 'Testing Results'
             GridLayout:
+                id: postTest_buttons
+                loads:
+                    root.default_buttons()
                 cols: 4
                 spacing: 10
-                size_hint_y: 0.37
-                GranuNoteButton:
-                    text: "Stalk\nLodge"    # this will add Stalk Lodge to notes, temp. placeholder
-                GranuNoteButton:
-                    text: "Root\nLodge" # this will add root lodge to notes, temp. placeholder
-                GranuNoteButton:
-                    text: "Wet\nSoil"   # this will add wet soil to notes, temp. placeholder
-                GranuNoteButton:
-                    text: "Add\nNote"
-                    on_release:
-                        root.move_to('note_screen') # Move to note screen
+                size_hint_y: 0.27
             Graph:
                 id: graph_test
                 plot: MeshLinePlot
