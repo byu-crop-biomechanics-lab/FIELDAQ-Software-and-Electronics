@@ -39,17 +39,16 @@
             GridLayout:
                 cols: 4
                 spacing: 10
-                size_hint_y: 0.37
+                size_hint_y: 0.25
                 GranuNoteButton:
-                    text: "Stalk\nLodge"    # this will add Stalk Lodge to notes, temp. placeholder
-                GranuNoteButton:
-                    text: "Root\nLodge" # this will add root lodge to notes, temp. placeholder
-                GranuNoteButton:
-                    text: "Wet\nSoil"   # this will add wet soil to notes, temp. placeholder
-                GranuNoteButton:
-                    text: "Add\nNote"
+                    text: "Break\nHeight"
                     on_release:
-                        root.move_to('note_screen') # Move to note screen
+                        root.move_to('break_height_screen') # Move to note screen
+                GranuNoteButton:
+                    text: "Root\nLodge"
+                    id: RootLodgeButton
+                    on_release:
+                        root.rootLodge_note()
             Graph:
                 id: graph_test
                 plot: MeshLinePlot
