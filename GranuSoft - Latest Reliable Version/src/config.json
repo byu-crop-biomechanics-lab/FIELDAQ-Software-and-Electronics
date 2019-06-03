@@ -7,12 +7,9 @@
     "operator": "Jared",
     "notes": {
         "pretest": [
-            "Wet Soil",
-            "Root Lodge"
+            "Wet Soil"
         ],
-        "posttest": [
-            "Stalk Lodge"
-        ],
+        "posttest": [],
         "bank": [
             "water"
         ]

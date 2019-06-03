@@ -37,12 +37,18 @@
             GranuTitle:
                 text: 'Testing Results'
             GridLayout:
-                id: postTest_buttons
-                loads:
-                    root.default_buttons()
                 cols: 4
                 spacing: 10
-                size_hint_y: 0.27
+                size_hint_y: 0.25
+                GranuNoteButton:
+                    text: "Break\nHeight"
+                    on_release:
+                        root.move_to('break_height_screen') # Move to note screen
+                GranuNoteButton:
+                    text: "Root\nLodge"
+                    id: RootLodgeButton
+                    on_release:
+                        root.rootLodge_note()
             Graph:
                 id: graph_test
                 plot: MeshLinePlot

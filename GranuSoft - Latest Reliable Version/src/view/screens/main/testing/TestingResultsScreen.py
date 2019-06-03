@@ -33,30 +33,6 @@ class TestingResultsScreen(BaseScreen):
     y_major = NumericProperty(1)
     datasets = []
 
-    def __init__(self, **kwargs):
-        '''Creates Kivy Buttons to be able to dynamically change the sidebar actions
-        based on interaction with the lists.'''
-        super(BaseScreen, self).__init__(**kwargs)
-
-        self.stalkLodge_button = GranuNoteButton(text = 'Stalk\nLodge')
-        '''self.stalkLodge_button.bind(on_release = self.save)'''
-        self.rootLodge_button = GranuNoteButton(text = 'Root\nLodge')
-        '''self.rootLodge_button.bind(on_release = self.new)'''
-        self.wetSoil_button = GranuNoteButton(text = 'Wet\nSoil')
-        '''self.wetSoil_button.bind(on_release = self.remove)'''
-        self.postNote_button = GranuNoteButton(text = 'Add Post-\nTest Note')
-        '''self.postNote_button.bind(on_release = root(BaseScreen, root).move_to('note_screen'))'''
-
-    # Button Changes
-
-    def default_buttons(self):
-        buttons = self.ids['postTest_buttons']
-        buttons.clear_widgets()
-        buttons.add_widget(self.stalkLodge_button)
-        buttons.add_widget(self.rootLodge_button)
-        buttons.add_widget(self.wetSoil_button)
-        buttons.add_widget(self.postNote_button)
-
     def find_max_x_load(self):
         max = 0
         for dataset in self.datasets:
@@ -71,9 +47,6 @@ class TestingResultsScreen(BaseScreen):
         self.datasets = ts.get_datasets()
         last_index = len(self.datasets) - 1
 
-        # Add buttons
-        self.default_buttons
-
         self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
         #self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
         self.y_max = 2000
@@ -85,6 +58,20 @@ class TestingResultsScreen(BaseScreen):
         #    print("Time:",self.datasets[i].timestamp," -- X_Load:", self.datasets[i].x_load)
 
         self.graph.add_plot(self.plot)
+
+        self.lodgeFlag = "STALK LODGE"
+
+    def rootLodge_note(self):
+        RLB = self.ids['RootLodgeButton']
+        if self.lodgeFlag == "ROOT LODGE":
+            self.lodgeFlag = "STALK LODGE"
+            RLB.background_color = (0,0,0,1)
+        elif self.lodgeFlag == "STALK LODGE":
+            self.lodgeFlag = "ROOT LODGE"
+            RLB.background_color = (1,0,0,1)
+        else:
+            self.lodgeFlag = "ROOT LODGE"
+            RLB.background_color = (1,0,0,1)
 
     def save_test(self):
         ts = TestSingleton()
@@ -135,6 +122,7 @@ class TestingResultsScreen(BaseScreen):
             writer.writerow(['POST_TEST_NOTE_4', post_notes[3]])
             writer.writerow(['POST_TEST_NOTE_5', post_notes[4]])
             writer.writerow(['BREAK_HEIGHT', str(config.get('break_height', 0)), 'cm'])
+            writer.writerow(['LODGE_TYPE', self.lodgeFlag])
             writer.writerow(['LCA_WEIGTH', '0', 'g'])
             writer.writerow(['----------SENSOR CALIBRATION DATA (stored_value*A + B = raw_data)------'])
             writer.writerow(['SENSOR', 'A', 'B', 'UNIT', 'ID'])
@@ -154,7 +142,7 @@ class TestingResultsScreen(BaseScreen):
         csvFile.close()
 
     def on_leave(self):
-
-
+        RLB = self.ids['RootLodgeButton']
+        RLB.background_color = (0,0,0,1)
         self.graph.remove_plot(self.plot)
         self.graph._clear_buffer()
