@@ -60,18 +60,23 @@ class TestingResultsScreen(BaseScreen):
         self.graph.add_plot(self.plot)
 
         self.lodgeFlag = "STALK LODGE"
+        RLB = self.ids['RootLodgeButton']
+        RLB.text = "Stalk\nLodge"
 
     def rootLodge_note(self):
         RLB = self.ids['RootLodgeButton']
         if self.lodgeFlag == "ROOT LODGE":
             self.lodgeFlag = "STALK LODGE"
+            RLB.text = "Stalk\nLodge"
             RLB.background_color = (0,0,0,1)
         elif self.lodgeFlag == "STALK LODGE":
             self.lodgeFlag = "ROOT LODGE"
             RLB.background_color = (1,0,0,1)
+            RLB.text = "Root\nLodge"
         else:
             self.lodgeFlag = "ROOT LODGE"
             RLB.background_color = (1,0,0,1)
+            RLB.text = "Root\nLodge"
 
     def save_test(self):
         ts = TestSingleton()
