@@ -69,7 +69,7 @@ class TestInProgressScreen(BaseScreen):
         self.datasets = []
         self.test_sensor = Sensor()
         self.plot = MeshLinePlot(color=[1, 1, 1, 1])
-        self.plot1 = MeshLinePlot(color=[0, 0, 0, 1])
+        self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
 
         self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
@@ -95,7 +95,7 @@ class TestInProgressScreen(BaseScreen):
             self.graph._clear_buffer()
             self.graph2._clear_buffer()
             self.plot = MeshLinePlot(color=[1, 1, 1, 1])
-            self.plot1 = MeshLinePlot(color=[0, 0, 0, 1])
+            self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
             last_index = len(self.datasets) - 1
 
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5

@@ -28,20 +28,20 @@
     GranuContainer:
         GranuContent:
             GridLayout:
-                cols: 2
-                spacing: 10
                 size_hint_y: 0.4
-                GranuStopButton:
-                    text: 'Stop'
-                    size_hint_x: .37
-                    on_release:
-                        root.move_to('testing_results_screen')
+                rows: 2
+                spacing: 10
+                GranuTitle:
+                    text: 'Test in Progress'
+                    size_hint_y: .4
                 GridLayout:
-                    rows: 2
+                    cols: 2
                     spacing: 10
-                    GranuTitle:
-                        text: 'Test in Progress'
-                        size_hint_y: .4
+                    GranuStopButton:
+                        text: 'Stop'
+                        size_hint_x: .37
+                        on_release:
+                            root.move_to('testing_results_screen')
                     TestInProgressInfoBox:
                         id: test_time_box
                         text: "Test in progress for\n" + str(root.test_time) + " seconds"
