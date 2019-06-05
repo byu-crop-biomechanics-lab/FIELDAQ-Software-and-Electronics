@@ -89,9 +89,11 @@ class TestInProgressScreen(BaseScreen):
             self.double_counter += 1
             self.second_counter = 0
             self.graph = self.ids['graph_test']
+            self.graph2 = self.ids['graph_test2']
             self.graph.remove_plot(self.plot)
-            self.graph.remove_plot(self.plot1)
+            self.graph2.remove_plot(self.plot1)
             self.graph._clear_buffer()
+            self.graph2._clear_buffer()
             self.plot = MeshLinePlot(color=[1, 1, 1, 1])
             self.plot1 = MeshLinePlot(color=[0, 0, 0, 1])
             last_index = len(self.datasets) - 1
@@ -112,7 +114,7 @@ class TestInProgressScreen(BaseScreen):
             self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets))]
 
             self.graph.add_plot(self.plot)
-            self.graph.add_plot(self.plot1)
+            self.graph2.add_plot(self.plot1)
 
 
 
