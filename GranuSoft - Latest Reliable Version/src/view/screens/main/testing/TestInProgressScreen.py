@@ -47,7 +47,7 @@ class TestInProgressScreen(BaseScreen):
     double_counter = 0
     start_time = 0
     start_timestamp = datetime.datetime.now().strftime("%I:%M:%S %p")
-    
+
     def on_pre_enter(self):
         self.test_time = 0
         self.temperature = 0
@@ -69,6 +69,7 @@ class TestInProgressScreen(BaseScreen):
         self.datasets = []
         self.test_sensor = Sensor()
         self.plot = MeshLinePlot(color=[1, 1, 1, 1])
+        self.plot1 = MeshLinePlot(color=[0, 0, 0, 1])
 
         self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
@@ -89,8 +90,10 @@ class TestInProgressScreen(BaseScreen):
             self.second_counter = 0
             self.graph = self.ids['graph_test']
             self.graph.remove_plot(self.plot)
+            self.graph.remove_plot(self.plot1)
             self.graph._clear_buffer()
             self.plot = MeshLinePlot(color=[1, 1, 1, 1])
+            self.plot1 = MeshLinePlot(color=[0, 0, 0, 1])
             last_index = len(self.datasets) - 1
 
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
@@ -100,24 +103,26 @@ class TestInProgressScreen(BaseScreen):
             #    self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
             self.x_major = int(self.x_max/5)
             #self.y_major = int(self.y_max/5)
-            
-            
 
-            
-            
+
+
+
+
             self.plot.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
+            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets))]
 
             self.graph.add_plot(self.plot)
-            
-            
+            self.graph.add_plot(self.plot1)
+
+
 
         sensor_values = self.test_sensor.get_sensor_data()
         self.x_load = sensor_values["X Load"]
         self.y_load = sensor_values["Y Load"]
         self.pot_angle = sensor_values["Pot Angle"]
         self.imu_angle = sensor_values["IMU Angle"]
-        
-        
+
+
         new_dataset = Dataset(total_time_passed, self.x_load, self.y_load, self.pot_angle, self.imu_angle,self.data_rate)
         self.datasets.append(new_dataset)
         # This next chunk is what we actually have to change to read from the sensors
@@ -144,8 +149,8 @@ class TestInProgressScreen(BaseScreen):
         self.datasets = []
         self.graph.remove_plot(self.plot)
         self.graph._clear_buffer()
-        
+
         #for dataset in self.datasets:
             #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Humidity:",dataset.humidity,"Location:",dataset.location,"X Load:",dataset.x_load,"Y_Load:",dataset.y_load,"Pot Angle:",dataset.pot_angle,"IMU Angle",dataset.imu_angle,"CPU Time:",dataset.cpu_time)
-            
+
             #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Data Rate:",dataset.data_rate)

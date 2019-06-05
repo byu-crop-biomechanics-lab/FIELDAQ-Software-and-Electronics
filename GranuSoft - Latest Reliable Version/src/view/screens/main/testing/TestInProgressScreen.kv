@@ -1,7 +1,7 @@
 #:import MeshLinePlot kivy.garden.graph.MeshLinePlot
 
 <TestInProgressInfoBox@Label>:
-    font_size: 50
+    font_size: 40
 	color: 0,0,0,1
 	halign: 'center'
 	valign: 'center'
@@ -30,6 +30,7 @@
             TestInProgressInfoBox:
                 id: test_time_box
                 text: "Test in progress for\n" + str(root.test_time) + " seconds"
+                size_hint_y: .3
             Graph:
                 id: graph_test
                 plot: MeshLinePlot
