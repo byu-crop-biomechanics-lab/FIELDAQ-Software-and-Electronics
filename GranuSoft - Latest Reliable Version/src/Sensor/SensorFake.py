@@ -1,4 +1,5 @@
 import datetime
+from math import sin
 
 class Sensor:
 
@@ -28,10 +29,10 @@ class Sensor:
         self.temp_fake += 1
         self.hum_fake += 2
         self.loc_fake += 4
-        self.x_fake += 8
-        self.y_fake += 16
-        self.pot_fake += 32
-        self.imu_fake += 64
+        self.x_fake = 800 + 400 * sin(self.temp_fake / 500) - 0.01 * self.temp_fake
+        self.y_fake += .5
+        self.pot_fake = 400 + 200 * sin(self.temp_fake / 100) + 0.01 * self.temp_fake
+        self.imu_fake += 4.5
         self.sensor_data["Time"] = self.time
         self.sensor_data["Temperature"] = self.temp_fake
         self.sensor_data["Humidity"] = self.hum_fake
@@ -44,4 +45,3 @@ class Sensor:
 
     def get_sensor_keys(self):
         return self.keys
-
