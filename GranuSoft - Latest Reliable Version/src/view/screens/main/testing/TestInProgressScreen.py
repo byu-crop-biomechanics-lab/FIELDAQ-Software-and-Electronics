@@ -68,8 +68,8 @@ class TestInProgressScreen(BaseScreen):
         self.y_major = int(self.y_max/5)
         self.datasets = []
         self.test_sensor = Sensor()
-        self.plot = MeshLinePlot(color=[1, 1, 1, 1])
         self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
 
         self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
@@ -88,14 +88,14 @@ class TestInProgressScreen(BaseScreen):
         if self.second_counter >= SECOND_CAP/2:
             self.double_counter += 1
             self.second_counter = 0
-            self.graph = self.ids['graph_test']
+            self.graph1 = self.ids['graph_test1']
             self.graph2 = self.ids['graph_test2']
-            self.graph.remove_plot(self.plot)
-            self.graph2.remove_plot(self.plot1)
-            self.graph._clear_buffer()
+            self.graph1.remove_plot(self.plot1)
+            self.graph2.remove_plot(self.plot2)
+            self.graph1._clear_buffer()
             self.graph2._clear_buffer()
-            self.plot = MeshLinePlot(color=[1, 1, 1, 1])
             self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
+            self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
             last_index = len(self.datasets) - 1
 
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
@@ -110,11 +110,11 @@ class TestInProgressScreen(BaseScreen):
 
 
 
-            self.plot.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
-            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets))]
+            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
+            self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets))]
 
-            self.graph.add_plot(self.plot)
-            self.graph2.add_plot(self.plot1)
+            self.graph1.add_plot(self.plot1)
+            self.graph2.add_plot(self.plot2)
 
 
 
@@ -149,9 +149,9 @@ class TestInProgressScreen(BaseScreen):
         ts.set_timestamp(self.start_timestamp)
         ts.set_datasets(self.datasets)
         self.datasets = []
-        self.graph.remove_plot(self.plot)
-        self.graph._clear_buffer()
-        self.graph2.remove_plot(self.plot1)
+        self.graph1.remove_plot(self.plot1)
+        self.graph1._clear_buffer()
+        self.graph2.remove_plot(self.plot2)
         self.graph2._clear_buffer()
 
         #for dataset in self.datasets:
