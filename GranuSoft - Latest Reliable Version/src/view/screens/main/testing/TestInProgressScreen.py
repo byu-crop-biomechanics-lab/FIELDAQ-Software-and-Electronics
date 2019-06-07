@@ -151,6 +151,8 @@ class TestInProgressScreen(BaseScreen):
         self.datasets = []
         self.graph.remove_plot(self.plot)
         self.graph._clear_buffer()
+        self.graph2.remove_plot(self.plot1)
+        self.graph2._clear_buffer()
 
         #for dataset in self.datasets:
             #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Humidity:",dataset.humidity,"Location:",dataset.location,"X Load:",dataset.x_load,"Y_Load:",dataset.y_load,"Pot Angle:",dataset.pot_angle,"IMU Angle",dataset.imu_angle,"CPU Time:",dataset.cpu_time)
