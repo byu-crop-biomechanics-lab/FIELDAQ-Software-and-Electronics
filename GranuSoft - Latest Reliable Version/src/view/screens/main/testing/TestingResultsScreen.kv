@@ -36,8 +36,9 @@
         GranuContent:
             GranuTitle:
                 text: 'Testing Results'
+                size_hint_max_y: 30
             GridLayout:
-                cols: 4
+                cols: 2
                 spacing: 10
                 size_hint_y: 0.25
                 GranuNoteButton:
@@ -48,20 +49,48 @@
                     id: RootLodgeButton
                     on_release:
                         root.rootLodge_note()
-            Graph:
-                id: graph_test
-                plot: MeshLinePlot
-                background_color: .5, .5, .5, 1
-                xlabel:'Time(s)'
-                ylabel:'X_Load(adc)'
-                x_ticks_major:root.x_major
-                y_ticks_major:root.y_major
-                y_grid_label:True
-                x_grid_label:True
-                padding:5
-                x_grid:True
-                y_grid:True
-                xmin:0
-                ymin:0
-                xmax:root.x_max
-                ymax:root.y_max
+            GridLayout:
+                cols:2
+                spacing: 10
+                GridLayout:
+                    rows: 2
+                    GraphTitle:
+                        text: 'Potentiometer Angle'
+                    Graph:
+                        id: graph_test1
+                        plot: MeshLinePlot
+                        background_color: .5, .5, .5, 1
+                        xlabel:'Time(s)'
+                        ylabel:'Angle (pot)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max
+                GridLayout:
+                    rows: 2
+                    GraphTitle:
+                        text: 'X-Force Loading'
+                    Graph:
+                        id: graph_test2
+                        plot: MeshLinePlot
+                        background_color: .5, .5, .5, 1
+                        xlabel:'Time(s)'
+                        ylabel:'X Load (adc)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max
