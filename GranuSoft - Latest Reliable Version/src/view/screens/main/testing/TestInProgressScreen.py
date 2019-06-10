@@ -32,9 +32,11 @@ SECOND_CAP = 1/INTERVAL
 class TestInProgressScreen(BaseScreen):
     test_time = NumericProperty(0)
     x_max = NumericProperty()
-    y_max = NumericProperty()
+    y_max1 = NumericProperty()
+    y_max2 = NumericProperty()
     x_major = NumericProperty()
-    y_major = NumericProperty()
+    y_major1 = NumericProperty()
+    y_major2 = NumericProperty()
     temperature = 0
     humidity = 0
     location = 0
@@ -62,10 +64,12 @@ class TestInProgressScreen(BaseScreen):
         self.double_counter = 0
         self.start_time = datetime.datetime.now()
         self.datasets = []
-        self.x_max = 5
-        self.y_max = 2000
+        self.x_max1 = 5
+        self.y_max1 = 500
+        self.y_max2 = 500
         self.x_major = int(self.x_max/5)
-        self.y_major = int(self.y_max/5)
+        self.y_major1 = int(self.y_max1/5)
+        self.y_major2 = int(self.y_max2/5)
         self.datasets = []
         self.test_sensor = Sensor()
         self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
@@ -99,11 +103,15 @@ class TestInProgressScreen(BaseScreen):
             last_index = len(self.datasets) - 1
 
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
+            self.y_max1 = math.ceil(max(self.datasets[i].pot_angle for i in range(0,len(self.datasets))) / 225) * 250
+            self.y_max2 = math.ceil(max(self.datasets[i].x_load for i in range(0,len(self.datasets))) / 225) * 250
             #if(self.find_max_x_load() == 0):
              #   self.y_max = 10000
             #else:
             #    self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
             self.x_major = int(self.x_max/5)
+            self.y_major1 = int(self.y_max1/5)
+            self.y_major2 = int(self.y_max2/5)
             #self.y_major = int(self.y_max/5)
 
 
