@@ -28,9 +28,11 @@ ONE_SEC = 1
 
 class TestingResultsScreen(BaseScreen):
     x_max = NumericProperty(1)
-    y_max = NumericProperty(1)
+    y_max1 = NumericProperty(1)
+    y_max2 = NumericProperty(1)
     x_major = NumericProperty(1)
-    y_major = NumericProperty(1)
+    y_major1 = NumericProperty(1)
+    y_major2 = NumericProperty(1)
     datasets = []
 
     def find_max_x_load(self):
@@ -51,9 +53,11 @@ class TestingResultsScreen(BaseScreen):
 
         self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
         #self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
-        self.y_max = 2000
+        self.y_max1 = math.ceil(max(self.datasets[i].pot_angle for i in range(0,len(self.datasets))) / 250) * 250
+        self.y_max2 = math.ceil(max(self.datasets[i].x_load for i in range(0,len(self.datasets)))/ 250) * 250
         self.x_major = int(self.x_max/5)
-        self.y_major = int(self.y_max/5)
+        self.y_major1 = int(self.y_max1/5)
+        self.y_major2 = int(self.y_max2/5)
 
         self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
         self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets))]
