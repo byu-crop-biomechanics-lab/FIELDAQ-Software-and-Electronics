@@ -3,16 +3,13 @@
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/]
+__pycache__/
+*.pyc
 
 # C extensions
 *.so
 
 # Testing Data
 *.csv
-
-# IPython
-profile_default/
-ipython_config.py
 
 # End of https://www.gitignore.io/api/python
