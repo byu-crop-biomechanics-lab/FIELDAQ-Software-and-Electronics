@@ -102,17 +102,9 @@ class TestInProgressScreen(BaseScreen):
             self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
             last_index = len(self.datasets) - 1
 
-            try:
-                self.y_max1ph = math.ceil(max(self.datasets[i].pot_angle for i in range(0,len(self.datasets))) / 250) * 250
-            except:
-                self.y_max1ph = 500
-            try:
-                self.y_max2ph = math.ceil(max(self.datasets[i].x_load for i in range(0,len(self.datasets))) / 250) * 250
-            except:
-                self.y_max2ph = 500
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
-            self.y_max1 = max(500, self.y_max1ph)
-            self.y_max2 = max(500, self.y_max2ph)
+            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].pot_angle / 250) * 250)
+            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].x_load / 250) * 250)
             #if(self.find_max_x_load() == 0):
              #   self.y_max = 10000
             #else:
