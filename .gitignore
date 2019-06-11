@@ -1,0 +1,22 @@
+# Created by https://www.gitignore.io/api/python
+# Edit at https://www.gitignore.io/?templates=python
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+
+# C extensions
+*.so
+
+# Testing Data
+*.csv
+
+# Configuration Files
+*.json
+
+# DS_Store, whatever that is
+*.DS_Store
+
+# End of https://www.gitignore.io/api/python
+
