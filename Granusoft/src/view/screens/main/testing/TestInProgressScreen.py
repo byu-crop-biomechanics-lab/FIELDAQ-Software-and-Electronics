@@ -116,24 +116,27 @@ class TestInProgressScreen(BaseScreen):
             self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets), 5)]
 
             self.graph1.add_plot(self.plot1)
-            self.graph2.add_plot(self.plot2
+            self.graph2.add_plot(self.plot2)
+
+
 
         sensor_values = self.test_sensor.get_sensor_data()
         self.x_load = sensor_values["X Load"]
         self.y_load = sensor_values["Y Load"]
         self.pot_angle = sensor_values["Pot Angle"]
         self.imu_angle = sensor_values["IMU Angle"]
-                                 
+
+
         new_dataset = Dataset(total_time_passed, self.x_load, self.y_load, self.pot_angle, self.imu_angle,self.data_rate)
         self.datasets.append(new_dataset)
         # This next chunk is what we actually have to change to read from the sensors
-        # self.temperature += 1
-        # self.humidity += 2
-        # self.location += 3
-        # self.x_load += 1
-        # self.y_load += 5
-        # self.pot_angle += 6
-        # self.imu_angle += 7
+       # self.temperature += 1
+       # self.humidity += 2
+       # self.location += 3
+       # self.x_load += 1
+       # self.y_load += 5
+       # self.pot_angle += 6
+       # self.imu_angle += 7
 
     def on_pre_leave(self):
         self.event.cancel()
@@ -155,5 +158,5 @@ class TestInProgressScreen(BaseScreen):
 
         #for dataset in self.datasets:
             #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Humidity:",dataset.humidity,"Location:",dataset.location,"X Load:",dataset.x_load,"Y_Load:",dataset.y_load,"Pot Angle:",dataset.pot_angle,"IMU Angle",dataset.imu_angle,"CPU Time:",dataset.cpu_time)
-                                 
+
             #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Data Rate:",dataset.data_rate)

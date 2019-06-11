@@ -7,19 +7,9 @@
     "operator": "Jared",
     "notes": {
         "pretest": [
-            "Wet Soil",
-            "",
-            "",
-            "",
-            ""
+            "Wet Soil"
         ],
-        "posttest": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ],
+        "posttest": [],
         "bank": [
             "water"
         ]

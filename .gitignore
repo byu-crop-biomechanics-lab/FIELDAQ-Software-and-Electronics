@@ -12,4 +12,10 @@ __pycache__/
 # Testing Data
 *.csv
 
+# Configuration Files
+*.json
+
+# DS_Store, whatever that is
+*.DS_Store
+
 # End of https://www.gitignore.io/api/python
