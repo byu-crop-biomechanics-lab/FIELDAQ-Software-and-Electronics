@@ -28,9 +28,11 @@ ONE_SEC = 1
 
 class TestingResultsScreen(BaseScreen):
     x_max = NumericProperty(1)
-    y_max = NumericProperty(1)
+    y_max1 = NumericProperty(1)
+    y_max2 = NumericProperty(1)
     x_major = NumericProperty(1)
-    y_major = NumericProperty(1)
+    y_major1 = NumericProperty(1)
+    y_major2 = NumericProperty(1)
     datasets = []
 
     def find_max_x_load(self):
@@ -41,23 +43,29 @@ class TestingResultsScreen(BaseScreen):
         return max
 
     def on_enter(self):
-        self.graph = self.ids['graph_test']
-        self.plot = MeshLinePlot(color=[1, 1, 1, 1])
+        self.graph1 = self.ids['graph_test1']
+        self.graph2 = self.ids['graph_test2']
+        self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
         ts = TestSingleton()
         self.datasets = ts.get_datasets()
         last_index = len(self.datasets) - 1
 
         self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
         #self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
-        self.y_max = 2000
+        self.y_max1 = math.ceil(max(self.datasets[i].pot_angle for i in range(0,len(self.datasets))) / 250) * 250
+        self.y_max2 = math.ceil(max(self.datasets[i].x_load for i in range(0,len(self.datasets)))/ 250) * 250
         self.x_major = int(self.x_max/5)
-        self.y_major = int(self.y_max/5)
+        self.y_major1 = int(self.y_max1/5)
+        self.y_major2 = int(self.y_max2/5)
 
-        self.plot.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
+        self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
+        self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets))]
         #for i in range(0,len(self.datasets)):
         #    print("Time:",self.datasets[i].timestamp," -- X_Load:", self.datasets[i].x_load)
 
-        self.graph.add_plot(self.plot)
+        self.graph1.add_plot(self.plot1)
+        self.graph2.add_plot(self.plot2)
 
         self.lodgeFlag = "STALK LODGE"
         RLB = self.ids['RootLodgeButton']
@@ -149,5 +157,7 @@ class TestingResultsScreen(BaseScreen):
     def on_leave(self):
         RLB = self.ids['RootLodgeButton']
         RLB.background_color = (0,0,0,1)
-        self.graph.remove_plot(self.plot)
-        self.graph._clear_buffer()
+        self.graph1.remove_plot(self.plot1)
+        self.graph1._clear_buffer()
+        self.graph2.remove_plot(self.plot2)
+        self.graph2._clear_buffer()

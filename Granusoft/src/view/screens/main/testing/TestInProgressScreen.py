@@ -32,9 +32,11 @@ SECOND_CAP = 1/INTERVAL
 class TestInProgressScreen(BaseScreen):
     test_time = NumericProperty(0)
     x_max = NumericProperty()
-    y_max = NumericProperty()
+    y_max1 = NumericProperty()
+    y_max2 = NumericProperty()
     x_major = NumericProperty()
-    y_major = NumericProperty()
+    y_major1 = NumericProperty()
+    y_major2 = NumericProperty()
     temperature = 0
     humidity = 0
     location = 0
@@ -47,7 +49,7 @@ class TestInProgressScreen(BaseScreen):
     double_counter = 0
     start_time = 0
     start_timestamp = datetime.datetime.now().strftime("%I:%M:%S %p")
-    
+
     def on_pre_enter(self):
         self.test_time = 0
         self.temperature = 0
@@ -62,13 +64,16 @@ class TestInProgressScreen(BaseScreen):
         self.double_counter = 0
         self.start_time = datetime.datetime.now()
         self.datasets = []
-        self.x_max = 5
-        self.y_max = 2000
+        self.x_max1 = 5
+        self.y_max1 = 250
+        self.y_max2 = 250
         self.x_major = int(self.x_max/5)
-        self.y_major = int(self.y_max/5)
+        self.y_major1 = int(self.y_max1/5)
+        self.y_major2 = int(self.y_max2/5)
         self.datasets = []
         self.test_sensor = Sensor()
-        self.plot = MeshLinePlot(color=[1, 1, 1, 1])
+        self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
 
         self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
@@ -87,47 +92,48 @@ class TestInProgressScreen(BaseScreen):
         if self.second_counter >= SECOND_CAP/2:
             self.double_counter += 1
             self.second_counter = 0
-            self.graph = self.ids['graph_test']
-            self.graph.remove_plot(self.plot)
-            self.graph._clear_buffer()
-            self.plot = MeshLinePlot(color=[1, 1, 1, 1])
+            self.graph1 = self.ids['graph_test1']
+            self.graph2 = self.ids['graph_test2']
+            self.graph1.remove_plot(self.plot1)
+            self.graph2.remove_plot(self.plot2)
+            self.graph1._clear_buffer()
+            self.graph2._clear_buffer()
+            self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
+            self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
             last_index = len(self.datasets) - 1
-
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
+            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].pot_angle / 250) * 250)
+            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].x_load / 250) * 250)
             #if(self.find_max_x_load() == 0):
              #   self.y_max = 10000
             #else:
             #    self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
             self.x_major = int(self.x_max/5)
-            #self.y_major = int(self.y_max/5)
-            
-            
+            self.y_major1 = int(self.y_max1/5)
+            self.y_major2 = int(self.y_max2/5)
 
-            
-            
-            self.plot.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets))]
+            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets), 5)]
+            self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets), 5)]
 
-            self.graph.add_plot(self.plot)
-            
-            
+            self.graph1.add_plot(self.plot1)
+            self.graph2.add_plot(self.plot2
 
         sensor_values = self.test_sensor.get_sensor_data()
         self.x_load = sensor_values["X Load"]
         self.y_load = sensor_values["Y Load"]
         self.pot_angle = sensor_values["Pot Angle"]
         self.imu_angle = sensor_values["IMU Angle"]
-        
-        
+                                 
         new_dataset = Dataset(total_time_passed, self.x_load, self.y_load, self.pot_angle, self.imu_angle,self.data_rate)
         self.datasets.append(new_dataset)
         # This next chunk is what we actually have to change to read from the sensors
-       # self.temperature += 1
-       # self.humidity += 2
-       # self.location += 3
-       # self.x_load += 1
-       # self.y_load += 5
-       # self.pot_angle += 6
-       # self.imu_angle += 7
+        # self.temperature += 1
+        # self.humidity += 2
+        # self.location += 3
+        # self.x_load += 1
+        # self.y_load += 5
+        # self.pot_angle += 6
+        # self.imu_angle += 7
 
     def on_pre_leave(self):
         self.event.cancel()
@@ -142,10 +148,12 @@ class TestInProgressScreen(BaseScreen):
         ts.set_timestamp(self.start_timestamp)
         ts.set_datasets(self.datasets)
         self.datasets = []
-        self.graph.remove_plot(self.plot)
-        self.graph._clear_buffer()
-        
+        self.graph1.remove_plot(self.plot1)
+        self.graph1._clear_buffer()
+        self.graph2.remove_plot(self.plot2)
+        self.graph2._clear_buffer()
+
         #for dataset in self.datasets:
             #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Humidity:",dataset.humidity,"Location:",dataset.location,"X Load:",dataset.x_load,"Y_Load:",dataset.y_load,"Pot Angle:",dataset.pot_angle,"IMU Angle",dataset.imu_angle,"CPU Time:",dataset.cpu_time)
-            
+                                 
             #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Data Rate:",dataset.data_rate)
