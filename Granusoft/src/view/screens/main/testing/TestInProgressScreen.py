@@ -65,8 +65,8 @@ class TestInProgressScreen(BaseScreen):
         self.start_time = datetime.datetime.now()
         self.datasets = []
         self.x_max1 = 5
-        self.y_max1 = 1000
-        self.y_max2 = 1000
+        self.y_max1 = 250
+        self.y_max2 = 250
         self.x_major = int(self.x_max/5)
         self.y_major1 = int(self.y_max1/5)
         self.y_major2 = int(self.y_max2/5)
