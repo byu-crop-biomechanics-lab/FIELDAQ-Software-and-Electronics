@@ -4,13 +4,16 @@
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
 
 # C extensions
 *.so
 
 # Testing Data
 *.csv
+
+# Swap Files
+*.swp
 
 # DS_Store, whatever that is
 *.DS_Store
