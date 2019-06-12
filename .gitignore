@@ -12,9 +12,6 @@ __pycache__/
 # Testing Data
 *.csv
 
-# Configuration Files
-*.json
-
 # DS_Store, whatever that is
 *.DS_Store
 
