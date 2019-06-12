@@ -9,6 +9,7 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.clock import Clock
 from view.BaseScreen import BaseScreen
+from Sensor import Sensor
 import datetime
 
 from Sensor import Sensor
@@ -18,6 +19,7 @@ Builder.load_file('view/screens/main/MainScreen.kv')
 INTERVAL = .004
 
 class MainScreen(BaseScreen):
+    sensor = Sensor()
     temperature = StringProperty("0")
     humidity = StringProperty("0")
     location = StringProperty("0.00,0.00")
@@ -31,6 +33,9 @@ class MainScreen(BaseScreen):
 
     def update_values(self, obj):
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
+        self.sensor.get_header_data()
+        sensor_data = self.sensor.get_sensor_data()
+        self.temperature = str(sensor_data["Temperature"])
 
     def on_leave(self):
         self.event.cancel()
