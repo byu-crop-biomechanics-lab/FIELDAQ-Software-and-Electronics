@@ -17,7 +17,7 @@ from Sensor import Sensor
 Builder.load_file('view/screens/main/MainScreen.kv')
 
 INTERVAL = .004
-INTERVAL2 = 2.000
+INTERVAL2 = 5
 
 class MainScreen(BaseScreen):
     sensor = Sensor()
@@ -28,11 +28,14 @@ class MainScreen(BaseScreen):
     def on_pre_enter(self):
         self.test_time = 0
         self.event = Clock.schedule_interval(self.update_time, INTERVAL)
-        #self.event2 = Clock.schedule_interval(self.update_values, INTERVAL2)
-        self.update_values
+        self.event2 = Clock.schedule_interval(self.update_values, INTERVAL2)
+        #self.update_values
         self.sensor_man = Sensor()
         if self.sensor_man.REAL_DATA is False:
             self.ids['warning_text'].text = 'WARNING: Using fake data.  Check console for stack trace.'
+
+    def on_enter(self):
+        self.event3 = Clock.schedule_interval(self.update_values, 0.01)
 
     def update_time(self, obj):
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
@@ -43,7 +46,8 @@ class MainScreen(BaseScreen):
         self.temperature = str(sensor_data["Temperature"])
         self.humidity = str(sensor_data["Humidity"])
         self.location = str(sensor_data["Location"])
+        self.event3.cancel()
 
     def on_leave(self):
         self.event.cancel()
-        #self.event2.cancel()
+        self.event2.cancel()
