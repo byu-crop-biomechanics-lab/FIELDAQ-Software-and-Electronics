@@ -46,7 +46,10 @@ class MainScreen(BaseScreen):
         self.temperature = str(sensor_data["Temperature"])
         self.humidity = str(sensor_data["Humidity"])
         self.location = str(sensor_data["Location"])
-        self.event3.cancel()
+        try:
+            self.event3.cancel()
+        except:
+            pass
 
     def on_leave(self):
         self.event.cancel()
