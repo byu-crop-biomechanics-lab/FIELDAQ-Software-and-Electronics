@@ -48,3 +48,8 @@ class SettingsScreen(BaseScreen):
     def save(self, path, filename):
         config.save_as(os.path.join(path, filename))
         self.dismiss_popup()
+
+    def updateOS(self):
+        app.stop()
+        os.system("git pull")
+        os.system("python3 main.py")
