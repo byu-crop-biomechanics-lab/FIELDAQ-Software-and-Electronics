@@ -46,8 +46,7 @@ class MainScreen(BaseScreen):
         self.temperature = str(sensor_data["Temperature"])
         self.humidity = str(sensor_data["Humidity"])
         try:
-            self.location = ('(' + str(sensor_data["Location"][0]) + ', ' + str(sensor_data["Location"][1]) + ')')
-            print(sensor_data["Location"][0])
+            self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
         except:
             pass # self.location = str(sensor_data["Location"])
         try:
