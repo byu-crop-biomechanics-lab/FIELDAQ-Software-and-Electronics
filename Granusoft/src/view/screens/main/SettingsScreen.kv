@@ -106,6 +106,7 @@
                 SettingsButton:
                     text: 'Update\nSoftware'
                     on_release:
+                        app.stop()
                         root.updateOS()
             StackLayout:
                 orientation: 'rl-bt'

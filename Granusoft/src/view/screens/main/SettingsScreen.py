@@ -50,6 +50,5 @@ class SettingsScreen(BaseScreen):
         self.dismiss_popup()
 
     def updateOS(self):
-        app.stop()
         os.system("git pull")
         os.system("python3 main.py")
