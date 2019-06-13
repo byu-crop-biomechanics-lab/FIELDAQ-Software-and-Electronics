@@ -53,11 +53,11 @@ class TestingResultsScreen(BaseScreen):
 
         self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
         #self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
-        if math.ceil(max(self.datasets[i].pot_angle for i in range(0,len(self.datasets))) / 250) != 0:
+        if math.ceil(max(self.datasets[i].pot_angle for i in range(0,len(self.datasets))) / 250) > 0:
             self.y_max1 = math.ceil(max(self.datasets[i].pot_angle for i in range(0,len(self.datasets))) / 250) * 25
         else:
             self.y_max1 = 250
-        if math.ceil(max(self.datasets[i].x_load for i in range(0,len(self.datasets)))/ 250) != 0:
+        if math.ceil(max(self.datasets[i].x_load for i in range(0,len(self.datasets)))/ 250) > 0:
             self.y_max2 = math.ceil(max(self.datasets[i].x_load for i in range(0,len(self.datasets)))/ 250) * 250
         else:
             self.y_max2 = 250

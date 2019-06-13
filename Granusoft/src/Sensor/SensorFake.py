@@ -29,7 +29,7 @@ class Sensor:
         self.temp_fake += 1
         self.hum_fake += 2
         self.loc_fake += 4
-        self.x_fake = 0 # 800 + 400 * sin(self.temp_fake / 500) - 0.01 * self.temp_fake
+        self.x_fake = 800 + 400 * sin(self.temp_fake / 500) - 0.01 * self.temp_fake
         self.y_fake += .5
         self.pot_fake = 400 + 200 * sin(self.temp_fake / 100) + 0.01 * self.temp_fake
         self.imu_fake += 4.5
