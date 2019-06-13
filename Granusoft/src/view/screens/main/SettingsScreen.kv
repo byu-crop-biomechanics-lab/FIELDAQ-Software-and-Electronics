@@ -106,6 +106,7 @@
                 SettingsButton:
                     text: 'Update\nSoftware'
                     on_release:
+                        root.move_to('software_update_screen')
                         app.stop()
                         root.updateOS()
             StackLayout:
