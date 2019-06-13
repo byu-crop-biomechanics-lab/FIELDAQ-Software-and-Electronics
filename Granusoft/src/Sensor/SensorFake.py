@@ -11,7 +11,7 @@ class Sensor:
         self.cpu_time = 0
         self.temp_fake = 0
         self.hum_fake = 0
-        self.loc_fake = 0
+        self.loc_fake = [40.2463, -111.6475]
         self.x_fake = 0
         self.y_fake = 0
         self.pot_fake = 0
@@ -28,7 +28,8 @@ class Sensor:
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
         self.temp_fake += 1
         self.hum_fake += 2
-        self.loc_fake += 4
+        self.loc_fake[0] += 0.0000003
+        self.loc_fake[1] += 0.0000005
         self.x_fake = 800 + 400 * sin(self.temp_fake / 500) - 0.01 * self.temp_fake
         self.y_fake += .5
         self.pot_fake = 400 + 200 * sin(self.temp_fake / 100) + 0.01 * self.temp_fake

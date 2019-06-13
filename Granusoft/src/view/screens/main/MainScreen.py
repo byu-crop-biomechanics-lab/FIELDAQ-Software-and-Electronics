@@ -43,12 +43,9 @@ class MainScreen(BaseScreen):
     def update_values(self, obj):
         self.sensor.get_header_data()
         sensor_data = self.sensor.get_sensor_data()
-        self.temperature = str(sensor_data["Temperature"])
-        self.humidity = str(sensor_data["Humidity"])
-        try:
-            self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
-        except:
-            pass # self.location = str(sensor_data["Location"])
+        self.temperature = str("%.0f" % sensor_data["Temperature"])
+        self.humidity = str("%.0f" % sensor_data["Humidity"])
+        self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
         try:
             self.event3.cancel()
         except:

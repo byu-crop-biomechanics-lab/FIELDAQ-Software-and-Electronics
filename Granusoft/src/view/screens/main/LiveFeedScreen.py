@@ -64,19 +64,19 @@ class LiveFeedScreen(BaseScreen):
         if self.run_count >= SECOND_CAP:
             self.sensor.get_header_data()
             sensor_data = self.sensor.get_sensor_data()
-            self.temperature = str(sensor_data["Temperature"])
-            self.humidity = str(sensor_data["Humidity"])
-            self.location = str(sensor_data["Location"])
+            self.temperature = str("%.1f" % sensor_data["Temperature"])
+            self.humidity = str("%.1f" % sensor_data["Humidity"])
+            self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
-            self.x_load = str(sensor_data["X Load"])
-            self.y_load = str(sensor_data["Y Load"])
-            self.pot_angle = str(sensor_data["Pot Angle"])
-            self.imu_angle = str(sensor_data["IMU Angle"])
+            self.x_load = str("%.1f" % sensor_data["X Load"])
+            self.y_load = str("%.1f" % sensor_data["Y Load"])
+            self.pot_angle = str("%.1f" % sensor_data["Pot Angle"])
+            self.imu_angle = str("%.1f" % sensor_data["IMU Angle"])
             # Calculate Data Acquisition Rate
             now = datetime.datetime.now()
             new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
             time_dif = new_time - self.old_time
-            self.data_rate = str(round(SECOND_CAP/time_dif,2))
+            self.data_rate = str("%.0f" % round(SECOND_CAP/time_dif,2))
             self.old_time = new_time
             # Reset run_count
             self.run_count = 0
