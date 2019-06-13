@@ -23,7 +23,7 @@ class MainScreen(BaseScreen):
     sensor = Sensor()
     temperature = StringProperty("0")
     humidity = StringProperty("0")
-    location = StringProperty("0.00,0.00")
+    location = StringProperty("1.12, 3.58")
     time = StringProperty("0")
     def on_pre_enter(self):
         self.test_time = 0
@@ -46,9 +46,10 @@ class MainScreen(BaseScreen):
         self.temperature = str(sensor_data["Temperature"])
         self.humidity = str(sensor_data["Humidity"])
         try:
-            self.location = '(' + str("%.2f%" % sensor_data["Location"][0]) + ', ' + str("%.2f%" % sensor_data["Location"][1]) + ')'
+            self.location = ('(' + str(sensor_data["Location"][0]) + ', ' + str(sensor_data["Location"][1]) + ')')
+            print(sensor_data["Location"][0])
         except:
-            self.location = str(sensor_data["Location"])
+            pass # self.location = str(sensor_data["Location"])
         try:
             self.event3.cancel()
         except:
