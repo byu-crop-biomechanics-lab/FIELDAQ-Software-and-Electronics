@@ -19,6 +19,9 @@ class GranuSideButton(Button):
 class GranuNoteButton(Button):
 	pass
 
+class SettingsButton(Button):
+	pass
+
 class GranuNone(Widget):
     pass
 
