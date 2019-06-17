@@ -15,10 +15,10 @@ __pycache__/
 # Swap Files
 *.swp
 
+# End of https://www.gitignore.io/api/python
+
 # DS_Store, whatever that is
 *.DS_Store
 
 # Configuration File
 config.json
-
-# End of https://www.gitignore.io/api/python

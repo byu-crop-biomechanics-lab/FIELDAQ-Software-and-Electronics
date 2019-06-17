@@ -107,15 +107,27 @@
                 spacing: 5
                 height: load_button.height - 6
                 Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
                     id: load_button
                     text: 'Load File'
                     size_hint_y: None
                     height: self.font_size + 40
                     size_hint_x: 0.25
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
                     on_release: root.show_load()
                 Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
                     text: 'Save File'
                     size_hint_y: None
                     height: self.font_size + 40
                     size_hint_x: 0.25
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
                     on_release: root.show_save()

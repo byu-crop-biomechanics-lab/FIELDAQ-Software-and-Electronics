@@ -22,9 +22,9 @@
 
 <MoveButton@Button>
     size_hint_y: None
-    background_color: (0,0,0,1)
-    height: self.font_size + 30
-    font_size: 18
+    background_color: (.42,.42,0.42,1)
+    height: self.font_size + 10
+    font_size: 35
 	markup: True
 	bold: True
 
@@ -103,11 +103,17 @@
                 size_hint_y: None
                 height: clear_button.height - 6
                 Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
                     id: clear_button
                     text: 'Clear Selection'
                     size_hint_y: None
-                    height: self.font_size + 40
-                    size_hint_x: 0.25
+                    height: self.font_size + 20
+                    size_hint_x: (1.0/3.0)
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
                     on_release:
                         pretest.clear_selection()
                         posttest.clear_selection()
