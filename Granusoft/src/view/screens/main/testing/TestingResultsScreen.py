@@ -112,6 +112,14 @@ class TestingResultsScreen(BaseScreen):
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
+
+        sensor = Sensor())
+        sensor.get_header_data()
+        sensor_data = sensor.get_sensor_data()
+        temperature = str(sensor_data["Temperature"])
+        humidity = str(sensor_data["Humidity"])
+        location = [str("%.5f" % sensor_data["Location"][0]), str("%.5f" % sensor_data["Location"][1])]
+
         with open(filename, 'w+', newline='') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerow(['----------META DATA----------'])
@@ -125,10 +133,10 @@ class TestingResultsScreen(BaseScreen):
             writer.writerow(['TIME', dt.strftime("%H:%M:%S"), 'Local Time Zone'])
             writer.writerow(['PLOT', str(config.get('plot_num', 0)), '#'])
             writer.writerow(['HEIGHT', str(config.get('height', 0)), 'cm'])
-            writer.writerow(['TEMPERATURE', '40', 'C'])
-            writer.writerow(['HUMIDITY', '40', '%'])
-            writer.writerow(['LATITUDE', '40', 'angular degrees'])
-            writer.writerow(['LONGITUDE', '40', 'angular degrees'])
+            writer.writerow(['TEMPERATURE', temperature, 'C'])
+            writer.writerow(['HUMIDITY', humidity, '%'])
+            writer.writerow(['LATITUDE', location[0], ' angular degrees'])
+            writer.writerow(['LONGITUDE', location[1], ' angular degrees'])
             writer.writerow(['----------OPTIONAL DATA----------'])
             writer.writerow(['PRE_TEST_NOTE_1', pre_notes[0]])
             writer.writerow(['PRE_TEST_NOTE_2', pre_notes[1]])
