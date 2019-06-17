@@ -12,8 +12,6 @@ from view.BaseScreen import BaseScreen
 from Sensor import Sensor
 import datetime
 
-from Sensor import Sensor
-
 Builder.load_file('view/screens/main/MainScreen.kv')
 
 INTERVAL = .004
