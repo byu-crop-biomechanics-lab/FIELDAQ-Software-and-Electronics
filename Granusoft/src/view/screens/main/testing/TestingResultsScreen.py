@@ -113,7 +113,7 @@ class TestingResultsScreen(BaseScreen):
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
 
-        sensor = Sensor())
+        sensor = Sensor()
         sensor.get_header_data()
         sensor_data = sensor.get_sensor_data()
         temperature = str(sensor_data["Temperature"])
