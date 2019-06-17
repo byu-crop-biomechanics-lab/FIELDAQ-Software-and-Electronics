@@ -113,10 +113,11 @@ class TestingResultsScreen(BaseScreen):
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
 
-        sensor = Sensor()
+        sensor = Sensor())
+        sensor.get_header_data()
         sensor_data = sensor.get_sensor_data()
-        temperature = str("%.0f" % sensor_data["Temperature"])
-        humidity = str("%.0f" % sensor_data["Humidity"])
+        temperature = str(sensor_data["Temperature"])
+        humidity = str(sensor_data["Humidity"])
         location = [str("%.5f" % sensor_data["Location"][0]), str("%.5f" % sensor_data["Location"][1])]
 
         with open(filename, 'w+', newline='') as csvFile:
