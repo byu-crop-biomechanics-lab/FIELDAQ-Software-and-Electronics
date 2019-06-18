@@ -1,6 +1,6 @@
 from kivy.config import Config as KivyConfig
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, FadeTransition
+from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
 
 import configurator as config
 
@@ -20,7 +20,7 @@ class GranuScreenManager(ScreenManager):
 
 class MainApp(App):
     def build(self):
-        sm = GranuScreenManager(transition=FadeTransition(duration=0.1))
+        sm = GranuScreenManager(transition=NoTransition())
         return sm
 
 if __name__ == "__main__":
