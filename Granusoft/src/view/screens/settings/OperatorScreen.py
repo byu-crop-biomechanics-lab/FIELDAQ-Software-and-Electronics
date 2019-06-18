@@ -25,7 +25,7 @@ class OperatorScreen(BaseScreen):
         """Once the Screen loads, focus the TextInput"""
         input = self.ids['operator']
         input.focus = True
-        input.select_all()
+        #input.select_all()
 
     def save(self):
         """Save button was pressed: save the new operator in the configuration file."""
