@@ -120,6 +120,12 @@ class TestingResultsScreen(BaseScreen):
         humidity = str(sensor_data["Humidity"])
         location = [str("%.5f" % sensor_data["Location"][0]), str("%.5f" % sensor_data["Location"][1])]
 
+        self.config_data = config.get('sensors', {})
+        self.NAMES = ['X Load', 'Y Load', 'IMU Angle', 'Pot Angle', 'Temperature', 'Humidity']
+        self.SENSOR = ['LOAD_X', 'LOAD_Y', 'IMU', 'POT', 'TEMP', 'HUM']
+        self.UNITS = ['N', 'Newtons', 'Deg', 'Deg', 'C', '%']
+        self.IDS = ['loadx1', 'loady1', 'imu1', 'pot1', 'temp1', 'hum1']
+
         with open(filename, 'w+', newline='') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerow(['----------META DATA----------'])
@@ -153,12 +159,11 @@ class TestingResultsScreen(BaseScreen):
             writer.writerow(['LCA_WEIGTH', '0', 'g'])
             writer.writerow(['----------SENSOR CALIBRATION DATA (stored_value*A + B = raw_data)------'])
             writer.writerow(['SENSOR', 'A', 'B', 'UNIT', 'ID'])
-            writer.writerow(['LOAD_X', '0', '0', 'N', 'loadx1'])
-            writer.writerow(['LOAD_Y', '0', '0', 'Newton', 'loady1'])
-            writer.writerow(['IMU', '0', '0', 'Deg', 'imu1'])
-            writer.writerow(['POT', '0', '0', 'Deg', 'pot1'])
-            writer.writerow(['TEMP', '0', '0', 'C', 'temp1'])
-            writer.writerow(['HUM', '0', '0', '%', 'hum1'])
+            for j in range(len(self.NAMES)):
+                try:
+                    writer.writerow([self.SENSOR[j], self.config_data[self.NAMES[j]]['slope'], self.config_data[self.NAMES[j]]['intercept'], self.UNITS[j], self.IDS[j]])
+                except:
+                    writer.writerow([self.SENSOR[j], '1', '0', self.UNITS[j], self.IDS[j]])
             writer.writerow(['----------TEST DATA-----------'])
             writer.writerow(['TIME (s)', 'ANGLE_POT', 'ANGLE_IMU', 'LOAD_X', 'LOAD_Y'])
             datasets = ts.get_datasets()
