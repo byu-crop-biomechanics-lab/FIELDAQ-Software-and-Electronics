@@ -63,7 +63,7 @@
                 text: 'Back'
 	    		on_release:
                     root.manager.transition.direction = 'right'
-                    root.move_to('main_screen') # Move to main screen
+                    root.move_to('cam_main_screen') # Move to main screen
         GranuContent:
             GranuTitle:
                 text: 'Camera Settings Screen'
@@ -73,34 +73,10 @@
                 spacing: 10
                 row_default_height: self.height/4
                 SettingsButton:
-                    text: 'Height'
-	    		    on_release:
-	    		        root.move_to('height_screen')
-                SettingsButton:
-                    text: 'Plot'
+                    text: 'Switch to\nGranusoft'
 	    		    on_release:
                         root.manager.transition.direction = 'left'
-                        root.move_to('plot_screen')
-                SettingsButton:
-                    text: 'Notes'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('note_screen')
-                SettingsButton:
-                    text: 'Sensors'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('sensors_screen')
-                SettingsButton:
-                    text: 'Operator'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('operator_screen')
-                SettingsButton:
-                    text: 'Switch to\nCamera'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('cam_main_screen')
+                        root.move_to('main_screen')
                 SettingsButton:
                     text: 'Update\nSoftware'
                     on_release:
