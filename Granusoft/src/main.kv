@@ -25,6 +25,12 @@
 #:import BreakHeightScreen view.screens.main.testing.BreakHeightScreen
 #:import TestsScreen view.screens.main.testing.TestsScreen
 
+#:import CameraMainScreen view.screens.camera.CameraMainScreen
+#:import CameraFeedScreen view.screens.camera.CameraFeedScreen
+#:import ImageReviewScreen view.screens.camera.ImageReviewScreen
+#:import ImagesViewScreen view.screens.camera.ImagesViewScreen
+#:import CameraSettingsScreen view.screens.camera.CameraSettingsScreen
+
 <GranuScreenManager>:
     # Properties
     current: 'main_screen' # Start with the main screen
@@ -57,3 +63,10 @@
     TestingResultsScreen:
     BreakHeightScreen:
     TestsScreen:
+
+    # Camera Interface
+    CameraMainScreen:
+    CameraFeedScreen:
+    ImageReviewScreen:
+    ImagesViewScreen:
+    CameraSettingsScreen:

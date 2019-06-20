@@ -52,8 +52,8 @@
                 text: "Save"
                 on_release: root.save(filechooser.path, filename.text)
 
-<SettingsScreen>:
-    name: 'settings_screen'
+<CameraSettingsScreen>:
+    name: 'cam_settings_screen'
     GranuContainer:
         GranuSideArea:
         	GranuNone:
@@ -66,7 +66,7 @@
                     root.move_to('main_screen') # Move to main screen
         GranuContent:
             GranuTitle:
-                text: 'Settings'
+                text: 'Camera Settings Screen'
             GridLayout:
                 cols: 3
                 rows: 3

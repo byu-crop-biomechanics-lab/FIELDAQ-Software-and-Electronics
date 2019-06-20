@@ -1,0 +1,34 @@
+<ImageReviewScreen>:
+    name: 'img_review_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Retake'
+	    		on_release:
+                    root.move_to('cam_feed_screen')
+            GranuSideButton:
+                text: 'Take\nAnother'
+                on_release:
+                    root.move_to('cam_feed_screen') # Move to testing screen
+            GranuNone:
+            GranuSideButton:
+                text: 'Save'
+                on_release:
+                    root.move_to('img_viewer_screen') # Move to exit screen
+        GranuContent:
+            GranuTitle:
+                text: 'Image Review Screen'
+            Label:
+                id: device_name
+                font_size: 40
+                markup: True
+            	bold: True
+                text: 'Stalk Strength\nDevice 2.1.0'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            	markup: True
+            	bold: True

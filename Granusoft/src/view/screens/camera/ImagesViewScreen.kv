@@ -1,0 +1,28 @@
+<ImagesViewScreen>:
+    name: 'img_viewer_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuNone:
+            GranuNone:
+            GranuNone:
+            GranuSideButton:
+                text: 'Back'
+                on_release:
+                    root.move_to('cam_main_screen') # Move to camera main screen
+        GranuContent:
+            GranuTitle:
+                text: 'Image Viewer'
+            Label:
+                id: device_name
+                font_size: 40
+                markup: True
+            	bold: True
+                text: 'Stalk Strength\nDevice 2.1.0'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            	markup: True
+            	bold: True
