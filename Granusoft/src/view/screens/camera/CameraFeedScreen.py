@@ -26,7 +26,7 @@ class CameraFeedScreen(BaseScreen):
 
     def on_enter(self):
         try:
-            self.camera.start_preview(alpha=250)
+            self.camera.start_preview(fullscreen=False,window=(250,10,530,440))
         except:
             pass
 
