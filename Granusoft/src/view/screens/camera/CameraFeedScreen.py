@@ -31,7 +31,7 @@ class CameraFeedScreen(BaseScreen):
             pass
     def captureImage(self):
         try:
-            filename = '/home/FIELDAQ/Granusoft/src/Images/CornStalk' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.jpg'
+            filename = 'Images/CornStalk' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.jpg'
             self.camera.capture(filename)
         except:
             pass
