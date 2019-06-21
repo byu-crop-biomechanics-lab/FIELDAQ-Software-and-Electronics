@@ -22,3 +22,6 @@ __pycache__/
 
 # Configuration File
 config.json
+
+# Test Images
+*.jpg

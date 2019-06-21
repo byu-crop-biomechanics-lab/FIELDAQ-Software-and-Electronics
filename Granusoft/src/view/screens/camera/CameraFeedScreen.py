@@ -31,7 +31,8 @@ class CameraFeedScreen(BaseScreen):
             pass
     def captureImage(self):
         try:
-            filename = 'Images/CornStalk' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.jpg'
+            dt = datetime.datetime.now()
+            filename = 'Images/Stalk_' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.jpg'
             self.camera.capture(filename)
         except:
             pass
