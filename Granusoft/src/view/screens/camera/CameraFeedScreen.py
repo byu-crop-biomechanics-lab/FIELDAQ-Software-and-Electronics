@@ -29,6 +29,12 @@ class CameraFeedScreen(BaseScreen):
             self.camera.start_preview(fullscreen=False,window=(250,10,530,440))
         except:
             pass
+    def captureImage(self):
+        try:
+            filename = '/home/FIELDAQ/Granusoft/src/Images/CornStalk' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.jpg'
+            self.camera.capture(filename)
+        except:
+            pass
 
     def on_leave(self):
         try:
