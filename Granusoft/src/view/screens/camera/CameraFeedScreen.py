@@ -19,15 +19,19 @@ except:
 Builder.load_file('view/screens/camera/CameraFeedScreen.kv')
 
 class CameraFeedScreen(BaseScreen):
+    try:
+        camera = PiCamera()
+    except:
+        pass
+
     def on_enter(self):
         try:
-            camera = PiCamera()
-            camera.start_preview(alpha=100)
+            self.camera.start_preview(alpha=250)
         except:
             pass
 
     def on_leave(self):
         try:
-            camera.stop_preview()
+            self.camera.stop_preview()
         except:
             pass
