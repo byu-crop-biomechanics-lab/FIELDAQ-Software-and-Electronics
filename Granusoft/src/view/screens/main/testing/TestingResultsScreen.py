@@ -105,10 +105,10 @@ class TestingResultsScreen(BaseScreen):
         })
         pre_notes = notes["pretest"]
         post_notes = notes["posttest"]
-        while(len(pre_notes) < 5):
-            pre_notes.append('')
-        while(len(post_notes) < 5):
-            post_notes.append('')
+        while(len(pre_notes) < 5): # These two while loops are causing the notes
+            pre_notes.append('')   # to be filled with blank notes when a test
+        while(len(post_notes) < 5): # is saved. Consider rewriting in writer as
+            post_notes.append('')   # logic as to not fill notes every test.
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
