@@ -32,11 +32,33 @@ class CameraFeedScreen(BaseScreen):
             print('No Camera Found')
     def captureImage(self):
         try:
+            def decdeg2dms(dd):
+                negative = dd < 0
+                dd = abs(dd)
+                minutes,seconds = divmod(dd*3600,60)
+                degrees,minutes = divmod(minutes,60)
+                if negative:
+                    if degrees > 0:
+                        degrees = -degrees
+                    elif minutes > 0:
+                        minutes = -minutes
+                    else:
+                        seconds = -seconds
+                return (degrees,minutes,seconds)
             sensor = Sensor()
             sensor.get_header_data()
-            location = [str("%.5f" % sensor_data["Location"][0]), str("%.5f" % sensor_data["Location"][1])]
-            camera.exif_tags['GPS.GPSLatitude'] = location[0]
-            camera.exif_tags['GPS.GPSLongitude'] = location[1]
+            sensor_data = sensor.get_sensor_data()
+            location = [sensor_data["Location"][0], sensor_data["Location"][1]]
+            latdms = decdeg2dms(abs(location[0]))
+            londms = decdeg2dms(abs(location[1]))
+            self.camera.exif_tags['IFD0.Artist']='JaredHMT'
+        except:
+            print('Location Data not found')
+        try:
+            self.camera.exif_tags['GPS.GPSLatitudeRef'] = 'N' if location[0] > 0 else 'S'
+            self.camera.exif_tags['GPS.GPSLongitudeRef'] = 'E' if location[1] > 0 else 'W'
+            self.camera.exif_tags['GPS.GPSLatitude'] = '%d/1,%d/1,%d/100' % (latdms[0], latdms[1], latdms[2])
+            self.camera.exif_tags['GPS.GPSLongitude'] = '%d/1,%d/1,%d/100' % (londms[0], londms[1], londms[2])
         except:
             print('Location Data not added')
         try:
