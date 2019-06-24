@@ -6,11 +6,11 @@
                 text: 'Take\nPhoto'
 	    		on_release:
                     root.captureImage()
-                    root.move_to('img_review_screen') # Move to settings screen
+                    root.move_to('cam_main_screen') # Move to main camera screen
             GranuNone:
             GranuNone:
             GranuSideButton:
-                text: 'Back'
+                text: 'Cancel'
                 on_release:
-                    root.move_to('cam_main_screen') # Move to exit screen
+                    root.move_to('cam_main_screen') # Move to main camera screen
         GranuContent:

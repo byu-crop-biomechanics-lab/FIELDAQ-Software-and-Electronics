@@ -3,18 +3,15 @@
     GranuContainer:
         GranuSideArea:
             GranuSideButton:
-                text: 'Retake'
+                text: 'Take\nAnother'
 	    		on_release:
                     root.move_to('cam_feed_screen')
-            GranuSideButton:
-                text: 'Take\nAnother'
-                on_release:
-                    root.move_to('cam_feed_screen') # Move to testing screen
+            GranuNone:
             GranuNone:
             GranuSideButton:
                 text: 'Save'
                 on_release:
-                    root.move_to('img_viewer_screen') # Move to exit screen
+                    root.move_to('cam_main_screen') # Move to main screen
         GranuContent:
             GranuTitle:
                 text: 'Image Review Screen'
@@ -23,7 +20,7 @@
                 font_size: 40
                 markup: True
             	bold: True
-                text: 'Stalk Strength\nDevice 2.1.0'
+                text: 'PUT THE BIG,\nFAT IMAGE RIGHT SMACK\nDAB IN THE CENTER\nHERE'
                 halign: 'center'
             Label:
                 id: warning_text

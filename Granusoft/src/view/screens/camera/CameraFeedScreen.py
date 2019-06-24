@@ -10,6 +10,7 @@ from kivy.properties import StringProperty
 from kivy.clock import Clock
 from view.BaseScreen import BaseScreen
 import datetime
+from Sensor import Sensor
 
 try:
     from picamera import PiCamera
@@ -28,14 +29,22 @@ class CameraFeedScreen(BaseScreen):
         try:
             self.camera.start_preview(rotation=180,fullscreen=False,window=(230,10,560,460))
         except:
-            pass
+            print('No Camera Found')
     def captureImage(self):
+        try:
+            sensor = Sensor()
+            sensor.get_header_data()
+            location = [str("%.5f" % sensor_data["Location"][0]), str("%.5f" % sensor_data["Location"][1])]
+            camera.exif_tags['GPS.GPSLatitude'] = location[0]
+            camera.exif_tags['GPS.GPSLongitude'] = location[1]
+        except:
+            print('Location Data not added')
         try:
             dt = datetime.datetime.now()
             filename = 'Images/Stalk_' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.jpg'
             self.camera.capture(filename)
         except:
-            pass
+            print('Taking Imaginary Picture')
 
     def on_leave(self):
         try:

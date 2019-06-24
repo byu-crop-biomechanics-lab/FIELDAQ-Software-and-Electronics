@@ -14,7 +14,7 @@
 	name: 'img_viewer_screen'
     GranuContainer:
         GranuSideArea:
-            id: tests_buttons
+            id: images_buttons
         GranuContent:
             GranuTitle:
                 text: 'Tests'
@@ -23,6 +23,6 @@
                 ImageList:
                     id: images_list
                     on_interaction:
-                        root.test_buttons()
+                        root.image_buttons()
                     on_deselect_all:
                         root.default_buttons()
