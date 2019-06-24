@@ -27,7 +27,7 @@ class CameraFeedScreen(BaseScreen):
         pass
     try:
         camera.exif_tags['IFD0.Artist']=str(config.get('operator', 0))
-        camera.exif_tags['EXIF.UserComment']=str('PLOT: ' + str(config.get('plot_num', 0)) + '\nHEIGHT: ' + str(config.get('height', 0)))
+        camera.exif_tags['IFD0.ImageDescription']=str('PLOT: ' + str(config.get('plot_num', 0)) + ', HEIGHT: ' + str(config.get('height', 0)))
     except:
         print('No Operator Data Added')
 
