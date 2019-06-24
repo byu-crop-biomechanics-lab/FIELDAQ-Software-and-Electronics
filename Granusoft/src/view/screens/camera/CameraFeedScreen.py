@@ -20,13 +20,13 @@ Builder.load_file('view/screens/camera/CameraFeedScreen.kv')
 
 class CameraFeedScreen(BaseScreen):
     try:
-        camera = PiCamera()
+        camera = PiCamera(resolution=(1120,920))
     except:
         pass
 
     def on_enter(self):
         try:
-            self.camera.start_preview(fullscreen=False,window=(250,10,530,440))
+            self.camera.start_preview(rotation=180,fullscreen=False,window=(230,10,560,460))
         except:
             pass
     def captureImage(self):
