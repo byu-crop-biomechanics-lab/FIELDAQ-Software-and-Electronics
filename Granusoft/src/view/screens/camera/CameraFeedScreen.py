@@ -11,6 +11,7 @@ from kivy.clock import Clock
 from view.BaseScreen import BaseScreen
 import datetime
 from Sensor import Sensor
+import configurator as config
 
 try:
     from picamera import PiCamera
@@ -24,6 +25,11 @@ class CameraFeedScreen(BaseScreen):
         camera = PiCamera(resolution=(1120,920))
     except:
         pass
+    try:
+        camera.exif_tags['IFD0.Artist']=str(config.get('operator', 0))
+        camera.exif_tags['EXIF.UserComment']=str('PLOT: ' + str(config.get('plot_num', 0)) + '\nHEIGHT: ' + str(config.get('height', 0)))
+    except:
+        print('No Operator Data Added')
 
     def on_enter(self):
         try:
@@ -51,7 +57,6 @@ class CameraFeedScreen(BaseScreen):
             location = [sensor_data["Location"][0], sensor_data["Location"][1]]
             latdms = decdeg2dms(abs(location[0]))
             londms = decdeg2dms(abs(location[1]))
-            self.camera.exif_tags['IFD0.Artist']='JaredHMT'
         except:
             print('Location Data not found')
         try:
