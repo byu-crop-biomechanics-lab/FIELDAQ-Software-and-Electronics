@@ -1,54 +1,85 @@
 """
-The main screen contains four buttons for navigation:
-Settings, Testing, Live Feed, and Exit
-
-It also shows environment data: Temperature, Humidity, Location, and Time.
+Fill in this summary later
 """
 
+
 from kivy.lang import Builder
-from kivy.properties import StringProperty
-from kivy.clock import Clock
+
+from kivy.properties import ListProperty
+import configurator as config
+
+
+
 from view.BaseScreen import BaseScreen
-from Sensor import Sensor
-import datetime
+from view.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
+from view.elements import *
+
+from os import listdir
+from os.path import isfile, join
+
+from kivy.garden.graph import Graph, MeshLinePlot
 
 Builder.load_file('view/screens/camera/ImagesViewScreen.kv')
 
-INTERVAL = .004
-INTERVAL2 = 5
+class Image(SingleSelectableListBehavior, Label):
+    pass
+
+class ImageList(SingleSelectableList):
+    def update(self, k, val):
+        self.data = [{'text': str(x)} for x in self.list_data]
 
 class ImagesViewScreen(BaseScreen):
-    sensor = Sensor()
-    temperature = StringProperty("0")
-    humidity = StringProperty("0")
-    location = StringProperty("1.12, 3.58")
-    time = StringProperty("0")
+    def __init__(self, **kwargs):
+        super(BaseScreen, self).__init__(**kwargs)
+        self.back_button = GranuSideButton(text = 'Back')
+        self.back_button.bind(on_release = self.go_back)
+        self.remove_button = GranuSideButton(text = 'Remove\nAll')
+        self.remove_button.bind(on_release = self.remove_tests)
+        self.export_button = GranuSideButton(text = 'Export\nAll')
+        self.export_button.bind(on_release = self.export_tests)
+        self.test_details_button = GranuSideButton(text = 'Test\nDetails')
+        self.test_details_button.bind(on_release = self.test_details)
+
     def on_pre_enter(self):
-        self.test_time = 0
-        self.event = Clock.schedule_interval(self.update_time, INTERVAL)
-        self.event2 = Clock.schedule_interval(self.update_values, INTERVAL2)
-        #self.update_values
-        self.sensor_man = Sensor()
-        if self.sensor_man.REAL_DATA is False:
-            self.ids['warning_text'].text = 'WARNING: Using falsified data.  Check console for stack trace.'
+        self.test_filenames = [f for f in listdir("Images") if isfile(join("Images", f))]
 
-    def on_enter(self):
-        self.event3 = Clock.schedule_interval(self.update_values, 0.01)
 
-    def update_time(self, obj):
-        self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
 
-    def update_values(self, obj):
-        self.sensor.get_header_data()
-        sensor_data = self.sensor.get_sensor_data()
-        self.temperature = str("%.0f" % sensor_data["Temperature"])
-        self.humidity = str("%.0f" % sensor_data["Humidity"])
-        self.location = ('(' + str("%.4f" % sensor_data["Location"][0]) + ', ' + str("%.4f" % sensor_data["Location"][1]) + ')')
-        try:
-            self.event3.cancel()
-        except:
-            pass
+        self.default_buttons()
+
+        self.ids['images_list'].list_data = self.test_filenames
+
+
+    def go_back(self, obj):
+        super(TestsScreen, self).back()
+
+    def remove_tests(self, obj):
+        print("We should remove all tests!")
+
+    def export_tests(self, obj):
+        print("We should export all tests!")
+
+    def test_details(self, obj):
+        print("We should show test details!")
+
+    # Button Changes
+
+    def default_buttons(self):
+        buttons = self.ids['tests_buttons']
+        buttons.clear_widgets()
+        buttons.add_widget(self.back_button)
+        buttons.add_widget(self.remove_button)
+        buttons.add_widget(self.export_button)
+        buttons.add_widget(Widget())
+
+    def test_buttons(self):
+        buttons = self.ids['tests_buttons']
+        buttons.clear_widgets()
+        buttons.add_widget(self.back_button)
+        buttons.add_widget(self.remove_button)
+        buttons.add_widget(self.export_button)
+        buttons.add_widget(self.test_details_button)
+
 
     def on_leave(self):
-        self.event.cancel()
-        self.event2.cancel()
+        pass
