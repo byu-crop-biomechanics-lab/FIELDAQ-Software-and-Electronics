@@ -3,15 +3,16 @@
     GranuContainer:
         GranuSideArea:
             GranuSideButton:
-                text: 'Take\nAnother'
-	    		on_release:
-                    root.move_to('cam_feed_screen')
+                text: 'Delete'
+                on_release:
+                    root.delete_button()
+                    root.move_to('img_viewer_screen')
             GranuNone:
             GranuNone:
             GranuSideButton:
-                text: 'Save'
+                text: 'Back'
                 on_release:
-                    root.move_to('cam_main_screen') # Move to main screen
+                    root.move_to('img_viewer_screen') # Move to images view screen
         GranuContent:
             GranuTitle:
                 text: 'Image Review Screen'
@@ -22,10 +23,3 @@
             	bold: True
                 text: 'PUT THE BIG,\nFAT IMAGE RIGHT SMACK\nDAB IN THE CENTER\nHERE'
                 halign: 'center'
-            Label:
-                id: warning_text
-                color: (0.8, 0, 0, 1)
-                size_hint_max_y: 15
-                font_size: 15
-            	markup: True
-            	bold: True
