@@ -17,9 +17,11 @@
             GranuTitle:
                 text: 'Image Review Screen'
             Label:
-                id: device_name
-                font_size: 40
-                markup: True
+                size_hint_max_y: 40
+                font_size: 20
+            	markup: True
             	bold: True
-                text: 'PUT THE BIG,\nFAT IMAGE RIGHT SMACK\nDAB IN THE CENTER\nHERE'
-                halign: 'center'
+                text: 'Image: ' + root.image_name
+            Image:
+                source: 'Images/' + root.image_name
+                texture: None

@@ -56,7 +56,9 @@ class ImagesViewScreen(BaseScreen):
         print("We should export all images!")
 
     def image_details(self, obj):
-        print("We should show the image!")
+        imagename = self.ids['images_list'].remove_selected()
+        img_screen = self.manager.get_screen('img_review_screen')
+        img_screen.set_image(imagename[0])
         super(ImagesViewScreen, self).move_to('img_review_screen')
 
     # Button Changes
