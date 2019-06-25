@@ -1,6 +1,6 @@
 """
-The main screen contains four buttons for navigation:
-Settings, Testing, Live Feed, and Exit
+The main screen contains three buttons for navigation:
+View Images, Testing, and Settings
 
 It also shows environment data: Temperature, Humidity, Location, and Time.
 """

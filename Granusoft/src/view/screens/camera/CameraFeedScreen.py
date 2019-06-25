@@ -1,8 +1,11 @@
 """
-The main screen contains four buttons for navigation:
-Settings, Testing, Live Feed, and Exit
+The Camera Feed Screen is designed to preview the camera and allow the user to
+take a picture by pressing a button.
 
-It also shows environment data: Temperature, Humidity, Location, and Time.
+EXIF tags are added to the image to record important, relevant, information.
+
+A try/except mechanism is used here so that the code may still be tested on
+computers for debugging.
 """
 
 from kivy.lang import Builder
@@ -28,6 +31,7 @@ class CameraFeedScreen(BaseScreen):
     try:
         camera.exif_tags['IFD0.Artist']=str(config.get('operator', 0))
         camera.exif_tags['IFD0.ImageDescription']=str('PLOT: ' + str(config.get('plot_num', 0)) + ', HEIGHT: ' + str(config.get('height', 0)))
+        camera.exif_tags['IFD0.Copyright'] = 'Copyright (c) 2019 BYU Crop Biomechanics Laboratory'
     except:
         print('No Operator Data Added')
 
@@ -39,26 +43,19 @@ class CameraFeedScreen(BaseScreen):
     def captureImage(self):
         try:
             def decdeg2dms(dd):
-                negative = dd < 0
                 dd = abs(dd)
                 minutes,seconds = divmod(dd*3600,60)
                 degrees,minutes = divmod(minutes,60)
-                if negative:
-                    if degrees > 0:
-                        degrees = -degrees
-                    elif minutes > 0:
-                        minutes = -minutes
-                    else:
-                        seconds = -seconds
                 return (degrees,minutes,seconds)
             sensor = Sensor()
             sensor.get_header_data()
             sensor_data = sensor.get_sensor_data()
             location = [sensor_data["Location"][0], sensor_data["Location"][1]]
-            latdms = decdeg2dms(abs(location[0]))
-            londms = decdeg2dms(abs(location[1]))
+            latdms = decdeg2dms(location[0])
+            londms = decdeg2dms(location[1])
         except:
             print('Location Data not found')
+            location = [0, 0]
         try:
             self.camera.exif_tags['GPS.GPSLatitudeRef'] = 'N' if location[0] > 0 else 'S'
             self.camera.exif_tags['GPS.GPSLongitudeRef'] = 'E' if location[1] > 0 else 'W'

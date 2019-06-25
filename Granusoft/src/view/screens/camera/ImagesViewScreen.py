@@ -1,5 +1,7 @@
 """
-Fill in this summary later
+This screen lists all of the images in src/Images that the user can interact
+with. All images can be exported, or removed. Or images may be viewed
+individually.
 """
 
 
@@ -8,16 +10,12 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 import configurator as config
 
-
-
 from view.BaseScreen import BaseScreen
 from view.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
 from view.elements import *
 
 from os import listdir
 from os.path import isfile, join
-
-from kivy.garden.graph import Graph, MeshLinePlot
 
 Builder.load_file('view/screens/camera/ImagesViewScreen.kv')
 
@@ -43,8 +41,6 @@ class ImagesViewScreen(BaseScreen):
     def on_pre_enter(self):
         self.image_filenames = [f for f in listdir("Images") if isfile(join("Images", f))]
 
-
-
         self.default_buttons()
 
         self.ids['images_list'].list_data = self.image_filenames
@@ -60,7 +56,8 @@ class ImagesViewScreen(BaseScreen):
         print("We should export all images!")
 
     def image_details(self, obj):
-        print("We should show image details!")
+        print("We should show the image!")
+        super(ImagesViewScreen, self).move_to('img_review_screen')
 
     # Button Changes
 

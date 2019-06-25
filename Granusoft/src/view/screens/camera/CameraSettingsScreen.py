@@ -1,6 +1,9 @@
 """
-From the settings screen you can navigate to these options: Height, Plot, Operator,
-Folder, Notes
+Settings relevant to the camera are viewed here. Some settings relevant are:
+Plot Number, Height, etc.
+
+Switching back to the main Granustem functionality is also achieved through the
+Settings screen.
 """
 
 import os
