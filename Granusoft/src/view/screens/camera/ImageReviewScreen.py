@@ -11,7 +11,7 @@ from view.BaseScreen import BaseScreen
 from Sensor import Sensor
 import datetime
 
-from os import listdir
+import os
 
 Builder.load_file('view/screens/camera/ImageReviewScreen.kv')
 
@@ -23,3 +23,4 @@ class ImageReviewScreen(BaseScreen):
 
     def delete_button(self):
         print('We should delete image ' + self.image_name)
+        os.system("rm Images/" + self.image_name)
