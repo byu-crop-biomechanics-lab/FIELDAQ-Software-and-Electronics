@@ -25,7 +25,7 @@ Builder.load_file('view/screens/camera/CameraFeedScreen.kv')
 
 class CameraFeedScreen(BaseScreen):
     try:
-        camera = PiCamera(resolution=(1120,920))
+        camera = PiCamera(resolution=(2240,1840))
     except:
         pass
     try:
