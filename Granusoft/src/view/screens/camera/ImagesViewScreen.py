@@ -51,6 +51,13 @@ class ImagesViewScreen(BaseScreen):
 
     def remove_images(self, obj):
         print("We should remove all images!")
+        keepnames = ['Stalk_2019_06_20_22_45_52.jpg', 'Stalk_2019_06_24_13_03_02.jpg', 'Stalk_2019_06_24_13_08_08.jpg']
+        for f in listdir("Images"):
+            if f in keepnames:
+                pass
+            else:
+                # os.system("rm Images/" + f)
+                print('Would have removed ' + f)
 
     def export_images(self, obj):
         print("We should export all images!")
