@@ -18,7 +18,10 @@ from view.StaticList import StaticList
 from view.elements import *
 import configurator as config
 import csv
-from sensors.connections import *
+try:
+    from sensors.connections import *
+except:
+    pass
 
 from kivy.garden.graph import Graph, MeshLinePlot
 
@@ -113,7 +116,10 @@ class TestingResultsScreen(BaseScreen):
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
-        gps.update()
+        try:
+            gps.update()
+        except:
+            pass
         sensor = Sensor()
         sensor.get_header_data()
         sensor_data = sensor.get_sensor_data()
