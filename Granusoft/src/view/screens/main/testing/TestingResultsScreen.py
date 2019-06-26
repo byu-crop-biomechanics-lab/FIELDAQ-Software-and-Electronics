@@ -18,6 +18,7 @@ from view.StaticList import StaticList
 from view.elements import *
 import configurator as config
 import csv
+from sensors.connections import *
 
 from kivy.garden.graph import Graph, MeshLinePlot
 
@@ -112,13 +113,13 @@ class TestingResultsScreen(BaseScreen):
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
-
+        gps.update()
         sensor = Sensor()
         sensor.get_header_data()
         sensor_data = sensor.get_sensor_data()
         temperature = str(sensor_data["Temperature"])
         humidity = str(sensor_data["Humidity"])
-        location = [str("%.5f" % sensor_data["Location"][0]), str("%.5f" % sensor_data["Location"][1])]
+        location = [str("%.7f" % sensor_data["Location"][0]), str("%.7f" % sensor_data["Location"][1])]
 
         self.config_data = config.get('sensors', {})
         self.NAMES = ['X Load', 'Y Load', 'IMU Angle', 'Pot Angle', 'Temperature', 'Humidity']

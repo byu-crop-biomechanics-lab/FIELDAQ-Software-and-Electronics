@@ -13,6 +13,7 @@ class Location:
     def get_data(self):
         gps.update()
         if gps.has_fix:
+            gps.update()
             self.lat = gps.latitude
             self.long = gps.longitude
         return self.lat, self.long
