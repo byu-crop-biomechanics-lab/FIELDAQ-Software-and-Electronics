@@ -105,10 +105,6 @@ class TestingResultsScreen(BaseScreen):
         })
         pre_notes = notes["pretest"]
         post_notes = notes["posttest"]
-        while(len(pre_notes) < 5): # These two while loops are causing the notes
-            pre_notes.append('')   # to be filled with blank notes when a test
-        while(len(post_notes) < 5): # is saved. Consider rewriting in writer as
-            post_notes.append('')   # logic as to not fill notes every test.
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
@@ -138,16 +134,16 @@ class TestingResultsScreen(BaseScreen):
             writer.writerow(['LATITUDE', location[0], ' angular degrees'])
             writer.writerow(['LONGITUDE', location[1], ' angular degrees'])
             writer.writerow(['----------OPTIONAL DATA----------'])
-            writer.writerow(['PRE_TEST_NOTE_1', pre_notes[0]])
-            writer.writerow(['PRE_TEST_NOTE_2', pre_notes[1]])
-            writer.writerow(['PRE_TEST_NOTE_3', pre_notes[2]])
-            writer.writerow(['PRE_TEST_NOTE_4', pre_notes[3]])
-            writer.writerow(['PRE_TEST_NOTE_5', pre_notes[4]])
-            writer.writerow(['POST_TEST_NOTE_1', post_notes[0]])
-            writer.writerow(['POST_TEST_NOTE_2', post_notes[1]])
-            writer.writerow(['POST_TEST_NOTE_3', post_notes[2]])
-            writer.writerow(['POST_TEST_NOTE_4', post_notes[3]])
-            writer.writerow(['POST_TEST_NOTE_5', post_notes[4]])
+            for i in range(5):
+                try:
+                    writer.writerow(['PRE_TEST_NOTE_' + str(i+1), pre_notes[i]])
+                except:
+                    writer.writerow(['PRE_TEST_NOTE_' + str(i+1), ''])
+            for i in range(5):
+                try:
+                    writer.writerow(['POST_TEST_NOTE_' + str(i+1), post_notes[i]])
+                except:
+                    writer.writerow(['POST_TEST_NOTE_' + str(i+1), ''])
             writer.writerow(['BREAK_HEIGHT', str(config.get('break_height', 0)), 'cm'])
             writer.writerow(['LODGE_TYPE', self.lodgeFlag])
             writer.writerow(['LCA_WEIGTH', '0', 'g'])
