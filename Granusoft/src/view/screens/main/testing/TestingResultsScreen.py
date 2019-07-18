@@ -18,6 +18,10 @@ from view.StaticList import StaticList
 from view.elements import *
 import configurator as config
 import csv
+try:
+    from sensors.connections import *
+except:
+    pass
 
 from kivy.garden.graph import Graph, MeshLinePlot
 
@@ -41,7 +45,10 @@ class TestingResultsScreen(BaseScreen):
             if(dataset.x_load > max):
                 max = dataset.x_load
         return max
-
+    def on_pre_enter(self):
+        sensor = Sensor()
+        sensor.clear_gps_memory()
+        
     def on_enter(self):
         self.graph1 = self.ids['graph_test1']
         self.graph2 = self.ids['graph_test2']
@@ -108,13 +115,22 @@ class TestingResultsScreen(BaseScreen):
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
-
+        try:
+            gps.update()
+        except:
+            pass
         sensor = Sensor()
         sensor.get_header_data()
         sensor_data = sensor.get_sensor_data()
         temperature = str(sensor_data["Temperature"])
         humidity = str(sensor_data["Humidity"])
-        location = [str("%.5f" % sensor_data["Location"][0]), str("%.5f" % sensor_data["Location"][1])]
+        location = [str("%.7f" % sensor_data["Location"][0]), str("%.7f" % sensor_data["Location"][1])]
+
+        self.config_data = config.get('sensors', {})
+        self.NAMES = ['X Load', 'Y Load', 'IMU Angle', 'Pot Angle', 'Temperature', 'Humidity']
+        self.SENSOR = ['LOAD_X', 'LOAD_Y', 'IMU', 'POT', 'TEMP', 'HUM']
+        self.UNITS = ['N', 'Newtons', 'Deg', 'Deg', 'C', '%']
+        self.IDS = ['loadx1', 'loady1', 'imu1', 'pot1', 'temp1', 'hum1']
 
         with open(filename, 'w+', newline='') as csvFile:
             writer = csv.writer(csvFile)
@@ -149,12 +165,11 @@ class TestingResultsScreen(BaseScreen):
             writer.writerow(['LCA_WEIGTH', '0', 'g'])
             writer.writerow(['----------SENSOR CALIBRATION DATA (stored_value*A + B = raw_data)------'])
             writer.writerow(['SENSOR', 'A', 'B', 'UNIT', 'ID'])
-            writer.writerow(['LOAD_X', '0', '0', 'N', 'loadx1'])
-            writer.writerow(['LOAD_Y', '0', '0', 'Newton', 'loady1'])
-            writer.writerow(['IMU', '0', '0', 'Deg', 'imu1'])
-            writer.writerow(['POT', '0', '0', 'Deg', 'pot1'])
-            writer.writerow(['TEMP', '0', '0', 'C', 'temp1'])
-            writer.writerow(['HUM', '0', '0', '%', 'hum1'])
+            for j in range(len(self.NAMES)):
+                try:
+                    writer.writerow([self.SENSOR[j], self.config_data[self.NAMES[j]]['slope'], self.config_data[self.NAMES[j]]['intercept'], self.UNITS[j], self.IDS[j]])
+                except:
+                    writer.writerow([self.SENSOR[j], '1', '0', self.UNITS[j], self.IDS[j]])
             writer.writerow(['----------TEST DATA-----------'])
             writer.writerow(['TIME (s)', 'ANGLE_POT', 'ANGLE_IMU', 'LOAD_X', 'LOAD_Y'])
             datasets = ts.get_datasets()
