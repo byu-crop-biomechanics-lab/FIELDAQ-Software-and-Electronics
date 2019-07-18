@@ -45,7 +45,10 @@ class TestingResultsScreen(BaseScreen):
             if(dataset.x_load > max):
                 max = dataset.x_load
         return max
-
+    def on_pre_enter(self):
+        sensor = Sensor()
+        sensor.clear_gps_memory()
+        
     def on_enter(self):
         self.graph1 = self.ids['graph_test1']
         self.graph2 = self.ids['graph_test2']

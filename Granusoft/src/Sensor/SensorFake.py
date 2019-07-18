@@ -22,8 +22,6 @@ class Sensor:
         self.sensor_data["Humidity"] = "5"
         self.sensor_data["Location"] = "5"
 
-
-
     def get_sensor_data(self):
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
         self.temp_fake += 1
@@ -43,6 +41,9 @@ class Sensor:
         self.sensor_data["Pot Angle"] = self.pot_fake
         self.sensor_data["IMU Angle"] = self.imu_fake
         return self.sensor_data
+
+    def clear_gps_memory(self):
+        print('Clear GPS memory')
 
     def get_sensor_keys(self):
         return self.keys

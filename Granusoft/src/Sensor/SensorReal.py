@@ -46,6 +46,9 @@ class Sensor:
         self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(),3)
         return self.sensor_data
 
+    def clear_gps_memory(self):
+        self.location.update_gps_location()
+
     def get_sensor_keys(self):
         return self.keys
 
