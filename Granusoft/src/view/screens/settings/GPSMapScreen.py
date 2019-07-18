@@ -1,6 +1,6 @@
 """
 This screen is designed to test the precision of the GPS unit
-by taking measurements every 15 seconds while the operator
+by taking measurements every 5 seconds while the operator
 walks on a predetermined path. The coordinates can be uploaded
 to google to compare the precision of the gps.
 """
@@ -23,17 +23,31 @@ import csv
 
 Builder.load_file('view/screens/settings/GPSMapScreen.kv')
 
-INTERVAL = 15
+INTERVAL = 5
 
 class GPSMapScreen(BaseScreen):
     sensor = Sensor()
     def update_gps_location(self):
+        uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
+        gps = adafruit_gps.GPS(uart, debug=False)
         gps.update()
-            # Turn button red or something. Have csvwrite start writing and
-            # have stop button send stop signal to csvwrite.
+        uart = serial.Serial("/dev/ttyS0", baudrate=115200, timeout=3000)
+        gps = adafruit_gps.GPS(uart, debug=False)
+        gps.send_command(b'PMTK184,1')
+        while True:
+            try:
+                uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
+                gps = adafruit_gps.GPS(uart, debug=False)
+                gps.update()
+                break
+            except:
+                uart = serial.Serial("/dev/ttyS0", baudrate=115200, timeout=3000)
+                gps = adafruit_gps.GPS(uart, debug=False)
+                gps.send_command(b'PMTK184,1')
+        self.ids['test_text'].text = 'GPS MEMORY\nCLEARED'
 
     def start_gps_test(self):
-        self.ids['test_text'].text = 'GPS TESTING IN PROGRESS'
+        self.ids['test_text'].text = 'GPS TESTING\nIN PROGRESS'
         dt = datetime.datetime.now()
         self.filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
         with open(self.filename, 'w+', newline='') as csvFile:
