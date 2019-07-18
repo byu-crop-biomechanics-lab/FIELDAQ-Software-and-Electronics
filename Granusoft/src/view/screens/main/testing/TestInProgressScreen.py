@@ -65,8 +65,8 @@ class TestInProgressScreen(BaseScreen):
         self.start_time = datetime.datetime.now()
         self.datasets = []
         self.x_max1 = 5
-        self.y_max1 = 250
-        self.y_max2 = 250
+        self.y_max1 = 100
+        self.y_max2 = 5
         self.x_major = int(self.x_max/5)
         self.y_major1 = int(self.y_max1/5)
         self.y_major2 = int(self.y_max2/5)
@@ -102,8 +102,8 @@ class TestInProgressScreen(BaseScreen):
             self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
             last_index = len(self.datasets) - 1
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
-            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].pot_angle / 250) * 250)
-            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].x_load / 250) * 250)
+            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].pot_angle / 100) * 100)
+            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].x_load / 5) * 5)
             #if(self.find_max_x_load() == 0):
              #   self.y_max = 10000
             #else:

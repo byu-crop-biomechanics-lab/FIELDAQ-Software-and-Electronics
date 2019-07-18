@@ -28,7 +28,7 @@ class Sensor:
         self.hum_fake += 2
         self.loc_fake[0] += 0.0000003
         self.loc_fake[1] += 0.0000005
-        self.x_fake = 800 + 400 * sin(self.temp_fake / 500) - 0.01 * self.temp_fake
+        self.x_fake = 800 + 400 * sin(self.temp_fake / 500) + 0.02 * self.temp_fake
         self.y_fake += .5
         self.pot_fake = 400 + 200 * sin(self.temp_fake / 100) + 0.01 * self.temp_fake
         self.imu_fake += 4.5
@@ -43,7 +43,8 @@ class Sensor:
         return self.sensor_data
 
     def clear_gps_memory(self):
-        print('Clear GPS memory')
+        pass
+        # print('Clear GPS memory')
 
     def get_sensor_keys(self):
         return self.keys
