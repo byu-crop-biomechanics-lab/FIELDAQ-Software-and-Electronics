@@ -66,7 +66,7 @@ FORCE_SENSOR_SCALING = 3556.1878
 # GPS
 gps = adafruit_gps.GPS(uart, debug=False)
 gps.send_command(b'PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
-gps.send_command(b'PMTK220,1000')
+gps.send_command(b'PMTK220,500')
 try:
     gps.update()
 except:

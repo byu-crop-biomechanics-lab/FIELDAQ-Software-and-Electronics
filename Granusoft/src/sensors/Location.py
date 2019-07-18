@@ -19,17 +19,20 @@ class Location:
 
     def update_gps_location(self):
         uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
-        UART = serial.Serial("/dev/ttyS0", baudrate=115200, timeout=3000)
         gps = adafruit_gps.GPS(uart, debug=False)
         gps.update()
-        gps = adafruit_gps.GPS(UART, debug=False)
+        uart = serial.Serial("/dev/ttyS0", baudrate=115200, timeout=3000)
+        gps = adafruit_gps.GPS(uart, debug=False)
         gps.send_command(b'PMTK184,1')
         while True:
             try:
+                uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
                 gps = adafruit_gps.GPS(uart, debug=False)
                 gps.update()
+                # print('Worked')
                 break
             except:
-                gps = adafruit_gps.GPS(UART, debug=False)
+                # print("Didn't Work")
+                uart = serial.Serial("/dev/ttyS0", baudrate=115200, timeout=3000)
+                gps = adafruit_gps.GPS(uart, debug=False)
                 gps.send_command(b'PMTK184,1')
-        self.ids['test_text'].text = 'GPS MEMORY\nCLEARED'
