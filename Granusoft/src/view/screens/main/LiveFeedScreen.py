@@ -69,10 +69,10 @@ class LiveFeedScreen(BaseScreen):
             self.humidity = str("%.1f" % sensor_data["Humidity"])
             self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
-            self.x_load = str("%.1f" % sensor_data["X Load"])
+            self.x_load = str("%.3f" % sensor_data["X Load"])
             self.y_load = str("%.1f" % sensor_data["Y Load"])
-            self.pot_angle = str("%.1f" % sensor_data["Pot Angle"])
-            self.imu_angle = str("%.1f" % sensor_data["IMU Angle"])
+            self.pot_angle = str("%.3f" % sensor_data["Pot Angle"])
+            self.imu_angle = str("%.3f" % sensor_data["IMU Angle"])
             # Calculate Data Acquisition Rate
             now = datetime.datetime.now()
             new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
