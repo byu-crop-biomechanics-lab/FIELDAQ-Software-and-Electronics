@@ -8,8 +8,10 @@ import serial
 import adafruit_gps
 import adafruit_lis3dh
 import adafruit_am2320
-import adafruit_ads1x15.ads1115 as ADS
+import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
+
+# THIS IS AN EXACT DUPLICATE OF THE CONNECTIONS.PY FILE IN src/sensors
 
 GPIO.setmode(GPIO.BCM)
 i2c = busio.I2C(board.SCL, board.SDA, 115200)
@@ -44,8 +46,8 @@ for pin in GPIO_PINS:
 
 
 # ADC
-ads1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
-ads2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=16)
+ads1 = ADS.ADS1015(i2c, address=0x49, data_rate = 3300, mode=0)
+ads2 = ADS.ADS1015(i2c, address=0x48, data_rate = 3300, mode=0)
 CHAN0 = AnalogIn(ads1, ADS.P0)
 CHAN1 = AnalogIn(ads1, ADS.P1)
 CHAN2 = AnalogIn(ads1, ADS.P2)
@@ -61,13 +63,12 @@ X_LOAD_CHAN = CHAN4
 Y_LOAD_CHAN = CHAN2
 
 # Scaling factor for the force sensor
-FORCE_SENSOR_SCALING = 16 # 3556.1878
-# ads2.gain = FORCE_SENSOR_SCALING
+FORCE_SENSOR_SCALING = 3556.1878
 
 # GPS
 gps = adafruit_gps.GPS(uart, debug=False)
 gps.send_command(b'PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
-gps.send_command(b'PMTK220,500')
+gps.send_command(b'PMTK220,1000')
 try:
     gps.update()
 except:

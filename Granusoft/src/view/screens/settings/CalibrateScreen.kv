@@ -16,6 +16,8 @@
     size_hint_y: None
     height: self.font_size + 5
     font_size: 15
+	markup: True
+	bold: True
 
 <CalibrateScreen>:
 	name: 'calibrate_screen'
@@ -26,7 +28,7 @@
                 on_release:
                     if root.save(): root.back()
             GranuSideButton:
-                text: 'Add Point'
+                text: 'Add\nPoint'
                 on_release:
                     root.move_to('calibrate_point_screen')
             GranuNone:

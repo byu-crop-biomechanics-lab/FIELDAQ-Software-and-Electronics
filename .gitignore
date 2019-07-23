@@ -21,4 +21,5 @@ __pycache__/
 # Configuration File
 config.json
 
-# End of https://www.gitignore.io/api/python
+# Test Images
+*.jpg

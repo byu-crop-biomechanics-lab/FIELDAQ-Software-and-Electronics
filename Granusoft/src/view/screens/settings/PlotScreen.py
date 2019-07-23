@@ -25,7 +25,7 @@ class PlotScreen(BaseScreen):
         """Once the Screen loads, focus the TextInput"""
         input = self.ids['plot_num']
         input.focus = True
-        input.select_all()
+        #input.select_all()
 
     def save(self):
         """Save button was pressed: save the new height in the configuration file.

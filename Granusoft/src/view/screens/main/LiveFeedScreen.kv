@@ -1,11 +1,13 @@
 <LiveFeedInfoBox@Label>:
     font_size: 25
-	color: 0,0,0,1
+    color: 1,1,1,1
 	halign: 'center'
 	valign: 'center'
+	markup: True
+    bold: True
     canvas.before:
         Color:
-            rgba: .74,.74,.74,1
+            rgba: .14,.14,.14,1
         Rectangle:
             pos: self.pos
             size: self.size
@@ -15,7 +17,10 @@
     GranuContainer:
         GranuSideArea:
             GranuNone:
-            GranuNone:
+            GranuSideButton:
+                id: adc_button_text
+                on_release:
+                    root.adc_button_press()
             GranuSideButton:
                 text: root.transition_to_state
 	    		on_release:
@@ -39,19 +44,20 @@
                     text: root.humidity_label + ':\n' + root.humidity + "%"
                 LiveFeedInfoBox:
                     id: location
+                    size_hint_x: 1.25
                     text: root.location_label + ':\n' + root.location
                 LiveFeedInfoBox:
-                    id: time
-                    text: root.time_label + ':\n' + root.time
-                LiveFeedInfoBox:
                     id: x_load
-                    text: root.x_load_label + ':\n' + root.x_load
+                    text: root.x_load_label + ':\n' + root.x_load + root.xUnits
                 LiveFeedInfoBox:
                     id: y_load
                     text: root.y_load_label + ':\n' + root.y_load
                 LiveFeedInfoBox:
+                    id: time
+                    text: root.time_label + ':\n' + root.time
+                LiveFeedInfoBox:
                     id: pot_angle
-                    text: root.pot_angle_label + ':\n' + root.pot_angle
+                    text: root.pot_angle_label + ':\n' + root.pot_angle + root.potUnits
                 LiveFeedInfoBox:
                     id: imu_angle
                     text: root.imu_angle_label + ':\n' + root.imu_angle + "G"

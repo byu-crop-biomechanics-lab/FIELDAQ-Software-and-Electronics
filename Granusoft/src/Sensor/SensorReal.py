@@ -39,12 +39,15 @@ class Sensor:
         self.sensor_data["Humidity"] = self.hum.get_data()
         self.sensor_data["Location"] = self.location.get_data()
 
-    def get_sensor_data(self):
-        self.sensor_data["X Load"] = round(self.x_load.get_data(),4)
+    def get_sensor_data(self, adc_out = 0):
+        self.sensor_data["X Load"] = round(self.x_load.get_data(adc_out),4)
         self.sensor_data["Y Load"] = round(self.y_load.get_data(),4)
-        self.sensor_data["Pot Angle"] = round(self.pot_angle.get_data(),3)
+        self.sensor_data["Pot Angle"] = round(self.pot_angle.get_data(adc_out),3)
         self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(),3)
         return self.sensor_data
+
+    def clear_gps_memory(self):
+        self.location.update_gps_location()
 
     def get_sensor_keys(self):
         return self.keys

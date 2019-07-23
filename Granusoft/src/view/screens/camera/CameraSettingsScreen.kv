@@ -52,8 +52,8 @@
                 text: "Save"
                 on_release: root.save(filechooser.path, filename.text)
 
-<SettingsScreen>:
-    name: 'settings_screen'
+<CameraSettingsScreen>:
+    name: 'cam_settings_screen'
     GranuContainer:
         GranuSideArea:
         	GranuNone:
@@ -63,10 +63,10 @@
                 text: 'Back'
 	    		on_release:
                     root.manager.transition.direction = 'right'
-                    root.move_to('main_screen') # Move to main screen
+                    root.move_to('cam_main_screen') # Move to main screen
         GranuContent:
             GranuTitle:
-                text: 'Settings'
+                text: 'Camera Settings Screen'
             GridLayout:
                 cols: 3
                 rows: 3
@@ -79,37 +79,20 @@
                 SettingsButton:
                     text: 'Plot'
 	    		    on_release:
-                        root.manager.transition.direction = 'left'
                         root.move_to('plot_screen')
-                SettingsButton:
-                    text: 'Notes'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('note_screen')
-                SettingsButton:
-                    text: 'Sensors'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('sensors_screen')
                 SettingsButton:
                     text: 'Operator'
 	    		    on_release:
-                        root.manager.transition.direction = 'left'
                         root.move_to('operator_screen')
                 SettingsButton:
-                    text: 'Switch to\nCamera'
+                    text: 'Switch to\nGranusoft'
 	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('cam_main_screen')
+                        root.move_to('main_screen')
                 SettingsButton:
                     text: 'Update\nSoftware'
                     on_release:
                         app.stop()
                         root.updateOS()
-                # SettingsButton:
-                #     text: 'GPS Mapping'
-                #     on_release:
-                #         root.move_to('gps_mapper')
             StackLayout:
                 orientation: 'rl-bt'
                 size_hint_y: None

@@ -1,6 +1,9 @@
 """
-From the settings screen you can navigate to these options: Height, Plot, Operator,
-Folder, Notes
+Settings relevant to the camera are viewed here. Some settings relevant are:
+Plot Number, Height, etc.
+
+Switching back to the main Granustem functionality is also achieved through the
+Settings screen.
 """
 
 import os
@@ -14,7 +17,7 @@ from kivy.uix.popup import Popup
 import configurator as config
 from view.BaseScreen import BaseScreen
 
-Builder.load_file('view/screens/main/SettingsScreen.kv')
+Builder.load_file('view/screens/camera/CameraSettingsScreen.kv')
 
 class LoadDialog(Popup):
     '''A dialog to load a file.  The load and cancel properties point to the
@@ -29,7 +32,7 @@ class SaveDialog(Popup):
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class SettingsScreen(BaseScreen):
+class CameraSettingsScreen(BaseScreen):
     def dismiss_popup(self):
         self._popup.dismiss()
 

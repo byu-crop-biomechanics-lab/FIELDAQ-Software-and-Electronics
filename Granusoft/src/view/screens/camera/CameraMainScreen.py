@@ -1,6 +1,6 @@
 """
-The main screen contains four buttons for navigation:
-Settings, Testing, Live Feed, and Exit
+The main screen contains three buttons for navigation:
+View Images, Testing, and Settings
 
 It also shows environment data: Temperature, Humidity, Location, and Time.
 """
@@ -12,12 +12,12 @@ from view.BaseScreen import BaseScreen
 from Sensor import Sensor
 import datetime
 
-Builder.load_file('view/screens/main/MainScreen.kv')
+Builder.load_file('view/screens/camera/CameraMainScreen.kv')
 
 INTERVAL = .004
 INTERVAL2 = 5
 
-class MainScreen(BaseScreen):
+class CameraMainScreen(BaseScreen):
     sensor = Sensor()
     temperature = StringProperty("0")
     humidity = StringProperty("0")
@@ -30,8 +30,7 @@ class MainScreen(BaseScreen):
         #self.update_values
         self.sensor_man = Sensor()
         if self.sensor_man.REAL_DATA is False:
-            self.ids['warning_text'].text = 'WARNING: Using fake data.  Check console for stack trace.'
-        # self.sensor.clear_gps_memory()
+            self.ids['warning_text'].text = 'WARNING: Using falsified data.  Check console for stack trace.'
 
     def on_enter(self):
         self.event3 = Clock.schedule_interval(self.update_values, 0.01)

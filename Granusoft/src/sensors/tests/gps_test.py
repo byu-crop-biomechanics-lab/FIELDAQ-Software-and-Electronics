@@ -32,7 +32,7 @@ def gps_test():
     # Main loop runs forever printing the location, etc. every second.
     last_print = time.monotonic()
     cnt = 0
-    while cnt < 4:
+    while cnt < 10:
         cnt = cnt + 1
         # Make sure to call gps.update() every loop iteration and at least twice
         # as fast as data comes from the GPS unit (usually every second).

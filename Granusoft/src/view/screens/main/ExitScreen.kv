@@ -4,7 +4,7 @@
         GranuSideArea:
             GranuSideButton:
                 text: 'Cancel'
-                on_release: root.move_to('main_screen')
+                on_release: root.back()
             GranuSideButton:
                 text: 'Exit'
                 on_release: app.stop()
@@ -14,7 +14,6 @@
 				    app.stop()
                     app.run()
             GranuSideButton:
-                text: 'Shutdown'
+                text: 'Shut\nDown'
                 on_release: root.move_to('main_screen')
         GranuContent:
-
