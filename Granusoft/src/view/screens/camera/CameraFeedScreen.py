@@ -33,15 +33,17 @@ class CameraFeedScreen(BaseScreen):
         camera.exif_tags['IFD0.ImageDescription']=str('PLOT: ' + str(config.get('plot_num', 0)) + ', HEIGHT: ' + str(config.get('height', 0)))
         camera.exif_tags['IFD0.Copyright'] = 'Copyright (c) 2019 BYU Crop Biomechanics Laboratory'
     except:
-        pass
-        # print('No Operator Data Added')
+        pass # print('No Operator Data Added')
+
+    def on_pre_enter(self):
+        sensor = Sensor()
+        sensor.clear_gps_memory()
 
     def on_enter(self):
         try:
             self.camera.start_preview(rotation=180,fullscreen=False,window=(230,10,560,460))
         except:
-            pass
-            # print('No Camera Found')
+            pass # print('No Camera Found')
     def captureImage(self):
         try:
             def decdeg2dms(dd):
@@ -64,15 +66,13 @@ class CameraFeedScreen(BaseScreen):
             self.camera.exif_tags['GPS.GPSLatitude'] = '%d/1,%d/1,%d/100' % (latdms[0], latdms[1], latdms[2])
             self.camera.exif_tags['GPS.GPSLongitude'] = '%d/1,%d/1,%d/100' % (londms[0], londms[1], londms[2])
         except:
-            pass
-            # print('Location Data not added')
+            pass # print('Location Data not added')
         try:
             dt = datetime.datetime.now()
             filename = 'Images/Stalk_' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.jpg'
             self.camera.capture(filename)
         except:
-            pass
-            # print('Taking Imaginary Picture')
+            pass # print('Taking Imaginary Picture')
 
     def on_leave(self):
         try:
