@@ -1,0 +1,28 @@
+<ImagePic>
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ImageList>
+    viewclass: 'Note'
+    SingleSelectableRecycleBoxLayout:
+
+<ImagesViewScreen>:
+	name: 'img_viewer_screen'
+    GranuContainer:
+        GranuSideArea:
+            id: images_buttons
+        GranuContent:
+            GranuTitle:
+                text: 'Images'
+            BoxLayout:
+                orientation: 'horizontal'
+                ImageList:
+                    id: images_list
+                    on_interaction:
+                        root.image_buttons()
+                    on_deselect_all:
+                        root.default_buttons()
