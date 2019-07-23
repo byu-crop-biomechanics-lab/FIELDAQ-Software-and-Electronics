@@ -31,7 +31,7 @@ class MainScreen(BaseScreen):
         self.sensor_man = Sensor()
         if self.sensor_man.REAL_DATA is False:
             self.ids['warning_text'].text = 'WARNING: Using fake data.  Check console for stack trace.'
-        self.sensor.clear_gps_memory()
+        # self.sensor.clear_gps_memory()
 
     def on_enter(self):
         self.event3 = Clock.schedule_interval(self.update_values, 0.01)
