@@ -17,7 +17,10 @@
     GranuContainer:
         GranuSideArea:
             GranuNone:
-            GranuNone:
+            GranuSideButton:
+                id: adc_button_text
+                on_release:
+                    root.adc_button_press()
             GranuSideButton:
                 text: root.transition_to_state
 	    		on_release:

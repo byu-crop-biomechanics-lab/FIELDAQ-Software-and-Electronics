@@ -22,7 +22,7 @@ class Sensor:
         self.sensor_data["Humidity"] = "5"
         self.sensor_data["Location"] = "5"
 
-    def get_sensor_data(self):
+    def get_sensor_data(self, adc_out = 0):
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
         self.temp_fake += 1
         self.hum_fake += 2

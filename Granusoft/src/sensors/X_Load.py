@@ -14,10 +14,17 @@ class X_Load:
             self.slope = 1.0
             self.intercept = 0
 
-    def get_data(self):
+    def get_data(self, adc_out = 0):
         try:
-            self.load = (X_LOAD_CHAN.value * self.slope) + self.intercept
-            self.load_adc = X_LOAD_CHAN.value
-            return self.load
+            if adc_out == 1:
+                self.load_adc = X_LOAD_CHAN.value
+                return self.load_adc
+            else:
+                self.load = (X_LOAD_CHAN.value * self.slope) + self.intercept
+                return self.load
         except:
-            return self.load
+            if adc_out == 1:
+                return self.load_adc
+            else:
+                print('Failed X Load')
+                return self.load

@@ -14,10 +14,16 @@ class Pot:
             self.slope = 1.0
             self.intercept = 0.0
 
-    def get_data(self):
+    def get_data(self, adc_out = 0):
         try:
-            self.pot_adc = POT_CHAN.value
-            self.pot = (POT_CHAN.value * self.slope) + self.intercept
-            return self.pot
+            if adc_out == 1:
+                self.pot_adc = POT_CHAN.value
+                return self.pot_adc
+            else:
+                self.pot = (POT_CHAN.value * self.slope) + self.intercept
+                return self.pot
         except:
-            return self.pot
+            if adc_out == 1:
+                return self.pot_adc
+            else:
+                return self.pot

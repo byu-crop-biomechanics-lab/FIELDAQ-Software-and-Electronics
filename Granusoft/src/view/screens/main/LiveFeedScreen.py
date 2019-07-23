@@ -32,8 +32,6 @@ class LiveFeedScreen(BaseScreen):
     #sensor_data =  self.sensor.get_sensor_data()
     #for i in range(0,len(sensor_data)):
 
-
-
     temperature_label = StringProperty("Temperature")
     humidity_label = StringProperty("Humidity")
     location_label = StringProperty("Location")
@@ -59,12 +57,14 @@ class LiveFeedScreen(BaseScreen):
         self.event = Clock.schedule_interval(self.update_values, INTERVAL)
         self.transition_to_state = "Pause"
         self.sensor.clear_gps_memory()
+        self.adc_out = 0
+        self.ids['adc_button_text'].text = 'ADC\nValues'
 
     def update_values(self, obj):
 
         if self.run_count >= SECOND_CAP:
             self.sensor.get_header_data()
-            sensor_data = self.sensor.get_sensor_data()
+            sensor_data = self.sensor.get_sensor_data(self.adc_out)
             self.temperature = str("%.1f" % sensor_data["Temperature"])
             self.humidity = str("%.1f" % sensor_data["Humidity"])
             self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
@@ -84,6 +84,15 @@ class LiveFeedScreen(BaseScreen):
         else:
             sensor_data = self.sensor.get_sensor_data()
             self.run_count = self.run_count + 1
+
+    def adc_button_press(self):
+        adcButton = self.ids['adc_button_text']
+        if self.adc_out == 0:
+            self.adc_out = 1
+            adcButton.text = 'Real\nUnits'
+        else:
+            self.adc_out = 0
+            adcButton.text = 'ADC\nValues'
 
     def on_leave(self):
         self.event.cancel()
