@@ -52,6 +52,8 @@ class LiveFeedScreen(BaseScreen):
     imu_angle = StringProperty("0")
     data_rate = StringProperty("0")
     old_time = 0
+    xUnits = " lbs"
+    potUnits = u'\N{DEGREE SIGN}'
 
     def on_pre_enter(self):
         self.event = Clock.schedule_interval(self.update_values, INTERVAL)
@@ -59,6 +61,7 @@ class LiveFeedScreen(BaseScreen):
         self.sensor.clear_gps_memory()
         self.adc_out = 0
         self.ids['adc_button_text'].text = 'ADC\nValues'
+        self.adc_out = 0
 
     def update_values(self, obj):
 
@@ -90,9 +93,13 @@ class LiveFeedScreen(BaseScreen):
         if self.adc_out == 0:
             self.adc_out = 1
             adcButton.text = 'Real\nUnits'
+            self.xUnits = ""
+            self.potUnits = ""
         else:
             self.adc_out = 0
             adcButton.text = 'ADC\nValues'
+            self.xUnits = " lbs"
+            self.potUnits = u'\N{DEGREE SIGN}'
 
     def on_leave(self):
         self.event.cancel()
