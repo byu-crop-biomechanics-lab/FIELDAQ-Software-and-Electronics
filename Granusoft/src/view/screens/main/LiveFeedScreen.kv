@@ -17,7 +17,10 @@
     GranuContainer:
         GranuSideArea:
             GranuNone:
-            GranuNone:
+            GranuSideButton:
+                id: adc_button_text
+                on_release:
+                    root.adc_button_press()
             GranuSideButton:
                 text: root.transition_to_state
 	    		on_release:
@@ -45,7 +48,7 @@
                     text: root.location_label + ':\n' + root.location
                 LiveFeedInfoBox:
                     id: x_load
-                    text: root.x_load_label + ':\n' + root.x_load
+                    text: root.x_load_label + ':\n' + root.x_load + root.xUnits
                 LiveFeedInfoBox:
                     id: y_load
                     text: root.y_load_label + ':\n' + root.y_load
@@ -54,7 +57,7 @@
                     text: root.time_label + ':\n' + root.time
                 LiveFeedInfoBox:
                     id: pot_angle
-                    text: root.pot_angle_label + ':\n' + root.pot_angle
+                    text: root.pot_angle_label + ':\n' + root.pot_angle + root.potUnits
                 LiveFeedInfoBox:
                     id: imu_angle
                     text: root.imu_angle_label + ':\n' + root.imu_angle + "G"
