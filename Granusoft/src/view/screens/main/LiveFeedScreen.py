@@ -54,6 +54,7 @@ class LiveFeedScreen(BaseScreen):
     old_time = 0
     xUnits = " lbs"
     potUnits = u'\N{DEGREE SIGN}'
+    imuUnits = u'\N{DEGREE SIGN}'
 
     def on_pre_enter(self):
         self.event = Clock.schedule_interval(self.update_values, INTERVAL)
@@ -95,11 +96,13 @@ class LiveFeedScreen(BaseScreen):
             adcButton.text = 'Real\nUnits'
             self.xUnits = ""
             self.potUnits = ""
+            self.imuUnits = "G"
         else:
             self.adc_out = 0
             adcButton.text = 'ADC\nValues'
             self.xUnits = " lbs"
             self.potUnits = u'\N{DEGREE SIGN}'
+            self.imuUnits = u'\N{DEGREE SIGN}'
 
     def on_leave(self):
         self.event.cancel()

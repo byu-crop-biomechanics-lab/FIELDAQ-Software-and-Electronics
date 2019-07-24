@@ -43,7 +43,7 @@ class Sensor:
         self.sensor_data["X Load"] = round(self.x_load.get_data(adc_out),4)
         self.sensor_data["Y Load"] = round(self.y_load.get_data(),4)
         self.sensor_data["Pot Angle"] = round(self.pot_angle.get_data(adc_out),3)
-        self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(),3)
+        self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
         return self.sensor_data
 
     def clear_gps_memory(self):
