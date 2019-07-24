@@ -32,7 +32,7 @@ class TestingScreen(BaseScreen):
         self.event = Clock.schedule_interval(self.update_time, ONE_SEC)
         self.height_num = str(config.get('height',0))
         self.plot = str(config.get('plot_num',0))
-        self.operator = config.get('operator','N/A')
+        self.operator = str(config.get('operator','N/A'))
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
         # Get notes from config file
         notes = config.get('notes', {
@@ -49,4 +49,3 @@ class TestingScreen(BaseScreen):
 
     def on_leave(self):
         self.event.cancel()
-
