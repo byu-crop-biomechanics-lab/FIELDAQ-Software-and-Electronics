@@ -39,7 +39,7 @@ class ImagesViewScreen(BaseScreen):
         self.image_details_button.bind(on_release = self.image_details)
 
     def on_pre_enter(self):
-        self.image_filenames = [f for f in listdir("Images") if isfile(join("Images", f))]
+        self.image_filenames = [f for f in listdir("Images") if (isfile(join("Images", f)) and f != ".gitignore")]
 
         self.default_buttons()
 

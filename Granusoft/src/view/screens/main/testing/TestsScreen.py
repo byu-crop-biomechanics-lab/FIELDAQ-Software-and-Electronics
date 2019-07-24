@@ -43,7 +43,7 @@ class TestsScreen(BaseScreen):
         self.test_details_button.bind(on_release = self.test_details)
 
     def on_pre_enter(self):
-        self.test_filenames = [f for f in listdir("Tests") if isfile(join("Tests", f))]
+        self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
 
 
 
