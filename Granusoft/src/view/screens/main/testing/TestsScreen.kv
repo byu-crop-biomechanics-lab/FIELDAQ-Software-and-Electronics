@@ -10,6 +10,27 @@
     viewclass: 'Note'
     SingleSelectableRecycleBoxLayout:
 
+<SaveTestDialog>:
+    title: 'Save Settings'
+    title_align: 'center'
+    size_hint: (0.9, 0.9)
+    BoxLayout:
+        orientation: "vertical"
+
+        FileChooserIconView:
+            id: filechooser
+            path: str(Path.home())
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+            Button:
+                text: "Save"
+                on_release: root.save(filechooser.path)
+
+
 <TestsScreen>:
 	name: 'tests_screen'
     GranuContainer:

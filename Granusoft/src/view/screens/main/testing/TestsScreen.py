@@ -6,14 +6,19 @@ Test in Progress
 from kivy.lang import Builder
 
 from kivy.properties import ListProperty
+from kivy.properties import ObjectProperty
 import configurator as config
 
+from TestSingleton import TestSingleton
+from shutil import copyfile
 
+
+from kivy.uix.popup import Popup
 
 from view.BaseScreen import BaseScreen
 from view.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
 from view.elements import *
-
+import os
 from os import listdir
 from os.path import isfile, join
 
@@ -28,6 +33,11 @@ class TestList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
+class SaveTestDialog(Popup):
+    '''A dialog to save a file.  The save and cancel properties point to the
+    functions called when the save or cancel buttons are pressed.'''
+    save = ObjectProperty(None)
+    cancel = ObjectProperty(None)
 
 class TestsScreen(BaseScreen):
 
@@ -45,21 +55,41 @@ class TestsScreen(BaseScreen):
     def on_pre_enter(self):
         self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
 
-
-
         self.default_buttons()
 
         self.ids['tests_list'].list_data = self.test_filenames
-
 
     def go_back(self, obj):
         super(TestsScreen, self).back()
 
     def remove_tests(self, obj):
-        print("We should remove all tests!")
+        for name in self.test_filenames:
+            if name != '.gitignore':
+                os.remove('Tests/' + name)
+        self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
+        self.ids['tests_list'].list_data = self.test_filenames
+        # print("We should remove all tests!")
+
+    def dismiss_popup(self):
+        self._popup.dismiss()
 
     def export_tests(self, obj):
-        print("We should export all tests!")
+        self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
+        self._popup.open()
+        # print("We should export all tests!")
+
+    def save(self, path):
+        config.save_as(os.path.join(path, "test"))
+        for name in self.test_filenames:
+            if name != '.gitignore':
+                copyfile('Tests/' + name, path + "/" + name)
+                os.remove('Tests/' + name)
+            self.dismiss_popup()
+
+    def set_test_name(self):
+        ts = TestSingleton()
+        filename = self.ids['tests_list'].remove_selected()
+        ts.set_test_details_name(filename[0])
 
     def test_details(self, obj):
         print("We should show test details!")
