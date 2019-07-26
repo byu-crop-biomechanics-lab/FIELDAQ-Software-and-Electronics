@@ -8,12 +8,18 @@ individually.
 from kivy.lang import Builder
 
 from kivy.properties import ListProperty
+from kivy.properties import ObjectProperty
 import configurator as config
+
+from shutil import copyfile
+
+
+from kivy.uix.popup import Popup
 
 from view.BaseScreen import BaseScreen
 from view.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
 from view.elements import *
-
+import os
 from os import listdir
 from os.path import isfile, join
 
@@ -25,6 +31,12 @@ class ImagePic(SingleSelectableListBehavior, Label):
 class ImageList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
+
+class SaveImageDialog(Popup):
+    '''A dialog to save a file.  The save and cancel properties point to the
+    functions called when the save or cancel buttons are pressed.'''
+    save = ObjectProperty(None)
+    cancel = ObjectProperty(None)
 
 class ImagesViewScreen(BaseScreen):
     def __init__(self, **kwargs):
@@ -45,22 +57,32 @@ class ImagesViewScreen(BaseScreen):
 
         self.ids['images_list'].list_data = self.image_filenames
 
-
     def go_back(self, obj):
         super(ImagesViewScreen, self).back()
 
     def remove_images(self, obj):
-        print("We should remove all images!")
-        keepnames = ['Stalk_2019_06_20_22_45_52.jpg', 'Stalk_2019_06_24_13_03_02.jpg', 'Stalk_2019_06_24_13_08_08.jpg']
-        for f in listdir("Images"):
-            if f in keepnames:
-                pass
-            else:
-                # os.system("rm Images/" + f)
-                print('Would have removed ' + f)
+        for name in self.image_filenames:
+            if name != '.gitignore':
+                os.remove('Images/' + name)
+        self.image_filenames = [f for f in listdir("Images") if (isfile(join("Images", f)) and f != ".gitignore")]
+        self.ids['images_list'].list_data = self.image_filenames
+        # print("We should remove all images!")
+
+    def dismiss_popup(self):
+        self._popup.dismiss()
 
     def export_images(self, obj):
-        print("We should export all images!")
+        self._popup = SaveImageDialog(save=self.save, cancel=self.dismiss_popup)
+        self._popup.open()
+        # print("We should export all images!")
+
+    def save(self, path):
+        config.save_as(os.path.join(path, "image"))
+        for name in self.image_filenames:
+            if name != '.gitignore':
+                copyfile('Images/' + name, path + "/" + name)
+                os.remove('Images/' + name)
+            self.dismiss_popup()
 
     def image_details(self, obj):
         imagename = self.ids['images_list'].remove_selected()
