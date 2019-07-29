@@ -74,6 +74,18 @@ class TestsScreen(BaseScreen):
         self._popup.dismiss()
 
     def export_tests(self, obj):
+        USB_TEST_FOLDERS_PATH = '/dev/usbStick'
+        try:
+            os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
+        except:
+            print("USB Not Mounted")
+        if os.path.exists('/dev/usbStick/Tests'):
+            pass
+        else:
+            try:
+                os.makedirs('/dev/usbStick/Tests')
+            except:
+                print("Couldn't create Tests folder on USB")
         self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
         self._popup.open()
         # print("We should export all tests!")
@@ -114,4 +126,7 @@ class TestsScreen(BaseScreen):
 
 
     def on_leave(self):
-        pass
+        try:
+            os.system("sudo umount /mnt/usbStick")
+        except:
+            print('USB not Unmounted')
