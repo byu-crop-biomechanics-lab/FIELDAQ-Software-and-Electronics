@@ -11,7 +11,7 @@ import configurator as config
 
 from TestSingleton import TestSingleton
 from shutil import copyfile
-
+import datetime
 
 from kivy.uix.popup import Popup
 
@@ -79,24 +79,34 @@ class TestsScreen(BaseScreen):
             os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
         except:
             print("USB Not Mounted")
-        if os.path.exists('/dev/usbStick/Tests'):
-            pass
-        else:
-            try:
-                os.makedirs('/dev/usbStick/Tests')
-            except:
-                print("Couldn't create Tests folder on USB")
         self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
         self._popup.open()
         # print("We should export all tests!")
 
     def save(self, path):
-        config.save_as(os.path.join(path, "test"))
-        for name in self.test_filenames:
-            if name != '.gitignore':
-                copyfile('Tests/' + name, path + "/" + name)
-                os.remove('Tests/' + name)
-            self.dismiss_popup()
+        dt = datetime.datetime.now()
+        configName = 'test_config' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.txt'
+        subFold = dt.strftime('%Y_%m_%d_%H_%M_%S') + '__Tests'
+        try:
+            if not os.path.exists(path+'/'+subFold):
+                os.makedirs(path + '/' + subFold)
+        except:
+            pass
+        try:
+            config.save_as(os.path.join(path + '/' + subFold, configName))
+            for name in self.test_filenames:
+                if name != '.gitignore':
+                    copyfile('Tests/' + name, path + '/' + subFold + "/" + name)
+                    os.remove('Tests/' + name)
+                self.dismiss_popup()
+        except:
+            print("NOPE")
+            config.save_as(os.path.join(path, configName))
+            for name in self.test_filenames:
+                if name != '.gitignore':
+                    copyfile('Tests/' + name, path + "/" + name)
+                    os.remove('Tests/' + name)
+                self.dismiss_popup()
 
     def set_test_name(self):
         ts = TestSingleton()
