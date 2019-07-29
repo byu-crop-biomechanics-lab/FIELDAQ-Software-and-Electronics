@@ -86,7 +86,7 @@ class TestsScreen(BaseScreen):
     def save(self, path):
         dt = datetime.datetime.now()
         configName = 'test_config' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.txt'
-        subFold = dt.strftime('%Y_%m_%d_%H_%M_%S') + '__Tests'
+        subFold = 'Tests_' + dt.strftime('%Y_%m_%d')
         try:
             if not os.path.exists(path+'/'+subFold):
                 os.makedirs(path + '/' + subFold)
@@ -100,13 +100,14 @@ class TestsScreen(BaseScreen):
                     os.remove('Tests/' + name)
                 self.dismiss_popup()
         except:
-            print("NOPE")
             config.save_as(os.path.join(path, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('Tests/' + name, path + "/" + name)
                     os.remove('Tests/' + name)
                 self.dismiss_popup()
+        self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
+        self.ids['tests_list'].list_data = self.test_filenames
 
     def set_test_name(self):
         ts = TestSingleton()
