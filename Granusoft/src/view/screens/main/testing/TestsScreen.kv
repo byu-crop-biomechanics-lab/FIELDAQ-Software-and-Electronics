@@ -70,6 +70,31 @@
                 text: "Save to\nUSB"
                 on_release: root.save('/mnt/usbStick')
 
+<NoUsbDialog>:
+    size_hint: (0.55, 0.77)
+    markup: True
+    bold: True
+    title: 'No USB Detected'
+    title_align: 'center'
+    title_size: '26sp'
+    # size_hint: (0.5, 0.7)
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            font_size: 26
+            markup: True
+            bold: True
+            halign: 'center'
+            text: "No USB Device was detected.\nPlease try again."
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            size_hint_x: 1
+            height: 65
+            NavButton:
+                text: "Cancel"
+                on_release: root.cancel()
+
 <TestsScreen>:
 	name: 'tests_screen'
     GranuContainer:

@@ -43,13 +43,19 @@ class SaveTestDialog(Popup):
     cancel = ObjectProperty(None)
 
 class SaveConfirmDialog(Popup):
-        '''A dialog to save a file.  The save and cancel properties point to the
-        functions called when the save or cancel buttons are pressed.'''
-        save = ObjectProperty(None)
-        pathSelector = ObjectProperty(None)
-        cancel = ObjectProperty(None)
+    '''A dialog to save a file.  The save and cancel properties point to the
+    functions called when the save or cancel buttons are pressed.'''
+    save = ObjectProperty(None)
+    pathSelector = ObjectProperty(None)
+    cancel = ObjectProperty(None)
+
+class NoUsbDialog(Popup):
+    '''A dialog to save a file.  The save and cancel properties point to the
+    functions called when the save or cancel buttons are pressed.'''
+    cancel = ObjectProperty(None)
 
 class TestsScreen(BaseScreen):
+    USB_TEST_FOLDERS_PATH = '/mnt/usbStick'
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
@@ -84,12 +90,12 @@ class TestsScreen(BaseScreen):
         self._popup.dismiss()
 
     def export_tests(self, obj):
-        USB_TEST_FOLDERS_PATH = '/dev/usbStick'
-        try:
-            os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
-        except:
-            print("USB Not Mounted")
-        self._popup = SaveConfirmDialog(save=self.save, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
+        if not os.path.ismount(self.USB_TEST_FOLDERS_PATH):
+            try:
+                os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
+            except:
+                print("USB Not Mounted")
+        self._popup = SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
         self._popup.open()
         # print("We should export all tests!")
 
@@ -98,9 +104,20 @@ class TestsScreen(BaseScreen):
         self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
         self._popup.open()
 
+    def usbSave(self, path):
+        if os.path.ismount(self.USB_TEST_FOLDERS_PATH):
+            self.save(path)
+        else:
+            self.noUSB()
+
+    def noUSB(self):
+        self.dismiss_popup()
+        self._popup = NoUsbDialog(cancel=self.dismiss_popup)
+        self._popup.open()
+
     def save(self, path):
         dt = datetime.datetime.now()
-        configName = 'test_config' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.txt'
+        configName = 'config_' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.txt'
         subFold = 'Tests_' + dt.strftime('%Y_%m_%d')
         try:
             if not os.path.exists(path+'/'+subFold):
@@ -152,7 +169,6 @@ class TestsScreen(BaseScreen):
 
 
     def on_leave(self):
-        try:
+        if os.path.ismount(self.USB_TEST_FOLDERS_PATH):
             os.system("sudo umount /mnt/usbStick")
-        except:
-            print('USB not Unmounted')
+        
