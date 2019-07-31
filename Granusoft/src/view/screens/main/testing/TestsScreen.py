@@ -29,6 +29,9 @@ Builder.load_file('view/screens/main/testing/TestsScreen.kv')
 class Test(SingleSelectableListBehavior, Label):
     pass
 
+class NavButton(Button):
+    pass
+
 class TestList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
@@ -38,6 +41,13 @@ class SaveTestDialog(Popup):
     functions called when the save or cancel buttons are pressed.'''
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
+
+class SaveConfirmDialog(Popup):
+        '''A dialog to save a file.  The save and cancel properties point to the
+        functions called when the save or cancel buttons are pressed.'''
+        save = ObjectProperty(None)
+        pathSelector = ObjectProperty(None)
+        cancel = ObjectProperty(None)
 
 class TestsScreen(BaseScreen):
 
@@ -79,9 +89,14 @@ class TestsScreen(BaseScreen):
             os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
         except:
             print("USB Not Mounted")
-        self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
+        self._popup = SaveConfirmDialog(save=self.save, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
         self._popup.open()
         # print("We should export all tests!")
+
+    def pathSelector(self): # , obj):
+        self.dismiss_popup()
+        self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
+        self._popup.open()
 
     def save(self, path):
         dt = datetime.datetime.now()
