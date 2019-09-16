@@ -76,7 +76,7 @@ class ArchiveScreen(BaseScreen):
         self.ids['tests_list'].list_data = self.test_filenames
 
     def go_back(self, obj):
-        super(TestsScreen, self).back()
+        super(ArchiveScreen, self).back()
 
     def remove_tests(self, obj):
         for name in self.test_filenames:
