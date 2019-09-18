@@ -81,7 +81,8 @@ class TestsScreen(BaseScreen):
     def remove_tests(self, obj):
         for name in self.test_filenames:
             if name != '.gitignore':
-                os.remove('Tests/' + name)
+                # os.remove('Tests/' + name)
+                os.rename('Tests/' + name, 'TestArchive/' + name)
         self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
         self.ids['tests_list'].list_data = self.test_filenames
         # print("We should remove all tests!")
@@ -136,7 +137,8 @@ class TestsScreen(BaseScreen):
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('Tests/' + name, path + "/" + name)
-                    os.remove('Tests/' + name)
+                    # os.remove('Tests/' + name)
+                    os.rename('Tests/' + name, 'TestArchive/' + name)
                 self.dismiss_popup()
         self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
         self.ids['tests_list'].list_data = self.test_filenames
@@ -171,4 +173,3 @@ class TestsScreen(BaseScreen):
     def on_leave(self):
         if os.path.ismount(self.USB_TEST_FOLDERS_PATH):
             os.system("sudo umount /mnt/usbStick")
-        
