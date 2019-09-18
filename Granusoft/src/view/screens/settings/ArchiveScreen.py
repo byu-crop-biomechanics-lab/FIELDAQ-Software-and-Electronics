@@ -26,30 +26,30 @@ from kivy.garden.graph import Graph, MeshLinePlot
 
 Builder.load_file('view/screens/settings/ArchiveScreen.kv')
 
-class Test(SingleSelectableListBehavior, Label):
+class TestArch(SingleSelectableListBehavior, Label):
     pass
 
-class NavButton(Button):
+class ArchNavButton(Button):
     pass
 
-class TestList(SingleSelectableList):
+class TestListArch(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
-class SaveTestDialog(Popup):
+class SaveTestDialogArch(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class SaveConfirmDialog(Popup):
+class SaveConfirmDialogArch(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     save = ObjectProperty(None)
     pathSelector = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class NoUsbDialog(Popup):
+class NoUsbDialogArch(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     cancel = ObjectProperty(None)
@@ -129,14 +129,14 @@ class ArchiveScreen(BaseScreen):
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('TestArchive/' + name, path + '/' + subFold + "/" + name)
-                    os.remove('TestArchive/' + name)
+                    # os.remove('TestArchive/' + name)
                 self.dismiss_popup()
         except:
             config.save_as(os.path.join(path, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('TestArchive/' + name, path + "/" + name)
-                    os.remove('TestArchive/' + name)
+                    # os.remove('TestArchive/' + name)
                 self.dismiss_popup()
         self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
         self.ids['tests_list'].list_data = self.test_filenames

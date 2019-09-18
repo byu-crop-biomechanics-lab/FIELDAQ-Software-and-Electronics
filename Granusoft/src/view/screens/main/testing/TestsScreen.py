@@ -130,15 +130,16 @@ class TestsScreen(BaseScreen):
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('Tests/' + name, path + '/' + subFold + "/" + name)
-                    os.remove('Tests/' + name)
+                    # os.remove('Tests/' + name)
+                    os.rename('Tests/' + name, 'TestArchive/' + subFold + '/' + name)
                 self.dismiss_popup()
         except:
             config.save_as(os.path.join(path, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
-                    copyfile('Tests/' + name, path + "/" + name)
+                    copyfile('Tests/' + name, path + '/' + name)
                     # os.remove('Tests/' + name)
-                    os.rename('Tests/' + name, 'TestArchive/' + name)
+                    os.rename('Tests/' + name, 'TestArchive/' + subFold + '/' + name)
                 self.dismiss_popup()
         self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
         self.ids['tests_list'].list_data = self.test_filenames
