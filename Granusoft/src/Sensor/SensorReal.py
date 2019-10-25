@@ -1,6 +1,6 @@
 from sensors.Temperature import Temperature
-from sensors.Humidity import Humidity
-from sensors.Location import Location
+# from sensors.Humidity import Humidity
+# from sensors.Location import Location
 from sensors.X_Load import X_Load
 from sensors.Y_Load import Y_Load
 from sensors.Pot import Pot
@@ -16,8 +16,8 @@ class Sensor:
     def __init__(self):
         self.REAL_DATA = True
         self.keys = ["Temperature","Humidity","Location","Time","X Load","Y Load","Pot Angle","IMU Angle"]
-        self.temp = Temperature()
-        self.hum = Humidity()
+        # self.temp = Temperature()
+        # self.hum = Humidity()
         self.location = Location()
         self.x_load = X_Load()
         self.y_load = Y_Load()
@@ -35,8 +35,8 @@ class Sensor:
         self.imu_fake = 0
 
     def get_header_data(self):
-        self.sensor_data["Temperature"] = self.temp.get_data()
-        self.sensor_data["Humidity"] = self.hum.get_data()
+        self.sensor_data["Temperature"] = 0 # self.temp.get_data()
+        self.sensor_data["Humidity"] = 0 # self.hum.get_data()
         self.sensor_data["Location"] = self.location.get_data()
 
     def get_sensor_data(self, adc_out = 0):
