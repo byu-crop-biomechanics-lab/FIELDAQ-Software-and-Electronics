@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 import serial
 import adafruit_gps
 import adafruit_lis3dh
-import adafruit_am2320
+#import adafruit_am2320
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 
@@ -16,7 +16,7 @@ i2c = busio.I2C(board.SCL, board.SDA, 115200)
 uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
 
 # Temperature and Humidity sensor, off of the I2C pins on bottom right of board
-am = adafruit_am2320.AM2320(i2c)
+#am = adafruit_am2320.AM2320(i2c)
 
 # Accelerometer, top middle of board
 lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c)

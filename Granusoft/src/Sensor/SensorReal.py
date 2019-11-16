@@ -1,6 +1,6 @@
-from sensors.Temperature import Temperature
+#from sensors.Temperature import Temperature
 # from sensors.Humidity import Humidity
-# from sensors.Location import Location
+from sensors.Location import Location
 from sensors.X_Load import X_Load
 from sensors.Y_Load import Y_Load
 from sensors.Pot import Pot
