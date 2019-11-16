@@ -44,8 +44,8 @@ for pin in GPIO_PINS:
 
 
 # ADC
-ads1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
-ads2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=16)
+#ads1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
+#ads2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=16)
 CHAN0 = AnalogIn(ads1, ADS.P0)
 CHAN1 = AnalogIn(ads1, ADS.P1)
 CHAN2 = AnalogIn(ads1, ADS.P2)
