@@ -72,6 +72,11 @@ class ImagesViewScreen(BaseScreen):
         self._popup.dismiss()
 
     def export_images(self, obj):
+        if not os.path.ismount(self.USB_TEST_FOLDERS_PATH):
+            try:
+                os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
+            except:
+                print("USB Not Mounted")
         self._popup = SaveImageDialog(save=self.save, cancel=self.dismiss_popup)
         self._popup.open()
         # print("We should export all images!")
