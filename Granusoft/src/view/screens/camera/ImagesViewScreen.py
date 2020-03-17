@@ -12,7 +12,7 @@ from kivy.properties import ObjectProperty
 import configurator as config
 
 from shutil import copyfile
-
+import shutil
 
 from kivy.uix.popup import Popup
 
@@ -87,8 +87,11 @@ class ImagesViewScreen(BaseScreen):
         config.save_as(os.path.join(path, "image"))
         for name in self.image_filenames:
             if name != '.gitignore':
-                copyfile('Images/' + name, path + "/" + name)
-                os.remove('Images/' + name)
+                fromDir = 'Images/' + name
+                toDir = path + "/" + name
+                os.system("cp " + fromDir + " " + toDir)
+                #shutil.copy('Images/' + name, path + "/" + name)
+                # os.remove('Images/' + name)
             self.dismiss_popup()
 
     def image_details(self, obj):
@@ -117,4 +120,5 @@ class ImagesViewScreen(BaseScreen):
 
 
     def on_leave(self):
-        pass
+        if os.path.ismount(self.USB_IMG_FOLDERS_PATH):
+            os.system("sudo umount /mnt/usbStick")
