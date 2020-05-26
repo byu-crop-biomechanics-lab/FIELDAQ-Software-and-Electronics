@@ -16,8 +16,8 @@ class Sensor:
     def __init__(self):
         self.REAL_DATA = True
         self.keys = ["Temperature","Humidity","Location","Time","X Load","Y Load","Pot Angle","IMU Angle"]
-        # self.temp = Temperature()
-        # self.hum = Humidity()
+        self.temp = 0.0 #Temperature()
+        self.hum = 0.0 #Humidity()
         self.location = Location()
         self.x_load = X_Load()
         self.y_load = Y_Load()

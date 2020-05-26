@@ -7,7 +7,7 @@ class Humidity:
 
     def get_data(self):
         try:
-            self.hum = am.relative_humidity
+            self.hum = 0.0 #am.relative_humidity
             return self.hum
         except:
             return self.hum

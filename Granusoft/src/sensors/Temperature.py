@@ -7,7 +7,7 @@ class Temperature:
 
     def get_data(self):
         try:
-            self.temp = am.temperature
+            self.temp = 0.0 #am.temperature
             return self.temp
         except:
             return self.temp
