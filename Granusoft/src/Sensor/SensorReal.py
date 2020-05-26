@@ -1,5 +1,5 @@
-from sensors.Temperature import Temperature
-from sensors.Humidity import Humidity
+#from sensors.Temperature import Temperature
+# from sensors.Humidity import Humidity
 from sensors.Location import Location
 from sensors.X_Load import X_Load
 from sensors.Y_Load import Y_Load
@@ -16,8 +16,8 @@ class Sensor:
     def __init__(self):
         self.REAL_DATA = True
         self.keys = ["Temperature","Humidity","Location","Time","X Load","Y Load","Pot Angle","IMU Angle"]
-        self.temp = Temperature()
-        self.hum = Humidity()
+        self.temp = 0.0 #Temperature()
+        self.hum = 0.0 #Humidity()
         self.location = Location()
         self.x_load = X_Load()
         self.y_load = Y_Load()
@@ -35,15 +35,15 @@ class Sensor:
         self.imu_fake = 0
 
     def get_header_data(self):
-        self.sensor_data["Temperature"] = self.temp.get_data()
-        self.sensor_data["Humidity"] = self.hum.get_data()
+        self.sensor_data["Temperature"] = 0 # self.temp.get_data()
+        self.sensor_data["Humidity"] = 0 # self.hum.get_data()
         self.sensor_data["Location"] = self.location.get_data()
 
     def get_sensor_data(self, adc_out = 0):
         self.sensor_data["X Load"] = round(self.x_load.get_data(adc_out),4)
         self.sensor_data["Y Load"] = round(self.y_load.get_data(),4)
         self.sensor_data["Pot Angle"] = round(self.pot_angle.get_data(adc_out),3)
-        self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(),3)
+        self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
         return self.sensor_data
 
     def clear_gps_memory(self):
