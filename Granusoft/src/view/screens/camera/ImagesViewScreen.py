@@ -89,7 +89,8 @@ class ImagesViewScreen(BaseScreen):
             if name != '.gitignore':
                 fromDir = 'Images/' + name
                 toDir = path + "/" + name
-                os.system("cp " + fromDir + " " + toDir)
+                copyfile(fromDir, toDir)
+                #os.system("cp " + fromDir + " " + toDir)
                 #shutil.copy('Images/' + name, path + "/" + name)
                 # os.remove('Images/' + name)
             self.dismiss_popup()
