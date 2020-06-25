@@ -20,6 +20,7 @@ from view.BaseScreen import BaseScreen
 from view.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
 from view.elements import *
 import os
+import datetime
 from os import listdir
 from os.path import isfile, join
 
@@ -84,11 +85,18 @@ class ImagesViewScreen(BaseScreen):
         # print("We should export all images!")
 
     def save(self, path):
+        dt = datetime.datetime.now()
+        subFold = 'Images_' + dt.strftime('%Y_%m_%d')
+        try:
+            if not os.path.exists(path + '/' + subFold):
+                os.makedirs(path + '/' + subFold)
+        except:
+                pass
         config.save_as(os.path.join(path, "image"))
         for name in self.image_filenames:
             if name != '.gitignore':
                 fromDir = 'Images/' + name
-                toDir = path + "/" + name
+                toDir = path + "/" + subFold + '/' + name
                 copyfile(fromDir, toDir)
                 #os.system("cp " + fromDir + " " + toDir)
                 #shutil.copy('Images/' + name, path + "/" + name)
