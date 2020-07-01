@@ -102,6 +102,8 @@ class ImagesViewScreen(BaseScreen):
                 #shutil.copy('Images/' + name, path + "/" + name)
                 # os.remove('Images/' + name)
             self.dismiss_popup()
+        if os.path.ismount(self.USB_IMG_FOLDERS_PATH):
+            os.system("sudo umount /mnt/usbStick")
 
     def image_details(self, obj):
         imagename = self.ids['images_list'].remove_selected()
