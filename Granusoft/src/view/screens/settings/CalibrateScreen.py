@@ -35,6 +35,7 @@ class CalibrateScreen(BaseScreen):
 
     def on_pre_enter(self):
         self.points_List = self.ids['point_list']
+        self.points_List.clear_selection()
         removeButton = self.ids['removal_button']
         removeButton.bind(on_release = self.remove_point)
 
@@ -81,8 +82,11 @@ class CalibrateScreen(BaseScreen):
                     except:
                         pass
         # Calculate line of best fit using Least Square Method
-        adc_points = [x[0] for x in self.points_list]
-        real_points = [x[1] for x in self.points_list]
+        try:
+            adc_points = [x[0] for x in self.points_list]
+            real_points = [x[1] for x in self.points_list]
+        except:
+            self.points_list = []
         if len(self.points_list) > 1:
             poly = numpy.polyfit(adc_points, real_points, 1) # Linear regression
             self.slope = numpy.float(poly[0])
@@ -90,6 +94,10 @@ class CalibrateScreen(BaseScreen):
         else:
             self.slope = 1.0
             self.intercept = 0.0
+        try:
+            self.points_List.clear_selection()
+        except:
+            pass
 
     def save(self):
         self.config_data[self.sensor_name] = {
