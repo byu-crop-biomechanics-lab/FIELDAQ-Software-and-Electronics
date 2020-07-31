@@ -7,6 +7,7 @@ from kivy.properties import StringProperty, ListProperty, NumericProperty
 
 from view.BaseScreen import BaseScreen
 from view.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
+from view.elements import *
 
 import numpy
 
@@ -31,8 +32,11 @@ class CalibrateScreen(BaseScreen):
     def __init__(self, **kwargs):
         super(CalibrateScreen, self).__init__(**kwargs)
         self.config_data = {}
-        self.remove_button = self.ids['remove_button']
-        self.remove_button.bind(on_release = self.remove_point)
+
+    def on_pre_enter(self):
+        self.points_List = self.ids['point_list']
+        removeButton = self.ids['removal_button']
+        removeButton.bind(on_release = self.remove_point)
 
     def set_sensor(self, name):
         self.sensor_name = name
@@ -59,10 +63,10 @@ class CalibrateScreen(BaseScreen):
             self.slope = 1.0
             self.intercept = 0.0
 
-    def remove_point(self):
-        print("We Should Remove This(/These) Point(s) for Sensor" + root.sensor_name)
+    def remove_point(self, obj):
+        print("We Should Remove This(/These) Point(s) for Sensor" + self.sensor_name)
         print("Which Tests?")
-        selection = point_list.get_selected()
+        selection = self.points_List.get_selected()
         for items in selection: print(items)
 
     def save(self):
