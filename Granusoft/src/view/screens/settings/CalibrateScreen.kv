@@ -34,7 +34,9 @@
             GranuSideButton:
                 text: 'Remove\nPoint(s)'
                 on_release:
-                    self.remove_point()
+                    print("We Should Remove This(/These) Point(s) for Sensor" + root.sensor_name)
+                    print("Which Tests?")
+                    for selected in root.config_data['Pot Angle']['points_list']: print(selected)
             GranuSideButton:
                 text: 'Cancel'
 	    		on_release:
