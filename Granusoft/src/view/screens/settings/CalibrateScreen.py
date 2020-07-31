@@ -31,6 +31,8 @@ class CalibrateScreen(BaseScreen):
     def __init__(self, **kwargs):
         super(CalibrateScreen, self).__init__(**kwargs)
         self.config_data = {}
+        self.remove_button = self.ids['remove_button']
+        self.remove_button.bind(on_release = self.remove_point)
 
     def set_sensor(self, name):
         self.sensor_name = name
@@ -58,7 +60,10 @@ class CalibrateScreen(BaseScreen):
             self.intercept = 0.0
 
     def remove_point(self):
-        pass
+        print("We Should Remove This(/These) Point(s) for Sensor" + root.sensor_name)
+        print("Which Tests?")
+        selection = point_list.get_selected()
+        for items in selection: print(items)
 
     def save(self):
         self.config_data[self.sensor_name] = {
