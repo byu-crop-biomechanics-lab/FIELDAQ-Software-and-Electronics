@@ -36,7 +36,8 @@
                 on_release:
                     print("We Should Remove This(/These) Point(s) for Sensor" + root.sensor_name)
                     print("Which Tests?")
-                    for items in root.points_list: print(items)
+                    selection = point_list.get_selected()
+                    for items in selection: print(items)
             GranuSideButton:
                 text: 'Cancel'
 	    		on_release:
