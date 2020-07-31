@@ -57,6 +57,12 @@ class CalibrateScreen(BaseScreen):
             self.slope = 1.0
             self.intercept = 0.0
 
+    def remove_point(self):
+        print("We Should Remove This(/These) Point(s) for Sensor: " + root.sensor_name)
+        print("Which Tests?")
+        for selected in root.PointsList.layout_manager.selected_nodes:
+            print(selected)
+
     def save(self):
         self.config_data[self.sensor_name] = {
             'slope': self.slope,

@@ -34,10 +34,7 @@
             GranuSideButton:
                 text: 'Remove\nPoint(s)'
                 on_release:
-                    print("We Should Remove This(/These) Point(s) for Sensor: " + root.sensor_name)
-                    print("Which Tests?")
-                    for selected in root.PointsList.layout_manager.selected_nodes:
-                        print(selected)
+                    self.remove_point()
             GranuSideButton:
                 text: 'Cancel'
 	    		on_release:
