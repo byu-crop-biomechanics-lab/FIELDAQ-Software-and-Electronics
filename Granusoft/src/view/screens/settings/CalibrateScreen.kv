@@ -31,7 +31,10 @@
                 text: 'Add\nPoint'
                 on_release:
                     root.move_to('calibrate_point_screen')
-            GranuNone:
+            GranuSideButton:
+                text: 'Remove\nPoint(s)'
+                on_release:
+                    print('We Should Remove This(/These) Point(s) for Sensor:' + root.sensor_name)
             GranuSideButton:
                 text: 'Cancel'
 	    		on_release:
