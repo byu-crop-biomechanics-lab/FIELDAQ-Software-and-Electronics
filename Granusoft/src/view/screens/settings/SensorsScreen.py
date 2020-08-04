@@ -1,3 +1,4 @@
+import os
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.uix.button import Button
@@ -39,3 +40,6 @@ class SensorsScreen(BaseScreen):
                 # Sensor name, parent screen (of button), calibration screen
                 self.ids['sensor_list'].add_widget(SensorButton(s, self, calib_screen))
         Clock.schedule_once(gui_init)
+
+    def restart_OS(self):
+        os.system("python3 main.py")
