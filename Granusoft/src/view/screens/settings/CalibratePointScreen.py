@@ -44,7 +44,6 @@ class CalibratePointScreen(BaseScreen):
 
     def get_adc(self, obj):
         vals = []
-        #print("Collecting ADC Values")
         adc_input = self.ids['adc']
         sensor = Sensor()
         for i in range(100):
@@ -52,5 +51,4 @@ class CalibratePointScreen(BaseScreen):
             vals.append(sensor_data[self.sensor_name])
             print(str(i) + ': ' + str(sensor_data[self.sensor_name]))
         med_val = median(vals)
-        #print('Median: ' + str(med_val))
         adc_input.text = str(med_val)
