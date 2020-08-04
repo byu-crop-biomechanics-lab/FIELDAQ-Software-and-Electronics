@@ -28,9 +28,8 @@
                 on_release:
                     if root.save(): root.back()
             GranuSideButton:
+                id: add_point_button
                 text: 'Add\nPoint'
-                on_release:
-                    root.move_to('calibrate_point_screen')
             GranuSideButton:
                 id: removal_button
                 text: 'Remove\nPoint'

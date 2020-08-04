@@ -3,10 +3,17 @@ from kivy.lang import Builder
 import configurator as config
 from view.BaseScreen import BaseScreen
 from view.input.StrInput import StrInput
+from Sensor import Sensor
+from kivy.properties import StringProperty
 
 Builder.load_file('view/screens/settings/CalibratePointScreen.kv')
 
 class CalibratePointScreen(BaseScreen):
+    sensor_name = StringProperty()
+
+    def __init__(self, **kwargs):
+        super(CalibratePointScreen, self).__init__(**kwargs)
+
     def on_pre_enter(self):
         adc_input = self.ids['adc']
         adc_input.text = ''
@@ -21,6 +28,9 @@ class CalibratePointScreen(BaseScreen):
         input = self.ids['real']
         input.focus = True
 
+    def set_sensor(self, name):
+        self.sensor_name = name
+
     def add(self):
         adc_input = self.ids['adc']
         real_input = self.ids['real']
@@ -31,7 +41,9 @@ class CalibratePointScreen(BaseScreen):
         else:
             return False
 
-    def get_adc(self):
+    def get_adc(self, obj):
         print("Collecting ADC Values")
         adc_input = self.ids['adc']
-        adc_input.text = '1123'
+        sensor = Sensor()
+        sensor_data = sensor.get_sensor_data()
+        adc_input.text = str(sensor_data[self.sensor_name])
