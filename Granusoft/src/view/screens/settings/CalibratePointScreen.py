@@ -5,6 +5,7 @@ from view.BaseScreen import BaseScreen
 from view.input.StrInput import StrInput
 from Sensor import Sensor
 from kivy.properties import StringProperty
+from statistics import median
 
 Builder.load_file('view/screens/settings/CalibratePointScreen.kv')
 
@@ -42,8 +43,14 @@ class CalibratePointScreen(BaseScreen):
             return False
 
     def get_adc(self, obj):
-        print("Collecting ADC Values")
+        vals = []
+        #print("Collecting ADC Values")
         adc_input = self.ids['adc']
         sensor = Sensor()
-        sensor_data = sensor.get_sensor_data()
-        adc_input.text = str(sensor_data[self.sensor_name])
+        for i in range(100):
+            sensor_data = sensor.get_sensor_data(1)
+            vals.append(sensor_data[self.sensor_name])
+            print(str(i) + ': ' + str(sensor_data[self.sensor_name]))
+        med_val = median(vals)
+        #print('Median: ' + str(med_val))
+        adc_input.text = str(med_val)
