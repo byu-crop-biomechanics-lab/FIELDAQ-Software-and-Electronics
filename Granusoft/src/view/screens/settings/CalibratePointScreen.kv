@@ -7,6 +7,8 @@
 	    		on_release:
 	    		    if root.add(): root.back()
             GranuSideButton:
+                id: collect_button
+            GranuSideButton:
                 text: 'Cancel'
                 on_release:
                     root.back()
@@ -17,16 +19,16 @@
                 rows: 2
                 cols: 2
                 Label:
-                    text: 'ADC: '
+                    text: 'Real: '
                 FloatInput:
-                    id: adc
+                    id: real
                     font_size: 30
                     multiline: False
                     size_hint_max_y: 30+15
                 Label:
-                    text: 'Real: '
+                    text: 'ADC: '
                 FloatInput:
-                    id: real
+                    id: adc
                     font_size: 30
                     multiline: False
                     size_hint_max_y: 30+15
