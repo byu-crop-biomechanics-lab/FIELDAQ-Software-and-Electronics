@@ -12,3 +12,6 @@ class ExitScreen(BaseScreen):
     def shutD(self):
         os.system("sudo shutdown now")
         #pass
+
+    def restart_OS(self):
+        os.system("python3 main.py")
