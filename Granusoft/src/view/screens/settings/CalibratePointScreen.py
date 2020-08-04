@@ -49,6 +49,5 @@ class CalibratePointScreen(BaseScreen):
         for i in range(100):
             sensor_data = sensor.get_sensor_data(1)
             vals.append(sensor_data[self.sensor_name])
-            print(str(i) + ': ' + str(sensor_data[self.sensor_name]))
         med_val = median(vals)
         adc_input.text = str(med_val)
