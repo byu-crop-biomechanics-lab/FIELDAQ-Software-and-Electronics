@@ -12,6 +12,9 @@ class CalibratePointScreen(BaseScreen):
         adc_input.text = ''
         real_input = self.ids['real']
         real_input.text = ''
+        collectButton = self.ids['collect_button']
+        collectButton.text = 'Collect\nADC'
+        collectButton.bind(on_release = self.get_adc)
 
     def on_enter(self):
         """Once the Screen loads, focus the Texinputnput"""
@@ -28,3 +31,7 @@ class CalibratePointScreen(BaseScreen):
         else:
             return False
 
+    def get_adc(self):
+        print("Collecting ADC Values")
+        adc_input = self.ids['adc']
+        adc_input.text = '1123'
