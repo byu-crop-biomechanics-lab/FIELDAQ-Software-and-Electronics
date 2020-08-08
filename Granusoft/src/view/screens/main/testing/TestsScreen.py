@@ -123,6 +123,7 @@ class TestsScreen(BaseScreen):
         try:
             if not os.path.exists(path+'/'+subFold):
                 os.makedirs(path + '/' + subFold)
+                os.makedirs('TestArchive/' + subFold)
         except:
             pass
         try:
