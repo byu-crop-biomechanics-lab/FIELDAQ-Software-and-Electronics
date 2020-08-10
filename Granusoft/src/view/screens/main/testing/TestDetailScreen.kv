@@ -5,38 +5,16 @@
     GranuContainer:
         GranuSideArea:
             GranuSideButton:
-                text: 'Update\nNotes'
+                text: 'Back'
 	    		on_release:
-                    root.move_to('note_screen') # Move to note screen
-            GranuSideButton:
-                text: 'Break\nHeight'
-	    		on_release:
-                    root.move_to('break_height_screen') # Move to break height screen
-            GranuSideButton:
-                text: 'Reject'
-	    		on_release:
-                    root.move_to('testing_screen') # Move to main screen
-            GranuSideButton:
-                text: 'Save'
-	    		on_release:
-                    root.save_test()
-                    root.move_to('testing_screen') # Move to main screen
+                    root.back() # Move to note screen
+            GranuNone:
+            GranuNone:
+			GranuNone:
         GranuContent:
             GranuTitle:
-                text: 'Testing Results'
+                text: 'Test Results:' + 'TEST ###'
                 size_hint_max_y: 30
-            GridLayout:
-                cols: 2
-                spacing: 10
-                size_hint_y: 0.25
-                GranuNoteButton:
-                    text: "Break\nHeight"
-                    on_release:
-                        root.move_to('break_height_screen') # Move to note screen
-                GranuNoteButton:
-                    id: RootLodgeButton
-                    on_release:
-                        root.rootLodge_note()
             GridLayout:
                 cols:2
                 spacing: 10

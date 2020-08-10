@@ -7,6 +7,7 @@ from kivy.lang import Builder
 
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
+from kivy.clock import Clock
 import configurator as config
 
 from TestSingleton import TestSingleton
@@ -66,7 +67,11 @@ class TestsScreen(BaseScreen):
         self.export_button = GranuSideButton(text = 'Export\nAll')
         self.export_button.bind(on_release = self.export_tests)
         self.test_details_button = GranuSideButton(text = 'Test\nDetails')
-        self.test_details_button.bind(on_release = self.test_details)
+        self.test_details_button.bind(on_release = self.to_test_details)
+        def gui_init(dt):
+            self.test_details_screen = self.manager.get_screen('test_detail_screen')
+            self.parent_screen = self
+        Clock.schedule_once(gui_init)
 
     def on_pre_enter(self):
         self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
@@ -74,6 +79,7 @@ class TestsScreen(BaseScreen):
         self.default_buttons()
 
         self.ids['tests_list'].list_data = self.test_filenames
+        self.test_list = self.ids['tests_list']
 
     def go_back(self, obj):
         super(TestsScreen, self).back()
@@ -150,8 +156,10 @@ class TestsScreen(BaseScreen):
         filename = self.ids['tests_list'].remove_selected()
         ts.set_test_details_name(filename[0])
 
-    def test_details(self, obj):
-        print("We should show test details!")
+    def to_test_details(self, obj):
+        selection = self.test_list.get_selected()
+        self.test_details_screen.set_file(selection)
+        self.parent_screen.move_to('test_detail_screen')
 
     # Button Changes
 
