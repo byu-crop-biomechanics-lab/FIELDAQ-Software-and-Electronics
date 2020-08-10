@@ -48,15 +48,17 @@ class TestDetailScreen(BaseScreen):
     def on_pre_enter(self):
         sensor = Sensor()
         sensor.clear_gps_memory()
+        self.screenTitle = self.ids['testTitle']
 
     def on_enter(self):
         self.graph1 = self.ids['graph_test1']
         self.graph2 = self.ids['graph_test2']
         self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
         self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.screenTitle.text = str(self.fileName[:-4])
 
     def set_file(self, filename):
-        self.fileName = filename
+        self.fileName = filename[0]
 
     def rootLodge_note(self):
         RLB = self.ids['RootLodgeButton']

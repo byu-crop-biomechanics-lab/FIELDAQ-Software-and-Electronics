@@ -157,8 +157,8 @@ class TestsScreen(BaseScreen):
         ts.set_test_details_name(filename[0])
 
     def to_test_details(self, obj):
-        selection = self.test_list.get_selected()
-        self.test_details_screen.set_file(selection)
+        selected = self.test_list.get_selected()
+        self.test_details_screen.set_file(selected)
         self.parent_screen.move_to('test_detail_screen')
 
     # Button Changes

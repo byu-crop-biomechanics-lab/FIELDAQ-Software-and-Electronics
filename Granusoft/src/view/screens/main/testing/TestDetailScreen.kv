@@ -10,10 +10,11 @@
                     root.back() # Move to note screen
             GranuNone:
             GranuNone:
-			GranuNone:
+			GranuSideButton:
+				text: 'IMU/\nPOT'
         GranuContent:
             GranuTitle:
-                text: 'Test Results:' + 'TEST ###'
+                id: testTitle #text: 'Test Results:' + root.fileName
                 size_hint_max_y: 30
             GridLayout:
                 cols:2
