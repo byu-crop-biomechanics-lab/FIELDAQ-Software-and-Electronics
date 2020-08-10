@@ -1,0 +1,84 @@
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
+<TestDetailScreen>:
+	name: 'test_detail_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Update\nNotes'
+	    		on_release:
+                    root.move_to('note_screen') # Move to note screen
+            GranuSideButton:
+                text: 'Break\nHeight'
+	    		on_release:
+                    root.move_to('break_height_screen') # Move to break height screen
+            GranuSideButton:
+                text: 'Reject'
+	    		on_release:
+                    root.move_to('testing_screen') # Move to main screen
+            GranuSideButton:
+                text: 'Save'
+	    		on_release:
+                    root.save_test()
+                    root.move_to('testing_screen') # Move to main screen
+        GranuContent:
+            GranuTitle:
+                text: 'Testing Results'
+                size_hint_max_y: 30
+            GridLayout:
+                cols: 2
+                spacing: 10
+                size_hint_y: 0.25
+                GranuNoteButton:
+                    text: "Break\nHeight"
+                    on_release:
+                        root.move_to('break_height_screen') # Move to note screen
+                GranuNoteButton:
+                    id: RootLodgeButton
+                    on_release:
+                        root.rootLodge_note()
+            GridLayout:
+                cols:2
+                spacing: 10
+                GridLayout:
+                    rows: 2
+                    GraphTitle:
+                        text: 'Potentiometer Angle'
+                    Graph:
+                        id: graph_test1
+                        plot: MeshLinePlot
+                        background_color: 0, 0, 0, 1
+                        xlabel:'Time(s)'
+                        ylabel:'Angle (pot)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major1
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max1
+                GridLayout:
+                    rows: 2
+                    GraphTitle:
+                        text: 'X-Force Loading'
+                    Graph:
+                        id: graph_test2
+                        plot: MeshLinePlot
+                        background_color: 0, 0, 0, 1
+                        xlabel:'Time(s)'
+                        ylabel:'X Load (adc)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major2
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max2
