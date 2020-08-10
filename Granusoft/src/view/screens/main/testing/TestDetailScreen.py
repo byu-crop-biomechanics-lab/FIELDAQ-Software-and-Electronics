@@ -38,6 +38,9 @@ class TestDetailScreen(BaseScreen):
     y_major1 = NumericProperty(1)
     y_major2 = NumericProperty(1)
     datasets = []
+    pot_angle = []
+    imu_angle = []
+    force_app = []
 
     def find_max_x_load(self):
         max = 0
@@ -56,6 +59,17 @@ class TestDetailScreen(BaseScreen):
         self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
         self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
         self.screenTitle.text = str(self.fileName[:-4])
+
+        with open('Tests/' + str(self.fileName)) as testFile:
+            readCSV = csv.reader(testFile, delimiter=',')
+            myFlag = 0
+            for row in readCSV:
+                if myFlag == 1:
+                    self.pot_angle.append(row[1])
+                    self.imu_angle.append(row[2])
+                    self.force_app.append(row[3])
+                if str(row[0]) == 'TIME (s)' and myFlag == 0:
+                    myFlag = 1
 
     def set_file(self, filename):
         self.fileName = filename[0]
