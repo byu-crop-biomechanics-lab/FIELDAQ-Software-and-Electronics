@@ -18,6 +18,7 @@ from view.StaticList import StaticList
 from view.elements import *
 import configurator as config
 import csv
+import numpy as np
 try:
     from sensors.connections import *
 except:
@@ -62,32 +63,26 @@ class TestDetailScreen(BaseScreen):
 
         with open('Tests/' + str(self.fileName)) as testFile:
             readCSV = csv.reader(testFile, delimiter=',')
-            myFlag = 0
+            testData = 0
             for row in readCSV:
-                if myFlag == 1:
+                if testData == 1:
                     self.pot_angle.append(row[1])
                     self.imu_angle.append(row[2])
                     self.force_app.append(row[3])
-                if str(row[0]) == 'TIME (s)' and myFlag == 0:
-                    myFlag = 1
+                if str(row[0]) == 'TIME (s)' and testData == 0:
+                    testData = 1
+
+        self.plot1.points = [(float(self.pot_angle[i]), float(self.force_app[i])) for i in range(0, len(self.pot_angle))]
+        self.x_max = math.ceil(max(float(self.pot_angle[i]) for i in range(0, len(self.pot_angle)))*1.05)
+        self.x_major = int(self.x_max/5)
+        self.y_max1 = math.ceil(max(float(self.force_app[i]) for i in range(0, len(self.force_app)))*1.05)
+        self.y_major1 = int(self.y_max1/5)
+        self.y_max2 = self.y_max1
+        self.y_major2 = self.y_major1
+        self.graph1.add_plot(self.plot1)
 
     def set_file(self, filename):
         self.fileName = filename[0]
-
-    def rootLodge_note(self):
-        RLB = self.ids['RootLodgeButton']
-        if self.lodgeFlag == "ROOT LODGE":
-            self.lodgeFlag = "STALK LODGE"
-            RLB.text = "Stalk\nLodge"
-            RLB.background_color = (0,0,0,1)
-        elif self.lodgeFlag == "STALK LODGE":
-            self.lodgeFlag = "ROOT LODGE"
-            RLB.background_color = (1,0,0,1)
-            RLB.text = "Root\nLodge"
-        else:
-            self.lodgeFlag = "ROOT LODGE"
-            RLB.background_color = (1,0,0,1)
-            RLB.text = "Root\nLodge"
 
     def on_leave(self):
         self.graph1.remove_plot(self.plot1)
