@@ -1,5 +1,6 @@
 import datetime
 from math import sin
+import math
 
 class Sensor:
 
@@ -16,6 +17,7 @@ class Sensor:
         self.y_fake = 0
         self.pot_fake = 0
         self.imu_fake = 0
+        self.elapsed_time = 0
 
     def get_header_data(self):
         self.sensor_data["Temperature"] = "5"
@@ -24,14 +26,15 @@ class Sensor:
 
     def get_sensor_data(self, adc_out = 0):
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
-        self.temp_fake += 1
-        self.hum_fake += 2
-        self.loc_fake[0] += 0.0000003
-        self.loc_fake[1] += 0.0000005
-        self.x_fake = 800 + 400 * sin(self.temp_fake / 500) + 0.02 * self.temp_fake
-        self.y_fake += .5
-        self.pot_fake = 400 + 200 * sin(self.temp_fake / 100) + 0.01 * self.temp_fake
-        self.imu_fake += 4.5
+        self.temp_fake = float("nan")
+        self.hum_fake = float("nan")
+        self.loc_fake[0] += 0.00000003
+        self.loc_fake[1] += 0.00000005
+        self.y_fake = float("nan")
+        self.pot_fake = .25 * (90 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2),2*90)))
+        self.imu_fake += .15 * (90 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2.1),2*90)))
+        self.x_fake = 12 * math.asin(math.radians((self.pot_fake - (90/4))/(90/4)))
+        self.elapsed_time += 0.1
         self.sensor_data["Time"] = self.time
         self.sensor_data["Temperature"] = self.temp_fake
         self.sensor_data["Humidity"] = self.hum_fake
