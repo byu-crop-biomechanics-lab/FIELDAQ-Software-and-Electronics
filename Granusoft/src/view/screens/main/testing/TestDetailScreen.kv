@@ -12,6 +12,7 @@
             GranuNone:
 			GranuSideButton:
 				text: 'IMU/\nPOT'
+				id: imu_pot_toggle
         GranuContent:
             GranuTitle:
                 id: testTitle #text: 'Test Results:' + root.fileName
@@ -20,14 +21,15 @@
                 rows: 2
                 GraphTitle:
                     text: 'Test Details'
+					id: title_text
                 Graph:
-                    id: graph_test1
+                    id: graph_test
                     plot: MeshLinePlot
                     background_color: 0, 0, 0, 1
                     xlabel:'Angle (deg)'
                     ylabel:'Force (lbs)'
                     x_ticks_major:root.x_major
-                    y_ticks_major:root.y_major1
+                    y_ticks_major:root.y_major
                     y_grid_label:True
                     x_grid_label:True
                     #padding:5
@@ -36,4 +38,4 @@
                     xmin:0
                     ymin:0
                     xmax:root.x_max
-                    ymax:root.y_max1
+                    ymax:root.y_max

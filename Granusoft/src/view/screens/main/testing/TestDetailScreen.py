@@ -33,11 +33,9 @@ ONE_SEC = 1
 
 class TestDetailScreen(BaseScreen):
     x_max = NumericProperty(1)
-    y_max1 = NumericProperty(1)
-    y_max2 = NumericProperty(1)
+    y_max = NumericProperty(1)
     x_major = NumericProperty(1)
-    y_major1 = NumericProperty(1)
-    y_major2 = NumericProperty(1)
+    y_major = NumericProperty(1)
     datasets = []
     pot_angle = []
     imu_angle = []
@@ -55,9 +53,12 @@ class TestDetailScreen(BaseScreen):
         self.screenTitle = self.ids['testTitle']
 
     def on_enter(self):
-        self.graph1 = self.ids['graph_test1']
-        self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.graph = self.ids['graph_test']
+        self.results_plot = MeshLinePlot(color=[1, 1, 1, 1])
         self.screenTitle.text = str(self.fileName[:-4])
+        self.toggle_button = self.ids['imu_pot_toggle']
+        self.toggle_button.bind(on_release = self.toggleButton)
+        self.title_Text = self.ids['title_text']
         with open('Tests/' + str(self.fileName)) as testFile:
             readCSV = csv.reader(testFile, delimiter=',')
             testData = 0
@@ -68,16 +69,44 @@ class TestDetailScreen(BaseScreen):
                     self.force_app.append(row[3])
                 if str(row[0]) == 'TIME (s)' and testData == 0:
                     testData = 1
-        self.plot1.points = [(float(self.pot_angle[i]), float(self.force_app[i])) for i in range(0, len(self.pot_angle))]
-        self.x_max = math.ceil(max(float(self.pot_angle[i]) for i in range(0, len(self.pot_angle)))*1.05)
-        self.x_major = int(self.x_max/5)
-        self.y_max1 = math.ceil(max(float(self.force_app[i]) for i in range(0, len(self.force_app)))*1.05)
-        self.y_major1 = int(self.y_max1/5)
-        self.graph1.add_plot(self.plot1)
+        self.imu_points = [(float(self.imu_angle[i]), float(self.force_app[i])) for i in range(0, len(self.imu_angle))]
+        self.imuXmax = math.ceil(max(float(self.imu_angle[i]) for i in range(0, len(self.imu_angle)))/10)*10
+        self.imuXmajor = int(self.imuXmax/5)
+        self.imu_title = 'Test Details (X Load and IMU Data)'
+        self.pot_points = [(float(self.pot_angle[i]), float(self.force_app[i])) for i in range(0, len(self.pot_angle))]
+        self.potXmax = math.ceil(max(float(self.pot_angle[i]) for i in range(0, len(self.pot_angle)))/10)*10
+        self.potXmajor = int(self.potXmax/5)
+        self.pot_title = 'Test Details (X Load and Potentiometer Data)'
+        self.x_max = self.potXmax
+        self.x_major = self.potXmajor
+        self.y_max = math.ceil(max(float(self.force_app[i]) for i in range(0, len(self.force_app)))/15)*15
+        self.y_major = int(self.y_max/5)
+        self.results_plot.points = self.pot_points
+        self.pot_plot = 1
+        self.graph.add_plot(self.results_plot)
+        self.title_Text.text = self.pot_title
+
+    def toggleButton(self, obj):
+        if self.pot_plot:
+            self.graph.remove_plot(self.results_plot)
+            self.results_plot.points = self.imu_points
+            self.x_max = self.imuXmax
+            self.x_major = self.imuXmajor
+            self.graph.add_plot(self.results_plot)
+            self.title_Text.text = self.imu_title
+            self.pot_plot = 0
+        else:
+            self.graph.remove_plot(self.results_plot)
+            self.results_plot.points = self.pot_points
+            self.x_max = self.potXmax
+            self.x_major = self.potXmajor
+            self.graph.add_plot(self.results_plot)
+            self.title_Text.text = self.pot_title
+            self.pot_plot = 1
 
     def set_file(self, filename):
         self.fileName = filename[0]
 
     def on_leave(self):
-        self.graph1.remove_plot(self.plot1)
-        self.graph1._clear_buffer()
+        self.graph.remove_plot(self.results_plot)
+        self.graph._clear_buffer()
