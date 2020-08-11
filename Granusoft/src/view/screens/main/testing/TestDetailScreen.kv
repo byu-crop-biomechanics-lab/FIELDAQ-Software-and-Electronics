@@ -17,47 +17,23 @@
                 id: testTitle #text: 'Test Results:' + root.fileName
                 size_hint_max_y: 30
             GridLayout:
-                cols:2
-                spacing: 10
-                GridLayout:
-                    rows: 2
-                    GraphTitle:
-                        text: 'Potentiometer Angle'
-                    Graph:
-                        id: graph_test1
-                        plot: MeshLinePlot
-                        background_color: 0, 0, 0, 1
-                        xlabel:'Time(s)'
-                        ylabel:'Angle (pot)'
-                        x_ticks_major:root.x_major
-                        y_ticks_major:root.y_major1
-                        y_grid_label:True
-                        x_grid_label:True
-                        #padding:5
-                        x_grid:True
-                        y_grid:True
-                        xmin:0
-                        ymin:0
-                        xmax:root.x_max
-                        ymax:root.y_max1
-                GridLayout:
-                    rows: 2
-                    GraphTitle:
-                        text: 'X-Force Loading'
-                    Graph:
-                        id: graph_test2
-                        plot: MeshLinePlot
-                        background_color: 0, 0, 0, 1
-                        xlabel:'Time(s)'
-                        ylabel:'X Load (adc)'
-                        x_ticks_major:root.x_major
-                        y_ticks_major:root.y_major2
-                        y_grid_label:True
-                        x_grid_label:True
-                        #padding:5
-                        x_grid:True
-                        y_grid:True
-                        xmin:0
-                        ymin:0
-                        xmax:root.x_max
-                        ymax:root.y_max2
+                rows: 2
+                GraphTitle:
+                    text: 'Test Details'
+                Graph:
+                    id: graph_test1
+                    plot: MeshLinePlot
+                    background_color: 0, 0, 0, 1
+                    xlabel:'Angle (deg)'
+                    ylabel:'Force (lbs)'
+                    x_ticks_major:root.x_major
+                    y_ticks_major:root.y_major1
+                    y_grid_label:True
+                    x_grid_label:True
+                    #padding:5
+                    x_grid:True
+                    y_grid:True
+                    xmin:0
+                    ymin:0
+                    xmax:root.x_max
+                    ymax:root.y_max1
