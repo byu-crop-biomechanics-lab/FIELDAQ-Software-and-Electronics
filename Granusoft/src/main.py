@@ -25,4 +25,5 @@ class MainApp(App):
 
 if __name__ == "__main__":
     config.load() # Load our own app preferences
+    # Run the App
     MainApp().run()
