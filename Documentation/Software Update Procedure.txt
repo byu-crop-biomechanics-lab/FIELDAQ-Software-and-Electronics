@@ -6,7 +6,7 @@ On main screen of the device, Select ‘Exit’, then ‘Exit’ again. This wil
 Either SSH in or use a USB Keyboard. SSH will require a little bit of setup.
 
 SSH:
-In your command line, type “ssh pi@10.37.74.244"
+In your command line, type “ssh pi@[insert IP Address here]"
 If prompted, type “yes”
 Enter password: “granustem”
 Hit the ‘control’ and ‘C’ keys to interrupt the boot up process.
@@ -21,4 +21,4 @@ git pull - This command will get the latest updates from GitHub for the current 
 git branch - List the branches of the GitHub repository available. An indicator will show which branch is currently checked out.
 
 
-The software can be rebooted by typing ‘python3 main.py’ into the command line. 
+The software can be rebooted by typing ‘python3 main.py’ into the command line while in the ~/FIELDAQ/Granusoft/src directory. 
