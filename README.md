@@ -31,4 +31,4 @@ The Documentation directory contains many useful files, some of which have been 
   - Raspberry Pi Setup.docx - 	Information on how to set up a new raspberry pi from scratch to host the software.
 ### Examples
 - Example_Adding the Camera Module.docx - A reflection on how the camera screens were added.
-- Example_Adding a boot screen.docx - A hypothetical situation where a boot screen is created to choose between the Camera test mode and the Stalk Push testing mode.
+- Example_Adding a Boot Screen.docx - A hypothetical situation where a boot screen is created to choose between the Camera test mode and the Stalk Push testing mode.
