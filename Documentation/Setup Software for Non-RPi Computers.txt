@@ -1,0 +1,8 @@
+Process for setting up the code base to be run on non-RaspberryPi computers. This is useful for development and testing.
+
+Ensure python3 is installed on your device. I was able to run the code using python 3.9.2
+Install kivy (instructions found on kivy.org for your OS).
+Ensure Kivy-garden module is also installed if it was not installed with kivy (in the command line, run: pip3 install kivy-garden)
+After installing kivy and kivy-garden, install graph by using the command line to run: garden install graph
+
+The GUI can then be run by navigating to FIELDAQ/Granusoft/src in the command line and running the command: python3 main.py

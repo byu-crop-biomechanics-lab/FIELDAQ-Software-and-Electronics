@@ -14,6 +14,8 @@ The software is run by navigating into the FIELDAQ/Granusoft/src directory and r
 
 The main.py file imports the necessary kivy library elements, and builds the kivy app. The companion main.kv file imports the widgets (GUI screen elements), created for the use across the GUI, and imports the views that will be displayed throughout the app. These views are each composed of a python file and kivy file. More detail can be found in the file: Documentation/Kivy Screen Management.docx
 
+The software is designed to be run on the RaspberryPi, but can also be run on any computer with python3 and kivy. This approach is useful for development and testing purposes. The code is structured to use false sensor input data when the sensor connections can not be properly detected.
+
 ## Documentation Directory
 The Documentation directory contains many useful files, some of which have been mentioned previously. A brief overview of these files is provide here:
 ### Structural Information of the Code Base (how is it assembled)
@@ -24,6 +26,7 @@ The Documentation directory contains many useful files, some of which have been 
 ### Background Information (how do the pieces work)
 - Kivy Screen Management.docx - 	Information on how kivy navigates between screens and how screens can be added to the GUI.
 - Kivy Training Resources.docx - 	A list of resources on how to learn kivy for those who are unfamiliar with the libraries.
+- Setup Software for Non-RPi Computers.txt -  Information on how to get the GUI running on a non-RaspberryPi computer for software development.
 - Software Coding Standard.docx -	The Coding Standard for coding used throughout the software.
 - Software Update Procedure.txt - 	Information on how to utilize GitHub when updating the on-device software.
 - Supplementary Directory:
@@ -32,3 +35,5 @@ The Documentation directory contains many useful files, some of which have been 
 ### Examples
 - Example_Adding the Camera Module.docx - A reflection on how the camera screens were added.
 - Example_Adding a Boot Screen.docx - A hypothetical situation where a boot screen is created to choose between the Camera test mode and the Stalk Push testing mode.
+### Plans for Future Changes and Improvements
+- ...
