@@ -28,7 +28,7 @@ Detailed Overview
 Documentation - Contains resources for learning about the code base and references for coding standards and adding to the code base.
 	Documentation/Supplementary - Contains additional resources that are not immediately necessary for understanding the code base.
 
-Granusoft - Top-most directory containing only code, but all of the code base. 
+Granusoft - Top-most directory containing only code, but all of the code base. This was originally the entirety of the Capstone Team's GitHub repository.
 	Granusoft/motor_view - Contains python and kivy files for running a GUI capable of controlling motors–part of the capstone requirements.
 	Granusoft/src - The main directory containing the GUI code. In order to run the code, the user must navigate to this directory first.
 		Granusoft/src/Images - An empty directory where images from the camera will be stored.
