@@ -1,24 +1,12 @@
 Performing a Software Update on the Device
 
-Allow the device to start up.
-On main screen of the device, Select ‘Exit’, then ‘Exit’ again. This will take you to the command line on the device.
-
-Either SSH in or use a USB Keyboard. SSH will require a little bit of setup.
-
-SSH:
-In your command line, type “ssh pi@[insert IP Address here]"
-If prompted, type “yes”
-Enter password: “granustem”
-Hit the ‘control’ and ‘C’ keys to interrupt the boot up process.
-
-You are now in the device and can use the following git commands as you wish.
-
-
-git checkout [branch name] - This command is used to switch between branches in the GitHub repository.
-
-git pull - This command will get the latest updates from GitHub for the current branch and update them on the device.
-
-git branch - List the branches of the GitHub repository available. An indicator will show which branch is currently checked out.
-
-
-The software can be rebooted by typing ‘python3 main.py’ into the command line while in the ~/FIELDAQ/Granusoft/src directory. 
+1. Enter the command line on the pi device. The granusoft box interface can be exited on the main screen by selecting "Exit", then "Exit" again.
+2. Plug in a USB keyboard. (SSH can also be used, but a keyboard is easier and this guide will assume you are using a keyboard.)
+3. Connect the device to internet. This can usually be done by running "sudo raspi-config" and using the menu that provides. If more instructions
+   are needed, refer to: https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+   You can also use an ethernet cable instead of a wireless connection. 
+4. Ensure you are in the FIELDAQ file directory. The command line will list your current directory. It should say "~/FIELDAQ/Granusoft/src". 
+   If you just exited the granusoft software then you should already be in the correct directory. 
+   If you are not in the correct directory, type "cd ~/FIELDAQ/Granusoft/src".
+5. Type "git pull" into the command line. This will download the latest update onto your device. 
+6. The device is now updated! You can enter the updated software by either turning the device off and on again or running the command "python3 main.py".
