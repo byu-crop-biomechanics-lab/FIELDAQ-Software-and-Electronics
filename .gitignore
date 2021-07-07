@@ -23,3 +23,6 @@ config.json
 
 # Test Images
 *.jpg
+
+# Temporary Files
+*.docx#

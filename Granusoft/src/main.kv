@@ -1,6 +1,11 @@
-# Include custom Kivy widgets for all screens
+# This line is a comment, the following lines with a hashtag-colon are used by
+# the kivy interpreter.
+
+# Include custom Kivy widgets which will be used on all screens that are imported below
 #:import * view.elements
 
+# These following Lines declare where the py and kv files for each screen
+# are stored and that they should be imported
 #:import ExitScreen view.screens.main.ExitScreen
 #:import LiveFeedScreen view.screens.main.LiveFeedScreen
 #:import MainScreen view.screens.main.MainScreen
@@ -34,6 +39,8 @@
 #:import ImagesViewScreen view.screens.camera.ImagesViewScreen
 #:import CameraSettingsScreen view.screens.camera.CameraSettingsScreen
 
+# Load each screen into the ScreenManager. For human convenience, screens are
+# grouped into like-screens
 <GranuScreenManager>:
     # Properties
     current: 'main_screen' # Start with the main screen

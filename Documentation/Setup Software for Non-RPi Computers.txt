@@ -1,0 +1,23 @@
+Process for setting up the code base to be run on non-RaspberryPi computers. This is useful for development and testing.
+Specific instructions for installation will not be provided in this guide, as specific procedures will differ from
+device to device and version to version. Look up how to do so for your device online. 
+
+1. Install python. Version 3.9.5 is the latest version that has been confirmed to work, but new versions may also work. 
+2. Install virtualvenv. 
+3. Create a python environment with virtualvenv and enter it. Use this environment anytime you are working on this project. 
+4. Install kivy. Version 2.0.0 is the latest confirmed version, but newer versions may also work. kivy-garden is also required
+   but is usually installed with kivy. 
+5. Install numpy. 
+6. Navigate to the FIELDAQ/Granusoft/src directory in a terminal and run "python3.9 main.py" (replace 3.9 with whatever 
+   version you are using). 
+
+The box gui should now load onto your screen. If not, here are a few troubeshooting suggestions:
+- Check that your graphics drivers are properly installed and up to date. This has caused issues in the past. 
+- If using zsh when installing kivy on linux, the installation commands may not work as listed. Try using bash instead. 
+- Some documentation has suggested that matplotlib and kivy-garden's graph is required. Try installing matplotlib and graph. 
+  (Graph is installed with "garden install graph").
+- Although the code has been confirmed to work with python 3.9.5 and kivy 2.0.0, it was developed on python 3.5.3 and kivy 
+  1.11.0.dev0. Try installing these older versions and running the code. 
+
+Once you get the code running on your device, please update this guide with any useful information you learned during the 
+installation process. 
