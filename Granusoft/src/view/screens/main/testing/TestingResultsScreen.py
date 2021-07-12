@@ -135,7 +135,7 @@ class TestingResultsScreen(BaseScreen):
         with open(filename, 'w+', newline='') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerow(['----------META DATA----------'])
-            writer.writerow(['SOFTWARE VERSION', '2.1.2'])
+            writer.writerow(['SOFTWARE VERSION', '2.2.0'])
             writer.writerow(['DEVICE OPERATOR', str(config.get('operator', 0))])
             writer.writerow(['----------TEST ATTRIBUTES----------'])
             writer.writerow(['FIELD', 'VALUE', 'UNIT'])
