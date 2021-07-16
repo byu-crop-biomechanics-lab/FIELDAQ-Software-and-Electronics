@@ -62,7 +62,7 @@ class TestsScreen(BaseScreen):
         super(BaseScreen, self).__init__(**kwargs)
         self.back_button = GranuSideButton(text = 'Back')
         self.back_button.bind(on_release = self.go_back)
-        self.remove_button = GranuSideButton(text = 'Remove\nAll')
+        self.remove_button = GranuSideButton(text = 'Archive\nAll')
         self.remove_button.bind(on_release = self.remove_tests)
         self.export_button = GranuSideButton(text = 'Export\nAll')
         self.export_button.bind(on_release = self.export_tests)
