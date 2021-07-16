@@ -85,13 +85,7 @@ class TestsScreen(BaseScreen):
         super(TestsScreen, self).back()
 
     def remove_tests(self, obj):
-        for name in self.test_filenames:
-            if name != '.gitignore':
-                # os.remove('Tests/' + name)
-                os.rename('Tests/' + name, 'TestArchive/' + name)
-        self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
-        self.ids['tests_list'].list_data = self.test_filenames
-        # print("We should remove all tests!")
+        super(TestsScreen, self).move_to('test_archive_confirmation')
 
     def dismiss_popup(self):
         self._popup.dismiss()
