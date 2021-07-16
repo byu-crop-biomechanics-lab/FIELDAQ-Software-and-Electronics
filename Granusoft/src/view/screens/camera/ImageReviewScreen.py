@@ -22,5 +22,4 @@ class ImageReviewScreen(BaseScreen):
         self.image_name = name
 
     def delete_button(self):
-        print('We should delete image ' + self.image_name)
-        os.system("rm Images/" + self.image_name)
+        os.remove("Images/" + self.image_name)
