@@ -64,12 +64,7 @@ class ImagesViewScreen(BaseScreen):
         super(ImagesViewScreen, self).back()
 
     def remove_images(self, obj):
-        for name in self.image_filenames:
-            if name != '.gitignore':
-                os.remove('Images/' + name)
-        self.image_filenames = [f for f in listdir("Images") if (isfile(join("Images", f)) and f != ".gitignore")]
-        self.ids['images_list'].list_data = self.image_filenames
-        # print("We should remove all images!")
+        super(ImagesViewScreen, self).move_to('img_delete_confirmation')
 
     def dismiss_popup(self):
         self._popup.dismiss()
