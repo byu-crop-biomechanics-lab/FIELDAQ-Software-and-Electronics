@@ -62,7 +62,7 @@ class ArchiveScreen(BaseScreen):
         self.back_button = GranuSideButton(text = 'Back')
         self.back_button.bind(on_release = self.go_back)
         self.remove_button = GranuSideButton(text = 'Remove\nAll')
-        # self.remove_button.bind(on_release = self.remove_tests)
+        self.remove_button.bind(on_release = self.remove_tests)
         self.export_button = GranuSideButton(text = 'Export\nAll')
         self.export_button.bind(on_release = self.export_tests)
         self.test_details_button = GranuSideButton(text = 'Test\nDetails')
@@ -78,13 +78,13 @@ class ArchiveScreen(BaseScreen):
     def go_back(self, obj):
         super(ArchiveScreen, self).back()
 
-    # def remove_tests(self, obj):
-    #     for name in self.test_filenames:
-    #         if name != '.gitignore':
-    #             os.remove('TestArchive/' + name)
-    #     self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
-    #     self.ids['tests_list'].list_data = self.test_filenames
-    #     # print("We should remove all tests!")
+    def remove_tests(self, obj):
+        for name in self.test_filenames:
+            if name != '.gitignore':
+                os.remove('TestArchive/' + name)
+        self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
+        self.ids['tests_list'].list_data = self.test_filenames
+        # print("We should remove all tests!")
 
     def dismiss_popup(self):
         self._popup.dismiss()
