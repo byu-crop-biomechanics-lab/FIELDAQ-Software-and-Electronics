@@ -1,5 +1,7 @@
 """
-
+This screen makes sure that the user will not accidentally delete images stored on the device. It is quite simple
+with only two buttons, delete and cancel. The position and type of button is intentionally different than the previous
+set of buttons so it is very obvious there was a change in screen. 
 """
 
 import os
