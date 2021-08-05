@@ -45,13 +45,13 @@ for pin in GPIO_PINS:
 
 # ADC
 ads1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
-ads2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=16)
+ads2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=2)
 CHAN0 = AnalogIn(ads1, ADS.P0)
 CHAN1 = AnalogIn(ads1, ADS.P1)
 CHAN2 = AnalogIn(ads1, ADS.P2)
 CHAN3 = AnalogIn(ads1, ADS.P3)
-CHAN4 = AnalogIn(ads2, ADS.P0, ADS.P1)
-# CHAN5 = AnalogIn(ads2, ADS.P1)
+CHAN4 = AnalogIn(ads2, ADS.P0)
+CHAN5 = AnalogIn(ads2, ADS.P1)
 CHAN6 = AnalogIn(ads2, ADS.P2)
 CHAN7 = AnalogIn(ads2, ADS.P3)
 
