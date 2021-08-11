@@ -47,6 +47,12 @@ class TestingResultsScreen(BaseScreen):
         sensor = Sensor()
         sensor.clear_gps_memory()
 
+        # Get notes from config file
+        notes = config.get('notes', {"posttest": []})
+
+        # Set the data
+        self.ids['posttest'].list_data = notes["posttest"]
+
     def on_enter(self):
         self.graph = self.ids['graph_test']
         self.plot = MeshLinePlot(color=[1, 1, 1, 1])
@@ -69,25 +75,6 @@ class TestingResultsScreen(BaseScreen):
 
         self.graph.add_plot(self.plot)
 
-        # self.lodgeFlag = "STALK LODGE"
-        # RLB = self.ids['RootLodgeButton']
-        # RLB.text = "Stalk\nLodge"
-
-    # def rootLodge_note(self):
-    #     RLB = self.ids['RootLodgeButton']
-    #     if self.lodgeFlag == "ROOT LODGE":
-    #         self.lodgeFlag = "STALK LODGE"
-    #         RLB.text = "Stalk\nLodge"
-    #         RLB.background_color = (0,0,0,1)
-    #     elif self.lodgeFlag == "STALK LODGE":
-    #         self.lodgeFlag = "ROOT LODGE"
-    #         RLB.background_color = (1,0,0,1)
-    #         RLB.text = "Root\nLodge"
-    #     else:
-    #         self.lodgeFlag = "ROOT LODGE"
-    #         RLB.background_color = (1,0,0,1)
-    #         RLB.text = "Root\nLodge"
-
     def save_test(self):
         ts = TestSingleton()
         self.datasets = ts.get_datasets()
@@ -96,11 +83,10 @@ class TestingResultsScreen(BaseScreen):
         #Prepare the notes
         notes = config.get('notes', {
             "pretest": [],
-            "posttest": [],
             "bank": []
         })
         pre_notes = notes["pretest"]
-        post_notes = notes["posttest"]
+        post_notes = self.ids["posttest"].get_selected()
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
@@ -169,7 +155,5 @@ class TestingResultsScreen(BaseScreen):
         csvFile.close()
 
     def on_leave(self):
-        # RLB = self.ids['RootLodgeButton']
-        # RLB.background_color = (0,0,0,1)
         self.graph.remove_plot(self.plot)
         self.graph._clear_buffer()

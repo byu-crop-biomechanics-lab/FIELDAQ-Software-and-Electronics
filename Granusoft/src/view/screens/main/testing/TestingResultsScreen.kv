@@ -37,21 +37,21 @@
             GranuTitle:
                 text: 'Testing Results'
                 size_hint_max_y: 30
-            # GridLayout:
-            #     cols: 2
-            #     spacing: 10
-            #     size_hint_y: 0.25
-            #     GranuNoteButton:
-            #         text: "Break\nHeight"
-            #         on_release:
-            #             root.move_to('break_height_screen') # Move to note screen
-            #     GranuNoteButton:
-            #         id: RootLodgeButton
-            #         on_release:
-            #             root.rootLodge_note()
             GridLayout:
-                cols:2
+                cols: 2
                 spacing: 10
+                GridLayout:
+                    rows: 2
+                    size_hint_x: 0.5
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: 0.1
+                        ListTitle:
+                            text: 'Post-test Notes'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        NoteList:
+                            id: posttest
                 GridLayout:
                     rows: 2
                     Graph:
