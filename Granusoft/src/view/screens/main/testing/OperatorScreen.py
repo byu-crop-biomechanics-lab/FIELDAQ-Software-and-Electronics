@@ -11,7 +11,7 @@ import configurator as config
 from view.BaseScreen import BaseScreen
 from view.input.StrInput import StrInput
 
-Builder.load_file('view/screens/settings/OperatorScreen.kv')
+Builder.load_file('view/screens/main/testing/OperatorScreen.kv')
 
 class OperatorScreen(BaseScreen):
     def on_pre_enter(self):

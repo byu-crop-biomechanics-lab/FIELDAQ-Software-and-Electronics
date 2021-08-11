@@ -11,7 +11,7 @@ import configurator as config
 from view.BaseScreen import BaseScreen
 from view.input.FloatInput import FloatInput
 
-Builder.load_file('view/screens/settings/HeightScreen.kv')
+Builder.load_file('view/screens/main/testing/HeightScreen.kv')
 
 class HeightScreen(BaseScreen):
     def on_pre_enter(self):
@@ -38,4 +38,3 @@ class HeightScreen(BaseScreen):
         else:
             input.focus = True
             return False
-

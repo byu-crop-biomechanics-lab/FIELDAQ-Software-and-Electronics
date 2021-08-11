@@ -11,7 +11,7 @@ import configurator as config
 from view.BaseScreen import BaseScreen
 from view.input.IntInput import IntInput
 
-Builder.load_file('view/screens/settings/PlotScreen.kv')
+Builder.load_file('view/screens/main/testing/PlotScreen.kv')
 
 class PlotScreen(BaseScreen):
     def on_pre_enter(self):
