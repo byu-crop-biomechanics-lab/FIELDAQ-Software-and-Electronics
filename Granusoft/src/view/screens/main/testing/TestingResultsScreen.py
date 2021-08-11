@@ -145,10 +145,11 @@ class TestingResultsScreen(BaseScreen):
             writer.writerow(['TIME', dt.strftime("%H:%M:%S"), 'Local Time Zone'])
             writer.writerow(['PLOT', str(config.get('plot_num', 0)), '#'])
             writer.writerow(['HEIGHT', str(config.get('height', 0)), 'cm'])
+            writer.writerow(['BARCODE', 'FIXME: Add barcode data'])
             writer.writerow(['TEMPERATURE', temperature, 'C'])
             writer.writerow(['HUMIDITY', humidity, '%'])
-            writer.writerow(['LATITUDE', location[0], ' angular degrees'])
-            writer.writerow(['LONGITUDE', location[1], ' angular degrees'])
+            writer.writerow(['LATITUDE', location[0], 'angular degrees'])
+            writer.writerow(['LONGITUDE', location[1], 'angular degrees'])
             writer.writerow(['----------OPTIONAL DATA----------'])
             for i in range(5):
                 try:
@@ -161,7 +162,6 @@ class TestingResultsScreen(BaseScreen):
                 except:
                     writer.writerow(['POST_TEST_NOTE_' + str(i+1), ''])
             writer.writerow(['BREAK_HEIGHT', str(config.get('break_height', 0)), 'cm'])
-            writer.writerow(['LODGE_TYPE', self.lodgeFlag])
             writer.writerow(['LCA_WEIGTH', '0', 'g'])
             writer.writerow(['----------SENSOR CALIBRATION DATA (stored_value*A + B = raw_data)------'])
             writer.writerow(['SENSOR', 'A', 'B', 'UNIT', 'ID'])
