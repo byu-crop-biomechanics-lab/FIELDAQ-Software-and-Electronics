@@ -38,15 +38,18 @@
             GridLayout:
                 cols: 2
                 spacing: 10
-                TestingInfoBox:
-                    id: height
+                SettingsButton:
                     text: "Height: " + root.height_num + " cm"
-                TestingInfoBox:
-                    id: operator
+                    on_release:
+                        root.move_to('height_screen')
+                SettingsButton:
                     text: "Operator: " + root.operator
-                TestingInfoBox:
-                    id: plot
+                    on_release:
+                        root.move_to('operator_screen')
+                SettingsButton:
                     text: "Plot: " + root.plot
+                    on_release:
+                        root.move_to('plot_screen')
                 TestingInfoBox:
                     id: time
                     text: "Time: " + root.time
