@@ -27,7 +27,7 @@ class NoteScreen(BaseScreen):
         based on interaction with the lists.'''
         super(BaseScreen, self).__init__(**kwargs)
 
-        self.save_button = GranuSideButton(text = 'Save')
+        self.save_button = GranuSideButton(text = 'Back')
         self.save_button.bind(on_release = self.save)
         self.new_button = GranuSideButton(text = 'New')
         self.new_button.bind(on_release = self.new)
