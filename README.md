@@ -28,7 +28,7 @@ The Documentation directory contains many useful files, some of which have been 
 - [Kivy Training Resources.docx](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/Kivy%20Training%20Resources.docx) - 	A list of resources on how to learn kivy for those who are unfamiliar with the libraries.
 - [Setup Software for Non-RPi Computers.txt](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/Setup%20Software%20for%20Non-RPi%20Computers.txt) -  Information on how to get the GUI running on a non-RaspberryPi computer for software development.
 - [Software Coding Standard.docx](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/Software%20Coding%20Standard.docx) -	The Coding Standard for coding used throughout the software.
-- [Software Update Procedure.txt](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/Software%20Update%20Procedure.txt) - 	Information on how to utilize GitHub when updating the on-device software.
+- [Software Update Procedure.md](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/Software%20Update%20Procedure.txt) - 	Information on how to utilize GitHub when updating the on-device software.
 - Supplementary Directory:
   - [Kivy Clock Summary.docx](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/Supplementary/Kivy%20Clock%20Summary.docx) - 	Information recorded by the capstone team about the logic for using the clock the way they did.
   - [Raspberry Pi Setup.docx](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/Supplementary/Raspberry%20Pi%20Setup.docx) - 	Information on how to set up a new raspberry pi from scratch to host the software.
