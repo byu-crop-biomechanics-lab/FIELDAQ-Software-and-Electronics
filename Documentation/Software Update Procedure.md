@@ -6,11 +6,11 @@
 3. Unzip the downloaded files and put them on the flash drive. The files should be in a folder named "FIELDAQ" in the root directory of the flash drive, meaning the first thing you should see when you open the flash drive is the folder "FIELDAQ" with "Documentation", "Granusoft", etc. inside that folder.
 4. Plug the flash drive into the FIELDAQ device and power it on. 
 5. Once the main screen has loaded, exit it. You should see a command window once you've exited the main screen. 
-6. Run the following command ```sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick/FIELDAQ && sudo rm ~/FIELDAQ -r && sudo mv /mnt/usbStick ~/FIELDAQ``` This can be done with a keyboard (it needs to be EXACT), or you can scan the qr code below if you have a barcode scanner able to scan barcodes.
+6. Run the following command ```sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick && sudo rm ~/FIELDAQ -r && sudo mv /mnt/usbStick/FIELDAQ ~/FIELDAQ && sudo reboot``` This can be done with a keyboard (it needs to be EXACT), or you can scan the qr code below if you have a barcode scanner able to scan barcodes.
 
 ![alt text](https://github.com/byu-crop-biomechanics-lab/FIELDAQ/blob/master/Documentation/USB_update_command.png)
 
-7. After waiting a few seconds, the device should have updated itself.
+7. The device will then reboot and the software should now be updated!
 
 ### Method 2: Connecting to internet and pulling changes directly from github
 1. Enter the command line on the pi device. The granusoft box interface can be exited on the main screen by selecting "Exit", then "Exit" again.
