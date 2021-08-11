@@ -86,7 +86,7 @@ class TestingResultsScreen(BaseScreen):
             "bank": []
         })
         pre_notes = notes["pretest"]
-        post_notes = self.ids["posttest"].get_selected()
+        post_notes = self.ids["posttest"].remove_selected()
         dt = datetime.datetime.now()
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.csv'
 
