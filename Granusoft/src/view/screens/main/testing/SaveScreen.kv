@@ -1,0 +1,23 @@
+<SaveScreen>:
+	name: 'save_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+	    		on_release:
+	    		    root.save_test()
+                    root.move_to('testing_screen')
+            GranuNone:
+            GranuNone:
+            GranuNone:
+        GranuContent:
+            GranuTitle:
+                text: 'Scan Barcode'
+            GridLayout:
+                rows: 1
+                cols: 1
+                StrInput:
+                    id: barcode
+                    font_size: 30
+                    multiline: False
+                    size_hint_max_y: 30+15
