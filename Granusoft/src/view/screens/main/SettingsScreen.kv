@@ -73,15 +73,6 @@
                 spacing: 10
                 row_default_height: self.height/4
                 SettingsButton:
-                    text: 'Height'
-	    		    on_release:
-	    		        root.move_to('height_screen')
-                SettingsButton:
-                    text: 'Plot'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('plot_screen')
-                SettingsButton:
                     text: 'Notes'
 	    		    on_release:
                         root.manager.transition.direction = 'left'
@@ -91,11 +82,6 @@
 	    		    on_release:
                         root.manager.transition.direction = 'left'
                         root.move_to('sensors_screen')
-                SettingsButton:
-                    text: 'Operator'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('operator_screen')
                 SettingsButton:
                     text: 'Switch to\nCamera'
 	    		    on_release:
