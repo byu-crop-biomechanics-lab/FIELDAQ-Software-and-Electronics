@@ -88,10 +88,15 @@
                         root.manager.transition.direction = 'left'
                         root.move_to('cam_main_screen')
                 SettingsButton:
-                    text: 'Update\nSoftware'
+                    text: 'Update with\nGithub'
                     on_release:
                         app.stop()
-                        root.updateOS()
+                        root.update_os_git()
+                SettingsButton:
+                    text: 'Update with\nUSB'
+                    on_release:
+                        app.stop()
+                        root.update_os_usb()
                 SettingsButton:
                     text: 'Test\nArchive\nFolder'
                     on_release:

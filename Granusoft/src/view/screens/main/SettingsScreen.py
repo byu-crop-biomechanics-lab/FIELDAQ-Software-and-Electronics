@@ -49,6 +49,12 @@ class SettingsScreen(BaseScreen):
         config.save_as(os.path.join(path, filename))
         self.dismiss_popup()
 
-    def updateOS(self):
+    def update_os_git(self):
         os.system("git pull")
         os.system("python3 main.py")
+
+    def update_os_usb(self):
+        os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
+        os.system("sudo rm ~/FIELDAQ -r")
+        os.system("sudo mv /mnt/usbStick/FIELDAQ ~/FIELDAQ")
+        os.system("sudo reboot")
