@@ -1,0 +1,36 @@
+<TestSettingsConfirmation>:
+	name: 'test_settings_confirmation'
+    GranuContainer:
+        GranuContent:
+            GranuTitle:
+                text: 'Confirm current test settings:'
+            GridLayout:
+                cols: 2
+                rows: 3
+                spacing: 10
+                row_default_height: self.height/4
+                SettingsButton:
+                    text: "Height: " + root.height_num + " cm"
+                    on_release:
+                        root.move_to('height_screen')
+                SettingsButton:
+                    text: "Operator: " + root.operator
+                    on_release:
+                        root.move_to('operator_screen')
+                SettingsButton:
+                    text: "Plot: " + root.plot
+                    on_release:
+                        root.move_to('plot_screen')
+            GridLayout:
+                cols: 2
+                rows: 3
+                spacing: 10
+                row_default_height: self.height/4
+                SettingsButton:
+                    text: "Cancel"
+                    on_release:
+                        root.back()
+                SettingsButton:
+                    text: "Confirm"
+                    on_release:
+                        root.move_to('barcode_confirmation')
