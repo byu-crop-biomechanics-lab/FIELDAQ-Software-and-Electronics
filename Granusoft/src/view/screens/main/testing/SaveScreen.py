@@ -105,9 +105,9 @@ class SaveScreen(BaseScreen):
                 except:
                     writer.writerow([self.SENSOR[j], '1', '0', self.UNITS[j], self.IDS[j]])
             writer.writerow(['----------TEST DATA-----------'])
-            writer.writerow(['TIME (s)', 'ANGLE_POT', 'ANGLE_IMU', 'LOAD_X', 'LOAD_Y'])
+            writer.writerow(['TIME (milliseconds)', 'ANGLE_POT', 'ANGLE_IMU', 'LOAD_X', 'LOAD_Y'])
             datasets = ts.get_datasets()
             for ds in datasets:
-                writer.writerow([ds.timestamp, ds.pot_angle, ds.imu_angle, ds.x_load, ds.y_load])
+                writer.writerow([(ds.timestamp * 1000), ds.pot_angle, ds.imu_angle, ds.x_load, ds.y_load])
 
         csvFile.close()
