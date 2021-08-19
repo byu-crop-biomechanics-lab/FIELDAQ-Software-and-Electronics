@@ -5,11 +5,6 @@ from .connections import *
 from math import acos, floor, degrees
 import configurator as config
 
-def wrap_angle(self, angle):
-    # Wraps angle so it stays in -180 to 180 deg range
-    angle -= 360.0 * floor((angle + 180.0) * (1 / 360))
-    return angle
-
 class IMU:
 
     def __init__(self):
@@ -34,9 +29,10 @@ class IMU:
         if x_raw < 0:
             angle = 360.0 - angle
 
+        # Wraps angle so it stays in -180 to 180 deg range
+        angle -= 360.0 * floor((angle + 180.0) * (1 / 360))
+
         if raw_out == 1:
-            wrap_angle(angle)
-            return angle
+            return z_raw
         else:
-            wrap_angle(angle)
             return angle
