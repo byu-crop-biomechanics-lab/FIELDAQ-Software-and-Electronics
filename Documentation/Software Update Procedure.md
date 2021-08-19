@@ -17,10 +17,12 @@
 
 ```sudo cp -r /mnt/usbStick/FIELDAQ ~/```
 
-```sudo reboot```
+```sudo umount /mnt/usbStick```
+
+```python3 main.py```
 
 - If you are running software version 2.3.0 or later (the main screen shows the software version) then there is a button in the settings that will run these commands for you. Simply go to the settings page and press "Update with USB".
-7. The device will then reboot and the software should now be updated. If it updated properly then the version number should show the latest version number on the main page (latest version is 2.3.0 at time of writing).
+7. The software will then reboot and should now be updated. If it updated properly then the version number should show the latest version number on the main page (latest version is 2.3.0 at time of writing).
 
 ### Method 2: Connecting to internet and pulling changes directly from github (Outdated)
 1. Enter the command line on the pi device. The granusoft box interface can be exited on the main screen by selecting "Exit", then "Exit" again.

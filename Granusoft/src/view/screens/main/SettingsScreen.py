@@ -56,4 +56,5 @@ class SettingsScreen(BaseScreen):
     def update_os_usb(self):
         os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
         os.system("sudo cp -r /mnt/usbStick/FIELDAQ/ ~/") # The pi's cp command has strange behavior
-        os.system("sudo reboot")
+        os.system("sudo umount /mnt/usbStick")
+        os.system("python3 main.py")
