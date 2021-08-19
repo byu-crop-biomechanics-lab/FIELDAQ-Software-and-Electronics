@@ -63,7 +63,7 @@ class SaveScreen(BaseScreen):
         self.config_data = config.get('sensors', {})
         self.NAMES = ['X Load', 'Y Load', 'IMU Angle', 'Pot Angle', 'Temperature', 'Humidity']
         self.SENSOR = ['LOAD_X', 'LOAD_Y', 'IMU', 'POT', 'TEMP', 'HUM']
-        self.UNITS = ['N', 'Newtons', 'Deg', 'Deg', 'C', '%']
+        self.UNITS = ['Pounds', 'Pounds', 'Deg', 'Deg', 'C', '%']
         self.IDS = ['loadx1', 'loady1', 'imu1', 'pot1', 'temp1', 'hum1']
 
         with open(filename, 'w+', newline='') as csvFile:
