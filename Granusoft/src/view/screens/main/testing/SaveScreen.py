@@ -51,7 +51,7 @@ class SaveScreen(BaseScreen):
         # Sets the filename to save the csv file as
         config.set('curr_test_num', (config.get('curr_test_num', 0) + 1))
         filename = 'Tests/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '_P' + str(config.get('plot_num', 0)) \
-            + '_T' + str(config.get('curr_test_num', 0)) + '.csv'
+            + '_T' + str(config.get('curr_test_num', 0)).zfill(2) + '.csv'
 
         try:
             gps.update()
