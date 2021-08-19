@@ -1,0 +1,27 @@
+<IMUCalibrateScreen>:
+	name: 'imu_calibrate_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+                on_release:
+                    if root.save(): root.back()
+            GranuSideButton:
+                text: 'Set To\nZero'
+                on_release:
+                    root.set_to_zero()
+            GranuNone:
+            GranuSideButton:
+                text: 'Cancel'
+	    		on_release:
+                    root.back()
+        GranuContent:
+            GranuTitle:
+                text: 'IMU Angle Calibration'
+            GridLayout:
+                cols: 2
+                rows: 5
+                spacing: 10
+                row_default_height: self.height/6
+                TestingInfoBox:
+                    text: 'Real: ' + str(round(root.real_angle, 3)) + ', ADC: ' + str(round(root.adc_angle, 3))

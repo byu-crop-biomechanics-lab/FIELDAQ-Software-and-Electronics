@@ -8,7 +8,11 @@ import configurator as config
 class IMU:
 
     def __init__(self):
-        pass
+        self.config_data = config.get('sensors', {})
+        try:
+            self.offset = self.config_data['IMU Angle']['offset']
+        except:
+            self.offset = 0
 
     def get_data(self, raw_out = 0):
         y_raw, z_raw, x_raw = [value / adafruit_lis3dh.STANDARD_GRAVITY for value in \
@@ -33,6 +37,7 @@ class IMU:
         angle -= 360.0 * floor((angle + 180.0) * (1 / 360))
 
         if raw_out == 1:
-            return z_raw
+            return angle
         else:
+            angle -= self.offset
             return angle

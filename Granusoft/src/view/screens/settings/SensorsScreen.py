@@ -23,8 +23,11 @@ class SensorButton(Button):
         self.text = name
 
     def on_release(self):
-        self.calib_screen.set_sensor(self.name)
-        self.parent_screen.move_to('calibrate_screen')
+        if self.name == "IMU Angle":
+            self.parent_screen.move_to('imu_calibrate_screen')
+        else:
+            self.calib_screen.set_sensor(self.name)
+            self.parent_screen.move_to('calibrate_screen')
 
 class SensorsScreen(BaseScreen):
     def __init__(self, **kwargs):

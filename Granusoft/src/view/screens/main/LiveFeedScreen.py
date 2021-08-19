@@ -99,7 +99,7 @@ class LiveFeedScreen(BaseScreen):
             adcButton.text = 'Real\nUnits'
             self.xUnits = ""
             self.potUnits = ""
-            self.imuUnits = "G"
+            self.imuUnits = u'\N{DEGREE SIGN}'
         else:
             self.adc_out = 0
             adcButton.text = 'ADC\nValues'
