@@ -9,7 +9,7 @@ Builder.load_file('view/screens/main/testing/BarcodeConfirmation.kv')
 
 class BarcodeConfirmation(BaseScreen):
     def use_barcode_yes(self):
-        config.set('barcodeScan',"ON")
+        config.set('barcode_scan',"ON")
 
     def use_barcode_no(self):
-        config.set('barcodeScan',"OFF")
+        config.set('barcode_scan',"OFF")

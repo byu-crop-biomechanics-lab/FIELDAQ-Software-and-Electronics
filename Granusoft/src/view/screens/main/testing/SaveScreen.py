@@ -17,7 +17,7 @@ Builder.load_file('view/screens/main/testing/SaveScreen.kv')
 class SaveScreen(BaseScreen):
     def on_pre_enter(self):
         """Prior to the screen loading, check if barcode needs to be scanned"""
-        use_barcode = config.get('barcodeScan',"OFF")
+        use_barcode = config.get('barcode_scan',"OFF")
 
         barcode = self.ids['barcode']
         barcode.text = ""
