@@ -34,6 +34,7 @@ class PlotScreen(BaseScreen):
         valid = input.validate()
         if valid:
             config.set('plot_num', int(input.text))
+            config.set('curr_test_num', 0)
             return True
         else:
             input.focus = True
