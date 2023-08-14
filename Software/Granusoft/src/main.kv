@@ -1,0 +1,99 @@
+# This line is a comment, the following lines with a hashtag-colon are used by
+# the kivy interpreter.
+
+# Include custom Kivy widgets which will be used on all screens that are imported below
+#:import * view.elements
+
+# These following Lines declare where the py and kv files for each screen
+# are stored and that they should be imported
+#:import ExitScreen view.screens.main.ExitScreen
+#:import LiveFeedScreen view.screens.main.LiveFeedScreen
+#:import MainScreen view.screens.main.MainScreen
+#:import SettingsScreen view.screens.main.SettingsScreen
+#:import TestingScreen view.screens.main.TestingScreen
+
+#:import ColorsScreen view.screens.settings.ColorsScreen
+#:import NoteScreen view.screens.settings.NoteScreen
+#:import SensorsScreen view.screens.settings.SensorsScreen
+#:import UpdateScreen view.screens.settings.UpdateScreen
+#:import GPSMapScreen view.screens.settings.GPSMapScreen
+#:import ArchiveScreen view.screens.settings.ArchiveScreen
+#:import TestDeleteConfirmation view.screens.settings.TestDeleteConfirmation
+
+#:import NewNoteScreen view.screens.settings.NewNoteScreen
+
+#:import CalibrateScreen view.screens.settings.CalibrateScreen
+#:import IMUCalibrateScreen view.screens.settings.IMUCalibrateScreen
+#:import CalibratePointScreen view.screens.settings.CalibratePointScreen
+
+#:import TestInProgressScreen view.screens.main.testing.TestInProgressScreen
+#:import TestingResultsScreen view.screens.main.testing.TestingResultsScreen
+#:import BreakHeightScreen view.screens.main.testing.BreakHeightScreen
+#:import TestsScreen view.screens.main.testing.TestsScreen
+#:import TestDetailScreen view.screens.main.testing.TestDetailScreen
+#:import TestArchiveConfirmation view.screens.main.testing.TestArchiveConfirmation
+#:import TestSettingsConfirmation view.screens.main.testing.TestSettingsConfirmation
+#:import BarcodeConfirmation view.screens.main.testing.BarcodeConfirmation
+#:import SaveScreen view.screens.main.testing.SaveScreen
+#:import HeightScreen view.screens.main.testing.HeightScreen
+#:import OperatorScreen view.screens.main.testing.OperatorScreen
+#:import PlotScreen view.screens.main.testing.PlotScreen
+
+#:import CameraMainScreen view.screens.camera.CameraMainScreen
+#:import CameraFeedScreen view.screens.camera.CameraFeedScreen
+#:import ImageReviewScreen view.screens.camera.ImageReviewScreen
+#:import ImagesViewScreen view.screens.camera.ImagesViewScreen
+#:import CameraSettingsScreen view.screens.camera.CameraSettingsScreen
+#:import ImageDeleteConfirmation view.screens.camera.ImageDeleteConfirmation
+
+# Load each screen into the ScreenManager. For human convenience, screens are
+# grouped into like-screens
+<GranuScreenManager>:
+    # Properties
+    current: 'main_screen' # Start with the main screen
+
+    # Root
+    ExitScreen:
+    LiveFeedScreen:
+    MainScreen:
+    SettingsScreen:
+    TestingScreen:
+
+    # Settings
+    ColorsScreen:
+    NoteScreen:
+    SensorsScreen:
+    UpdateScreen:
+    GPSMapScreen:
+    ArchiveScreen:
+    TestDeleteConfirmation:
+
+    # Settings - Notes
+    NewNoteScreen:
+
+    # Settings - Sensors
+    CalibrateScreen:
+    IMUCalibrateScreen:
+    CalibratePointScreen:
+
+    # Testing
+    TestInProgressScreen:
+    TestingResultsScreen:
+    BreakHeightScreen:
+    TestsScreen:
+    TestDetailScreen:
+    TestArchiveConfirmation:
+    TestSettingsConfirmation:
+    BarcodeConfirmation:
+    SaveScreen:
+    HeightScreen:
+    OperatorScreen:
+    PlotScreen:
+
+    # Camera Interface
+    CameraMainScreen:
+    CameraFeedScreen:
+    ImageReviewScreen:
+    ImagesViewScreen:
+    CameraSettingsScreen:
+    ImageDeleteConfirmation:

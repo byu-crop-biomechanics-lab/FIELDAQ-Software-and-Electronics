@@ -1,0 +1,41 @@
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
+<TestDetailScreen>:
+	name: 'test_detail_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.back() # Move to note screen
+            GranuNone:
+            GranuNone:
+			GranuSideButton:
+				text: 'IMU/\nPOT'
+				id: imu_pot_toggle
+        GranuContent:
+            GranuTitle:
+                id: testTitle #text: 'Test Results:' + root.fileName
+                size_hint_max_y: 30
+            GridLayout:
+                rows: 2
+                GraphTitle:
+                    text: 'Test Details'
+					id: title_text
+                Graph:
+                    id: graph_test
+                    plot: MeshLinePlot
+                    background_color: 0, 0, 0, 1
+                    xlabel:'Angle (deg)'
+                    ylabel:'Force (lbs)'
+                    x_ticks_major:root.x_major
+                    y_ticks_major:root.y_major
+                    y_grid_label:True
+                    x_grid_label:True
+                    #padding:5
+                    x_grid:True
+                    y_grid:True
+                    xmin:0
+                    ymin:0
+                    xmax:root.x_max
+                    ymax:root.y_max

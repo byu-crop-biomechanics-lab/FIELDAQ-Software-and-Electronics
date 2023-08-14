@@ -1,0 +1,99 @@
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
+<TestInProgressInfoBox@Label>:
+    font_size: 40
+	color: 0,0,0,1
+	halign: 'center'
+    valign: 'center'
+    color: 1,1,1,1
+    markup: True
+    bold: True
+    canvas.before:
+        Color:
+            rgba: .5,.4,.4,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<GranuStopButton@Button>
+	background_color: (0,0,0,1)
+	font_size: 35
+	halign: 'center'
+	valign: 'middle'
+    markup: True
+    bold: True
+
+<GraphTitle@Label>
+    size_hint_max_y: 30
+    font_size: 20
+    markup: True
+    bold: True
+
+<TestInProgressScreen>:
+	name: 'test_in_progress_screen'
+    GranuContainer:
+        GranuContent:
+            GridLayout:
+                size_hint_y: 0.4
+                rows: 2
+                spacing: 10
+                GranuTitle:
+                    text: 'Test in Progress'
+                    size_hint_y: .4
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+                    GranuStopButton:
+                        text: 'Stop'
+                        size_hint_x: .37
+                        on_release:
+                            root.move_to('testing_results_screen')
+                    TestInProgressInfoBox:
+                        id: test_time_box
+                        text: "Test in progress for\n" + str(root.test_time) + " seconds"
+                        #size_hint_y: .3
+            GridLayout:
+                cols: 2
+                spacing: 10
+                GridLayout:
+                    rows: 2
+                    GraphTitle:
+                        text: 'Potentiometer Angle'
+                    Graph:
+                        id: graph_test1
+                        plot: MeshLinePlot
+                        background_color: 0, 0, 0, 1
+                        xlabel:'Time (s)'
+                        ylabel:'Angle (pot)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major1
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max1
+                GridLayout:
+                    rows: 2
+                    GraphTitle:
+                        text: 'X-Force Loading'
+                    Graph:
+                        id: graph_test2
+                        plot: MeshLinePlot
+                        background_color: 0, 0, 0, 1
+                        xlabel:'Time (s)'
+                        ylabel:'X Load (lbs)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major2
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max2

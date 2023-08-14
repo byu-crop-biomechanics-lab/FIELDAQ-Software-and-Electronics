@@ -1,0 +1,19 @@
+<ExitScreen>
+    name: 'exit_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Cancel'
+                on_release: root.back()
+            GranuSideButton:
+                text: 'Exit'
+                on_release: app.stop()
+            GranuSideButton:
+                text: 'Restart'
+                on_release:
+				    app.stop()
+                    root.restart_OS()
+            GranuSideButton:
+                text: 'Shut\nDown'
+                on_release: root.shutD()
+        GranuContent:

@@ -1,0 +1,73 @@
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
+<TestingResultsInfoBox@Label>:
+    font_size: 25
+	color: 0,0,0,1
+	halign: 'center'
+	valign: 'center'
+    canvas.before:
+        Color:
+            rgba: .74,.74,.74,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TestingResultsScreen>:
+	name: 'testing_results_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Update\nNotes'
+	    		on_release:
+                    root.move_to('note_screen') # Move to note screen
+            GranuSideButton:
+                text: 'Break\nHeight'
+	    		on_release:
+                    root.move_to('break_height_screen') # Move to break height screen
+            GranuSideButton:
+                text: 'Reject'
+	    		on_release:
+                    root.move_to('testing_screen') # Move to main screen
+            GranuSideButton:
+                text: 'Save'
+	    		on_release:
+                    root.save_post_notes()
+                    root.move_to('save_screen') # Move to saving screen
+        GranuContent:
+            GranuTitle:
+                text: 'Testing Results'
+                size_hint_max_y: 30
+            GridLayout:
+                cols: 2
+                spacing: 10
+                GridLayout:
+                    rows: 2
+                    size_hint_x: 0.5
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: 0.1
+                        ListTitle:
+                            text: 'Post-test Notes'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        NoteList:
+                            id: posttest
+                GridLayout:
+                    rows: 2
+                    Graph:
+                        id: graph_test
+                        plot: MeshLinePlot
+                        background_color: 0, 0, 0, 1
+                        xlabel:'Pot Angle (deg)'
+                        ylabel:'Force (lbs)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max
