@@ -47,6 +47,8 @@ class CalibratePointScreen(BaseScreen):
         adc_input = self.ids['adc']
         sensor = Sensor()
         for i in range(100):
+            if self.sensor_name=='Load Cell\nHeight':
+                self.sensor_name = 'Load Cell Height'
             sensor_data = sensor.get_sensor_data(1)
             vals.append(sensor_data[self.sensor_name])
         med_val = median(vals)

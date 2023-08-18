@@ -1,0 +1,24 @@
+<DateTimeScreen>:
+    name: 'date_time_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+	    		on_release:
+	    		    if root.save(): root.back()
+            GranuSideButton:
+                text: 'Cancel'
+                on_release:
+                    root.back()
+        GranuContent:
+            GranuTitle:
+                text: 'YYYY-DD-MM   HH:MM:SS   Time Zone \n        (2000-01-10  23:45:00  PST)'
+                font_size: 22
+            GridLayout:
+                rows: 1
+                cols: 1
+                StrInput:
+                    id: datetime
+                    font_size: 30
+                    multiline: False
+                    size_hint_max_y: 30+15

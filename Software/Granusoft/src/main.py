@@ -9,7 +9,7 @@ KivyConfig.set('kivy', 'desktop', 0) # Disable OS-specific features for testing
 KivyConfig.set('kivy', 'keyboard_mode', 'systemanddock') # Allow barcode scanner and
                                                          # on screen keyboard
 KivyConfig.set('graphics', 'height', 480) # Set window size to be the same as touchscreen
-KivyConfig.set('graphics', 'width', 800)  # (not used when fullscreen enabled)
+KivyConfig.set('graphics', 'width', 800)  # (not used when fullscreen enabled!)
 CLOCK_TYPE = "default"
 KivyConfig.set('kivy', 'kivy_clock', CLOCK_TYPE)
 KivyConfig.set('graphics', 'maxfps', 250)

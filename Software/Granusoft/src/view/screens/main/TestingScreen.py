@@ -19,21 +19,29 @@ Builder.load_file('view/screens/main/TestingScreen.kv')
 
 ONE_SEC = 1
 
+
 class TestingScreen(BaseScreen):
-    height_num = StringProperty("N/A")
+    sensor = Sensor()
+    load_cell_height = StringProperty("N/A")
+    loadCellHeightUnits = " cm"
     plot = StringProperty("N/A")
     operator = StringProperty("N/A")
-    time = StringProperty("N/A")
+    time = StringProperty("0")
+    current_date = StringProperty("N/A")
+    date_time = StringProperty("N/A")
+    folder = StringProperty("N/A")
     datasets = []
 
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         list of notes. Show the default buttons."""
         self.event = Clock.schedule_interval(self.update_time, ONE_SEC)
-        self.height_num = str(config.get('height',0))
-        self.plot = str(config.get('plot_num',0))
-        self.operator = str(config.get('operator','N/A'))
-        self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
+        self.load_cell_height = self.get_height()
+        config.set('height', float(self.load_cell_height))
+        self.plot = str(config.get('plot_num', 0))
+        self.operator = str(config.get('operator', 'N/A'))
+        self.folder = str(config.get('folder', 'N/A'))
+        self.current_date = datetime.date.today().strftime("%d/%m/%Y")
         # Get notes from config file
         notes = config.get('notes', {
             "pretest": [],
@@ -44,8 +52,12 @@ class TestingScreen(BaseScreen):
         self.ids['pretest'].list_data = notes["pretest"]
         self.ids['posttest'].list_data = notes["posttest"]
 
-    def update_time(self, obj):
+    def update_time(self,obj):
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
+        self.date_time = self.current_date+": "+self.time
 
     def on_leave(self):
         self.event.cancel()
+
+    def get_height(self):
+        return str(config.get('height', 0))

@@ -1,0 +1,25 @@
+<NewTestNoteScreen>:
+    name: 'new_test_note_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+	    		on_release:
+                    root.clear_config()
+	    		    if root.save():root.back()
+            GranuSideButton:
+                text: 'Cancel'
+                on_release:
+                    root.clear_config() 
+                    root.back()
+        GranuContent:
+            GranuTitle:
+                text: 'New Note'
+            GridLayout:
+                rows: 1
+                cols: 1
+                StrInput:
+                    id: note
+                    font_size: 30
+                    multiline: False
+                    size_hint_max_y: 30+15

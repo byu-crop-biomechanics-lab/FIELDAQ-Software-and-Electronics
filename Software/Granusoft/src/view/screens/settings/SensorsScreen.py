@@ -39,10 +39,12 @@ class SensorsScreen(BaseScreen):
             calib_screen = self.manager.get_screen('calibrate_screen')
             for s in self.senseMan.get_sensor_keys():
                 # Perhaps Location and Time should be accessed in some other way?
-                if s=='Location' or s=='Time': continue
+                if s=='Location' or s=='Time' or s=='Temperature' or s=='Humidity': continue
+                if s=='Load Cell Height': s='Load Cell\nHeight'
                 # Sensor name, parent screen (of button), calibration screen
                 self.ids['sensor_list'].add_widget(SensorButton(s, self, calib_screen))
         Clock.schedule_once(gui_init)
 
     def restart_OS(self):
-        os.system("python3 main.py")
+        #os.system("python3 main.py")
+        os.system("reboot")

@@ -24,15 +24,8 @@ class LiveFeedScreen(BaseScreen):
 
     run_count = 0
     transition_to_state = StringProperty("Pause")
-    #self.keys = ListProperty()
-    #self.values =
-    #sensor_keys =  self.sensor.get_sensor_keys()
-    #for key in sensor_keys:
-    #    self.keys.append(keys)
-    #sensor_data =  self.sensor.get_sensor_data()
-    #for i in range(0,len(sensor_data)):
 
-    temperature_label = StringProperty("Temperature")
+    #temperature_label = StringProperty("Temperature")
     humidity_label = StringProperty("Humidity")
     location_label = StringProperty("Location")
     time_label = StringProperty("Time")
@@ -41,8 +34,10 @@ class LiveFeedScreen(BaseScreen):
     pot_angle_label = StringProperty("Pot Angle")
     imu_angle_label = StringProperty("IMU Angle")
     data_rate_label = StringProperty("Data Rate")
+    load_cell_height_label = StringProperty("Load Cell Height")
+    current_date_label = StringProperty("Date")
 
-    temperature = StringProperty("0")
+    #temperature = StringProperty("0")
     humidity = StringProperty("0")
     location = StringProperty("0.00, 0.00")
     time = StringProperty("00:00:00 AM")
@@ -51,10 +46,15 @@ class LiveFeedScreen(BaseScreen):
     pot_angle = StringProperty("0")
     imu_angle = StringProperty("0")
     data_rate = StringProperty("0")
+    current_date = StringProperty("01/01/2000")
+    load_cell_height = StringProperty("0.00")
+
     old_time = 0
     xUnits = " lbs"
     potUnits = u'\N{DEGREE SIGN}'
     imuUnits = u'\N{DEGREE SIGN}'
+    loadCellHeightUnits = 'cm'
+
 
     def on_pre_enter(self):
         self.event = Clock.schedule_interval(self.update_values, INTERVAL)
@@ -68,10 +68,11 @@ class LiveFeedScreen(BaseScreen):
         if self.run_count >= SECOND_CAP:
             self.sensor.get_header_data()
             sensor_data = self.sensor.get_sensor_data(self.adc_out)
-            self.temperature = str("%.1f" % sensor_data["Temperature"])
-            self.humidity = str("%.1f" % sensor_data["Humidity"])
+            #self.temperature = str("%.1f" % sensor_data["Temperature"])
+            #self.humidity = str("%.1f" % sensor_data["Humidity"])
             self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
+            self.current_date = datetime.date.today().strftime("%d/%m/%Y")
             self.y_load = str("%.1f" % sensor_data["Y Load"])
             if self.adc_out == 0:
                 self.x_load = str("%.3f" % sensor_data["X Load"])
@@ -80,6 +81,7 @@ class LiveFeedScreen(BaseScreen):
                 self.x_load = str("%.0f" % sensor_data["X Load"])
                 self.pot_angle = str("%.0f" % sensor_data["Pot Angle"])
             self.imu_angle = str("%.3f" % sensor_data["IMU Angle"])
+            self.load_cell_height = str("%.2f" % sensor_data["Load Cell Height"])
             # Calculate Data Acquisition Rate
             now = datetime.datetime.now()
             new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)

@@ -32,21 +32,25 @@ class TestSingleton:
 
     def get_height(self):
         return self.instance.height
+
     def set_height(self, height):
         self.instance.height = height
 
     def get_plot(self):
         return self.instance.plot
+
     def set_plot(self, plot):
         self.instance.plot = plot
 
     def get_pre_notes(self):
         return self.instance.pre_notes
+        
     def set_pre_notes(self, pre_notes):
         self.instance.pre_notes = pre_notes
 
     def get_post_notes(self):
         return self.instance.post_notes
+
     def set_post_notes(self, post_notes):
         self.instance.post_notes = post_notes
 

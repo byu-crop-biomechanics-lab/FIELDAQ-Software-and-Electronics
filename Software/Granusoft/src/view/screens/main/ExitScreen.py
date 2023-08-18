@@ -14,4 +14,4 @@ class ExitScreen(BaseScreen):
         #pass
 
     def restart_OS(self):
-        os.system("python3 main.py")
+        os.system("reboot")

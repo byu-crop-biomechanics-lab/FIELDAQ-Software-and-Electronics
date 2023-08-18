@@ -15,7 +15,7 @@
 <TestingResultsScreen>:
 	name: 'testing_results_screen'
     GranuContainer:
-        GranuSideArea:
+        GranuSideAreaTest:
             GranuSideButton:
                 text: 'Update\nNotes'
 	    		on_release:
@@ -27,12 +27,18 @@
             GranuSideButton:
                 text: 'Reject'
 	    		on_release:
-                    root.move_to('testing_screen') # Move to main screen
+                    root.check_height_sensor_status()
+                    root.move_to(root.next_screen) # Move to main screen
             GranuSideButton:
                 text: 'Save'
 	    		on_release:
                     root.save_post_notes()
                     root.move_to('save_screen') # Move to saving screen
+            GranuSideButton:
+                text: 'Toggle'
+	    		on_release:
+                    root.toggle_button() 
+
         GranuContent:
             GranuTitle:
                 text: 'Testing Results'
@@ -58,16 +64,15 @@
                         id: graph_test
                         plot: MeshLinePlot
                         background_color: 0, 0, 0, 1
-                        xlabel:'Pot Angle (deg)'
+                        xlabel: root.xlabel
                         ylabel:'Force (lbs)'
-                        x_ticks_major:root.x_major
-                        y_ticks_major:root.y_major
+                        x_ticks_major: root.xmajor
+                        y_ticks_major: root.y_major
                         y_grid_label:True
                         x_grid_label:True
-                        #padding:5
                         x_grid:True
                         y_grid:True
                         xmin:0
                         ymin:0
-                        xmax:root.x_max
+                        xmax:root.xmax
                         ymax:root.y_max

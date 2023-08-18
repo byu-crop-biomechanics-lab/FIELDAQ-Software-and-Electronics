@@ -37,11 +37,11 @@
                 cols: 3
                 spacing: 10
                 LiveFeedInfoBox:
-                    id: temperature
-                    text: root.temperature_label + ':\n' + root.temperature + u'\N{DEGREE SIGN}' + "C"
+                    id: current_date
+                    text: root.current_date_label +':\n'+ root.current_date
                 LiveFeedInfoBox:
-                    id: humidity
-                    text: root.humidity_label + ':\n' + root.humidity + "%"
+                    id: time
+                    text: root.time_label + ':\n' + root.time
                 LiveFeedInfoBox:
                     id: location
                     size_hint_x: 1.25
@@ -53,8 +53,8 @@
                     id: y_load
                     text: root.y_load_label + ':\n' + root.y_load
                 LiveFeedInfoBox:
-                    id: time
-                    text: root.time_label + ':\n' + root.time
+                    id: load_cell_height
+                    text: root.load_cell_height_label + ':\n' + root.load_cell_height + root.loadCellHeightUnits
                 LiveFeedInfoBox:
                     id: pot_angle
                     text: root.pot_angle_label + ':\n' + root.pot_angle + root.potUnits
@@ -64,3 +64,4 @@
                 LiveFeedInfoBox:
                     id: cpu_time
                     text: root.data_rate_label + ':\n' + root.data_rate + " Hz"
+                

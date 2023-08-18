@@ -104,17 +104,14 @@ class TestInProgressScreen(BaseScreen):
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
             self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].pot_angle / 100) * 100)
             self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].x_load / 5) * 5)
-            #if(self.find_max_x_load() == 0):
-             #   self.y_max = 10000
-            #else:
-            #    self.y_max = math.ceil(self.find_max_x_load() / 10000) * 10000
+
             self.x_major = int(self.x_max/5)
             self.y_major1 = int(self.y_max1/5)
             self.y_major2 = int(self.y_max2/5)
 
             self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].pot_angle) for i in range(0, len(self.datasets), 5)]
             self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].x_load) for i in range(0, len(self.datasets), 5)]
-
+            
             self.graph1.add_plot(self.plot1)
             self.graph2.add_plot(self.plot2)
 
@@ -127,16 +124,8 @@ class TestInProgressScreen(BaseScreen):
         self.imu_angle = sensor_values["IMU Angle"]
 
 
-        new_dataset = Dataset(total_time_passed, self.x_load, self.y_load, self.pot_angle, self.imu_angle,self.data_rate)
+        new_dataset = Dataset(total_time_passed, self.x_load, self.y_load, self.pot_angle, self.imu_angle, self.data_rate)
         self.datasets.append(new_dataset)
-        # This next chunk is what we actually have to change to read from the sensors
-       # self.temperature += 1
-       # self.humidity += 2
-       # self.location += 3
-       # self.x_load += 1
-       # self.y_load += 5
-       # self.pot_angle += 6
-       # self.imu_angle += 7
 
     def on_pre_leave(self):
         self.event.cancel()
@@ -145,8 +134,7 @@ class TestInProgressScreen(BaseScreen):
         ts.set_height(str(config.get('height', "")))
         ts.set_plot(str(config.get('plot_num', "")))
         config.set('break_height', "N/A")
-        #ts.set_pre_notes(str(config.get('height', "")))
-        #ts.set_post_notes(str(config.get('height', "")))
+
         ts.set_operator(str(config.get('operator', "")))
         ts.set_timestamp(self.start_timestamp)
         ts.set_datasets(self.datasets)
@@ -155,8 +143,3 @@ class TestInProgressScreen(BaseScreen):
         self.graph1._clear_buffer()
         self.graph2.remove_plot(self.plot2)
         self.graph2._clear_buffer()
-
-        #for dataset in self.datasets:
-            #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Humidity:",dataset.humidity,"Location:",dataset.location,"X Load:",dataset.x_load,"Y_Load:",dataset.y_load,"Pot Angle:",dataset.pot_angle,"IMU Angle",dataset.imu_angle,"CPU Time:",dataset.cpu_time)
-
-            #print("Timestamp:",dataset.timestamp,"Temperature:",dataset.temperature,"Data Rate:",dataset.data_rate)

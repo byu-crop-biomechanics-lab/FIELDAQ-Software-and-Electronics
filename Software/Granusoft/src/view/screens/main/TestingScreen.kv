@@ -1,5 +1,5 @@
 <TestingInfoBox@Label>:
-    font_size: 25
+    font_size: 20
     color: 1,1,1,1
 	halign: 'center'
     valign: 'center'
@@ -27,11 +27,12 @@
             GranuSideButton:
                 text: "Tests"
                 on_release:
-                    root.move_to('tests_screen') # Move to tests screen
+                    root.move_to('test_folders_screen') # Move to tests screen
             GranuSideButton:
                 text: 'Back'
 	    		on_release:
                     root.move_to('main_screen') # Move to main screen
+        
         GranuContent:
             GranuTitle:
                 text: 'Testing'
@@ -39,20 +40,29 @@
                 cols: 2
                 spacing: 10
                 SettingsButton:
-                    text: "Height: " + root.height_num + " cm"
+                    font_size: 20
+                    text: "Load Cell Height: \n" + root.load_cell_height + root.loadCellHeightUnits
                     on_release:
                         root.move_to('height_screen')
                 SettingsButton:
-                    text: "Operator: " + root.operator
+                    font_size: 20
+                    text: "Operator: \n" + root.operator
                     on_release:
                         root.move_to('operator_screen')
                 SettingsButton:
-                    text: "Plot: " + root.plot
+                    font_size: 20
+                    text: "Plot: \n" + root.plot
                     on_release:
                         root.move_to('plot_screen')
+                SettingsButton:
+                    font_size: 20
+                    text: "Folder:\n"+ root.folder
+                    on_release:
+                        root.move_to('folder_screen')
+
                 TestingInfoBox:
-                    id: time
-                    text: "Time: " + root.time
+                    id: date_time
+                    text: "Date and Time: \n " + root.date_time
             BoxLayout:
                 orientation: 'horizontal'
                 size_hint_y: None

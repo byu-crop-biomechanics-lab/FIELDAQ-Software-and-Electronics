@@ -13,13 +13,13 @@ class GranuContainer(BoxLayout):
 class GranuSideArea(GridLayout):
     pass
 
-class GranuSideButton(Button):
+class SettingsButton(Button):
+	pass
+
+class GranuSideButton(SettingsButton):
 	pass
 
 class GranuNoteButton(Button):
-	pass
-
-class SettingsButton(Button):
 	pass
 
 class GranuNone(Widget):
@@ -29,4 +29,7 @@ class GranuContent(BoxLayout):
     pass
 
 class GranuTitle(Label):
+    pass
+
+class GranuSideAreaTest(GridLayout):
     pass

@@ -8,7 +8,7 @@
         orientation: "vertical"
         FileChooserIconView:
             id: filechooser
-            path: str(Path.home())
+            path: str(root.home)
         BoxLayout:
             size_hint_y: None
             height: 30
@@ -39,9 +39,9 @@
                 height: 30
                 multiline: False
         FileChooserIconView:
-            id: filechooser
-            path: str(Path.home())
-            on_selection: filename.text = self.selection and self.selection[0] or ''
+            id: file_chooser
+            path: str(root.home)
+            on_selection: filename.text = self.selection[0]
         BoxLayout:
             size_hint_y: None
             height: 30
@@ -50,7 +50,7 @@
                 on_release: root.cancel()
             Button:
                 text: "Save"
-                on_release: root.save(filechooser.path, filename.text)
+                on_release: root.save(file_chooser.path, filename.text)
 
 <SettingsScreen>:
     name: 'settings_screen'
@@ -83,10 +83,9 @@
                         root.manager.transition.direction = 'left'
                         root.move_to('sensors_screen')
                 SettingsButton:
-                    text: 'Switch to\nCamera'
+                    text: 'Date & Time'
 	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('cam_main_screen')
+                        root.move_to('date_time_screen')
                 SettingsButton:
                     text: 'Update with\nGithub'
                     on_release:

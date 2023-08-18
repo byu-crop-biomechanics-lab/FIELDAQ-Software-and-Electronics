@@ -56,7 +56,10 @@ CHAN6 = AnalogIn(ads2, ADS.P2)
 CHAN7 = AnalogIn(ads2, ADS.P3)
 
 # Channels for the pot and force sensors
+
+HEIGHT_POT_CHAN = CHAN1
 POT_CHAN = CHAN2
+
 X_LOAD_CHAN = CHAN4
 Y_LOAD_CHAN = CHAN3
 

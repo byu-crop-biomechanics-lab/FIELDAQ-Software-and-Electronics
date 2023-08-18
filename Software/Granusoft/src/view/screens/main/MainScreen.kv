@@ -40,7 +40,7 @@
                 font_size: 40
                 markup: True
             	bold: True
-                text: 'Stalk Strength\nDevice 2.3.0'
+                text: 'Stalk Strength\nDevice 2.3.1'
                 halign: 'center'
             Label:
                 id: warning_text
@@ -53,14 +53,14 @@
                 cols: 2
                 spacing: 10
                 MainScreenInfoBox:
-                    id: temperature
-                    text: 'Temperature: ' + root.temperature +  u'\N{DEGREE SIGN}' + 'F'
+                    id: current_date
+                    text: 'Date: \n' + root.current_date
                 MainScreenInfoBox:
-                    id: humidity
-                    text: 'Humidity: ' + root.humidity +  "%"
+                    id: load_cell_height
+                    text: 'Height: \n' + root.load_cell_height+root.loadCellHeightUnits
                 MainScreenInfoBox:
                     id: location
                     text: 'Location:\n' + root.location
                 MainScreenInfoBox:
                     id: time
-                    text: 'Time: ' + root.time
+                    text: 'Time: \n' + root.time

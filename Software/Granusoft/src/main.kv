@@ -11,6 +11,7 @@
 #:import MainScreen view.screens.main.MainScreen
 #:import SettingsScreen view.screens.main.SettingsScreen
 #:import TestingScreen view.screens.main.TestingScreen
+#:import TestingScreenAuto view.screens.main.TestingScreenAuto
 
 #:import ColorsScreen view.screens.settings.ColorsScreen
 #:import NoteScreen view.screens.settings.NoteScreen
@@ -20,11 +21,15 @@
 #:import ArchiveScreen view.screens.settings.ArchiveScreen
 #:import TestDeleteConfirmation view.screens.settings.TestDeleteConfirmation
 
+#:import TestNotesScreen view.screens.settings.TestNotesScreen
 #:import NewNoteScreen view.screens.settings.NewNoteScreen
+#:import NewTestNoteScreen view.screens.settings.NewTestNoteScreen
 
 #:import CalibrateScreen view.screens.settings.CalibrateScreen
 #:import IMUCalibrateScreen view.screens.settings.IMUCalibrateScreen
 #:import CalibratePointScreen view.screens.settings.CalibratePointScreen
+#:import DateTimeScreen view.screens.settings.DateTimeScreen
+
 
 #:import TestInProgressScreen view.screens.main.testing.TestInProgressScreen
 #:import TestingResultsScreen view.screens.main.testing.TestingResultsScreen
@@ -38,13 +43,13 @@
 #:import HeightScreen view.screens.main.testing.HeightScreen
 #:import OperatorScreen view.screens.main.testing.OperatorScreen
 #:import PlotScreen view.screens.main.testing.PlotScreen
-
-#:import CameraMainScreen view.screens.camera.CameraMainScreen
-#:import CameraFeedScreen view.screens.camera.CameraFeedScreen
-#:import ImageReviewScreen view.screens.camera.ImageReviewScreen
-#:import ImagesViewScreen view.screens.camera.ImagesViewScreen
-#:import CameraSettingsScreen view.screens.camera.CameraSettingsScreen
-#:import ImageDeleteConfirmation view.screens.camera.ImageDeleteConfirmation
+#:import HeightSensor view.screens.main.testing.HeightSensor
+#:import FolderScreen view.screens.main.testing.FolderScreen
+#:import TestFoldersScreen view.screens.main.testing.TestFoldersScreen
+#:import DeleteFolderConfirmation view.screens.main.testing.DeleteFolderConfirmation
+#:import RenameFolderScreen view.screens.main.testing.RenameFolderScreen
+#:import HeightChangeConfirmation view.screens.main.testing.HeightChangeConfirmation 
+#:import ChangeHeightScreen view.screens.main.testing.ChangeHeightScreen
 
 # Load each screen into the ScreenManager. For human convenience, screens are
 # grouped into like-screens
@@ -58,6 +63,7 @@
     MainScreen:
     SettingsScreen:
     TestingScreen:
+    TestingScreenAuto:
 
     # Settings
     ColorsScreen:
@@ -67,9 +73,12 @@
     GPSMapScreen:
     ArchiveScreen:
     TestDeleteConfirmation:
+    TestNotesScreen:
+    DateTimeScreen:
 
     # Settings - Notes
     NewNoteScreen:
+    NewTestNoteScreen:
 
     # Settings - Sensors
     CalibrateScreen:
@@ -89,11 +98,10 @@
     HeightScreen:
     OperatorScreen:
     PlotScreen:
-
-    # Camera Interface
-    CameraMainScreen:
-    CameraFeedScreen:
-    ImageReviewScreen:
-    ImagesViewScreen:
-    CameraSettingsScreen:
-    ImageDeleteConfirmation:
+    HeightSensor:
+    FolderScreen:
+    TestFoldersScreen:
+    DeleteFolderConfirmation:
+    RenameFolderScreen:
+    HeightChangeConfirmation:
+    ChangeHeightScreen:

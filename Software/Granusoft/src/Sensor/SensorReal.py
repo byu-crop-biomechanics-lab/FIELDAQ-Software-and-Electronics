@@ -5,6 +5,7 @@ from sensors.X_Load import X_Load
 from sensors.Y_Load import Y_Load
 from sensors.Pot import Pot
 from sensors.IMU import IMU
+from sensors.Height import HeightPoT
 import datetime
 import board
 import busio
@@ -15,7 +16,7 @@ class Sensor:
 
     def __init__(self):
         self.REAL_DATA = True
-        self.keys = ["Temperature","Humidity","Location","Time","X Load","Y Load","Pot Angle","IMU Angle"]
+        self.keys = ["Temperature","Humidity","Location","Time","X Load","Y Load","Pot Angle","IMU Angle", "Load Cell Height"]
         self.temp = 0.0 #Temperature()
         self.hum = 0.0 #Humidity()
         self.location = Location()
@@ -23,6 +24,7 @@ class Sensor:
         self.y_load = Y_Load()
         self.pot_angle = Pot()
         self.imu_angle = IMU()
+        self.load_cell_height = HeightPoT()
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
         self.sensor_data = {}
         self.cpu_time = 0
@@ -35,8 +37,6 @@ class Sensor:
         self.imu_fake = 0
 
     def get_header_data(self):
-        self.sensor_data["Temperature"] = 0 # self.temp.get_data()
-        self.sensor_data["Humidity"] = 0 # self.hum.get_data()
         self.sensor_data["Location"] = self.location.get_data()
 
     def get_sensor_data(self, adc_out = 0):
@@ -44,6 +44,7 @@ class Sensor:
         self.sensor_data["Y Load"] = round(self.y_load.get_data(adc_out),4)
         self.sensor_data["Pot Angle"] = round(self.pot_angle.get_data(adc_out),3)
         self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
+        self.sensor_data["Load Cell Height"] = round(self.load_cell_height.get_data(adc_out),2)
         return self.sensor_data
 
     def clear_gps_memory(self):
