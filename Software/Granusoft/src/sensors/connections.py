@@ -57,11 +57,11 @@ CHAN7 = AnalogIn(ads2, ADS.P3)
 
 # Channels for the pot and force sensors
 
-HEIGHT_POT_CHAN = CHAN1
-POT_CHAN = CHAN2
+HEIGHT_POT_CHAN = CHAN0
+POT_CHAN = CHAN1
 
-X_LOAD_CHAN = CHAN4
-Y_LOAD_CHAN = CHAN3
+X_LOAD_CHAN = CHAN6
+Y_LOAD_CHAN = CHAN7
 
 # Scaling factor for the force sensor
 FORCE_SENSOR_SCALING = 16 # 3556.1878
