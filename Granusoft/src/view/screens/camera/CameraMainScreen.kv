@@ -1,0 +1,53 @@
+<CameraMainScreen>:
+    name: 'cam_main_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Settings'
+                on_release:
+                    root.move_to('cam_settings_screen') # Move to camera settings screen
+            GranuSideButton:
+                text: 'Camera'
+                on_release:
+                    root.move_to('cam_feed_screen') # Move to camera feed screen
+            GranuSideButton:
+                text: 'View\nImages'
+	    		on_release:
+                    root.move_to('img_viewer_screen') # Move to image view screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('exit_screen') # Move to exit screen
+        GranuContent:
+            GranuTitle:
+                text: 'Camera Main Menu'
+            Label:
+                id: device_name
+                font_size: 40
+                markup: True
+            	bold: True
+                text: 'Stalk Cutting\nDevice 2.1.0'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            	markup: True
+            	bold: True
+            GridLayout:
+                cols: 2
+                rows: 2
+                spacing: 10
+                MainScreenInfoBox:
+                    id: temperature
+                    text: 'Temperature: ' + root.temperature +  u'\N{DEGREE SIGN}' + 'F'
+                MainScreenInfoBox:
+                    id: humidity
+                    text: 'Humidity: ' + root.humidity +  "%"
+                MainScreenInfoBox:
+                    id: location
+                    text: 'Location:\n' + root.location
+                MainScreenInfoBox:
+                    id: time
+                    text: 'Time: ' + root.time

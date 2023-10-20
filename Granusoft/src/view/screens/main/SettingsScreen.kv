@@ -1,0 +1,133 @@
+#:import Path pathlib.Path
+
+<LoadDialog>:
+    title: 'Load Settings'
+    title_align: 'center'
+    size_hint: (0.9, 0.9)
+    BoxLayout:
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+            path: str(Path.home())
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection[0])
+
+<SaveDialog>:
+    title: 'Save Settings'
+    title_align: 'center'
+    size_hint: (0.9, 0.9)
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: filename.height
+            Label:
+                text: 'Filename:'
+                size_hint_x: None
+            StrInput:
+                id: filename
+                text: 'settings.json'
+                size_hint_y: None
+                height: 30
+                multiline: False
+        FileChooserIconView:
+            id: filechooser
+            path: str(Path.home())
+            on_selection: filename.text = self.selection and self.selection[0] or ''
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+            Button:
+                text: "Save"
+                on_release: root.save(filechooser.path, filename.text)
+
+<SettingsScreen>:
+    name: 'settings_screen'
+    GranuContainer:
+        GranuSideArea:
+        	GranuNone:
+        	GranuNone:
+            GranuNone:
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.manager.transition.direction = 'right'
+                    root.move_to('main_screen') # Move to main screen
+        GranuContent:
+            GranuTitle:
+                text: 'Settings'
+            GridLayout:
+                cols: 3
+                rows: 3
+                spacing: 10
+                row_default_height: self.height/4
+                SettingsButton:
+                    text: 'Update\nNotes'
+	    		    on_release:
+                        root.manager.transition.direction = 'left'
+                        root.move_to('note_screen')
+                SettingsButton:
+                    text: 'Sensors'
+	    		    on_release:
+                        root.manager.transition.direction = 'left'
+                        root.move_to('sensors_screen')
+                SettingsButton:
+                    text: 'Switch to\nCamera'
+	    		    on_release:
+                        root.manager.transition.direction = 'left'
+                        root.move_to('cam_main_screen')
+                SettingsButton:
+                    text: 'Update with\nGithub'
+                    on_release:
+                        app.stop()
+                        root.update_os_git()
+                SettingsButton:
+                    text: 'Update with\nUSB'
+                    on_release:
+                        app.stop()
+                        root.update_os_usb()
+                SettingsButton:
+                    text: 'Test\nArchive\nFolder'
+                    on_release:
+                        root.move_to('archive_screen')
+            StackLayout:
+                orientation: 'rl-bt'
+                size_hint_y: None
+                spacing: 5
+                height: load_button.height - 6
+                Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
+                    id: load_button
+                    text: 'Load File'
+                    size_hint_y: None
+                    height: self.font_size + 40
+                    size_hint_x: 0.25
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
+                    on_release: root.show_load()
+                Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
+                    text: 'Save File'
+                    size_hint_y: None
+                    height: self.font_size + 40
+                    size_hint_x: 0.25
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
+                    on_release: root.show_save()

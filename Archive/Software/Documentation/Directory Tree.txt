@@ -1,0 +1,48 @@
+Graphic Overview
+
+FIELDAQ
+├── Documentation
+│   └── Supplementary
+└── Granusoft
+    ├── motor_view
+    └── src
+        ├── Images
+        ├── Sensor
+        ├── TestArchive
+        ├── Tests
+        ├── sensors
+        │   └── tests
+        └── view
+            ├── input
+            │   └── Sensors
+            ├── keyboard_layouts
+            └── screens
+                ├── camera
+                ├── main
+                │   └── testing
+                └── settings
+
+
+Detailed Overview
+
+Documentation - Contains resources for learning about the code base and references for coding standards and adding to the code base.
+	Documentation/Supplementary - Contains additional resources that are not immediately necessary for understanding the code base.
+
+Granusoft - Top-most directory containing only code, but all of the code base. This was originally the entirety of the Capstone Team's GitHub repository.
+	Granusoft/motor_view - Contains python and kivy files for running a GUI capable of controlling motors–part of the capstone requirements.
+	Granusoft/src - The main directory containing the GUI code. In order to run the code, the user must navigate to this directory first.
+		Granusoft/src/Images - An empty directory where images from the camera will be stored.
+		Granusoft/src/Sensor - Contains the python files that will manage the input sensor data or create fake sensor data (used for debugging)
+		Granusoft/src/TestArchive - An empty directory where 'deleted' tests from the device will be stored. These tests are not shown to the user, but remain on device in case of accident.
+		Granusoft/src/Tests - An empty directory where tests are stored.
+		Granusoft/src/sensors - Contains the python files that will communicate with the physical sensors on the device. These codes are called by the script in Granusoft/src/Sensor.
+			Granusoft/src/sensors/tests - Contains simple tests that can be manually run by the user to test the connection of each sensor. These scripts are not utilized by the GUI.
+		Granusoft/src/view - Directory where all of the GUI screens, or 'views', are stored.
+			Granusoft/src/view/input - Contains python scripts that manage data input to the GUI via keyboards.
+				Granusoft/src/view/input/Sensors - Contains identical python files for each physical sensor. I am unsure what this directory is used for.
+			Granusoft/src/view/keyboard_layouts - Contains the json files for the custom keyboards used throughout the GUI.
+			Granusoft/src/view/screens - Contains 3 directories that help organize all of the python and kivy files for each screen used throughout the GUI.
+				Granusoft/src/view/screens/camera - Contains all of the python and kivy files used when using the device to take photos using the Camera.
+				Granusoft/src/view/screens/main - Contains the majority of the python and kivy files used for the stalk pushing GUI.
+					Granusoft/src/view/screens/main/testing - Further separates the testing python and kivy files from the majority of the other screens contained in Granusoft/src/view/screens/main.
+				Granusoft/src/view/screens/settings - Contains the python and kivy files for all of the settings screens.

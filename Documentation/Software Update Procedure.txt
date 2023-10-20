@@ -1,0 +1,24 @@
+Performing a Software Update on the Device
+
+Allow the device to start up.
+On main screen of the device, Select ‘Exit’, then ‘Exit’ again. This will take you to the command line on the device.
+
+Either SSH in or use a USB Keyboard. SSH will require a little bit of setup.
+
+SSH:
+In your command line, type “ssh pi@[insert IP Address here]"
+If prompted, type “yes”
+Enter password: “granustem”
+Hit the ‘control’ and ‘C’ keys to interrupt the boot up process.
+
+You are now in the device and can use the following git commands as you wish.
+
+
+git checkout [branch name] - This command is used to switch between branches in the GitHub repository.
+
+git pull - This command will get the latest updates from GitHub for the current branch and update them on the device.
+
+git branch - List the branches of the GitHub repository available. An indicator will show which branch is currently checked out.
+
+
+The software can be rebooted by typing ‘python3 main.py’ into the command line while in the ~/FIELDAQ/Granusoft/src directory. 

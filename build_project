@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Specify the Python version to download and install
+python_version="python3.10"
+venv_name="myenv"
+
+# Function to check if Python is already installed
+is_python_installed() {
+    command -v ${python_version} &>/dev/null
+}
+
+# Function to create a virtual environment
+create_virtual_environment() {
+    ${python_version} -m venv $venv_name
+}
+
+# Function to activate the virtual environment
+activate_virtual_environment() {
+    source $venv_name/bin/activate
+}
+
+# Install the necessary build tools
+install_build_tools() {
+    sudo apt-get update
+    sudo apt-get install -y build-essential
+}
+
+# # Download and install Python if it's not already installed
+if ! is_python_installed; then
+    echo "Python 3.${python_version} is not installed. Downloading and installing..."
+    # Download Python source code
+    wget https://www.python.org/ftp/python/${python_version}/Python-${python_version}.tar.xz
+    # Extract the source code
+    tar -xf Python-${python_version}.tar.xz
+    cd Python-${python_version}
+    # Configure and install Python
+    ./configure --enable-optimizations
+    make -j$(nproc)
+    sudo make altinstall
+    cd ..
+    # Clean up downloaded files
+    rm -rf Python-${python_version} Python-${python_version}.tar.xz
+else
+    echo "Python 3.${python_version} is already installed."
+fi
+
+# Install the necessary build tools
+install_build_tools
+
+# Create and activate the virtual environment
+sudo apt install python3.10-venv
+create_virtual_environment
+activate_virtual_environment
+
+# Specify the Python libraries to install
+libraries=(
+    "certifi==2021.10.8"
+    "charset-normalizer==2.0.7"
+    "docutils==0.17.1"
+    "idna==3.3"
+    "Kivy==2.2.1"
+    #"kivy-deps.angle==0.3.0"
+    #"kivy-deps.glew==0.3.0"
+    #"kivy-deps.sdl2==0.3.1"
+    "Kivy-Garden==0.1.4"
+    "numpy==1.21.3"
+    "Pygments==2.10.0"
+    #"pypiwin32==223"
+    #"pywin32==302"
+    "requests==2.26.0"
+    "scipy==1.7.2"
+    "urllib3==1.26.7"
+    "getmac==0.8.3"
+)
+
+# Install Python libraries using the virtual environment
+for library in "${libraries[@]}"; do
+    pip install "$library"
+    if [ $? -eq 0 ]; then
+        echo "Successfully installed $library"
+    else
+        echo "Failed to install $library"
+    fi
+done
+
+garden install graph
+cd Granusoft/src/
+python3 main.py 
