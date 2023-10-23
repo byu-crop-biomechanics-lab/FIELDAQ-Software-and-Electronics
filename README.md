@@ -12,7 +12,7 @@ The software for the FIELDAQ is written in python, using the kivy library. Versi
 Run the following commands in a bash terminal to download, build and run the projcet. This build script will build a python environment and download the necessary packages. It then will build the project and run it to verify that everything is working correctly. 
 ```
 git clone git@github.com:byu-crop-biomechanics-lab/FIELDAQ-Software-and-Electronics.git
-cd ./REAPER
+cd FIELDAQ-Software-and-Electronics/
 source build_project
 ```
 
