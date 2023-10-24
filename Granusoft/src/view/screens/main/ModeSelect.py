@@ -25,5 +25,4 @@ class ModeSelect(BaseScreen):
         pass
 
     def on_leave(self):
-        self.event.cancel()
-        self.event2.cancel()
+        pass
