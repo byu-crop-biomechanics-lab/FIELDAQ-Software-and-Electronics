@@ -1,0 +1,35 @@
+<MainScreenInfoBox@Label>:
+    font_size: 25
+	color: 1,1,1,1
+	halign: 'center'
+	valign: 'center'
+	markup: True
+	bold: True
+    canvas.before:
+        Color:
+            rgba: .14,.14,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MainScreen>:
+    name: 'mode_select'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Arm'
+	    		on_release:
+                    root.move_to('main_screen') # Move to settings screen
+            GranuSideButton:
+                text: 'DogBone'
+                on_release:
+                    root.move_to('main_screen') # Moves to test settings confirmation
+            GranuSideButton:
+                text: 'Camera'
+                on_release:
+                    root.move_to('main_screen') # Move to liveFeed screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('exit_screen') # Move to exit screen
+
