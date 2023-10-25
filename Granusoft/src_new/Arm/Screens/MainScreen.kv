@@ -1,0 +1,196 @@
+# This line is a comment, the following lines with a hashtag-colon are used by
+# the kivy interpreter.
+
+# Include custom Kivy widgets which will be used on all screens that are imported below
+#:import * ../util.elements
+
+# These following Lines declare where the py and kv files for each screen
+# are stored and that they should be imported
+#:import ExitScreen ExitScreen
+#:import LiveFeedScreen LiveFeedScreen
+#:import SettingsScreen SettingsScreen
+#:import TestingScreen TestingScreen
+#:import TestingScreenAuto TestingScreenAuto
+
+#:import ColorsScreen Settings.ColorsScreen
+#:import NoteScreen Settings.NoteScreen
+#:import SensorsScreen Settings.SensorsScreen
+#:import UpdateScreen Settings.UpdateScreen
+#:import GPSMapScreen Settings.GPSMapScreen
+#:import ArchiveScreen Settings.ArchiveScreen
+#:import TestDeleteConfirmation Settings.TestDeleteConfirmation
+
+#:import TestNotesScreen Settings.TestNotesScreen
+#:import NewNoteScreen Settings.NewNoteScreen
+#:import NewTestNoteScreen Settings.NewTestNoteScreen
+
+#:import CalibrateScreen Settings.CalibrateScreen
+#:import IMUCalibrateScreen Settings.IMUCalibrateScreen
+#:import CalibratePointScreen Settings.CalibratePointScreen
+
+
+#:import TestInProgressScreen DataCollection.TestInProgressScreen
+#:import TestingResultsScreen DataCollection.TestingResultsScreen
+#:import BreakHeightScreen DataCollection.testing.BreakHeightScreen
+#:import TestsScreen DataCollection.TestsScreen
+#:import TestDetailScreen DataCollection.TestDetailScreen
+#:import TestArchiveConfirmation DataCollection.TestArchiveConfirmation
+#:import TestSettingsConfirmation DataCollection.TestSettingsConfirmation
+#:import BarcodeConfirmation DataCollection.BarcodeConfirmation
+#:import SaveScreen DataCollection.SaveScreen
+#:import HeightScreen DataCollection.HeightScreen
+#:import OperatorScreen DataCollection.OperatorScreen
+#:import PlotScreen DataCollection.PlotScreen
+#:import HeightSensor DataCollection.HeightSensor
+#:import FolderScreen DataCollection.FolderScreen
+#:import TestFoldersScreen DataCollection.TestFoldersScreen
+#:import DeleteFolderConfirmation DataCollection.DeleteFolderConfirmation
+#:import RenameFolderScreen DataCollection.RenameFolderScreen
+#:import HeightChangeConfirmation DataCollection.HeightChangeConfirmation 
+
+
+# Load each screen into the ScreenManager. For human convenience, screens are
+# grouped into like-screens
+<GranuScreenManager>:
+    # Properties
+    current: 'mode_select' # Start with the ModeSelect screen
+
+    # Root
+    ExitScreen:
+    LiveFeedScreen:
+    MainScreen:
+    SettingsScreen:
+    TestingScreen:
+    TestingScreenAuto:
+
+    # Settings
+    ColorsScreen:
+    NoteScreen:
+    SensorsScreen:
+    UpdateScreen:
+    GPSMapScreen:
+    ArchiveScreen:
+    TestDeleteConfirmation:
+    TestNotesScreen:
+
+    # Settings - Notes
+    NewNoteScreen:
+    NewTestNoteScreen:
+
+    # Settings - Sensors
+    CalibrateScreen:
+    IMUCalibrateScreen:
+    CalibratePointScreen:
+
+    # Testing
+    TestInProgressScreen:
+    TestingResultsScreen:
+    BreakHeightScreen:
+    TestsScreen:
+    TestDetailScreen:
+    TestArchiveConfirmation:
+    TestSettingsConfirmation:
+    BarcodeConfirmation:
+    SaveScreen:
+    HeightScreen:
+    OperatorScreen:
+    PlotScreen:
+    HeightSensor:
+    FolderScreen:
+    TestFoldersScreen:
+    DeleteFolderConfirmation:
+    RenameFolderScreen:
+    HeightChangeConfirmation:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<MainScreenInfoBox@Label>:
+    font_size: 25
+	color: 1,1,1,1
+	halign: 'center'
+	valign: 'center'
+	markup: True
+	bold: True
+    canvas.before:
+        Color:
+            rgba: .14,.14,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MainScreen>:
+    name: 'main_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Settings'
+	    		on_release:
+                    root.move_to('settings_screen') # Move to settings screen
+            GranuSideButton:
+                text: 'Testing'
+                on_release:
+                    root.move_to('test_settings_confirmation') # Moves to test settings confirmation
+            GranuSideButton:
+                text: 'Live Feed'
+                on_release:
+                    root.move_to('live_feed_screen') # Move to liveFeed screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('exit_screen') # Move to exit screen
+        GranuContent:
+            GranuTitle:
+                text: 'Main Menu'
+            Label:
+                id: device_name
+                font_size: 40
+                markup: True
+            	bold: True
+                text: 'Stalk Strength\nDevice 2.3.1'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            	markup: True
+            	bold: True
+            GridLayout:
+                cols: 2
+                spacing: 10
+                MainScreenInfoBox:
+                    id: current_date
+                    text: 'Date: \n' + root.current_date
+                MainScreenInfoBox:
+                    id: load_cell_height
+                    text: 'Height: \n' + root.load_cell_height+root.loadCellHeightUnits
+                MainScreenInfoBox:
+                    id: location
+                    text: 'Location:\n' + root.location
+                MainScreenInfoBox:
+                    id: time
+                    text: 'Time: \n' + root.time

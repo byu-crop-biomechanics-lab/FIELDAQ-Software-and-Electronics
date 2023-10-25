@@ -1,0 +1,121 @@
+<Notes>
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    font_size: 18
+	markup: True
+	bold: True
+
+<NotesList>
+    viewclass: 'Notes'
+    SelectableRecycleBoxLayout:
+
+<ListTitle@Label>
+    size_hint_y: None
+    height: self.font_size
+    font_size: 20
+	markup: True
+	bold: True
+
+<MoveButton@Button>
+    size_hint_y: None
+    background_color: (.42,.42,0.42,1)
+    height: self.font_size + 10
+    font_size: 35
+	markup: True
+	bold: True
+
+<TestNotesScreen>:
+	name: 'test_notes_screen'
+    GranuContainer:
+        GranuSideArea:
+            id: notes_buttons
+        GranuContent:
+            GranuTitle:
+                text: 'Notes'
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: self.minimum_height
+                ListTitle:
+                    text: 'Pre-test Notes'
+                ListTitle:
+                    text: 'Post-test Notes'
+                ListTitle:
+                    text: 'Note Bank'
+            BoxLayout:
+                orientation: 'horizontal'
+                NoteList:
+                    id: pre_test_notes
+                    on_interaction:
+                        post_test_notes.clear_selection()
+                        notes_bank.clear_selection()
+                        root.test_buttons()
+                    on_deselect_all:
+                        root.default_buttons()
+                NoteList:
+                    id: post_test_notes
+                    on_interaction:
+                        pre_test_notes.clear_selection()
+                        notes_bank.clear_selection()
+                        root.test_buttons()
+                    on_deselect_all:
+                        root.default_buttons()
+                NoteList:
+                    canvas.after:
+                        Color:
+                            rgba: 0.5, 0.5, 0.5, 1
+                        Line:
+                            width: 1
+                            rectangle: self.x, self.y, 1, self.height
+                    id: notes_bank
+                    on_interaction:
+                        pre_test_notes.clear_selection()
+                        post_test_notes.clear_selection()
+                        root.bank_buttons()
+                    on_deselect_all:
+                        root.default_buttons()
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: self.minimum_height
+                MoveButton:
+                    text: 'Move Here'
+                    on_release:
+                        root.move_to_pretest()
+                        root.default_buttons()
+                MoveButton:
+                    text: 'Move Here'
+                    on_release:
+                        root.move_to_posttest()
+                        root.default_buttons()
+                MoveButton:
+                    text: 'Move Here'
+                    on_release:
+                        root.move_to_bank()
+                        root.default_buttons()
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'center'
+                size_hint_y: None
+                height: clear_button.height - 6
+                Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
+                    id: clear_button
+                    text: 'Clear Selection'
+                    size_hint_y: None
+                    height: self.font_size + 20
+                    size_hint_x: (1.0/3.0)
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
+                    on_release:
+                        pre_test_notes.clear_selection()
+                        post_test_notes.clear_selection()
+                        notes_bank.clear_selection()
+                        root.default_buttons()

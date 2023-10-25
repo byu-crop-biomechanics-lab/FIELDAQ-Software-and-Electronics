@@ -1,0 +1,21 @@
+# This line is a comment, the following lines with a hashtag-colon are used by
+# the kivy interpreter.
+
+# Include custom Kivy widgets which will be used on all screens that are imported below
+#:import * util.elements
+
+#:import ModeSelect ModeSelect
+#:import MainScreen Arm.Screens.MainScreen
+
+
+# Load each screen into the ScreenManager. For human convenience, screens are
+# grouped into like-screens
+<GranuScreenManager>:
+    # Properties
+    current: 'mode_select' # Start with the ModeSelect screen
+
+    # Root
+    ModeSelect:
+    MainScreen
+
+

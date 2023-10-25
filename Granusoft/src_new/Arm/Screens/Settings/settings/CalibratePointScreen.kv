@@ -1,0 +1,34 @@
+<CalibratePointScreen>:
+    name: 'calibrate_point_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Add'
+	    		on_release:
+	    		    if root.add(): root.back()
+            GranuSideButton:
+                id: collect_button
+            GranuSideButton:
+                text: 'Cancel'
+                on_release:
+                    root.back()
+        GranuContent:
+            GranuTitle:
+                text: 'Add Calibration Point'
+            GridLayout:
+                rows: 2
+                cols: 2
+                Label:
+                    text: 'Real: '
+                FloatInput:
+                    id: real
+                    font_size: 30
+                    multiline: False
+                    size_hint_max_y: 30+15
+                Label:
+                    text: 'ADC: '
+                FloatInput:
+                    id: adc
+                    font_size: 30
+                    multiline: False
+                    size_hint_max_y: 30+15
