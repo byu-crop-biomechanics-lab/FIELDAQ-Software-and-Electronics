@@ -8,10 +8,12 @@ stored in our settings file .
 from kivy.lang import Builder
 
 import configurator as config
-from view.BaseScreen import BaseScreen
-from view.input.StrInput import StrInput
+from util.BaseScreen import BaseScreen
+from util.input.StrInput import StrInput
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/main/testing/OperatorScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class OperatorScreen(BaseScreen):
     def on_pre_enter(self):

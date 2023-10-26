@@ -4,9 +4,9 @@ from Sensor import Sensor
 import datetime
 from TestSingleton import TestSingleton
 
-from view.BaseScreen import BaseScreen
+from util.BaseScreen import BaseScreen
 from kivy.properties import StringProperty
-from view.elements import *
+from util.elements import *
 import configurator as config
 import csv
 try:
@@ -15,11 +15,13 @@ except:
     pass
 
 from getmac import get_mac_address as gma
+from util.getKVPath import getKVPath
+import os
 
 #import pytz
 #from timezonefinder import TimezoneFinder
 
-Builder.load_file('view/screens/main/testing/SaveScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 
 class SaveScreen(BaseScreen):

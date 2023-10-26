@@ -1,9 +1,11 @@
 import shutil
 from kivy.lang import Builder
 import configurator as config
-from view.BaseScreen import BaseScreen
+from util.BaseScreen import BaseScreen
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/main/testing/DeleteFolderConfirmation.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class DeleteFolderConfirmation(BaseScreen):
     

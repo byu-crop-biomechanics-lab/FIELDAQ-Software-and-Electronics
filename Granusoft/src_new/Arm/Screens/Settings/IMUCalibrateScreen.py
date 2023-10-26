@@ -3,12 +3,14 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 
 from Sensor import Sensor
-from view.BaseScreen import BaseScreen
-from view.elements import *
+from util.BaseScreen import BaseScreen
+from util.elements import *
 
 import configurator as config
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/settings/IMUCalibrateScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 ONE_SEC = 1
 

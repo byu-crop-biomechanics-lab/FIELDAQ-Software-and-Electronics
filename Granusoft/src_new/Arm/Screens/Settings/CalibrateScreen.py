@@ -6,15 +6,18 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 from kivy.properties import ObjectProperty
 
-from view.BaseScreen import BaseScreen
-from view.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
-from view.elements import *
+from util.BaseScreen import BaseScreen
+from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
+from util.elements import *
 
 import numpy
 
 import configurator as config
+import os
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/settings/CalibrateScreen.kv')
+
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class PointDisplay(SelectableListBehavior, Label):
     adc = NumericProperty()

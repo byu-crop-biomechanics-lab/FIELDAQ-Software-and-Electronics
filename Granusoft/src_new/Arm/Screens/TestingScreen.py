@@ -9,16 +9,15 @@ from kivy.properties import ListProperty
 from kivy.clock import Clock
 from Sensor import Sensor
 
-from view.BaseScreen import BaseScreen
-from view.StaticList import StaticList
+from util.BaseScreen import BaseScreen
+from util.StaticList import StaticList
 import configurator as config
-from view.elements import *
+from util.elements import *
 import datetime
+from util.getKVPath import getKVPath
+import os
 
-# import pytz
-# from timezonefinder import TimezoneFinder
-
-Builder.load_file('view/screens/main/TestingScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 ONE_SEC = 1
 

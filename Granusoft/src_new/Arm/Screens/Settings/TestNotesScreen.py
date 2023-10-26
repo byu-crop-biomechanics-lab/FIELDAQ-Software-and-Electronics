@@ -3,12 +3,13 @@ from kivy.properties import ListProperty
 from kivy.clock import Clock
 
 import configurator as config
-from view.BaseScreen import BaseScreen
-from view.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
-from view.elements import *
+from util.BaseScreen import BaseScreen
+from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
+from util.elements import *
 import csv
-
-Builder.load_file('view/screens/settings/TestNotesScreen.kv')
+from util.getKVPath import getKVPath
+import os
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class Notes(SelectableListBehavior, Label):
     pass

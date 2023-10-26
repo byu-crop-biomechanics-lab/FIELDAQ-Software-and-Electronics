@@ -10,11 +10,11 @@ from kivy.clock import Clock
 from Sensor import Sensor
 import datetime
 
-from view.BaseScreen import BaseScreen
-from view.elements import *
-
-
-Builder.load_file('view/screens/main/LiveFeedScreen.kv')
+from util.BaseScreen import BaseScreen
+from util.elements import *
+import os
+from util.getKVPath import getKVPath
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = .004
 SECOND_CAP = 1/INTERVAL

@@ -5,8 +5,10 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.uix.label import Label
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('util/elements.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 class GranuContainer(BoxLayout):
     pass
 

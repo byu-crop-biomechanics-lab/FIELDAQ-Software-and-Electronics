@@ -13,9 +13,9 @@ import time
 import math
 from TestSingleton import TestSingleton
 
-from view.BaseScreen import BaseScreen
-from view.StaticList import StaticList
-from view.elements import *
+from util.BaseScreen import BaseScreen
+from util.StaticList import StaticList
+from util.elements import *
 import configurator as config
 import csv
 import numpy as np
@@ -25,8 +25,10 @@ except:
     pass
 
 from kivy.garden.graph import Graph, MeshLinePlot
+import os 
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/main/testing/TestDetailScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 ONE_SEC = 1
 

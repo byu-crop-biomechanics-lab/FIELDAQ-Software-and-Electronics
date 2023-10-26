@@ -13,15 +13,17 @@ from kivy.clock import Clock
 from Sensor import Sensor
 import datetime
 
-from view.BaseScreen import BaseScreen
-from view.elements import *
+from util.BaseScreen import BaseScreen
+from util.elements import *
 try:
     from sensors.connections import *
 except:
     pass
 import csv
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/settings/GPSMapScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = 5
 

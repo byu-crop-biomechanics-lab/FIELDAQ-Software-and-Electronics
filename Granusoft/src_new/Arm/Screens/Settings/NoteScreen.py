@@ -2,11 +2,12 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 
 import configurator as config
-from view.BaseScreen import BaseScreen
-from view.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
-from view.elements import *
-
-Builder.load_file('view/screens/settings/NoteScreen.kv')
+from util.BaseScreen import BaseScreen
+from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
+from util.elements import *
+from util.getKVPath import getKVPath
+import os
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class Note(SelectableListBehavior, Label):
     pass

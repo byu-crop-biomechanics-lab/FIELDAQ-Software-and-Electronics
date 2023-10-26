@@ -10,8 +10,10 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.behaviors import ButtonBehavior
 
 from kivy.properties import ListProperty
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/SingleSelectableList.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class SingleSelectableListBehavior(RecycleDataViewBehavior):
     '''Add selection support to a Label.'''

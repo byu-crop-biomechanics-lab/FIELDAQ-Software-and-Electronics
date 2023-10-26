@@ -11,17 +11,16 @@ from kivy.clock import Clock
 from Sensor import Sensor
 from kivy.uix.popup import Popup
 
-from view.BaseScreen import BaseScreen
-from view.StaticList import StaticList
+from util.BaseScreen import BaseScreen
+from util.StaticList import StaticList
 import configurator as config
-from view.elements import *
+from util.elements import *
 
 import datetime
 import os
-# import pytz
-# from timezonefinder import TimezoneFinder
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/main/TestingScreenAuto.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 ONE_SEC = 1
 HEIGHT_INTERVAL = 0.004

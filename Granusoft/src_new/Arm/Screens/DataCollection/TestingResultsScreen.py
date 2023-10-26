@@ -18,8 +18,9 @@ except:
     pass
 
 from kivy.garden.graph import MeshLinePlot
-
-Builder.load_file('view/screens/main/testing/TestingResultsScreen.kv')
+from util.getKVPath import getKVPath
+import os 
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 
 class TestingResultsScreen(BaseScreen):

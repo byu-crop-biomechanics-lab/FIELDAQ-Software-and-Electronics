@@ -4,10 +4,11 @@ from kivy.clock import Clock
 from kivy.uix.button import Button
 from kivy.properties import ObjectProperty
 
-from view.BaseScreen import BaseScreen
+from util.BaseScreen import BaseScreen
 from Sensor import Sensor
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/settings/SensorsScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class SensorButton(Button):
     def __init__(self, name, parent_screen, calib_screen, **kwargs):

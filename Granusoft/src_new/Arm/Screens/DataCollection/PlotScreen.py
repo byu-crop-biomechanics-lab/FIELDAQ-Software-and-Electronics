@@ -8,10 +8,12 @@ in our settings file.
 from kivy.lang import Builder
 
 import configurator as config
-from view.BaseScreen import BaseScreen
-from view.input.IntInput import IntInput
+from util.BaseScreen import BaseScreen
+from util.input.IntInput import IntInput
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/main/testing/PlotScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class PlotScreen(BaseScreen):
     def on_pre_enter(self):

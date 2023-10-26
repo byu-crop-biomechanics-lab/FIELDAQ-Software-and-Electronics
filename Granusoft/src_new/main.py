@@ -1,6 +1,7 @@
 from kivy.config import Config as KivyConfig
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
+from Arm.Screens.ExitScreen import ExitScreen
 
 import configurator as config
 
@@ -24,6 +25,10 @@ class MainApp(App):
         return sm
 
 if __name__ == "__main__":
+    import sys
+
+    root_directory = sys.base_prefix
+    print("Root Python directory:", root_directory)
     config.load() # Load our own app preferences
     # Run the App
     MainApp().run()

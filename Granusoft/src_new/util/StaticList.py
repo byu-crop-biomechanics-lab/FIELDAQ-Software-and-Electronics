@@ -4,8 +4,10 @@ from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.label import Label
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.properties import ListProperty
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/StaticList.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class StaticRecycleBoxLayout(RecycleBoxLayout):
     pass

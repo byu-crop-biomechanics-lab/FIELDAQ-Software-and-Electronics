@@ -5,10 +5,12 @@ An input text box that, when selected, allows the user to type in the Break Heig
 from kivy.lang import Builder
 
 import configurator as config
-from view.BaseScreen import BaseScreen
-from view.input.FloatInput import FloatInput
+from util.BaseScreen import BaseScreen
+from util.input.FloatInput import FloatInput
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/main/testing/BreakHeightScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class BreakHeightScreen(BaseScreen):
     def on_pre_enter(self):

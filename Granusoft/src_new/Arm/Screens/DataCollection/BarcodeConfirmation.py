@@ -1,10 +1,11 @@
 import os
 from kivy.lang import Builder
 import configurator as config
-from view.BaseScreen import BaseScreen
 from kivy.uix.screenmanager import ScreenManager, Screen
+from util.BaseScreen import BaseScreen
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/main/testing/BarcodeConfirmation.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class BarcodeConfirmation(BaseScreen):
     def use_barcode_yes(self):

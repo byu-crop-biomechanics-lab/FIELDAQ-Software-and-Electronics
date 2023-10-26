@@ -19,13 +19,13 @@ def show_keyboard(caller, layout):
     if kb.widget:
         keyboard = kb.widget
         if layout=='numeric':
-            keyboard.layout = "view/keyboard_layouts/numeric.json"
+            keyboard.layout = "util/keyboard_layouts/numeric.json"
             keyboard.margin_hint = [0.05, 0.2, 0.05, 0.2]
         elif layout=='integer':
-            keyboard.layout = "view/keyboard_layouts/integer.json"
+            keyboard.layout = "util/keyboard_layouts/integer.json"
             keyboard.margin_hint = [0.05, 0.2, 0.05, 0.2]
         elif layout=='text':
-            keyboard.layout = "view/keyboard_layouts/text.json"
+            keyboard.layout = "util/keyboard_layouts/text.json"
             keyboard.margin_hint = [0.05, 0.06, 0.05, 0.06]
         else:
             keyboard.layout = layout

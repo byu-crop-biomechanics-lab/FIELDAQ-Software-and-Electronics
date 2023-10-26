@@ -8,11 +8,12 @@ import os
 
 from kivy.lang import Builder
 
-from view.BaseScreen import BaseScreen
+from util.BaseScreen import BaseScreen
 from os import listdir
 from os.path import isfile, join
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/main/testing/TestArchiveConfirmation.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class TestArchiveConfirmation(BaseScreen):
     def on_pre_enter(self):

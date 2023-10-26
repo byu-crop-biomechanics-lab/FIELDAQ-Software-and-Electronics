@@ -12,9 +12,10 @@ from kivy.properties import StringProperty
 from kivy.uix.popup import Popup
 
 import configurator as config
-from view.BaseScreen import BaseScreen
+from util.BaseScreen import BaseScreen
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/main/SettingsScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class LoadDialog(Popup):
     '''A dialog to load a file.  The load and cancel properties point to the

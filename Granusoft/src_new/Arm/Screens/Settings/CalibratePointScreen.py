@@ -1,13 +1,15 @@
 from kivy.lang import Builder
 
 import configurator as config
-from view.BaseScreen import BaseScreen
-from view.input.StrInput import StrInput
+from util.BaseScreen import BaseScreen
+from util.input.StrInput import StrInput
 from Sensor import Sensor
 from kivy.properties import StringProperty
 from statistics import median
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/settings/CalibratePointScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class CalibratePointScreen(BaseScreen):
     sensor_name = StringProperty()

@@ -23,8 +23,10 @@ import time
 import math
 
 from kivy.garden.graph import Graph, MeshLinePlot
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/main/testing/TestInProgressScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = .003
 SECOND_CAP = 1/INTERVAL

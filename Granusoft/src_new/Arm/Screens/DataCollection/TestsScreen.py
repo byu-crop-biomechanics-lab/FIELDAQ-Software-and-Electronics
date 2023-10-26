@@ -16,16 +16,17 @@ import datetime
 
 from kivy.uix.popup import Popup
 
-from view.BaseScreen import BaseScreen
-from view.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
-from view.elements import *
+from util.BaseScreen import BaseScreen
+from util.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
+from util.elements import *
 import os
 from os import listdir
 from os.path import isfile, join
 
 from kivy.garden.graph import Graph, MeshLinePlot
+from util.getKVPath import getKVPath
 
-Builder.load_file('view/screens/main/testing/TestsScreen.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class Test(SingleSelectableListBehavior, Label):
     pass

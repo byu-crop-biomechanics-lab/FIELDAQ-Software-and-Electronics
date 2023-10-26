@@ -6,11 +6,13 @@ data for the test.
 from kivy.lang import Builder
 from kivy.properties import StringProperty
 
-from view.BaseScreen import BaseScreen
+from util.BaseScreen import BaseScreen
 import configurator as config
-from view.elements import *
+from util.elements import *
+from util.getKVPath import getKVPath
+import os
 
-Builder.load_file('view/screens/main/testing/TestSettingsConfirmation.kv')
+Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class TestSettingsConfirmation(BaseScreen):
     height_num = StringProperty("N/A")
