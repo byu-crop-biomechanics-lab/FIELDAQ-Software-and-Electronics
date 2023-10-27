@@ -7,7 +7,7 @@ from kivy.properties import StringProperty, ListProperty, NumericProperty
 from kivy.properties import ObjectProperty
 
 from util.BaseScreen import BaseScreen
-from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
+from util.SelectableList import SelectableList, SelectableListBehavior
 from util.elements import *
 
 import numpy

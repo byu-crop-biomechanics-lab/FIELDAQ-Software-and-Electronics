@@ -7,10 +7,10 @@ from kivy.lang import Builder
 
 import configurator as config
 from util.BaseScreen import BaseScreen
-from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
 import os
 
+print(getKVPath(os.getcwd(), __file__))
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class NewNoteScreen(BaseScreen):

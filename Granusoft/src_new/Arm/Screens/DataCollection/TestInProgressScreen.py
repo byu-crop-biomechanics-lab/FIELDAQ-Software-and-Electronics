@@ -12,17 +12,15 @@ from kivy.clock import Clock
 from Dataset import Dataset
 from Sensor import Sensor
 from TestSingleton import TestSingleton
-from Sensor import Sensor
 
-from view.BaseScreen import BaseScreen
+from util.BaseScreen import BaseScreen
 import configurator as config
-from kivy.config import Config as KivyConfig
-from view.elements import *
+from util.elements import *
 import datetime
 import time
 import math
 
-from kivy.garden.graph import Graph, MeshLinePlot
+from kivy.garden.graph import MeshLinePlot
 from util.getKVPath import getKVPath
 import os
 

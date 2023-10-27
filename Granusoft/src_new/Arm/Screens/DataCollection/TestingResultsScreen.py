@@ -8,9 +8,9 @@ from Sensor import Sensor
 import math
 from TestSingleton import TestSingleton
 
-from view.BaseScreen import BaseScreen
-from view.StaticList import StaticList
-from view.elements import *
+from util.BaseScreen import BaseScreen
+from util.StaticList import StaticList
+from util.elements import *
 import configurator as config
 try:
     from sensors.connections import *

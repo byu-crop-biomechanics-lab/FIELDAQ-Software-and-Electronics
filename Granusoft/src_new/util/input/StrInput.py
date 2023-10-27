@@ -1,7 +1,7 @@
 from kivy.clock import Clock
 from kivy.uix.textinput import TextInput
 
-import view.keyboard_man as km
+import util.keyboard_man as km
 
 class StrInput(TextInput):
     def validate(self):
