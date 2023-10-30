@@ -3,7 +3,6 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
 from Arm.Screens.ExitScreen import ExitScreen
 
-import configurator as config
 
 # Kivy Configuration
 KivyConfig.set('kivy', 'desktop', 0) # Disable OS-specific features for testing
@@ -29,6 +28,6 @@ if __name__ == "__main__":
 
     root_directory = sys.base_prefix
     print("Root Python directory:", root_directory)
-    config.load() # Load our own app preferences
+
     # Run the App
     MainApp().run()

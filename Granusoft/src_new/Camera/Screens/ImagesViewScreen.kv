@@ -1,0 +1,48 @@
+<ImagePic>
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ImageList>
+    viewclass: 'Note'
+    SingleSelectableRecycleBoxLayout:
+
+<SaveImageDialog>:
+    title: 'Save Images'
+    title_align: 'center'
+    size_hint: (0.9, 0.9)
+    BoxLayout:
+        orientation: "vertical"
+
+        FileChooserIconView:
+            id: filechooser
+            path: '/mnt/usbStick' #str(Path.home())
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+            Button:
+                text: "Save"
+                on_release: root.save(filechooser.path)
+
+<ImagesViewScreen>:
+	name: 'img_viewer_screen'
+    GranuContainer:
+        GranuSideArea:
+            id: images_buttons
+        GranuContent:
+            GranuTitle:
+                text: 'Images'
+            BoxLayout:
+                orientation: 'horizontal'
+                ImageList:
+                    id: images_list
+                    on_interaction:
+                        root.image_buttons()
+                    on_deselect_all:
+                        root.default_buttons()
