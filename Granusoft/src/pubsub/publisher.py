@@ -4,9 +4,6 @@ import json
 
 ZMQ_PORT = 5555
 
-import zmq
-import json
-
 class Publisher:
     '''
     Class for publishing data to a topic using ZeroMQ.

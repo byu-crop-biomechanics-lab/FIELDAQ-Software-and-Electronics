@@ -8,14 +8,6 @@ import time
 
 ZMQ_PORT = 5555
 
-import zmq
-import json
-import signal
-import threading
-import time
-from typing import Callable
-from .topic import Topic
-
 class Subscriber:
     '''
     Class for subscribing to a topic.
@@ -96,12 +88,12 @@ class Subscriber:
         while not self._shutdown:
             try:
                 socks = dict(self._poller.poll(self._socket_timeout))
-            except zmq.error.ZMQError as e:
+            except zmq.error.ZMQError as error:
                 # Supress this error as it occurs when the socket is closed before the poller finishes its update. This can occur
                 # in various ways depending on when the user calls close() and recive(). The error is harmless as it simply indicates 
                 # that the socket was closed and can be ignored.
-                if e != 'Socket operation on non-socket':
-                    print(e)
+                if error != 'Socket operation on non-socket':
+                    print(error)
             if self._socket in socks and socks[self._socket] == zmq.POLLIN:
                 data = self._socket.recv().split()
                 # topic = data[0].decode('utf-8')
