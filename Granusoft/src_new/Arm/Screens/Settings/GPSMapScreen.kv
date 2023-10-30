@@ -1,0 +1,31 @@
+<GPSMapScreen>:
+	name: 'gps_mapper'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                id: update_button
+                text: 'Update\nGPS'
+                on_release:
+                    root.update_gps_location()
+            GranuSideButton:
+                text: 'Start\nTest'
+                on_release:
+                    root.start_gps_test()
+            GranuSideButton:
+                text: 'Stop\nTest'
+                on_release:
+                    root.stop_gps_test()
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.move_to('settings_screen') # Move to main screen
+        GranuContent:
+			GranuNone:
+            Label:
+				id: test_text
+                text: 'GPS Testing'
+				size_hint_max_y: 70
+			    font_size: 60
+				markup: True
+				bold: True
+			GranuNone:

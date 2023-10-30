@@ -1,0 +1,27 @@
+<HeightScreen>:
+	name: 'height_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+	    		on_release: if root.save(): root.back()
+            GranuSideButton:
+                text: 'Cancel'
+                on_release:
+                    root.back()
+            GranuNone:
+            GranuNone:
+        GranuContent:
+            GranuTitle:
+                text: 'Height'
+            GridLayout:
+                cols: 2
+                rows: 1
+                FloatInput:
+                    id: height
+                    font_size: 30
+                    size_hint_max_y: 30+15
+                Label:
+                    text: "cm"
+                    size_hint_x: 0.2
+                    font_size: 30

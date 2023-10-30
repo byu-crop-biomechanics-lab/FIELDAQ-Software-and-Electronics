@@ -1,0 +1,26 @@
+<ModeSelect>:
+    name: 'mode_select'
+    GranuContainer:
+        GranuSideAreaTest:
+            GranuSideButton:
+                text: 'Arm'
+                on_release:
+                    root.move_to('main_screen') # Move to settings screen
+            GranuSideButton:
+                text: 'DogBone'
+                on_release:
+                    root.move_to('main_screen') # Moves to test settings confirmation
+            GranuSideButton:
+                text: 'Darling'
+                on_release:
+                    root.move_to('main_screen') # Moves to test settings confirmation
+            GranuSideButton:
+                text: 'Camera'
+                on_release:
+                    root.move_to('cam_main_screen') # Move to liveFeed screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('exit_screen') # Move to exit screen
+
+

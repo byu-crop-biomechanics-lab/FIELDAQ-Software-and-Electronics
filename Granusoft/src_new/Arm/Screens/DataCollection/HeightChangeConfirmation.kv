@@ -1,0 +1,41 @@
+<HeightChangeConfirmDialog>:
+    size_hint: (0.55, 0.77)
+    markup: True
+    bold: True
+    title: 'LOAD CELL HEIGHT CHANGE'
+    title_align: 'center'
+    title_size: '26sp'
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            font_size: 26
+            markup: True
+            bold: True
+            halign: 'left'
+            text: "You Are About to Change \n the Load Cell Height,\n Continue?"
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            size_hint_x: 1
+            height: 65
+            NavButton:
+                text: "Cancel"
+                on_release: root.cancel()
+            NavButton:
+                text: "Proceed"
+                on_release: root.proceed()
+
+
+<HeightChangeConfirmation>:
+	name: 'height_change_confirmation'
+    GranuContainer:
+        GranuSideArea:
+            # GranuSideButton:
+            #     text: 'Proceed With Test'
+	    	# 	on_release:
+	    	# 	    check_height_change(self)
+            #         root.move_to(root.next_screen)
+            # GranuNone:
+            GranuNone:
+            GranuNone:

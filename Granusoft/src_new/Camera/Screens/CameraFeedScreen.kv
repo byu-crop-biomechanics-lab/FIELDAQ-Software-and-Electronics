@@ -1,0 +1,16 @@
+<CameraFeedScreen>:
+    name: 'cam_feed_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Take\nPhoto'
+	    		on_release:
+                    root.captureImage() # Call the function captureImage in the CameraFeedScreen python class
+            GranuNone:
+            GranuNone:
+            GranuSideButton:
+                text: 'Back'
+                on_release:
+                    root.move_to('cam_main_screen') # Move to main camera screen
+        GranuContent:
+            GranuNone:
