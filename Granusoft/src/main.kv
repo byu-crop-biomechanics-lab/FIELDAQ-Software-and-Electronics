@@ -56,14 +56,17 @@
 #:import CameraSettingsScreen view.screens.camera.CameraSettingsScreen
 #:import ImageDeleteConfirmation view.screens.camera.ImageDeleteConfirmation
 
+#:import ModeSelect view.screens.main.ModeSelect
+
 
 # Load each screen into the ScreenManager. For human convenience, screens are
 # grouped into like-screens
 <GranuScreenManager>:
     # Properties
-    current: 'main_screen' # Start with the main screen
+    current: 'mode_select' # Start with the ModeSelect screen
 
     # Root
+    ModeSelect:
     ExitScreen:
     LiveFeedScreen:
     MainScreen:
