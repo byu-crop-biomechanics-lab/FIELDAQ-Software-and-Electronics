@@ -8,6 +8,7 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 import configurator as config
+from Singleton import SettingsSingleton
 
 from TestSingleton import TestSingleton
 from shutil import copyfile

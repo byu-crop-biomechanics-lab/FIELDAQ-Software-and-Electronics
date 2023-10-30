@@ -17,6 +17,7 @@ from view.BaseScreen import BaseScreen
 from view.StaticList import StaticList
 from view.elements import *
 import configurator as config
+from Singleton import SettingsSingleton
 import csv
 import numpy as np
 try:

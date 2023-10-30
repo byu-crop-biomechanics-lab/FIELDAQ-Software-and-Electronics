@@ -3,6 +3,7 @@ from kivy.properties import ListProperty
 from kivy.clock import Clock
 
 import configurator as config
+from Singleton import SettingsSingleton
 from view.BaseScreen import BaseScreen
 from view.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
 from view.elements import *

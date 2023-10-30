@@ -7,6 +7,7 @@ from view.BaseScreen import BaseScreen
 from view.elements import *
 
 import configurator as config
+from Singleton import SettingsSingleton
 
 Builder.load_file('view/screens/settings/IMUCalibrateScreen.kv')
 

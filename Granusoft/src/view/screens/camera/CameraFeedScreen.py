@@ -15,6 +15,7 @@ from view.BaseScreen import BaseScreen
 import datetime
 from Sensor import Sensor
 import configurator as config
+from Singleton import SettingsSingleton
 
 try:
     from picamera import PiCamera
@@ -24,6 +25,7 @@ except:
 Builder.load_file('view/screens/camera/CameraFeedScreen.kv')
 
 class CameraFeedScreen(BaseScreen):
+    config = SettingsSingleton()
     try:
         camera = PiCamera(resolution=(2240,1840))
     except:

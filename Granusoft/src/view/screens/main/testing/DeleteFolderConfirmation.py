@@ -1,6 +1,7 @@
 import shutil
 from kivy.lang import Builder
 import configurator as config
+from Singleton import SettingsSingleton
 from view.BaseScreen import BaseScreen
 
 Builder.load_file('view/screens/main/testing/DeleteFolderConfirmation.kv')

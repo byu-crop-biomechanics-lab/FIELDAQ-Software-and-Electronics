@@ -1,10 +1,12 @@
 from .connections import *
 import configurator as config
+from Singleton import SettingsSingleton
 
 class HeightPoT:
 
     def __init__(self):
-        self.config_data = config.get('sensors', {})
+        self.config = SettingsSingleton()
+        self.config_data = self.config.get('sensors', {})
         self.height_pot = 0.0
         self.height_pot_adc = 0.0
         try:

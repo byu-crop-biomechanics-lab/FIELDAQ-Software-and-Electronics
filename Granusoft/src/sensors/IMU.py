@@ -4,11 +4,13 @@
 from .connections import *
 from math import acos, floor, degrees
 import configurator as config
+from Singleton import SettingsSingleton
 
 class IMU:
 
     def __init__(self):
-        self.config_data = config.get('sensors', {})
+        self.config = SettingsSingleton()
+        self.config_data = self.config.get('sensors', {})
         try:
             self.offset = self.config_data['IMU Angle']['offset']
         except:

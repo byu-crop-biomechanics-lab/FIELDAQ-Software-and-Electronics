@@ -1,11 +1,12 @@
 from .connections import *
 import configurator as config
+from Singleton import SettingsSingleton
 
 class X_Load:
 
     def __init__(self):
-        print("X Load init")
-        self.config_data = config.get('sensors', {})
+        self.config = SettingsSingleton()
+        self.config_data = self.config.get('sensors', {})
         self.load = 0.0
         self.load_adc = 0.0
         try:

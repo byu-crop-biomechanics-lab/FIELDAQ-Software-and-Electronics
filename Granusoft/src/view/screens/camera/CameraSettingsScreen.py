@@ -15,6 +15,7 @@ from kivy.properties import StringProperty
 from kivy.uix.popup import Popup
 
 import configurator as config
+from Singleton import SettingsSingleton
 from view.BaseScreen import BaseScreen
 
 Builder.load_file('view/screens/camera/CameraSettingsScreen.kv')
@@ -33,6 +34,8 @@ class SaveDialog(Popup):
     cancel = ObjectProperty(None)
 
 class CameraSettingsScreen(BaseScreen):
+    config = SettingsSingleton()
+    
     def dismiss_popup(self):
         self._popup.dismiss()
 
@@ -45,11 +48,11 @@ class CameraSettingsScreen(BaseScreen):
         self._popup.open()
 
     def load(self, path, filename):
-        config.load_from(os.path.join(path, filename))
+        self.config.load_from(os.path.join(path, filename))
         self.dismiss_popup()
 
     def save(self, path, filename):
-        config.save_as(os.path.join(path, filename))
+        self.config.save_as(os.path.join(path, filename))
         self.dismiss_popup()
 
     def updateOS(self):

@@ -13,6 +13,7 @@ from view.elements import *
 import numpy
 
 import configurator as config
+from Singleton import SettingsSingleton
 
 Builder.load_file('view/screens/settings/CalibrateScreen.kv')
 

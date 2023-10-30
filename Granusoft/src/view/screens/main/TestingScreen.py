@@ -12,6 +12,7 @@ from Sensor import Sensor
 from view.BaseScreen import BaseScreen
 from view.StaticList import StaticList
 import configurator as config
+from Singleton import SettingsSingleton
 from view.elements import *
 import datetime
 

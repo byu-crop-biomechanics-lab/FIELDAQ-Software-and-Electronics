@@ -2,7 +2,8 @@ from kivy.config import Config as KivyConfig
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
 
-import configurator as config
+# import configurator as config
+from Singleton import SettingsSingleton 
 
 # Kivy Configuration
 KivyConfig.set('kivy', 'desktop', 0) # Disable OS-specific features for testing
@@ -24,6 +25,7 @@ class MainApp(App):
         return sm
 
 if __name__ == "__main__":
+    config = SettingsSingleton()
     config.load() # Load our own app preferences
     # Run the App
     MainApp().run()

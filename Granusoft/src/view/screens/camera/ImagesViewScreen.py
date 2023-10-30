@@ -10,6 +10,7 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 import configurator as config
+from Singleton import SettingsSingleton
 
 from shutil import copyfile
 import shutil
@@ -40,6 +41,7 @@ class SaveImageDialog(Popup):
     cancel = ObjectProperty(None)
 
 class ImagesViewScreen(BaseScreen):
+    config = SettingsSingleton()
     USB_IMG_FOLDERS_PATH = '/mnt/usbStick'
 
     def __init__(self, **kwargs):
@@ -87,7 +89,7 @@ class ImagesViewScreen(BaseScreen):
                 os.makedirs(path + '/' + subFold)
         except:
                 pass
-        config.save_as(os.path.join(path, "image"))
+        self.config.save_as(os.path.join(path, "image"))
         for name in self.image_filenames:
             if name != '.gitignore':
                 fromDir = 'Images/' + name

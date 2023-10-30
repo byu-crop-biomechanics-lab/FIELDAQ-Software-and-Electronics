@@ -8,6 +8,7 @@ stored in our settings file.
 from kivy.lang import Builder
 
 import configurator as config
+from Singleton import SettingsSingleton
 from view.BaseScreen import BaseScreen
 from view.input.FloatInput import FloatInput
 

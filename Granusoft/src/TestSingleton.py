@@ -1,3 +1,5 @@
+
+
 class TestSingleton:
     class __TestSingleton:
         def __init__(self):
@@ -74,32 +76,3 @@ class TestSingleton:
         return self.instance.break_height
     def set_break_height(self, break_height):
         self.instance.break_height = break_height
-
-#class Dataset:
-#    def __init__(self, name, test):
-#        self.name = name
-#        self.number = test
-
-#a = TestSingleton()
-#a.set_height("tall")
-#d1 = Dataset("ben", "1")
-#d2 = Dataset("sarah", "2")
-#datasets1 = []
-#datasets1.append(d1)
-#datasets1.append(d2)
-#a.set_datasets(datasets1)
-#print("a is",a.get_height())
-#print(a.get_datasets()[0].name)
-#b = TestSingleton()
-#b.set_height("short")
-#d3 = Dataset("alexander", "3")
-#d4 = Dataset("quigley", "4")
-#datasets2 = []
-#datasets2.append(d3)
-#datasets2.append(d4)
-#b.set_datasets(datasets2)
-#b.clear_all()
-#print("b is",b.get_height())
-#print(b.get_datasets()[0].name)
-#print("a is",a.get_height())
-#print(a.get_datasets()[0].name)

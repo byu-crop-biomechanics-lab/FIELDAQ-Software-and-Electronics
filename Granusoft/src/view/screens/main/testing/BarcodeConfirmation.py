@@ -1,6 +1,7 @@
 import os
 from kivy.lang import Builder
 import configurator as config
+from Singleton import SettingsSingleton
 from view.BaseScreen import BaseScreen
 from kivy.uix.screenmanager import ScreenManager, Screen
 

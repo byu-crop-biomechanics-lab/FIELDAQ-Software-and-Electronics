@@ -2,6 +2,7 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 
 import configurator as config
+from Singleton import SettingsSingleton
 from view.BaseScreen import BaseScreen
 from view.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
 from view.elements import *

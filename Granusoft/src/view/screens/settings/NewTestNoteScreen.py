@@ -6,6 +6,7 @@ screen keyboard that will pop up. The input text box will iniinputally be empty.
 from kivy.lang import Builder
 
 import configurator as config
+from Singleton import SettingsSingleton
 from view.BaseScreen import BaseScreen
 from view.input.StrInput import StrInput
 

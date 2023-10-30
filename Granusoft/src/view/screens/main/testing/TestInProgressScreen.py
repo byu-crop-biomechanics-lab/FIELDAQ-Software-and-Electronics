@@ -16,6 +16,7 @@ from Sensor import Sensor
 
 from view.BaseScreen import BaseScreen
 import configurator as config
+from Singleton import SettingsSingleton
 from kivy.config import Config as KivyConfig
 from view.elements import *
 import datetime

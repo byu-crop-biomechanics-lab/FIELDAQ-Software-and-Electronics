@@ -8,6 +8,7 @@ from view.BaseScreen import BaseScreen
 from kivy.properties import StringProperty
 from view.elements import *
 import configurator as config
+from Singleton import SettingsSingleton
 import csv
 try:
     from sensors.connections import *

@@ -5,6 +5,7 @@ from view.BaseScreen import BaseScreen
 from Sensor import Sensor
 from kivy.uix.popup import Popup
 import configurator as config
+from Singleton import SettingsSingleton
 from view.elements import *
 
 Builder.load_file('view/screens/main/testing/HeightChangeConfirmation.kv')

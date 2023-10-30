@@ -8,6 +8,7 @@ from kivy.properties import StringProperty
 
 from view.BaseScreen import BaseScreen
 import configurator as config
+from Singleton import SettingsSingleton
 from view.elements import *
 
 Builder.load_file('view/screens/main/testing/TestSettingsConfirmation.kv')
