@@ -9,7 +9,7 @@ from kivy.lang import Builder
 
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
-import configurator as config
+import Granusoft.src_new.Camera.Settings.configurator as config
 
 from shutil import copyfile
 import shutil
