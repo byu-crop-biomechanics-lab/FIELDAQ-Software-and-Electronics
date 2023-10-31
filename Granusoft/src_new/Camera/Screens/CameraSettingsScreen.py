@@ -14,7 +14,7 @@ from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivy.uix.popup import Popup
 
-import configurator as config
+import Camera.Settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
 

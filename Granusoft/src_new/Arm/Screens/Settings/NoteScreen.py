@@ -1,7 +1,7 @@
 from kivy.lang import Builder
 from kivy.properties import ListProperty
 
-import configurator as config
+import Arm.Settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
 from util.elements import *

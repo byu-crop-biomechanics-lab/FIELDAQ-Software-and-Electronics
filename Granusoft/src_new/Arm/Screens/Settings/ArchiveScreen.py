@@ -7,9 +7,9 @@ from kivy.lang import Builder
 
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
-import configurator as config
+import Arm.Settings.configurator as config
 
-from TestSingleton import TestSingleton
+from Arm.Data.TestSingleton import TestSingleton
 from shutil import copyfile
 import datetime
 

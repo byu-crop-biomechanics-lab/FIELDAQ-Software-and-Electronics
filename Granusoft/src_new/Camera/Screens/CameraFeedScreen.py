@@ -13,8 +13,8 @@ from kivy.properties import StringProperty
 from kivy.clock import Clock
 from util.BaseScreen import BaseScreen
 import datetime
-from Sensor import Sensor
-import configurator as config
+from Camera.Sensors import Sensor
+import Camera.Settings.configurator as config
 from util.getKVPath import getKVPath
 import os
 

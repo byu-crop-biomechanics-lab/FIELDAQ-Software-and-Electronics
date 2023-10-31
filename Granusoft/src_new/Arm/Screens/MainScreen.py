@@ -9,13 +9,13 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.clock import Clock
 from util.BaseScreen import BaseScreen
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 import datetime
 import os 
 from util.getKVPath import getKVPath
 
 
-import configurator as config
+import Arm.Settings.configurator as config
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = .004
@@ -30,12 +30,13 @@ class MainScreen(BaseScreen):
     #time_zone = StringProperty("N/A")
     loadCellHeightUnits = 'cm'
 
-    def __init__(self):
-        super(MainScreen).__init__()
-        config.load() # Load our own app preferences
+    # def __init__(self):
+    #     super(MainScreen).__init__()
+
 
     def on_pre_enter(self):
         #self.time_zone = self.find_time_zone()
+        config.load() # Load our own app preferences
         self.test_time = 0
         self.event = Clock.schedule_interval(self.update_time, INTERVAL)
         self.event2 = Clock.schedule_interval(self.update_values, INTERVAL2)

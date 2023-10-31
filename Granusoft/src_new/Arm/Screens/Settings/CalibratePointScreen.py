@@ -1,9 +1,9 @@
 from kivy.lang import Builder
 
-import configurator as config
+import Arm.Settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 from kivy.properties import StringProperty
 from statistics import median
 from util.getKVPath import getKVPath

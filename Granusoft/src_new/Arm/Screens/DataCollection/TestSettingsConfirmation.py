@@ -7,7 +7,7 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 
 from util.BaseScreen import BaseScreen
-import configurator as config
+import Arm.Settings.configurator as config
 from util.elements import *
 from util.getKVPath import getKVPath
 import os
