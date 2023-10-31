@@ -2,9 +2,9 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
 from util.BaseScreen import BaseScreen
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 from kivy.uix.popup import Popup
-import configurator as config
+import Arm.Settings.configurator as config
 from util.elements import *
 from util.getKVPath import getKVPath
 import os

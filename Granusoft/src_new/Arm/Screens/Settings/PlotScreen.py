@@ -7,7 +7,7 @@ in our settings file.
 
 from kivy.lang import Builder
 
-import configurator as config
+import Granusoft.src_new.Arm.settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.IntInput import IntInput
 from util.getKVPath import getKVPath

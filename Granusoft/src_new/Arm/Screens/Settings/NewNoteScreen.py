@@ -5,7 +5,7 @@ screen keyboard that will pop up. The input text box will iniinputally be empty.
 
 from kivy.lang import Builder
 
-import configurator as config
+import Arm.Settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
 import os

@@ -10,7 +10,7 @@ from kivy.properties import NumericProperty
 from kivy.properties import StringProperty
 from kivy.properties import ListProperty
 from kivy.clock import Clock
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 import datetime
 
 from util.BaseScreen import BaseScreen

@@ -7,7 +7,7 @@ stored in our settings file .
 
 from kivy.lang import Builder
 import os
-import configurator as config
+import Arm.Settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath

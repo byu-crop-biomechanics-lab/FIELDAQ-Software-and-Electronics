@@ -8,7 +8,7 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.clock import Clock
 from util.BaseScreen import BaseScreen
-from Sensor import Sensor
+from Camera.Sensors import Sensor
 import datetime
 
 import os

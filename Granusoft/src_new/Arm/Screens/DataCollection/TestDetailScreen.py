@@ -7,16 +7,16 @@ from kivy.properties import NumericProperty
 from kivy.properties import StringProperty
 from kivy.properties import ListProperty
 from kivy.clock import Clock
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 import datetime
 import time
 import math
-from TestSingleton import TestSingleton
+from Arm.Data.TestSingleton import TestSingleton
 
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from util.elements import *
-import configurator as config
+import Arm.Settings.configurator as config
 import csv
 import numpy as np
 try:
