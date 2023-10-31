@@ -2,11 +2,11 @@ from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 from util.BaseScreen import BaseScreen
 from util.elements import *
 
-import configurator as config
+import Arm.Settings.configurator as config
 from util.getKVPath import getKVPath
 import os
 

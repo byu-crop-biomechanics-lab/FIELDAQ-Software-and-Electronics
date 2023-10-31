@@ -8,16 +8,16 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 from kivy.clock import Clock
-import configurator as config
+import Arm.Settings.configurator as config
 
-from TestSingleton import TestSingleton
+from Arm.Data.TestSingleton import TestSingleton
 from shutil import copyfile
 import datetime
 
 from kivy.uix.popup import Popup
 
 from util.BaseScreen import BaseScreen
-from util.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
+from util.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior
 from util.elements import *
 import os
 from os import listdir

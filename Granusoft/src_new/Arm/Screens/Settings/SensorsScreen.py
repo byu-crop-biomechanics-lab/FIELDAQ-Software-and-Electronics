@@ -5,7 +5,7 @@ from kivy.uix.button import Button
 from kivy.properties import ObjectProperty
 
 from util.BaseScreen import BaseScreen
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))

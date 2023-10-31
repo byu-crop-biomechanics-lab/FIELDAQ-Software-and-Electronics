@@ -4,14 +4,14 @@ Shows all data: Temperature, Humidity, Location, Time, and all Sensor data
 
 from kivy.lang import Builder
 from kivy.properties import NumericProperty, StringProperty
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 import math
-from TestSingleton import TestSingleton
+from Arm.Data.TestSingleton import TestSingleton
 
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from util.elements import *
-import configurator as config
+import Arm.Settings.configurator as config
 try:
     from sensors.connections import *
 except:
