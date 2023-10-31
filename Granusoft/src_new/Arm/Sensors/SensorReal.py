@@ -1,13 +1,13 @@
 #from sensors.Temperature import Temperature
 # from sensors.Humidity import Humidity
-from sensors.Location import Location
-from sensors.X_Load import X_Load
-from sensors.Y_Load import Y_Load
-from sensors.Pot import Pot
-from sensors.IMU import IMU
-from sensors.Height import HeightPoT
-from sensors.Strain1 import Strain1
-from sensors.Strain2 import Strain2
+from Arm.Sensors.Location import Location
+from Arm.Sensors.X_Load import X_Load
+from Arm.Sensors.Y_Load import Y_Load
+from Arm.Sensors.Pot import Pot
+from Arm.Sensors.IMU import IMU
+from Arm.Sensors.Height import HeightPoT
+from Arm.Sensors.Strain1 import Strain1
+from Arm.Sensors.Strain2 import Strain2
 import datetime
 import board
 import busio

@@ -1,13 +1,13 @@
 from os import mkdir, listdir
 from kivy.lang import Builder
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 import datetime
-from TestSingleton import TestSingleton
+from Arm.Data.TestSingleton import TestSingleton
 
 from util.BaseScreen import BaseScreen
 from kivy.properties import StringProperty
 from util.elements import *
-import configurator as config
+import Arm.Settings.configurator as config
 import csv
 try:
     from sensors.connections import *

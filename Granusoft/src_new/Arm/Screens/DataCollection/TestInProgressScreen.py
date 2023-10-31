@@ -9,12 +9,12 @@ from kivy.properties import NumericProperty
 from kivy.properties import StringProperty
 from kivy.properties import ListProperty
 from kivy.clock import Clock
-from Dataset import Dataset
-from Sensor import Sensor
-from TestSingleton import TestSingleton
+from Arm.Data.Dataset import Dataset
+from Arm.Sensors import Sensor
+from Arm.Data.TestSingleton import TestSingleton
 
 from util.BaseScreen import BaseScreen
-import configurator as config
+import Arm.Settings.configurator as config
 from util.elements import *
 import datetime
 import time

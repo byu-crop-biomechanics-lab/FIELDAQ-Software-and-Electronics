@@ -1,6 +1,6 @@
 import os
 from kivy.lang import Builder
-import configurator as config
+import Arm.Settings.configurator as config
 from kivy.uix.screenmanager import ScreenManager, Screen
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath

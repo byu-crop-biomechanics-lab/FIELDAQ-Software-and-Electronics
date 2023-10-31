@@ -12,7 +12,7 @@ from util.elements import *
 
 import numpy
 
-import configurator as config
+import Arm.Settings.configurator as config
 import os
 from util.getKVPath import getKVPath
 

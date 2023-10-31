@@ -8,12 +8,12 @@ from kivy.properties import StringProperty
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 from kivy.clock import Clock
-from Sensor import Sensor
+from Arm.Sensors import Sensor
 from kivy.uix.popup import Popup
 
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
-import configurator as config
+import Arm.Settings.configurator as config
 from util.elements import *
 
 import datetime

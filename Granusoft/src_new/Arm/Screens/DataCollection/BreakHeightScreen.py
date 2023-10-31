@@ -4,7 +4,7 @@ An input text box that, when selected, allows the user to type in the Break Heig
 
 from kivy.lang import Builder
 
-import configurator as config
+import Arm.Settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
 from util.getKVPath import getKVPath
