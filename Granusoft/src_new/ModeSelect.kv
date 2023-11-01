@@ -1,3 +1,9 @@
+#:import ArmMainScreen Arm.Screens.ArmMainScreen
+
+<GranuScreenManager>:
+    ArmMainScreen:
+
+
 <ModeSelect>:
     name: 'mode_select'
     GranuContainer:
@@ -5,15 +11,15 @@
             GranuSideButton:
                 text: 'Arm'
                 on_release:
-                    root.move_to('main_screen') # Move to settings screen
+                    root.move_to('arm_main_screen') # Move to settings screen
             GranuSideButton:
                 text: 'DogBone'
                 on_release:
-                    root.move_to('main_screen') # Moves to test settings confirmation
+                    root.move_to('arm_main_screen') # Moves to test settings confirmation
             GranuSideButton:
                 text: 'Darling'
                 on_release:
-                    root.move_to('main_screen') # Moves to test settings confirmation
+                    root.move_to('arm_main_screen') # Moves to test settings confirmation
             GranuSideButton:
                 text: 'Camera'
                 on_release:

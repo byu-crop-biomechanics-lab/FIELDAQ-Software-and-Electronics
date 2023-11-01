@@ -1,0 +1,21 @@
+<PlotScreen>:
+	name: 'plot_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+                on_release:
+                    if root.save(): root.back()
+            GranuSideButton:
+                text: 'Cancel'
+	    		on_release:
+                    root.back()
+        GranuContent:
+            GranuTitle:
+                text: 'Plot Number'
+            StackLayout:
+				padding: 20
+                IntInput:
+                    id: plot_num
+                    font_size: 30
+                    size_hint_max_y: 30+15

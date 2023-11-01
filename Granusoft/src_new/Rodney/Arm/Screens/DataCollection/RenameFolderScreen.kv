@@ -1,0 +1,25 @@
+<RenameFolderScreen>:
+	name: 'rename_folder_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+	    		on_release:
+	    		    if root.save(): root.back()
+            GranuSideButton:
+                text: 'Cancel'
+                on_release:
+                    root.back()
+            GranuNone:
+            GranuNone:
+        GranuContent:
+            GranuTitle:
+                text: 'Rename Folder'
+            GridLayout:
+                rows: 1
+                cols: 1
+                StrInput:
+                    id: folder
+                    font_size: 30
+                    multiline: False
+                    size_hint_max_y: 30+15

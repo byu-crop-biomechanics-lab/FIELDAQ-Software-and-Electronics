@@ -12,8 +12,8 @@
             pos: self.pos
             size: self.size
 
-<TestingScreen>:
-	name: 'testing_screen'
+<TestingScreenAuto>:
+	name: 'testing_screen_auto'
     GranuContainer:
         GranuSideArea:
             GranuSideButton:
@@ -23,7 +23,7 @@
             GranuSideButton:
                 text: "Start"
                 on_release:
-                    root.move_to('test_in_progress_screen') # Move to test in progress screen
+                    root.move_to('height_change_confirmation') # Move to test in progress screen
             GranuSideButton:
                 text: "Tests"
                 on_release:
@@ -31,7 +31,7 @@
             GranuSideButton:
                 text: 'Back'
 	    		on_release:
-                    root.move_to('arm_main_screen') # Move to main screen
+                    root.move_to('main_screen') # Move to main screen
         
         GranuContent:
             GranuTitle:
@@ -39,11 +39,10 @@
             GridLayout:
                 cols: 2
                 spacing: 10
-                SettingsButton:
+                TestingInfoBox:
                     font_size: 20
+                    id: load_cell_height
                     text: "Load Cell Height: \n" + root.load_cell_height + root.loadCellHeightUnits
-                    on_release:
-                        root.move_to('height_screen')
                 SettingsButton:
                     font_size: 20
                     text: "Operator: \n" + root.operator

@@ -1,0 +1,59 @@
+<PointDisplay>
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    text: '(' + str(root.adc) + ', ' + str(root.real) + ')'
+
+<PointsList>
+    viewclass: 'PointDisplay'
+    SelectableRecycleBoxLayout:
+
+
+<PointListTitle@Label>
+    size_hint_y: None
+    height: self.font_size + 5
+    font_size: 15
+	markup: True
+	bold: True
+
+<CalibrateScreen>:
+	name: 'calibrate_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Save'
+                on_release:
+                    if root.save(): root.back()
+            GranuSideButton:
+                id: add_point_button
+                text: 'Add\nPoint'
+            GranuSideButton:
+                id: removal_button
+                text: 'Remove\nPoint'
+            GranuSideButton:
+                text: 'Cancel'
+	    		on_release:
+                    root.back()
+        GranuContent:
+            GranuTitle:
+                text: root.sensor_name + ' Calibration'
+            BoxLayout:
+                orientation: 'horizontal'
+                BoxLayout:
+                    size_hint_x: 0.3
+                    orientation: 'vertical'
+                    PointListTitle:
+                        text: 'Calibration Points'
+                    PointListTitle:
+                        text: '(ADC, Real)'
+                    PointsList:
+                        id: point_list
+                        list_data: root.points_list
+            Label:
+                size_hint_y: None
+                height: self.font_size + 5
+                font_size: 20
+                text: 'real = ' + str(round(root.slope, 3)) + '*adc + ' + str(round(root.intercept, 3))
