@@ -1,9 +1,9 @@
-<HeightSensor>:
-    name: 'heightSensor'
+<DeleteFolderConfirmation>:
+    name: 'delete_folder_confirmation'
     GranuContainer:
         GranuContent:
             GranuTitle:
-                text: 'Does this device have a height sensor?'
+                text: 'Are You Sure?'
             GridLayout:
                 cols: 3
                 rows: 3
@@ -21,8 +21,7 @@
                 	markup: True
                 	bold: True
                     on_release:
-                        root.use_height_sensor_no()
-                        root.move_to('arm_testing_screen') # Move to testing screen
+                        root.move_to('test_folders_screen') # Move to testing screen
                 Button:
                 	background_color: (.42,.42,0.42,1)
                 	font_size: 25
@@ -35,5 +34,5 @@
                 	markup: True
                 	bold: True
                     on_release:
-                        root.use_height_sensor_yes()
-                        root.move_to('testing_screen_auto') # Move to testing screen
+                        root.delete_folder_yes()
+                        root.move_to('test_folders_screen') # Move to testing screen

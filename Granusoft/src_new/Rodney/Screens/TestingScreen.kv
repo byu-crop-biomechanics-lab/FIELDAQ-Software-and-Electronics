@@ -1,0 +1,79 @@
+<TestingInfoBox@Label>:
+    font_size: 20
+    color: 1,1,1,1
+	halign: 'center'
+    valign: 'center'
+    markup: True
+	bold: True
+    canvas.before:
+        Color:
+            rgba: .14,.14,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TestingScreen>:
+	name: 'testing_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Update\nNotes'
+	    		on_release:
+                    root.move_to('note_screen') # Move to notes screen
+            GranuSideButton:
+                text: "Start"
+                on_release:
+                    root.move_to('test_in_progress_screen') # Move to test in progress screen
+            GranuSideButton:
+                text: "Tests"
+                on_release:
+                    root.move_to('test_folders_screen') # Move to tests screen
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.move_to('rodney_main_screen') # Move to main screen
+        
+        GranuContent:
+            GranuTitle:
+                text: 'Testing'
+            GridLayout:
+                cols: 2
+                spacing: 10
+                SettingsButton:
+                    font_size: 20
+                    text: "Load Cell Height: \n" + root.load_cell_height + root.loadCellHeightUnits
+                    on_release:
+                        root.move_to('height_screen')
+                SettingsButton:
+                    font_size: 20
+                    text: "Operator: \n" + root.operator
+                    on_release:
+                        root.move_to('operator_screen')
+                SettingsButton:
+                    font_size: 20
+                    text: "Plot: \n" + root.plot
+                    on_release:
+                        root.move_to('plot_screen')
+                SettingsButton:
+                    font_size: 20
+                    text: "Folder:\n"+ root.folder
+                    on_release:
+                        root.move_to('folder_screen')
+
+                TestingInfoBox:
+                    id: date_time
+                    text: "Date and Time: \n " + root.date_time
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: self.minimum_height
+                ListTitle:
+                    text: 'Pre-test Notes'
+                ListTitle:
+                    text: 'Post-test Notes'
+            BoxLayout:
+                orientation: 'horizontal'
+                StaticList:
+                    id: pretest
+                StaticList:
+                    id: posttest

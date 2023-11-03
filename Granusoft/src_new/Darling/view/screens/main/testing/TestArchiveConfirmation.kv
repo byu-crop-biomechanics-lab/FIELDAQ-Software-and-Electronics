@@ -1,9 +1,11 @@
-<HeightSensor>:
-    name: 'heightSensor'
+#:import Path pathlib.Path
+
+<TestArchiveConfirmation>:
+    name: 'test_archive_confirmation'
     GranuContainer:
         GranuContent:
             GranuTitle:
-                text: 'Does this device have a height sensor?'
+                text: 'Archive all saved tests?'
             GridLayout:
                 cols: 3
                 rows: 3
@@ -12,7 +14,7 @@
                 Button:
                 	background_color: (.42,.42,0.42,1)
                 	font_size: 25
-                    text: 'No'
+                    text: 'Cancel'
                     size_hint_y: None
                     height: self.font_size + 40
                     size_hint_x: 0.25
@@ -20,13 +22,11 @@
                 	valign: 'middle'
                 	markup: True
                 	bold: True
-                    on_release:
-                        root.use_height_sensor_no()
-                        root.move_to('arm_testing_screen') # Move to testing screen
+                    on_release: root.cancel()
                 Button:
                 	background_color: (.42,.42,0.42,1)
                 	font_size: 25
-                    text: 'Yes'
+                    text: 'Archive All'
                     size_hint_y: None
                     height: self.font_size + 40
                     size_hint_x: 0.25
@@ -34,6 +34,4 @@
                 	valign: 'middle'
                 	markup: True
                 	bold: True
-                    on_release:
-                        root.use_height_sensor_yes()
-                        root.move_to('testing_screen_auto') # Move to testing screen
+                    on_release: root.archive_all()

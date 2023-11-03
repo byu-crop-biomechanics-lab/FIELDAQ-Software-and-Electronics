@@ -1,9 +1,9 @@
-<HeightSensor>:
-    name: 'heightSensor'
+<BarcodeConfirmation>:
+    name: 'barcode_confirmation'
     GranuContainer:
         GranuContent:
             GranuTitle:
-                text: 'Does this device have a height sensor?'
+                text: 'Scan a barcode for every test?'
             GridLayout:
                 cols: 3
                 rows: 3
@@ -21,8 +21,8 @@
                 	markup: True
                 	bold: True
                     on_release:
-                        root.use_height_sensor_no()
-                        root.move_to('arm_testing_screen') # Move to testing screen
+                        root.use_barcode_no()
+                        root.move_to('heightSensor') # Move to height sensor confirmation screen
                 Button:
                 	background_color: (.42,.42,0.42,1)
                 	font_size: 25
@@ -35,5 +35,5 @@
                 	markup: True
                 	bold: True
                     on_release:
-                        root.use_height_sensor_yes()
-                        root.move_to('testing_screen_auto') # Move to testing screen
+                        root.use_barcode_yes()
+                        root.move_to('heightSensor') # Move to height sensor confirmation screen

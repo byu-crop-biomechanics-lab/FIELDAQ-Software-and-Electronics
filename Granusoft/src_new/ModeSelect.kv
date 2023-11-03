@@ -1,7 +1,9 @@
-#:import ArmMainScreen Arm.Screens.ArmMainScreen
+#:import ARM_MainScreen Arm.Screens.ARM_MainScreen
+# import RodneyMainScreen Rodney.Screens.RodneyMainScreen
 
 <GranuScreenManager>:
-    ArmMainScreen:
+    ARM_MainScreen:
+#    RodneyMainScreen:
 
 
 <ModeSelect>:
@@ -13,9 +15,9 @@
                 on_release:
                     root.move_to('arm_main_screen') # Move to settings screen
             GranuSideButton:
-                text: 'DogBone'
+                text: 'Rodney'
                 on_release:
-                    root.move_to('arm_main_screen') # Moves to test settings confirmation
+                    root.move_to('rodney_main_screen') # Moves to test settings confirmation
             GranuSideButton:
                 text: 'Darling'
                 on_release:
@@ -27,6 +29,6 @@
             GranuSideButton:
                 text: 'Exit'
                 on_release:
-                    root.move_to('exit_screen') # Move to exit screen
+                    root.move_to('arm_exit_screen') # Move to exit screen
 
 
