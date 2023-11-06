@@ -12,7 +12,7 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class NewTestNoteScreen(BaseScreen):
+class ARM_NewTestNoteScreen(BaseScreen):
     def on_pre_enter(self):
         input = self.ids['note']
         input.text = ''

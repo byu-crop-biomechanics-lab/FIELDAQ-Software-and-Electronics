@@ -11,11 +11,11 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class CalibratePointScreen(BaseScreen):
+class ARM_CalibratePointScreen(BaseScreen):
     sensor_name = StringProperty()
 
     def __init__(self, **kwargs):
-        super(CalibratePointScreen, self).__init__(**kwargs)
+        super(ARM_CalibratePointScreen, self).__init__(**kwargs)
 
     def on_pre_enter(self):
         adc_input = self.ids['adc']
@@ -38,7 +38,7 @@ class CalibratePointScreen(BaseScreen):
         adc_input = self.ids['adc']
         real_input = self.ids['real']
         if adc_input.validate() and real_input.validate():
-            calib_screen = self.manager.get_screen('calibrate_screen')
+            calib_screen = self.manager.get_screen('arm_calibrate_screen')
             calib_screen.add_point(float(adc_input.text), float(real_input.text))
             return True
         else:

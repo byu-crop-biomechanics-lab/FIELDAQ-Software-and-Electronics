@@ -6,5 +6,5 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class ColorsScreen(BaseScreen):
+class ARM_ColorsScreen(BaseScreen):
     pass

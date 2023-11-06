@@ -122,7 +122,7 @@ class TestNotesScreen(BaseScreen):
     def new(self, obj):
         self._save_config()
         self.reset_individual_test_notes()
-        self.move_to('new_test_note_screen')
+        self.move_to('arm_new_test_note_screen')
 
     def remove(self, obj):
         '''Move selected notes to the Note Bank'''

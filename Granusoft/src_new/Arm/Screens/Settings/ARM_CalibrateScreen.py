@@ -19,25 +19,25 @@ from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class PointDisplay(SelectableListBehavior, Label):
+class ARM_PointDisplay(SelectableListBehavior, Label):
     adc = NumericProperty()
     real = NumericProperty()
 
-class PointsList(SelectableList):
+class ARM_PointsList(SelectableList):
     def update(self, k, val):
         self.data = [{'adc': x[0], 'real': x[1]} for x in self.list_data]
 
-class CalibrateScreen(BaseScreen):
+class ARM_CalibrateScreen(BaseScreen):
     sensor_name = StringProperty()
     points_list = ListProperty()
     slope = NumericProperty()
     intercept = NumericProperty()
 
     def __init__(self, **kwargs):
-        super(CalibrateScreen, self).__init__(**kwargs)
+        super(ARM_CalibrateScreen, self).__init__(**kwargs)
         self.config_data = {}
         def gui_init(dt):
-            self.calibrate_point_screen = self.manager.get_screen('calibrate_point_screen')
+            self.arm_calibrate_point_screen = self.manager.get_screen('arm_calibrate_point_screen')
             self.parent_screen = self
         Clock.schedule_once(gui_init)
 
@@ -62,8 +62,8 @@ class CalibrateScreen(BaseScreen):
             self.intercept = 0
 
     def to_points_screen(self, obj):
-        self.calibrate_point_screen.set_sensor(self.sensor_name)
-        self.parent_screen.move_to('calibrate_point_screen')
+        self.arm_calibrate_point_screen.set_sensor(self.sensor_name)
+        self.parent_screen.move_to('arm_calibrate_point_screen')
 
     def add_point(self, adc, real):
         self.points_list.append((adc, real))

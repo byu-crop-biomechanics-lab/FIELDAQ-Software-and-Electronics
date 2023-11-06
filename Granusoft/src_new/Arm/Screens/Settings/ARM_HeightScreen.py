@@ -7,7 +7,7 @@ stored in our settings file.
 
 from kivy.lang import Builder
 
-import Granusoft.src_new.Arm.settings.configurator as config
+import Arm.settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
 from util.getKVPath import getKVPath
@@ -15,7 +15,7 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class HeightScreen(BaseScreen):
+class ARM_HeightScreen(BaseScreen):
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         height."""

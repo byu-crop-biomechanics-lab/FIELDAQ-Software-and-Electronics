@@ -1,4 +1,4 @@
-<TestArch>
+<ARM_TestArch>
     canvas.before:
         Color:
             rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
@@ -6,18 +6,18 @@
             pos: self.pos
             size: self.size
 
-<TestListArch>
+<ARM_TestListArch>
     viewclass: 'Note'
     SingleSelectableRecycleBoxLayout:
 
-<ArchNavButton@Button>:
+<ARM_ArchNavButton@Button>:
     font_size: 26
     halign: 'center'
     valign: 'middle'
     markup: True
     bold: True
 
-<SaveTestDialogArch>:
+<ARM_SaveTestDialogArch>:
     markup: True
     bold: True
     title: 'Select Location'
@@ -32,14 +32,14 @@
         BoxLayout:
             size_hint_y: None
             height: 65
-            ArchNavButton:
+            ARM_ArchNavButton:
                 text: "Cancel"
                 on_release: root.cancel()
-            ArchNavButton:
+            ARM_ArchNavButton:
                 text: "Save"
                 on_release: root.save(filechooser.path)
 
-<SaveConfirmDialogArch>:
+<ARM_SaveConfirmDialogArch>:
     size_hint: (0.55, 0.77)
     markup: True
     bold: True
@@ -60,17 +60,17 @@
             size_hint_y: None
             size_hint_x: 1
             height: 65
-            ArchNavButton:
+            ARM_ArchNavButton:
                 text: "Cancel"
                 on_release: root.cancel()
-            ArchNavButton:
+            ARM_ArchNavButton:
                 text: "Choose\nLocation"
                 on_release: root.pathSelector()
-            ArchNavButton:
+            ARM_ArchNavButton:
                 text: "Save to\nUSB"
                 on_release: root.save('/mnt/usbStick')
 
-<NoUsbDialogArch>:
+<ARM_NoUsbDialogArch>:
     size_hint: (0.55, 0.77)
     markup: True
     bold: True
@@ -91,12 +91,12 @@
             size_hint_y: None
             size_hint_x: 1
             height: 65
-            ArchNavButton:
+            ARM_ArchNavButton:
                 text: "Cancel"
                 on_release: root.cancel()
 
-<ArchiveScreen>:
-	name: 'archive_screen'
+<ARM_ArchiveScreen>:
+	name: 'arm_archive_screen'
     GranuContainer:
         GranuSideArea:
             id: tests_buttons
@@ -105,7 +105,7 @@
                 text: 'Test Archive'
             BoxLayout:
                 orientation: 'horizontal'
-                NoteList:
+                ARM_NoteList:
                     id: tests_list
                     on_interaction:
                         root.test_buttons()

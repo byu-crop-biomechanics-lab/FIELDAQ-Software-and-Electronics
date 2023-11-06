@@ -28,7 +28,7 @@ class SensorButton(Button):
             self.parent_screen.move_to('imu_calibrate_screen')
         else:
             self.calib_screen.set_sensor(self.name)
-            self.parent_screen.move_to('calibrate_screen')
+            self.parent_screen.move_to('arm_calibrate_screen')
 
 class SensorsScreen(BaseScreen):
     def __init__(self, **kwargs):
@@ -37,7 +37,7 @@ class SensorsScreen(BaseScreen):
         self.senseMan = Sensor()
         def gui_init(dt):
             '''Called once the Kivy file is parsed. Needed so we can access Kivy IDs.'''
-            calib_screen = self.manager.get_screen('calibrate_screen')
+            calib_screen = self.manager.get_screen('arm_calibrate_screen')
             for s in self.senseMan.get_sensor_keys():
                 # Perhaps Location and Time should be accessed in some other way?
                 if s=='Location' or s=='Time' or s=='Temperature' or s=='Humidity': continue
