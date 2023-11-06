@@ -15,7 +15,7 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class HeightScreen(BaseScreen):
+class ARM_HeightScreen(BaseScreen):
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         height."""

@@ -15,7 +15,7 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class PlotScreen(BaseScreen):
+class ARM_PlotScreen(BaseScreen):
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         plot number."""

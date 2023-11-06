@@ -15,7 +15,7 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class OperatorScreen(BaseScreen):
+class ARM_OperatorScreen(BaseScreen):
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         operator and set the TextInput text."""

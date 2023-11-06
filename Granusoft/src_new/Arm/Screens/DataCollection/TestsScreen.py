@@ -31,7 +31,7 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 class Test(SingleSelectableListBehavior, Label):
     pass
 
-class NavButton(Button):
+class ARM_NavButton(Button):
     pass
 
 class TestList(SingleSelectableList):
@@ -56,7 +56,7 @@ class NoUsbDialog(Popup):
     functions called when the save or cancel buttons are pressed.'''
     cancel = ObjectProperty(None)
 
-class TestsScreen(BaseScreen):
+class ARM_TestsScreen(BaseScreen):
     USB_TEST_FOLDERS_PATH = '/mnt/usbStick'
 
     def __init__(self, **kwargs):
@@ -84,10 +84,10 @@ class TestsScreen(BaseScreen):
         self.test_list = self.ids['tests_list']
 
     def go_back(self, obj):
-        super(TestsScreen, self).back()
+        super(ARM_TestsScreen, self).back()
 
     def remove_tests(self, obj):
-        super(TestsScreen, self).move_to('test_archive_confirmation')
+        super(ARM_TestsScreen, self).move_to('test_archive_confirmation')
 
     def dismiss_popup(self):
         self._popup.dismiss()

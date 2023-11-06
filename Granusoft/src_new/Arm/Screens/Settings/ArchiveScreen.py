@@ -30,7 +30,7 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 class TestArch(SingleSelectableListBehavior, Label):
     pass
 
-class ArchNavButton(Button):
+class ArchARM_NavButton(Button):
     pass
 
 class TestListArch(SingleSelectableList):

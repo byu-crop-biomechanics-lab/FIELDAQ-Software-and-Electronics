@@ -23,7 +23,7 @@
             GranuSideButton:
                 text: "Start"
                 on_release:
-                    root.move_to('height_change_confirmation') # Move to test in progress screen
+                    root.move_to('arm_height_change_confirmation') # Move to test in progress screen
             GranuSideButton:
                 text: "Tests"
                 on_release:
@@ -57,7 +57,7 @@
                     font_size: 20
                     text: "Folder:\n"+ root.folder
                     on_release:
-                        root.move_to('folder_screen')
+                        root.move_to('arm_folder_screen')
 
                 ARM_TestingInfoBox:
                     id: date_time

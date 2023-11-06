@@ -10,7 +10,7 @@
     viewclass: 'Note'
     SingleSelectableRecycleBoxLayout:
 
-<ArchNavButton@Button>:
+<ArchARM_NavButton@Button>:
     font_size: 26
     halign: 'center'
     valign: 'middle'
@@ -32,10 +32,10 @@
         BoxLayout:
             size_hint_y: None
             height: 65
-            ArchNavButton:
+            ArchARM_NavButton:
                 text: "Cancel"
                 on_release: root.cancel()
-            ArchNavButton:
+            ArchARM_NavButton:
                 text: "Save"
                 on_release: root.save(filechooser.path)
 
@@ -60,13 +60,13 @@
             size_hint_y: None
             size_hint_x: 1
             height: 65
-            ArchNavButton:
+            ArchARM_NavButton:
                 text: "Cancel"
                 on_release: root.cancel()
-            ArchNavButton:
+            ArchARM_NavButton:
                 text: "Choose\nLocation"
                 on_release: root.pathSelector()
-            ArchNavButton:
+            ArchARM_NavButton:
                 text: "Save to\nUSB"
                 on_release: root.save('/mnt/usbStick')
 
@@ -91,7 +91,7 @@
             size_hint_y: None
             size_hint_x: 1
             height: 65
-            ArchNavButton:
+            ArchARM_NavButton:
                 text: "Cancel"
                 on_release: root.cancel()
 
