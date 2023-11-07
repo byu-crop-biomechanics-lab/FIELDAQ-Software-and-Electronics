@@ -14,7 +14,7 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 ONE_SEC = 1
 
-class IMUCalibrateScreen(BaseScreen):
+class ARM_IMUCalibrateScreen(BaseScreen):
     offset = NumericProperty()
     real_angle = NumericProperty()
     adc_angle = NumericProperty()

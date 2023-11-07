@@ -9,14 +9,14 @@ from util.getKVPath import getKVPath
 import os
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class Note(SelectableListBehavior, Label):
+class ARM_Note(SelectableListBehavior, Label):
     pass
 
-class NoteList(SelectableList):
+class ARM_NoteList(SelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
-class NoteScreen(BaseScreen):
+class ARM_NoteScreen(BaseScreen):
     '''Manages the Notes.
 
     Be careful not to make a shallow copy of list_data for any SelectableList'''
@@ -94,11 +94,11 @@ class NoteScreen(BaseScreen):
 
     def save(self, obj):
         self._save_config()
-        super(NoteScreen, self).back()
+        super(ARM_NoteScreen, self).back()
 
     def new(self, obj):
         self._save_config()
-        self.move_to('new_note_screen')
+        self.move_to('arm_new_note_screen')
 
     def remove(self, obj):
         '''Move selected notes to the Note Bank'''

@@ -27,7 +27,7 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = 5
 
-class GPSMapScreen(BaseScreen):
+class ARM_GPSMapScreen(BaseScreen):
     sensor = Sensor()
     def update_gps_location(self):
         uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)

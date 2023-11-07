@@ -27,35 +27,35 @@ from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class TestArch(SingleSelectableListBehavior, Label):
+class ARM_TestArch(SingleSelectableListBehavior, Label):
     pass
 
-class ArchARM_NavButton(Button):
+class ARM_ArchNavButton(Button):
     pass
 
-class TestListArch(SingleSelectableList):
+class ARM_TestListArch(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
-class SaveTestDialogArch(Popup):
+class ARM_SaveTestDialogArch(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class SaveConfirmDialogArch(Popup):
+class ARM_SaveConfirmDialogArch(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     save = ObjectProperty(None)
     pathSelector = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class NoUsbDialogArch(Popup):
+class ARM_NoUsbDialogArch(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     cancel = ObjectProperty(None)
 
-class ArchiveScreen(BaseScreen):
+class ARM_ArchiveScreen(BaseScreen):
     USB_TEST_FOLDERS_PATH = '/mnt/usbStick'
 
     def __init__(self, **kwargs):
@@ -77,10 +77,10 @@ class ArchiveScreen(BaseScreen):
         self.ids['tests_list'].list_data = self.test_filenames
 
     def go_back(self, obj):
-        super(ArchiveScreen, self).back()
+        super(ARM_ArchiveScreen, self).back()
 
     def remove_tests(self, obj):
-        super(ArchiveScreen, self).move_to('test_delete_confirmation')
+        super(ARM_ArchiveScreen, self).move_to('test_delete_confirmation')
 
     def dismiss_popup(self):
         self._popup.dismiss()
@@ -91,13 +91,13 @@ class ArchiveScreen(BaseScreen):
                 os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
             except:
                 print("USB Not Mounted")
-        self._popup = SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
+        self._popup = ARM_SaveConfirmDialogArch(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
         self._popup.open()
         # print("We should export all tests!")
 
     def pathSelector(self): # , obj):
         self.dismiss_popup()
-        self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
+        self._popup = ARM_SaveTestDialogArch(save=self.save, cancel=self.dismiss_popup)
         self._popup.open()
 
     def usbSave(self, path):
@@ -108,7 +108,7 @@ class ArchiveScreen(BaseScreen):
 
     def noUSB(self):
         self.dismiss_popup()
-        self._popup = ARM_NoUsbDialog(cancel=self.dismiss_popup)
+        self._popup = ARM_NoUsbDialogArch(cancel=self.dismiss_popup)
         self._popup.open()
 
     def save(self, path):

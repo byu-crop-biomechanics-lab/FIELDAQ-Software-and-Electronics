@@ -13,7 +13,7 @@ import os
 print(getKVPath(os.getcwd(), __file__))
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class NewNoteScreen(BaseScreen):
+class ARM_NewNoteScreen(BaseScreen):
     def on_pre_enter(self):
         input = self.ids['note']
         input.text = ''
