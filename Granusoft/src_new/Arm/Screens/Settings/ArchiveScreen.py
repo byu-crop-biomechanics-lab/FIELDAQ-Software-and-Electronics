@@ -108,7 +108,7 @@ class ArchiveScreen(BaseScreen):
 
     def noUSB(self):
         self.dismiss_popup()
-        self._popup = NoUsbDialog(cancel=self.dismiss_popup)
+        self._popup = ARM_NoUsbDialog(cancel=self.dismiss_popup)
         self._popup.open()
 
     def save(self, path):
