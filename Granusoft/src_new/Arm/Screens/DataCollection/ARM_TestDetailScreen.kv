@@ -1,7 +1,7 @@
 #:import MeshLinePlot kivy.garden.graph.MeshLinePlot
 
-<TestDetailScreen>:
-	name: 'rod_test_detail_screen'
+<ARM_TestDetailScreen>:
+	name: 'test_detail_screen'
     GranuContainer:
         GranuSideArea:
             GranuSideButton:
@@ -33,16 +33,16 @@
                     BoxLayout:
                         orientation: 'horizontal'
                         size_hint_y: 0.1
-                        ListTitle:
+                        ARM_ListTitle:
                             text: 'Post-test Notes'
                     BoxLayout:
                         orientation: 'horizontal'
-                        NoteList:
+                        ARM_NoteList:
                             id: test_notes 
 
                 GridLayout:
                     rows: 2
-                    GraphTitle:
+                    ARM_GraphTitle:
                         text: 'Test Details'
                         id: title_text
                     Graph:

@@ -46,7 +46,7 @@ class ROD_TestDetailScreen(BaseScreen):
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
         def gui_init(dt):
-            self.test_notes_screen = self.manager.get_screen('test_notes_screen')
+            self.test_notes_screen = self.manager.get_screen('rod_test_notes_screen')
             self.parent_screen = self
         Clock.schedule_once(gui_init)
 
@@ -134,4 +134,4 @@ class ROD_TestDetailScreen(BaseScreen):
     
     def update_notes(self):
         self.test_notes_screen.set_file(self.fileName)
-        super(ROD_TestDetailScreen, self).move_to('test_notes_screen')
+        super(ROD_TestDetailScreen, self).move_to('rod_test_notes_screen')

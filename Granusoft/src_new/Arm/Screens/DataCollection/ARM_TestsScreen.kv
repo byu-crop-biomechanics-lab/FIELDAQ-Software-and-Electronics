@@ -1,4 +1,4 @@
-<Test>
+<ARM_Test>
     canvas.before:
         Color:
             rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
@@ -6,11 +6,11 @@
             pos: self.pos
             size: self.size
 
-<TestList>
-    viewclass: 'Note'
+<ARM_TestList>
+    viewclass: 'ARM_Note'
     SingleSelectableRecycleBoxLayout:
 
-<NavButton@Button>:
+<ARM_NavButton@Button>:
     font_size: 26
     halign: 'center'
     valign: 'middle'
@@ -32,10 +32,10 @@
         BoxLayout:
             size_hint_y: None
             height: 65
-            NavButton:
+            ARM_NavButton:
                 text: "Cancel"
                 on_release: root.cancel()
-            NavButton:
+            ARM_NavButton:
                 text: "Save"
                 on_release: root.save(filechooser.path)
 
@@ -60,17 +60,17 @@
             size_hint_y: None
             size_hint_x: 1
             height: 65
-            NavButton:
+            ARM_NavButton:
                 text: "Cancel"
                 on_release: root.cancel()
-            NavButton:
+            ARM_NavButton:
                 text: "Choose\nLocation"
                 on_release: root.pathSelector()
-            NavButton:
+            ARM_NavButton:
                 text: "Save to\nUSB"
                 on_release: root.save('/mnt/usbStick')
 
-<NoUsbDialog>:
+<ARM_NoUsbDialog>:
     size_hint: (0.55, 0.77)
     markup: True
     bold: True
@@ -91,12 +91,12 @@
             size_hint_y: None
             size_hint_x: 1
             height: 65
-            NavButton:
+            ARM_NavButton:
                 text: "Cancel"
                 on_release: root.cancel()
 
-<TestsScreen>:
-	name: 'rod_tests_screen'
+<ARM_TestsScreen>:
+	name: 'tests_screen'
     GranuContainer:
         GranuSideArea:
             id: tests_buttons
@@ -105,7 +105,7 @@
                 text: 'Tests'
             BoxLayout:
                 orientation: 'horizontal'
-                TestList:
+                ARM_TestList:
                     id: tests_list
                     on_interaction:
                         root.test_buttons()

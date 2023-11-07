@@ -59,7 +59,7 @@ class TestFoldersScreen(BaseScreen):
         self.rename_folder_button.bind(on_release=self.rename_folder)
 
         def gui_init(dt):
-            self.test_screen = self.manager.get_screen('tests_screen')
+            self.test_screen = self.manager.get_screen('rod_tests_screen')
             self.parent_screen = self
         Clock.schedule_once(gui_init)
 
@@ -83,7 +83,7 @@ class TestFoldersScreen(BaseScreen):
     def view_tests(self, obj):
         selected = self.folder_list.get_selected()
         config.set('selected_folder', str(selected[0]))
-        self.parent_screen.move_to('tests_screen')
+        self.parent_screen.move_to('rod_tests_screen')
 
     def rename_folder(self,obj):
         selected = self.folder_list.get_selected()

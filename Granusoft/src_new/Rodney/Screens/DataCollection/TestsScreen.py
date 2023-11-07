@@ -70,7 +70,7 @@ class TestsScreen(BaseScreen):
         self.test_details_button = GranuSideButton(text = 'Test\nDetails')
         self.test_details_button.bind(on_release = self.to_test_details)
         def gui_init(dt):
-            self.test_details_screen = self.manager.get_screen('test_detail_screen')
+            self.test_details_screen = self.manager.get_screen('rod_test_detail_screen')
             self.parent_screen = self
         Clock.schedule_once(gui_init)
 
@@ -158,7 +158,7 @@ class TestsScreen(BaseScreen):
         selected = self.test_list.get_selected()
         self.test_details_screen.set_file(selected)
         self.test_list.clear_selection()
-        self.parent_screen.move_to('test_detail_screen')
+        self.parent_screen.move_to('rod_test_detail_screen')
 
     # Button Changes
 

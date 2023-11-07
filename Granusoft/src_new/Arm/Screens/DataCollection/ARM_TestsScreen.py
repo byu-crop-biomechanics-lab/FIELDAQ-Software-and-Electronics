@@ -28,13 +28,13 @@ from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class ROD_Test(SingleSelectableListBehavior, Label):
+class ARM_Test(SingleSelectableListBehavior, Label):
     pass
 
-class ROD_NavButton(Button):
+class ARM_NavButton(Button):
     pass
 
-class ROD_TestList(SingleSelectableList):
+class ARM_TestList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
@@ -51,12 +51,12 @@ class SaveConfirmDialog(Popup):
     pathSelector = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class ROD_NoUsbDialog(Popup):
+class ARM_NoUsbDialog(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     cancel = ObjectProperty(None)
 
-class ROD_TestsScreen(BaseScreen):
+class ARM_TestsScreen(BaseScreen):
     USB_TEST_FOLDERS_PATH = '/mnt/usbStick'
 
     def __init__(self, **kwargs):
@@ -70,7 +70,7 @@ class ROD_TestsScreen(BaseScreen):
         self.test_details_button = GranuSideButton(text = 'Test\nDetails')
         self.test_details_button.bind(on_release = self.to_test_details)
         def gui_init(dt):
-            self.test_details_screen = self.manager.get_screen('rod_test_detail_screen')
+            self.test_details_screen = self.manager.get_screen('test_detail_screen')
             self.parent_screen = self
         Clock.schedule_once(gui_init)
 
@@ -84,10 +84,10 @@ class ROD_TestsScreen(BaseScreen):
         self.test_list = self.ids['tests_list']
 
     def go_back(self, obj):
-        super(ROD_TestsScreen, self).back()
+        super(ARM_TestsScreen, self).back()
 
     def remove_tests(self, obj):
-        super(ROD_TestsScreen, self).move_to('test_archive_confirmation')
+        super(ARM_TestsScreen, self).move_to('test_archive_confirmation')
 
     def dismiss_popup(self):
         self._popup.dismiss()
@@ -115,7 +115,7 @@ class ROD_TestsScreen(BaseScreen):
 
     def noUSB(self):
         self.dismiss_popup()
-        self._popup = ROD_NoUsbDialog(cancel=self.dismiss_popup)
+        self._popup = ARM_NoUsbDialog(cancel=self.dismiss_popup)
         self._popup.open()
 
     def save(self, path):
@@ -158,7 +158,7 @@ class ROD_TestsScreen(BaseScreen):
         selected = self.test_list.get_selected()
         self.test_details_screen.set_file(selected)
         self.test_list.clear_selection()
-        self.parent_screen.move_to('rod_test_detail_screen')
+        self.parent_screen.move_to('test_detail_screen')
 
     # Button Changes
 

@@ -31,20 +31,20 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 FOLDERNAME = "Tests/"+"config.get('selected_folder',0)"
 
-class ROD_Folder(SingleSelectableListBehavior, Label):
+class ARM_Folder(SingleSelectableListBehavior, Label):
     pass
 
 
-class ROD_NavButton(Button):
+class ARM_NavButton(Button):
     pass
 
 
-class ROD_FolderList(SingleSelectableList):
+class ARM_FolderList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
 
-class ROD_TestFoldersScreen(BaseScreen):
+class ARM_TestFoldersScreen(BaseScreen):
     USB_TEST_FOLDERS_PATH = '/mnt/usbStick'
 
     def __init__(self, **kwargs):
@@ -59,7 +59,7 @@ class ROD_TestFoldersScreen(BaseScreen):
         self.rename_folder_button.bind(on_release=self.rename_folder)
 
         def gui_init(dt):
-            self.test_screen = self.manager.get_screen('rod_tests_screen')
+            self.test_screen = self.manager.get_screen('tests_screen')
             self.parent_screen = self
         Clock.schedule_once(gui_init)
 
@@ -73,17 +73,17 @@ class ROD_TestFoldersScreen(BaseScreen):
         self.folder_list = self.ids['folders_list']
 
     def go_back(self, obj):
-        super(ROD_TestFoldersScreen, self).back()
+        super(ARM_TestFoldersScreen, self).back()
 
     def delete_folder(self, obj):
         selected = self.folder_list.get_selected()
         config.set('unwanted_folder', str(selected[0]))
-        self.parent_screen.move_to('rod_delete_folder_confirmation')
+        self.parent_screen.move_to('arm_delete_folder_confirmation')
 
     def view_tests(self, obj):
         selected = self.folder_list.get_selected()
         config.set('selected_folder', str(selected[0]))
-        self.parent_screen.move_to('rod_tests_screen')
+        self.parent_screen.move_to('tests_screen')
 
     def rename_folder(self,obj):
         selected = self.folder_list.get_selected()
