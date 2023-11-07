@@ -17,7 +17,8 @@ import shutil
 from kivy.uix.popup import Popup
 
 from util.BaseScreen import BaseScreen
-from util.SingleSelectableList import SingleSelectableList, SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
+from util.SelectableList import SelectableListBehavior
+from util.SingleSelectableList import SingleSelectableList,   SingleSelectableListBehavior, SingleSelectableRecycleBoxLayout
 from util.elements import *
 import os
 import datetime
@@ -26,6 +27,9 @@ from os.path import isfile, join
 from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
+
+class CAM_Note(SelectableListBehavior, Label):
+    pass
 
 class ImagePic(SingleSelectableListBehavior, Label):
     pass
