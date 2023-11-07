@@ -11,14 +11,14 @@ from util.getKVPath import getKVPath
 import os
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class Notes(SelectableListBehavior, Label):
+class ARM_Notes(SelectableListBehavior, Label):
     pass
 
-class NotesList(SelectableList):
+class ARM_NotesList(SelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
-class TestNotesScreen(BaseScreen):
+class ARM_TestNotesScreen(BaseScreen):
     '''Manages the Notes.
 
     Be careful not to make a shallow copy of list_data for any SelectableList'''

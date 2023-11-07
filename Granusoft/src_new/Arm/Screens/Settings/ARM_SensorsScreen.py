@@ -10,7 +10,7 @@ from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-class SensorButton(Button):
+class ARM_SensorButton(Button):
     def __init__(self, name, parent_screen, calib_screen, **kwargs):
         '''Set the sensor name (which is also the key to retrieve calibration settings
         from the config file.  Reference the parent screen for move_to() function.
@@ -30,7 +30,7 @@ class SensorButton(Button):
             self.calib_screen.set_sensor(self.name)
             self.parent_screen.move_to('arm_calibrate_screen')
 
-class SensorsScreen(BaseScreen):
+class ARM_SensorsScreen(BaseScreen):
     def __init__(self, **kwargs):
         '''Add a button for each sensor.'''
         super(BaseScreen, self).__init__(**kwargs)
