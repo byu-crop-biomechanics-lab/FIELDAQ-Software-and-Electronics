@@ -43,7 +43,7 @@ class ARM_SensorsScreen(BaseScreen):
                 if s=='Location' or s=='Time' or s=='Temperature' or s=='Humidity': continue
                 if s=='Load Cell Height': s='Load Cell\nHeight'
                 # Sensor name, parent screen (of button), calibration screen
-                self.ids['sensor_list'].add_widget(SensorButton(s, self, calib_screen))
+                self.ids['sensor_list'].add_widget(ARM_SensorButton(s, self, calib_screen))
         Clock.schedule_once(gui_init)
 
     def restart_OS(self):

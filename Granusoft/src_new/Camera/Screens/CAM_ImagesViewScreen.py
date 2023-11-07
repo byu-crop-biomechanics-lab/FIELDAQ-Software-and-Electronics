@@ -13,7 +13,7 @@ import Camera.Settings.configurator as config
 
 from shutil import copyfile
 import shutil
-
+from util.SelectableList import SelectableListBehavior
 from kivy.uix.popup import Popup
 
 from util.BaseScreen import BaseScreen
@@ -26,6 +26,9 @@ from os.path import isfile, join
 from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
+
+class CAM_Note(SelectableListBehavior, Label):
+    pass
 
 class CAM_ImagePic(SingleSelectableListBehavior, Label):
     pass
