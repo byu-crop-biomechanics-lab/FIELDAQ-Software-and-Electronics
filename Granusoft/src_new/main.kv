@@ -4,33 +4,12 @@
 # Include custom Kivy widgets which will be used on all screens that are imported below
 #:import * util.elements
 
-#:import CameraMainScreen Camera.Screens.CameraMainScreen
-#:import CameraFeedScreen Camera.Screens.CameraFeedScreen
-#:import ImageReviewScreen Camera.Screens.ImageReviewScreen
-#:import ImagesViewScreen Camera.Screens.ImagesViewScreen
-#:import CameraSettingsScreen Camera.Screens.CameraSettingsScreen
-#:import ImageDeleteConfirmation Camera.Screens.ImageDeleteConfirmation
-
-
 #:import ModeSelect ModeSelect
 
-
-# Load each screen into the ScreenManager. For human convenience, screens are
-# grouped into like-screens
 <GranuScreenManager>:
     # Properties
     current: 'mode_select' # Start with the ModeSelect screen
     ModeSelect:
-
-
-
-    # Camera Interface
-    CameraMainScreen:
-    CameraFeedScreen:
-    ImageReviewScreen:
-    ImagesViewScreen:
-    CameraSettingsScreen:
-    ImageDeleteConfirmation:
 
 
 

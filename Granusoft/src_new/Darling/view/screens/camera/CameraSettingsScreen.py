@@ -17,7 +17,7 @@ from kivy.uix.popup import Popup
 import configurator as config
 from view.BaseScreen import BaseScreen
 
-Builder.load_file('view/screens/camera/CameraSettingsScreen.kv')
+Builder.load_file('view/screens/camera/CAM_SettingsScreen.kv')
 
 class LoadDialog(Popup):
     '''A dialog to load a file.  The load and cancel properties point to the
@@ -32,7 +32,7 @@ class SaveDialog(Popup):
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class CameraSettingsScreen(BaseScreen):
+class CAM_SettingsScreen(BaseScreen):
     def dismiss_popup(self):
         self._popup.dismiss()
 

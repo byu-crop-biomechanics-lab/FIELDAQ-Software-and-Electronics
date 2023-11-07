@@ -1,7 +1,7 @@
 """
 This screen needs to accept information about which image to view. Then display
 that image. The image can be deleted via this screen [not sure if this
-feature should be kept or not], or the user can return to the ImagesViewScreen.
+feature should be kept or not], or the user can return to the CAM_ImagesViewScreen.
 """
 
 from kivy.lang import Builder
@@ -13,9 +13,9 @@ import datetime
 
 import os
 
-Builder.load_file('view/screens/camera/ImageReviewScreen.kv')
+Builder.load_file('view/screens/camera/CAM_ImageReviewScreen.kv')
 
-class ImageReviewScreen(BaseScreen):
+class CAM_ImageReviewScreen(BaseScreen):
     image_name = StringProperty()
 
     def set_image(self, name):

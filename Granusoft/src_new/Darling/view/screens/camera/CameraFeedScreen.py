@@ -21,9 +21,9 @@ try:
 except:
     pass
 
-Builder.load_file('view/screens/camera/CameraFeedScreen.kv')
+Builder.load_file('view/screens/camera/CAM_FeedScreen.kv')
 
-class CameraFeedScreen(BaseScreen):
+class CAM_FeedScreen(BaseScreen):
     try:
         camera = PiCamera(resolution=(2240,1840))
     except:

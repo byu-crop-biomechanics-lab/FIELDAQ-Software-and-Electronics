@@ -43,7 +43,7 @@
                     font_size: 20
                     text: "Load Cell Height: \n" + root.load_cell_height + root.loadCellHeightUnits
                     on_release:
-                        root.move_to('height_screen')
+                        root.move_to('arm_height_screen')
                 SettingsButton:
                     font_size: 20
                     text: "Operator: \n" + root.operator
@@ -58,7 +58,7 @@
                     font_size: 20
                     text: "Folder:\n"+ root.folder
                     on_release:
-                        root.move_to('folder_screen')
+                        root.move_to('arm_folder_screen')
 
                 ARM_TestingInfoBox:
                     id: date_time

@@ -12,9 +12,9 @@ from view.BaseScreen import BaseScreen
 from os import listdir
 from os.path import isfile, join
 
-Builder.load_file('view/screens/camera/ImageDeleteConfirmation.kv')
+Builder.load_file('view/screens/camera/CAM_ImageDeleteConfirmation.kv')
 
-class ImageDeleteConfirmation(BaseScreen):
+class CAM_ImageDeleteConfirmation(BaseScreen):
     def on_pre_enter(self):
         self.image_filenames = [f for f in listdir("Images") if (isfile(join("Images", f)) and f != ".gitignore")]
 
@@ -22,7 +22,7 @@ class ImageDeleteConfirmation(BaseScreen):
         for name in self.image_filenames:
             if name != '.gitignore':
                 os.remove('Images/' + name)
-        super(ImageDeleteConfirmation, self).back()
+        super(CAM_ImageDeleteConfirmation, self).back()
 
     def cancel(self):
-        super(ImageDeleteConfirmation, self).back()
+        super(CAM_ImageDeleteConfirmation, self).back()

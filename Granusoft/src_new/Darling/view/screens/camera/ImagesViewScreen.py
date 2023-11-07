@@ -24,7 +24,7 @@ import datetime
 from os import listdir
 from os.path import isfile, join
 
-Builder.load_file('view/screens/camera/ImagesViewScreen.kv')
+Builder.load_file('view/screens/camera/CAM_ImagesViewScreen.kv')
 
 class ImagePic(SingleSelectableListBehavior, Label):
     pass
@@ -39,7 +39,7 @@ class SaveImageDialog(Popup):
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class ImagesViewScreen(BaseScreen):
+class CAM_ImagesViewScreen(BaseScreen):
     USB_IMG_FOLDERS_PATH = '/mnt/usbStick'
 
     def __init__(self, **kwargs):
@@ -61,10 +61,10 @@ class ImagesViewScreen(BaseScreen):
         self.ids['images_list'].list_data = self.image_filenames
 
     def go_back(self, obj):
-        super(ImagesViewScreen, self).back()
+        super(CAM_ImagesViewScreen, self).back()
 
     def remove_images(self, obj):
-        super(ImagesViewScreen, self).move_to('img_delete_confirmation')
+        super(CAM_ImagesViewScreen, self).move_to('img_delete_confirmation')
 
     def dismiss_popup(self):
         self._popup.dismiss()
@@ -104,7 +104,7 @@ class ImagesViewScreen(BaseScreen):
         imagename = self.ids['images_list'].remove_selected()
         img_screen = self.manager.get_screen('img_review_screen')
         img_screen.set_image(imagename[0])
-        super(ImagesViewScreen, self).move_to('img_review_screen')
+        super(CAM_ImagesViewScreen, self).move_to('img_review_screen')
 
     # Button Changes
 
