@@ -20,7 +20,7 @@
 	markup: True
 	bold: True
 
-<MoveButton@Button>
+<ARM_MoveButton@Button>
     size_hint_y: None
     background_color: (.42,.42,0.42,1)
     height: self.font_size + 10
@@ -82,17 +82,17 @@
                 orientation: 'horizontal'
                 size_hint_y: None
                 height: self.minimum_height
-                MoveButton:
+                ARM_MoveButton:
                     text: 'Move Here'
                     on_release:
                         root.move_to_pretest()
                         root.default_buttons()
-                MoveButton:
+                ARM_MoveButton:
                     text: 'Move Here'
                     on_release:
                         root.move_to_posttest()
                         root.default_buttons()
-                MoveButton:
+                ARM_MoveButton:
                     text: 'Move Here'
                     on_release:
                         root.move_to_bank()
