@@ -1,12 +1,12 @@
 
 #:import ARM_MainScreen Arm.Screens.ARM_MainScreen
-# import RodneyMainScreen Rodney.Screens.RodneyMainScreen
+#: import ROD_MainScreen Rodney.Screens.ROD_MainScreen
 #:import CAM_MainScreen Camera.Screens.CAM_MainScreen
 
 <GranuScreenManager>:
     ARM_MainScreen:
     CAM_MainScreen:
-#    RodneyMainScreen:
+    ROD_MainScreen:
 
 
 <ModeSelect>:
@@ -20,7 +20,7 @@
             GranuSideButton:
                 text: 'Rodney'
                 on_release:
-                    root.move_to('rodney_main_screen') # Moves to test settings confirmation
+                    root.move_to('rod_main_screen') # Moves to test settings confirmation
             GranuSideButton:
                 text: 'Darling'
                 on_release:
