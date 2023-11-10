@@ -1,0 +1,83 @@
+
+#:import CAM_FeedScreen Devices.Camera.Screens.CAM_FeedScreen
+#:import CAM_ImageReviewScreen Devices.Camera.Screens.CAM_ImageReviewScreen
+#:import CAM_ImagesViewScreen Devices.Camera.Screens.CAM_ImagesViewScreen
+#:import CAM_SettingsScreen Devices.Camera.Screens.CAM_SettingsScreen
+#:import CAM_ImageDeleteConfirmation Devices.Camera.Screens.CAM_ImageDeleteConfirmation
+
+<GranuScreenManager>:
+    CAM_FeedScreen:
+    CAM_ImageReviewScreen:
+    CAM_ImagesViewScreen:
+    CAM_SettingsScreen:
+    CAM_ImageDeleteConfirmation:
+
+<CAM_MainScreenInfoBox@Label>:
+    font_size: 25
+	color: 1,1,1,1
+	halign: 'center'
+	valign: 'center'
+	markup: True
+	bold: True
+    canvas.before:
+        Color:
+            rgba: .14,.14,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+
+<CAM_MainScreen>:
+    name: 'cam_main_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Settings'
+                on_release:
+                    root.move_to('cam_settings_screen') # Move to camera settings screen
+            GranuSideButton:
+                text: 'Camera'
+                on_release:
+                    root.move_to('cam_feed_screen') # Move to camera feed screen
+            GranuSideButton:
+                text: 'View\nImages'
+	    		on_release:
+                    root.move_to('cam_img_viewer_screen') # Move to image view screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('mode_select') # Move to exit screen
+        GranuContent:
+            GranuTitle:
+                text: 'Camera Main Menu'
+            Label:
+                id: device_name
+                font_size: 40
+                markup: True
+            	bold: True
+                text: 'Stalk Cutting\nDevice 2.1.0'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            	markup: True
+            	bold: True
+            GridLayout:
+                cols: 2
+                rows: 2
+                spacing: 10
+                CAM_MainScreenInfoBox:
+                    id: temperature
+                    text: 'Temperature: ' + root.temperature +  u'\N{DEGREE SIGN}' + 'F'
+                CAM_MainScreenInfoBox:
+                    id: humidity
+                    text: 'Humidity: ' + root.humidity +  "%"
+                CAM_MainScreenInfoBox:
+                    id: location
+                    text: 'Location:\n' + root.location
+                CAM_MainScreenInfoBox:
+                    id: time
+                    text: 'Time: ' + root.time

@@ -1,3 +1,16 @@
+
+#:import ARM_MainScreen Devices.Arm.Screens.ARM_MainScreen
+#:import ROD_MainScreen Devices.Rodney.Screens.ROD_MainScreen
+#:import CAM_MainScreen Devices.Camera.Screens.CAM_MainScreen
+#:import DAR_MainScreen Devices.Darling.Screens.DAR_MainScreen
+
+<GranuScreenManager>:
+    ARM_MainScreen:
+    CAM_MainScreen:
+    ROD_MainScreen:
+    DAR_MainScreen:
+
+
 <ModeSelect>:
     name: 'mode_select'
     GranuContainer:
@@ -5,15 +18,15 @@
             GranuSideButton:
                 text: 'Arm'
                 on_release:
-                    root.move_to('main_screen') # Move to settings screen
+                    root.move_to('arm_main_screen') # Move to settings screen
             GranuSideButton:
-                text: 'DogBone'
+                text: 'Rodney'
                 on_release:
-                    root.move_to('main_screen') # Moves to test settings confirmation
+                    root.move_to('rod_main_screen') # Moves to test settings confirmation
             GranuSideButton:
                 text: 'Darling'
                 on_release:
-                    root.move_to('main_screen') # Moves to test settings confirmation
+                    root.move_to('dar_main_screen') # Moves to test settings confirmation
             GranuSideButton:
                 text: 'Camera'
                 on_release:
@@ -21,6 +34,6 @@
             GranuSideButton:
                 text: 'Exit'
                 on_release:
-                    root.move_to('exit_screen') # Move to exit screen
+                    root.move_to('arm_exit_screen') # Move to exit screen
 
 

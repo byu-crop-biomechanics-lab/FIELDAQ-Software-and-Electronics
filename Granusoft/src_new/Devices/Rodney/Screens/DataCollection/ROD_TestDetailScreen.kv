@@ -1,0 +1,66 @@
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
+<ROD_TestDetailScreen>:
+	name: 'rod_test_detail_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.back() # Move to note screen
+			GranuSideButton:
+				text: 'IMU/POT'
+				id: imu_pot_toggle
+            GranuSideButton:
+                text: 'Update Notes'
+                on_release:
+                    root.update_notes()
+
+        GranuContent:
+
+            GranuTitle:
+                id: testTitle #text: 'Test Results:' + root.fileName
+                size_hint_max_y: 30
+                font_size: 22
+            
+            GridLayout:
+                cols: 2
+                spacing: 5
+
+                GridLayout:
+                    rows: 2
+                    size_hint_x: 0.5
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: 0.1
+                        ROD_ListTitle:
+                            text: 'Post-test Notes'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        ROD_NoteList:
+                            id: test_notes 
+
+                GridLayout:
+                    rows: 2
+                    ROD_GraphTitle:
+                        text: 'Test Details'
+                        id: title_text
+                    Graph:
+                        id: graph_test
+                        plot: MeshLinePlot
+                        background_color: 0, 0, 0, 1
+                        xlabel:'Angle (deg)'
+                        ylabel:'Force (lbs)'
+                        x_ticks_major:root.x_major
+                        y_ticks_major:root.y_major
+                        y_grid_label:True
+                        x_grid_label:True
+                        #padding:5
+                        x_grid:True
+                        y_grid:True
+                        xmin:0
+                        ymin:0
+                        xmax:root.x_max
+                        ymax:root.y_max
+
+            
