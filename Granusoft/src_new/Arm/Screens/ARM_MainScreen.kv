@@ -1,0 +1,160 @@
+# These following Lines declare where the py and kv files for each screen
+# are stored and that they should be imported
+#:import ARM_ExitScreen Arm.Screens.ARM_ExitScreen
+#:import ARM_LiveFeedScreen Arm.Screens.ARM_LiveFeedScreen
+
+#:import ARM_SettingsScreen Arm.Screens.ARM_SettingsScreen
+#:import ARM_TestingScreen Arm.Screens.ARM_TestingScreen
+#:import ARM_TestingScreenAuto Arm.Screens.ARM_TestingScreenAuto
+
+#:import ARM_ColorsScreen Arm.Screens.Settings.ARM_ColorsScreen
+#:import ARM_NoteScreen Arm.Screens.Settings.ARM_NoteScreen
+#:import ARM_SensorsScreen Arm.Screens.Settings.ARM_SensorsScreen
+#:import ARM_UpdateScreen Arm.Screens.Settings.ARM_UpdateScreen
+#:import ARM_GPSMapScreen Arm.Screens.Settings.ARM_GPSMapScreen
+#:import ARM_ArchiveScreen Arm.Screens.Settings.ARM_ArchiveScreen
+#:import ARM_TestDeleteConfirmation Arm.Screens.Settings.ARM_TestDeleteConfirmation
+
+#:import ARM_TestNotesScreen Arm.Screens.Settings.ARM_TestNotesScreen
+#:import ARM_NewNoteScreen Arm.Screens.Settings.ARM_NewNoteScreen
+#:import ARM_NewTestNoteScreen Arm.Screens.Settings.ARM_NewTestNoteScreen
+
+#:import ARM_CalibrateScreen Arm.Screens.Settings.ARM_CalibrateScreen
+#:import ARM_IMUCalibrateScreen Arm.Screens.Settings.ARM_IMUCalibrateScreen
+#:import ARM_CalibratePointScreen Arm.Screens.Settings.ARM_CalibratePointScreen
+
+
+#:import ARM_TestInProgressScreen Arm.Screens.DataCollection.ARM_TestInProgressScreen
+#:import ARM_TestingResultsScreen Arm.Screens.DataCollection.ARM_TestingResultsScreen
+#:import ARM_BreakHeightScreen Arm.Screens.DataCollection.ARM_BreakHeightScreen
+#:import ARM_TestsScreen Arm.Screens.DataCollection.ARM_TestsScreen
+#:import ARM_TestDetailScreen Arm.Screens.DataCollection.ARM_TestDetailScreen
+#:import ARM_TestArchiveConfirmation Arm.Screens.DataCollection.ARM_TestArchiveConfirmation
+#:import ARM_TestSettingsConfirmation Arm.Screens.DataCollection.ARM_TestSettingsConfirmation
+#:import ARM_BarcodeConfirmation Arm.Screens.DataCollection.ARM_BarcodeConfirmation
+#:import ARM_SaveScreen Arm.Screens.DataCollection.ARM_SaveScreen
+#:import ARM_HeightScreen Arm.Screens.DataCollection.ARM_HeightScreen
+#:import ARM_OperatorScreen Arm.Screens.DataCollection.ARM_OperatorScreen
+#:import ARM_PlotScreen Arm.Screens.DataCollection.ARM_PlotScreen
+#:import ARM_HeightSensor Arm.Screens.DataCollection.ARM_HeightSensor
+#:import ARM_FolderScreen Arm.Screens.DataCollection.ARM_FolderScreen
+#:import ARM_TestFoldersScreen Arm.Screens.DataCollection.ARM_TestFoldersScreen
+#:import ARM_DeleteFolderConfirmation Arm.Screens.DataCollection.ARM_DeleteFolderConfirmation
+#:import ARM_RenameFolderScreen Arm.Screens.DataCollection.ARM_RenameFolderScreen
+#:import ARM_HeightChangeConfirmation Arm.Screens.DataCollection.ARM_HeightChangeConfirmation 
+
+
+<GranuScreenManager>:
+    # Rootc_new/Camera/Screens/ImagesViewScreen.kv deleted in 65cf37202b6f9d4b26b29a167183d88487959a8e and modified in HEAD.  Version HEAD of Granusoft/src_new/
+  
+    ARM_SettingsScreen:
+    ARM_TestingScreen:
+    ARM_TestingScreenAuto:
+    ARM_LiveFeedScreen:
+
+    # Settings
+    ARM_ColorsScreen:
+    ARM_NoteScreen:
+    ARM_SensorsScreen:
+    ARM_UpdateScreen:
+    ARM_GPSMapScreen:
+    ARM_ArchiveScreen:
+    ARM_TestDeleteConfirmation:
+    ARM_TestNotesScreen:
+
+    # Settings - Notes
+    ARM_NewNoteScreen:
+    ARM_NewTestNoteScreen:
+
+    # Settings - Sensors
+    ARM_CalibrateScreen:
+    ARM_IMUCalibrateScreen:
+    ARM_CalibratePointScreen:
+
+    # Testing
+    ARM_TestInProgressScreen:
+    ARM_TestingResultsScreen:
+    ARM_BreakHeightScreen:
+    ARM_TestsScreen:
+    ARM_TestDetailScreen:
+    ARM_TestArchiveConfirmation:
+    ARM_TestSettingsConfirmation:
+    ARM_BarcodeConfirmation:
+    ARM_SaveScreen:
+    ARM_HeightScreen:
+    ARM_OperatorScreen:
+    ARM_PlotScreen:
+    ARM_HeightSensor:
+    ARM_FolderScreen:
+    ARM_TestFoldersScreen:
+    ARM_DeleteFolderConfirmation:
+    ARM_RenameFolderScreen:
+    ARM_HeightChangeConfirmation:
+
+
+<ARM_MainScreenInfoBox@Label>:
+    font_size: 25
+	color: 1,1,1,1
+	halign: 'center'
+	valign: 'center'
+	markup: True
+	bold: True
+    canvas.before:
+        Color:
+            rgba: .14,.14,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ARM_MainScreen>:
+    name: 'arm_main_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Settings'
+	    		on_release:
+                    root.move_to('arm_settings_screen') # Move to settings screen
+            GranuSideButton:
+                text: 'Testing'
+                on_release:
+                    root.move_to('test_settings_confirmation') # Moves to test settings confirmation
+            GranuSideButton:
+                text: 'Live Feed'
+                on_release:
+                    root.move_to('arm_live_feed_screen') # Move to liveFeed screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('mode_select') # Move to exit screen
+        GranuContent:
+            GranuTitle:
+                text: 'ARM Main Menu'
+            Label:
+                id: device_name
+                font_size: 40
+                markup: True
+            	bold: True
+                text: 'Stalk Strength\nDevice 2.3.1'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            	markup: True
+            	bold: True
+            GridLayout:
+                cols: 2
+                spacing: 10
+                ARM_MainScreenInfoBox:
+                    id: current_date
+                    text: 'Date: \n' + root.current_date
+                ARM_MainScreenInfoBox:
+                    id: load_cell_height
+                    text: 'Height: \n' + root.load_cell_height+root.loadCellHeightUnits
+                ARM_MainScreenInfoBox:
+                    id: location
+                    text: 'Location:\n' + root.location
+                ARM_MainScreenInfoBox:
+                    id: time
+                    text: 'Time: \n' + root.time
