@@ -42,7 +42,7 @@ Granusoft - Top-most directory containing only code, but all of the code base. T
 				Granusoft/src/view/input/Sensors - Contains identical python files for each physical sensor. I am unsure what this directory is used for.
 			Granusoft/src/view/keyboard_layouts - Contains the json files for the custom keyboards used throughout the GUI.
 			Granusoft/src/view/screens - Contains 3 directories that help organize all of the python and kivy files for each screen used throughout the GUI.
-				Granusoft/src/view/screens/camera - Contains all of the python and kivy files used when using the device to take photos using the Camera.
+				Granusoft/src/view/screens/camera - Contains all of the python and kivy files used when using the device to take photos using the Devices.Camera.
 				Granusoft/src/view/screens/main - Contains the majority of the python and kivy files used for the stalk pushing GUI.
 					Granusoft/src/view/screens/main/testing - Further separates the testing python and kivy files from the majority of the other screens contained in Granusoft/src/view/screens/main.
 				Granusoft/src/view/screens/settings - Contains the python and kivy files for all of the settings screens.

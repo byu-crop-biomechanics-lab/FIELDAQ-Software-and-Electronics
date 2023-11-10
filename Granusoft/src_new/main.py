@@ -1,8 +1,6 @@
 from kivy.config import Config as KivyConfig
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
-from Arm.Screens.ExitScreen import ExitScreen
-
 
 # Kivy Configuration
 KivyConfig.set('kivy', 'desktop', 0) # Disable OS-specific features for testing
@@ -30,4 +28,9 @@ if __name__ == "__main__":
     print("Root Python directory:", root_directory)
 
     # Run the App
-    MainApp().run()
+    try:
+        MainApp().run()
+    except KeyboardInterrupt:
+        print("Closing Application...")
+        sys.exit()
+
