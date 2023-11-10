@@ -1,7 +1,6 @@
 from kivy.config import Config as KivyConfig
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
-from Arm.Screens.ARM_ExitScreen import ARM_ExitScreen
 
 
 # Kivy Configuration
