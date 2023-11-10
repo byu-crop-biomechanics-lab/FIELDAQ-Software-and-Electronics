@@ -83,11 +83,6 @@
                         root.manager.transition.direction = 'left'
                         root.move_to('sensors_screen')
                 SettingsButton:
-                    text: 'Switch to\nCamera'
-	    		    on_release:
-                        root.manager.transition.direction = 'left'
-                        root.move_to('cam_main_screen')
-                SettingsButton:
                     text: 'Update with\nGithub'
                     on_release:
                         app.stop()
