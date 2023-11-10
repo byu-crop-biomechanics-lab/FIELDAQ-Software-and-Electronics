@@ -1,0 +1,67 @@
+<ARM_LiveFeedInfoBox@Label>:
+    font_size: 25
+    color: 1,1,1,1
+	halign: 'center'
+	valign: 'center'
+	markup: True
+    bold: True
+    canvas.before:
+        Color:
+            rgba: .14,.14,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ARM_LiveFeedScreen>:
+	name: 'arm_live_feed_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuNone:
+            GranuSideButton:
+                id: adc_button_text
+                on_release:
+                    root.adc_button_press()
+            GranuSideButton:
+                text: root.transition_to_state
+	    		on_release:
+                    root.transition()
+            GranuSideButton:
+                text: 'Back'
+	    		on_release:
+                    root.manager.transition.direction = 'right'
+                    root.move_to('arm_main_screen') # Move to main screen
+        GranuContent:
+            GranuTitle:
+                text: 'Live Feed'
+            GridLayout:
+                cols: 3
+                spacing: 10
+                ARM_LiveFeedInfoBox:
+                    id: current_date
+                    text: root.current_date_label +':\n'+ root.current_date
+                ARM_LiveFeedInfoBox:
+                    id: time
+                    text: root.time_label + ':\n' + root.time
+                ARM_LiveFeedInfoBox:
+                    id: location
+                    size_hint_x: 1.25
+                    text: root.location_label + ':\n' + root.location
+                ARM_LiveFeedInfoBox:
+                    id: strain1
+                    text: root.strain1_label + ':\n' + root.strain1 + root.xUnits
+                ARM_LiveFeedInfoBox:
+                    id: strain2
+                    text: root.strain2_label + ':\n' + root.strain2
+                ARM_LiveFeedInfoBox:
+                    id: load_cell_height
+                    text: root.load_cell_height_label + ':\n' + root.load_cell_height + root.loadCellHeightUnits
+                ARM_LiveFeedInfoBox:
+                    id: pot_angle
+                    text: root.pot_angle_label + ':\n' + root.pot_angle + root.potUnits
+                ARM_LiveFeedInfoBox:
+                    id: imu_angle
+                    text: root.imu_angle_label + ':\n' + root.imu_angle + root.imuUnits
+                ARM_LiveFeedInfoBox:
+                    id: cpu_time
+                    text: root.data_rate_label + ':\n' + root.data_rate + " Hz"
+                
