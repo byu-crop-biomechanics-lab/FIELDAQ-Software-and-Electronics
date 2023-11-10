@@ -11,8 +11,6 @@ from kivy.clock import Clock
 from util.BaseScreen import BaseScreen
 from Devices.Darling.Sensor import Sensor
 import datetime
-# import pytz
-# from timezonefinder import TimezoneFinder
 from util.getKVPath import getKVPath
 import os
 

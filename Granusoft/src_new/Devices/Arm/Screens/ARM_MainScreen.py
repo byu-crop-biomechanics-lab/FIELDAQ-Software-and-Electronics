@@ -14,7 +14,6 @@ import datetime
 import os 
 from util.getKVPath import getKVPath
 
-
 import Devices.Arm.Settings.configurator as config
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 

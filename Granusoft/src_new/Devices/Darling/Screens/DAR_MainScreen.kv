@@ -5,7 +5,6 @@
 # are stored and that they should be imported
 #:import DAR_ExitScreen Devices.Darling.Screens.DAR_ExitScreen
 #:import DAR_LiveFeedScreen Devices.Darling.Screens.DAR_LiveFeedScreen
-#:import DAR_MainScreen Devices.Darling.Screens.DAR_MainScreen
 #:import DAR_SettingsScreen Devices.Darling.Screens.DAR_SettingsScreen
 #:import DAR_TestingScreen Devices.Darling.Screens.DAR_TestingScreen
 #:import DAR_TestingScreenAuto Devices.Darling.Screens.DAR_TestingScreenAuto
@@ -49,13 +48,9 @@
 # Load each screen into the ScreenManager. For human convenience, screens are
 # grouped into like-screens
 <GranuScreenManager>:
-    # Properties
-    current: 'dar_main_screen' # Start with the main screen
-
     # Root
     DAR_ExitScreen:
     DAR_LiveFeedScreen:
-    DAR_MainScreen:
     DAR_SettingsScreen:
     DAR_TestingScreen:
     DAR_TestingScreenAuto:
