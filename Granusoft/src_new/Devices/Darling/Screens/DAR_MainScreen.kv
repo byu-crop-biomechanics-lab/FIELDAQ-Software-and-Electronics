@@ -1,0 +1,163 @@
+# Include custom Kivy widgets which will be used on all screens that are imported below
+#:import * util.elements
+
+# These following Lines declare where the py and kv files for each screen
+# are stored and that they should be imported
+#:import DAR_ExitScreen Devices.Darling.Screens.DAR_ExitScreen
+#:import DAR_LiveFeedScreen Devices.Darling.Screens.DAR_LiveFeedScreen
+#:import DAR_SettingsScreen Devices.Darling.Screens.DAR_SettingsScreen
+#:import DAR_TestingScreen Devices.Darling.Screens.DAR_TestingScreen
+#:import DAR_TestingScreenAuto Devices.Darling.Screens.DAR_TestingScreenAuto
+
+#:import DAR_ColorsScreen Devices.Darling.Screens.Settings.DAR_ColorsScreen
+#:import DAR_NoteScreen Devices.Darling.Screens.Settings.DAR_NoteScreen
+#:import DAR_SensorsScreen Devices.Darling.Screens.Settings.DAR_SensorsScreen
+#:import DAR_UpdateScreen Devices.Darling.Screens.Settings.DAR_UpdateScreen
+#:import DAR_GPSMapScreen Devices.Darling.Screens.Settings.DAR_GPSMapScreen
+#:import DAR_ArchiveScreen Devices.Darling.Screens.Settings.DAR_ArchiveScreen
+#:import DAR_TestDeleteConfirmation Devices.Darling.Screens.Settings.DAR_TestDeleteConfirmation
+
+#:import DAR_TestNotesScreen Devices.Darling.Screens.Settings.DAR_TestNotesScreen
+#:import DAR_NewNoteScreen Devices.Darling.Screens.Settings.DAR_NewNoteScreen
+#:import DAR_NewTestNoteScreen Devices.Darling.Screens.Settings.DAR_NewTestNoteScreen
+
+#:import DAR_CalibrateScreen Devices.Darling.Screens.Settings.DAR_CalibrateScreen
+#:import DAR_IMUCalibrateScreen Devices.Darling.Screens.Settings.DAR_IMUCalibrateScreen
+#:import DAR_CalibratePointScreen Devices.Darling.Screens.Settings.DAR_CalibratePointScreen
+
+#:import DAR_TestInProgressScreen Devices.Darling.Screens.DataCollection.DAR_TestInProgressScreen
+#:import DAR_TestingResultsScreen Devices.Darling.Screens.DataCollection.DAR_TestingResultsScreen
+#:import DAR_BreakHeightScreen Devices.Darling.Screens.DataCollection.DAR_BreakHeightScreen
+#:import DAR_TestsScreen Devices.Darling.Screens.DataCollection.DAR_TestsScreen
+#:import DAR_TestDetailScreen Devices.Darling.Screens.DataCollection.DAR_TestDetailScreen
+#:import DAR_TestArchiveConfirmation Devices.Darling.Screens.DataCollection.DAR_TestArchiveConfirmation
+#:import DAR_TestSettingsConfirmation Devices.Darling.Screens.DataCollection.DAR_TestSettingsConfirmation
+#:import DAR_BarcodeConfirmation Devices.Darling.Screens.DataCollection.DAR_BarcodeConfirmation
+#:import DAR_SaveScreen Devices.Darling.Screens.DataCollection.DAR_SaveScreen
+#:import DAR_HeightScreen Devices.Darling.Screens.DataCollection.DAR_HeightScreen
+#:import DAR_OperatorScreen Devices.Darling.Screens.DataCollection.DAR_OperatorScreen
+#:import DAR_PlotScreen Devices.Darling.Screens.DataCollection.DAR_PlotScreen
+#:import DAR_HeightSensor Devices.Darling.Screens.DataCollection.DAR_HeightSensor
+#:import DAR_FolderScreen Devices.Darling.Screens.DataCollection.DAR_FolderScreen
+#:import DAR_TestFoldersScreen Devices.Darling.Screens.DataCollection.DAR_TestFoldersScreen
+#:import DAR_DeleteFolderConfirmation Devices.Darling.Screens.DataCollection.DAR_DeleteFolderConfirmation
+#:import DAR_RenameFolderScreen Devices.Darling.Screens.DataCollection.DAR_RenameFolderScreen
+#:import DAR_HeightChangeConfirmation Devices.Darling.Screens.DataCollection.DAR_HeightChangeConfirmation 
+
+
+# Load each screen into the ScreenManager. For human convenience, screens are
+# grouped into like-screens
+<GranuScreenManager>:
+    # Root
+    DAR_ExitScreen:
+    DAR_LiveFeedScreen:
+    DAR_SettingsScreen:
+    DAR_TestingScreen:
+    DAR_TestingScreenAuto:
+
+    # Settings
+    DAR_ColorsScreen:
+    DAR_NoteScreen:
+    DAR_SensorsScreen:
+    DAR_UpdateScreen:
+    DAR_GPSMapScreen:
+    DAR_ArchiveScreen:
+    DAR_TestDeleteConfirmation:
+    DAR_TestNotesScreen:
+
+    # Settings - Notes
+    DAR_NewNoteScreen:
+    DAR_NewTestNoteScreen:
+
+    # Settings - Sensors
+    DAR_CalibrateScreen:
+    DAR_IMUCalibrateScreen:
+    DAR_CalibratePointScreen:
+
+    # Testing
+    DAR_TestInProgressScreen:
+    DAR_TestingResultsScreen:
+    DAR_BreakHeightScreen:
+    DAR_TestsScreen:
+    DAR_TestDetailScreen:
+    DAR_TestArchiveConfirmation:
+    DAR_TestSettingsConfirmation:
+    DAR_BarcodeConfirmation:
+    DAR_SaveScreen:
+    DAR_HeightScreen:
+    DAR_OperatorScreen:
+    DAR_PlotScreen:
+    DAR_HeightSensor:
+    DAR_FolderScreen:
+    DAR_TestFoldersScreen:
+    DAR_DeleteFolderConfirmation:
+    DAR_RenameFolderScreen:
+    DAR_HeightChangeConfirmation:
+
+
+<DAR_MainScreenInfoBox@Label>:
+    font_size: 25
+	color: 1,1,1,1
+	halign: 'center'
+	valign: 'center'
+	markup: True
+	bold: True
+    canvas.before:
+        Color:
+            rgba: .14,.14,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<DAR_MainScreen>:
+    name: 'dar_main_screen'
+    GranuContainer:
+        GranuSideArea:
+            GranuSideButton:
+                text: 'Settings'
+	    		on_release:
+                    root.move_to('dar_settings_screen') # Move to settings screen
+            GranuSideButton:
+                text: 'Testing'
+                on_release:
+                    root.move_to('dar_test_settings_confirmation') # Moves to test settings confirmation
+            GranuSideButton:
+                text: 'Live Feed'
+                on_release:
+                    root.move_to('dar_live_feed_screen') # Move to liveFeed screen
+            GranuSideButton:
+                text: 'Exit'
+                on_release:
+                    root.move_to('dar_exit_screen') # Move to exit screen
+        GranuContent:
+            GranuTitle:
+                text: 'Main Menu'
+            Label:
+                id: device_name
+                font_size: 40
+                markup: True
+            	bold: True
+                text: 'Stalk Strength\nDevice 2.3.1'
+                halign: 'center'
+            Label:
+                id: warning_text
+                color: (0.8, 0, 0, 1)
+                size_hint_max_y: 15
+                font_size: 15
+            	markup: True
+            	bold: True
+            GridLayout:
+                cols: 2
+                spacing: 10
+                DAR_MainScreenInfoBox:
+                    id: current_date
+                    text: 'Date: \n' + root.current_date
+                DAR_MainScreenInfoBox:
+                    id: load_cell_height
+                    text: 'Height: \n' + root.load_cell_height+root.loadCellHeightUnits
+                DAR_MainScreenInfoBox:
+                    id: location
+                    text: 'Location:\n' + root.location
+                DAR_MainScreenInfoBox:
+                    id: time
+                    text: 'Time: \n' + root.time
