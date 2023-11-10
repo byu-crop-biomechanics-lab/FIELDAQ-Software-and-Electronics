@@ -2,11 +2,13 @@
 #:import ARM_MainScreen Arm.Screens.ARM_MainScreen
 # import RodneyMainScreen Rodney.Screens.RodneyMainScreen
 #:import CAM_MainScreen Camera.Screens.CAM_MainScreen
+#:import DAR_MainScreen Darling.Screens.DAR_MainScreen
 
 <GranuScreenManager>:
     ARM_MainScreen:
     CAM_MainScreen:
 #    RodneyMainScreen:
+    DAR_MainScreen:
 
 
 <ModeSelect>:
@@ -24,7 +26,7 @@
             GranuSideButton:
                 text: 'Darling'
                 on_release:
-                    root.move_to('arm_main_screen') # Moves to test settings confirmation
+                    root.move_to('dar_main_screen') # Moves to test settings confirmation
             GranuSideButton:
                 text: 'Camera'
                 on_release:
