@@ -35,3 +35,5 @@ class GranuTitle(Label):
 
 class GranuSideAreaTest(GridLayout):
     pass
+
+# add comment
