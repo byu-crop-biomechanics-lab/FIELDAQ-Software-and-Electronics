@@ -23,11 +23,11 @@
             GranuSideButton:
                 text: "Start"
                 on_release:
-                    root.move_to('test_in_progress_screen') # Move to test in progress screen
+                    root.move_to('rod_test_in_progress_screen') # Move to test in progress screen
             GranuSideButton:
                 text: "Tests"
                 on_release:
-                    root.move_to('test_folders_screen') # Move to tests screen
+                    root.move_to('rod_test_folders_screen') # Move to tests screen
             GranuSideButton:
                 text: 'Back'
 	    		on_release:
@@ -48,12 +48,12 @@
                     font_size: 20
                     text: "Operator: \n" + root.operator
                     on_release:
-                        root.move_to('operator_screen')
+                        root.move_to('rod_operator_screen')
                 SettingsButton:
                     font_size: 20
                     text: "Plot: \n" + root.plot
                     on_release:
-                        root.move_to('plot_screen')
+                        root.move_to('rod_plot_screen')
                 SettingsButton:
                     font_size: 20
                     text: "Folder:\n"+ root.folder

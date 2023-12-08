@@ -16,11 +16,15 @@
                 SettingsButton:
                     text: "Operator: " + root.operator
                     on_release:
-                        root.move_to('operator_screen')
+                        root.move_to('rod_operator_screen')
+                SettingsButton:
+                    text: "Folder: " + root.folder
+                    on_release:
+                        root.move_to('rod_folder_screen')
                 SettingsButton:
                     text: "Plot: " + root.plot
                     on_release:
-                        root.move_to('plot_screen')
+                        root.move_to('rod_plot_screen')
             GridLayout:
                 cols: 2
                 rows: 3

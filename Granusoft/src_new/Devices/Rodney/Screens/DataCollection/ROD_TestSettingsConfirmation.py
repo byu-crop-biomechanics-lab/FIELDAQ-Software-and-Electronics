@@ -18,6 +18,7 @@ class ROD_TestSettingsConfirmation(BaseScreen):
     height_num = StringProperty("N/A")
     plot = StringProperty("N/A")
     operator = StringProperty("N/A")
+    folder = StringProperty("Default")
 
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
@@ -25,3 +26,4 @@ class ROD_TestSettingsConfirmation(BaseScreen):
         self.height_num = str(config.get('height',0))
         self.plot = str(config.get('plot_num',0))
         self.operator = str(config.get('operator','N/A'))
+        self.folder = str(config.get('folder','Default'))

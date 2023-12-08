@@ -13,7 +13,7 @@
             size: self.size
 
 <ROD_TestingResultsScreen>:
-	name: 'testing_results_screen'
+	name: 'rod_testing_results_screen'
     GranuContainer:
         GranuSideAreaTest:
             GranuSideButton:
@@ -33,7 +33,7 @@
                 text: 'Save'
 	    		on_release:
                     root.save_post_notes()
-                    root.move_to('save_screen') # Move to saving screen
+                    root.move_to('rod_save_screen') # Move to saving screen
             GranuSideButton:
                 text: 'Toggle'
 	    		on_release:
