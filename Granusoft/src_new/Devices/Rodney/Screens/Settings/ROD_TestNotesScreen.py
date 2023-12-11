@@ -117,7 +117,7 @@ class ROD_TestNotesScreen(BaseScreen):
     def save(self, obj):
         self.save_note_changes()
         self.reset_individual_test_notes()
-        super(TestNotesScreen, self).back()
+        super(ROD_TestNotesScreen, self).back()
 
     def new(self, obj):
         self._save_config()

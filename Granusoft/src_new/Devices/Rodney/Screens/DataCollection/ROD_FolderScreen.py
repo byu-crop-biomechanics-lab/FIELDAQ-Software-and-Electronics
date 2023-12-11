@@ -30,19 +30,19 @@ class ROD_FolderScreen(BaseScreen):
 
     def save(self):
         """Save button was pressed: save the new operator in the configuration file."""
-        folder_list = config.get('folders',0)
-        print(folder_list)
+        folder_list = config.get('folders', "default")
+        print("Folder list:", folder_list)
         input = self.ids['folder']
         valid = input.validate()
         if valid:
-            #config.set('folders', str(input.text))
-            # if str(input.text) not in folder_list:
-            #     try:
-            #         os.mkdir('Tests/'+str(config.get('folder', 0)))
-            #     except:
-            #         pass
-            #     folder_list.append(str(input.text))
-            #     config.set('folders', folder_list)
+            config.set('folder', str(input.text))
+            if str(input.text) not in folder_list:
+                try:
+                    os.mkdir('Tests/'+str(config.get('folder', 0)))
+                except:
+                    pass
+                folder_list = folder_list + " " + (str(input.text))
+                config.set('folders', folder_list)
             return True
         else:
             input.focus = True

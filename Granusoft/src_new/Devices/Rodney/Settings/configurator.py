@@ -42,12 +42,7 @@ def save_as(filepath):
 
 def set(key, value):
     """Set a key to value in the configuration JSON file."""
-    # Set key to value
-    if key == 'folders':
-        old = data[key]
-        data[key] = old + value
-    else:
-        data[key] = value
+    data[key] = value
     save()
 
 def get(key, default):
