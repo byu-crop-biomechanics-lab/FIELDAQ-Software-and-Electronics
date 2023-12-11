@@ -27,3 +27,8 @@ class ROD_TestSettingsConfirmation(BaseScreen):
         self.plot = str(config.get('plot_num',0))
         self.operator = str(config.get('operator','N/A'))
         self.folder = str(config.get('folder','Default'))
+
+    def on_leave(self):
+        """When the screen leaves, save the current notes to the configuration file."""
+        if "Default" not in os.listdir('Tests/'):
+            os.mkdir('Tests/Default')

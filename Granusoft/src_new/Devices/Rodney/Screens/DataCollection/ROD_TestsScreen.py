@@ -87,7 +87,7 @@ class ROD_TestsScreen(BaseScreen):
         super(ROD_TestsScreen, self).back()
 
     def remove_tests(self, obj):
-        super(ROD_TestsScreen, self).move_to('test_archive_confirmation')
+        super(ROD_TestsScreen, self).move_to('rod_test_archive_confirmation')
 
     def dismiss_popup(self):
         self._popup.dismiss()
