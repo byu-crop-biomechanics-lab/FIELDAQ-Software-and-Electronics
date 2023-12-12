@@ -118,6 +118,6 @@ class ROD_TestingResultsScreen(BaseScreen):
 
     def check_height_sensor_status(self):
         if str(config.get('height_sensor', 0)) == "ON":
-            self.next_screen = 'testing_screen_auto'
+            self.next_screen = 'rod_testing_screen_auto'
         else:
-            self.next_screen = 'testing_screen'
+            self.next_screen = 'rod_testing_screen'

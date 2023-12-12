@@ -36,7 +36,7 @@ class ROD_FolderScreen(BaseScreen):
         valid = input.validate()
         if valid:
             config.set('folder', str(input.text))
-            if str(input.text) not in folder_list:
+            if folder_list == 0 or str(input.text) not in folder_list:
                 try:
                     os.mkdir('Tests/'+str(config.get('folder', 0)))
                 except:
