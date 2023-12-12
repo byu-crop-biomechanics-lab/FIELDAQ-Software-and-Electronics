@@ -88,7 +88,7 @@ class ROD_TestFoldersScreen(BaseScreen):
     def rename_folder(self,obj):
         selected = self.folder_list.get_selected()
         config.set('selected_folder', str(selected[0]))
-        self.parent_screen.move_to('rename_folder_screen')
+        self.parent_screen.move_to('rod_rename_folder_screen')
 
     def default_folders_buttons(self):
         buttons = self.ids['folders_buttons']
