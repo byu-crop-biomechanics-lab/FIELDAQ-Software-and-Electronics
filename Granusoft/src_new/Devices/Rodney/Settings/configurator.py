@@ -29,11 +29,13 @@ def load_from(filepath):
             save()
     else:
         data = {}
+    pass
 
 def save():
-    """Saves data to the configuration file."""
-    with open(CONFIG_FILE, 'w') as outfile:
-        json.dump(data, outfile, indent=4)
+    # """Saves data to the configuration file."""
+    # with open(CONFIG_FILE, 'w') as outfile:
+    #     json.dump(data, outfile, indent=4)
+    pass
 
 def save_as(filepath):
     '''Saves data to the specified file.'''

@@ -45,6 +45,7 @@ class ROD_SettingsScreen(BaseScreen):
     def load(self, path, filename):
         config.load_from(os.path.join(path, filename))
         self.dismiss_popup()
+        pass
 
     def save(self, path, filename):
         config.save_as(os.path.join(path, filename))

@@ -11,10 +11,16 @@ import Devices.Rodney.Settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
+from util.elements import *
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_RenameFolderScreen(BaseScreen):
+    def __init__(self, **kwargs):
+        super(BaseScreen, self).__init__(**kwargs)
+        self.save_button = GranuSideButton(text='Save')
+        self.save_button.bind(on_release=self.save)
+
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         operator and set the TextInput text."""
@@ -35,12 +41,7 @@ class ROD_RenameFolderScreen(BaseScreen):
         valid = input.validate()
         if valid:
             os.rename('Tests/'+self.previous_name,"Tests/"+str(input.text))
-            config.set('selected_folder', str(input.text))
-            if str(input.text) not in folder_list:
-                folder_list.append(str(input.text))
-                folder_list.remove(self.previous_name)
-                config.set('folders', folder_list)
-            return True
         else:
             input.focus = True
             return False
+        self.move_to('rod_test_folders_screen')
