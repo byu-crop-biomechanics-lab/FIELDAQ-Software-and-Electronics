@@ -1,5 +1,8 @@
 # FIELDAQ
 
+## TODO 
+Fix the Rename function in the fodler system 
+
 ## Overview and Resources
 The software for the FIELDAQ is written in python, using the kivy library. Versioning is managed using git via GitHub. The layout and functionality are based on the old DARLING software. With the addition of a touchscreen, kivy was utilized over pygame.
 
