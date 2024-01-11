@@ -69,8 +69,15 @@ class ROD_TestingScreen(BaseScreen):
 
     def on_leave(self):
         self.event.cancel()
-        if self.folder not in os.listdir('Tests/'):
-            os.mkdir('Tests/' + self.folder)
+        folder_list = config.get('folders', "")
+        input = config.get('folder', "")
+        if folder_list == 0 or input not in folder_list:
+            try:
+                os.mkdir('Tests/'+str(config.get('folder', 0)))
+            except:
+                pass
+            folder_list = folder_list + " " + input
+            config.set('folders', folder_list)
 
 
     def get_height(self):

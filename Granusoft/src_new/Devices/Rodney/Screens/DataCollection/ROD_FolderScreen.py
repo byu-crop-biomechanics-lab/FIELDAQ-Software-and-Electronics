@@ -31,7 +31,6 @@ class ROD_FolderScreen(BaseScreen):
     def save(self):
         """Save button was pressed: save the new operator in the configuration file."""
         folder_list = config.get('folders', "default")
-        print("Folder list:", folder_list)
         input = self.ids['folder']
         valid = input.validate()
         if valid:

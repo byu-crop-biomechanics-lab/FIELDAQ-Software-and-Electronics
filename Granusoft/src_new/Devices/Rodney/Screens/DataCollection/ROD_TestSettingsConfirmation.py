@@ -30,5 +30,5 @@ class ROD_TestSettingsConfirmation(BaseScreen):
 
     def on_leave(self):
         """When the screen leaves, save the current notes to the configuration file."""
-        if "Default" not in os.listdir('Tests/'):
-            os.mkdir('Tests/Default')
+        # if "Default" not in os.listdir('Tests/'):
+        #     os.mkdir('Tests/Default')

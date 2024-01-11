@@ -31,11 +31,29 @@ def load_from(filepath):
         data = {}
     pass
 
+# def save():
+#     """Saves data to the configuration file."""
+#     with open(CONFIG_FILE, 'w') as outfile:
+#         json.dump(data, outfile, indent=4)
+#     pass
+
+
 def save():
-    # """Saves data to the configuration file."""
-    # with open(CONFIG_FILE, 'w') as outfile:
-    #     json.dump(data, outfile, indent=4)
-    pass
+    """Updates data in the configuration file with new_data."""
+    # Read existing data from the file
+    try:
+        with open(CONFIG_FILE, 'r') as infile:
+            existing_data = json.load(infile)
+    except FileNotFoundError:
+        # If the file doesn't exist, create an empty dictionary
+        existing_data = {}
+
+    # Update existing data with new_data
+    existing_data.update(data)
+
+    # Write the updated data back to the file
+    with open(CONFIG_FILE, 'w') as outfile:
+        json.dump(existing_data, outfile, indent=4)
 
 def save_as(filepath):
     '''Saves data to the specified file.'''
