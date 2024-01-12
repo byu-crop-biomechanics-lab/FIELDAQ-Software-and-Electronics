@@ -41,6 +41,9 @@ class ROD_RenameFolderScreen(BaseScreen):
         valid = input.validate()
         if valid:
             os.rename('Tests/'+self.previous_name,"Tests/"+str(input.text))
+            folder_list = folder_list.replace(self.previous_name, "")
+            folder_list = folder_list + input.text
+            config.set('folders', folder_list)
         else:
             input.focus = True
             return False
