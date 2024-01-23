@@ -20,7 +20,7 @@ import Devices.Rodney.Settings.configurator as config
 import csv
 import numpy as np
 try:
-    from sensors.connections import *
+    from Devices.Rodney.Sensors.connections import *
 except:
     pass
 

@@ -16,7 +16,7 @@ import datetime
 from util.BaseScreen import BaseScreen
 from util.elements import *
 try:
-    from sensors.connections import *
+    from Devices.Rodney.Sensors.connections import *
 except:
     pass
 import csv

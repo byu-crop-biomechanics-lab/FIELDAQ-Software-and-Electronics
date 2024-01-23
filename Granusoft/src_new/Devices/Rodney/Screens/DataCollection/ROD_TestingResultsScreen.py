@@ -13,7 +13,7 @@ from util.StaticList import StaticList
 from util.elements import *
 import Devices.Rodney.Settings.configurator as config
 try:
-    from sensors.connections import *
+    from Devices.Rodney.Sensors.connections import *
 except:
     pass
 
