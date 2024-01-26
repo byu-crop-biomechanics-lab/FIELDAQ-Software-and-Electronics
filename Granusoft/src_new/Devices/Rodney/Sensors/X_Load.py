@@ -1,5 +1,5 @@
 from .connections import *
-import Devices.Rodney.settings.configurator as config
+import Devices.Rodney.Settings.configurator as config
 
 class X_Load:
 

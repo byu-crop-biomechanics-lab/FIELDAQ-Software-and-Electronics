@@ -3,7 +3,7 @@
 
 from .connections import *
 from math import acos, floor, degrees
-import Devices.Camera.settings.configurator as config
+import Devices.Camera.Settings.configurator as config
 
 class IMU:
 

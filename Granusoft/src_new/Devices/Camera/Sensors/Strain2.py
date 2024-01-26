@@ -1,5 +1,5 @@
 from .connections import *
-import Devices.Camera.settings.configurator as config
+import Devices.Camera.Settings.configurator as config
 
 class Strain2:
 

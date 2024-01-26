@@ -3,7 +3,7 @@
 
 from .connections import *
 from math import acos, floor, degrees
-import Devices.Rodney.settings.configurator as config
+import Devices.Rodney.Settings.configurator as config
 
 class IMU:
 
