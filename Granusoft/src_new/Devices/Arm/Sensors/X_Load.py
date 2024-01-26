@@ -1,5 +1,5 @@
 from .connections import *
-import Granusoft.src_new.Devices.Arm.settings.configurator as config
+import Devices.Arm.settings.configurator as config
 
 class X_Load:
 

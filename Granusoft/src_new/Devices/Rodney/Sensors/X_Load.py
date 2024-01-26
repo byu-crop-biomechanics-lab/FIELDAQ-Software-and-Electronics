@@ -1,5 +1,5 @@
 from .connections import *
-import Granusoft.src_new.Devices.Rodney.settings.configurator as config
+import Devices.Rodney.settings.configurator as config
 
 class X_Load:
 

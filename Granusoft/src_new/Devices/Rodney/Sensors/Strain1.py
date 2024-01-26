@@ -1,5 +1,5 @@
 from .connections import *
-import configurator as config
+import Devices.Rodney.settings.configurator as config
 
 class Strain1:
 
