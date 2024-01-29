@@ -1,5 +1,5 @@
 from .connections import *
-import Devices.Arm.settings.configurator as config
+import Devices.Arm.Settings.configurator as config
 
 class X_Load:
 
