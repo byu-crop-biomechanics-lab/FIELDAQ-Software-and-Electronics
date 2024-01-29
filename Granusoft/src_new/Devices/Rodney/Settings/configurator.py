@@ -62,6 +62,7 @@ def save_as(filepath):
 
 def set(key, value):
     """Set a key to value in the configuration JSON file."""
+    print("Setting key, with value", key, value)
     data[key] = value
     save()
 
