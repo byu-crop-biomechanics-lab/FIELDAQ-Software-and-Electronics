@@ -23,8 +23,8 @@ def load():
 def load_from(filepath):
     '''Loads data from a specified configuration file.  Overwrites CONFIG_FILE'''
     global data
-    if os.path.isfile(filepath):
-        with open(filepath) as f:
+    if os.path.isfile(CONFIG_FILE):
+        with open(CONFIG_FILE) as f:
             data.update(json.load(f))
             save()
     else:
