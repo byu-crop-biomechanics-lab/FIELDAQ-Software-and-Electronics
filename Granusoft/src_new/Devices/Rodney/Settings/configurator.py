@@ -166,57 +166,6 @@ class SettingsSingleton(Singleton):
 #     is not defined, returns the saved value if a key is defined, and that the
 #     configuration file contains the values saved.
 
-<<<<<<< HEAD
-def save_as(filepath):
-    '''Saves data to the specified file.'''
-    with open(filepath, 'w') as outfile:
-        json.dump(data, outfile, indent=4)
-
-def set(key, value):
-    """Set a key to value in the configuration JSON file."""
-    stack = inspect.stack()
-    caller = stack[1]
-    print(f"Caller function name: {caller.function}")
-    print(f"Caller function name: {caller.filename}")
-    print(f"Caller function name: {caller.lineno}")
-    print(f"key: value", key, value)
-    data[key] = value
-    save()
-
-def get(key, default):
-    """Get a value from the configuration JSON file using a key.  If the value does not
-    exist, save the default value into the JSON file and return the default."""
-    print("key, data", key, default)
-    if key in data:
-        return data.get(key)
-    else:
-        stack = inspect.stack()
-        caller = stack[1]
-        print(f"Caller function name: {caller.function}")
-        print(f"Caller function name: {caller.filename}")
-        print(f"Caller function name: {caller.lineno}")
-        set(key, default)
-        return default
-
-if __name__ == "__main__":
-    """If the configuration module is run as the main program, test the configuration
-    module.  These tests ensure the module returns and saves the default value if a key
-    is not defined, returns the saved value if a key is defined, and that the
-    configuration file contains the values saved.
-
-    WARNING: This will override the configuration file."""
-    assert get('a', 3) == 3
-    set('b', 5)
-    assert get('b', 1) == 5
-    set('a', 9)
-    save()
-    get('a', 33)
-    get('b', 33)
-    load()
-    assert get('a', 2) == 9
-    get('c', 21) # The file should now contain 'c': 21
-    print("Check that the configuration file contains the key-value pair 'c': 21")
-=======
 #     WARNING: This will override the configuration file."""
 #     assert get('a', 3) == 3
 #     set('b', 5)
@@ -229,4 +178,3 @@ if __name__ == "__main__":
 #     assert get('a', 2) == 9
 #     get('c', 21) # The file should now contain 'c': 21
 #     print("Check that the configuration file contains the key-value pair 'c': 21")
->>>>>>> 8397c51413f85def2556294ea0d10c315058bbf2
