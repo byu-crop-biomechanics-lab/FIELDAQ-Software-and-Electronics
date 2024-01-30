@@ -1,10 +1,11 @@
 from .connections import *
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
 class Pot:
 
     def __init__(self):
-        self.config_data = config.get('sensors', {})
+        self.config = settings()
+        self.config_data = self.config.get('sensors', {})
         self.pot = 0.0
         self.pot_adc = 0.0
         try:

@@ -4,7 +4,7 @@ An input text box that, when selected, allows the user to type in the Break Heig
 
 from kivy.lang import Builder
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
 from util.getKVPath import getKVPath
@@ -17,7 +17,8 @@ class ROD_BreakHeightScreen(BaseScreen):
         """Before the Screen loads, read the configuration file to get the current
         height."""
         input = self.ids['break_height']
-        input.text = str(config.get('break_height', 0))
+        self.config = settings()
+        input.text = str(self.config.get('break_height', 0))
         input.validate()
 
     def on_enter(self):
@@ -31,7 +32,7 @@ class ROD_BreakHeightScreen(BaseScreen):
         input = self.ids['break_height']
         valid = input.validate()
         if valid:
-            config.set('break_height', input.text)
+            self.config.set('break_height', input.text)
             return True
         else:
             input.focus = True

@@ -7,7 +7,7 @@ stored in our settings file .
 
 from kivy.lang import Builder
 
-import Granusoft.src_new.Rodney.settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
@@ -20,7 +20,8 @@ class ROD_OperatorScreen(BaseScreen):
         """Before the Screen loads, read the configuration file to get the current
         operator and set the TextInput text."""
         input = self.ids['operator']
-        input.text = str(config.get('operator', "Default User"))
+        self.config = settings()
+        input.text = str(self.config.get('operator', "Default User"))
         input.validate()
 
     def on_enter(self):
@@ -34,7 +35,7 @@ class ROD_OperatorScreen(BaseScreen):
         input = self.ids['operator']
         valid = input.validate()
         if valid:
-            config.set('operator', str(input.text))
+            self.config.set('operator', str(input.text))
             return True
         else:
             input.focus = True

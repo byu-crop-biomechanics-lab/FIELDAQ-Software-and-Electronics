@@ -11,7 +11,7 @@ from Devices.Rodney.Data.TestSingleton import TestSingleton
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from util.elements import *
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 try:
     from Devices.Rodney.Sensors.connections import *
 except:
@@ -49,7 +49,8 @@ class ROD_TestingResultsScreen(BaseScreen):
         sensor.clear_gps_memory()
 
         # Get notes from config file
-        notes = config.get('notes', {"posttest": []})
+        self.config = settings()
+        notes = self.config.get('notes', {"posttest": []})
 
         # Set the data
         self.ids['posttest'].list_data = notes["posttest"]
@@ -117,7 +118,7 @@ class ROD_TestingResultsScreen(BaseScreen):
             self.toggle = 1
 
     def check_height_sensor_status(self):
-        if str(config.get('height_sensor', 0)) == "ON":
+        if str(self.config.get('height_sensor', 0)) == "ON":
             self.next_screen = 'rod_testing_screen_auto'
         else:
             self.next_screen = 'rod_testing_screen'

@@ -7,7 +7,7 @@ in our settings file.
 
 from kivy.lang import Builder
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.IntInput import IntInput
 from util.getKVPath import getKVPath
@@ -20,7 +20,8 @@ class ROD_PlotScreen(BaseScreen):
         """Before the Screen loads, read the configuration file to get the current
         plot number."""
         input = self.ids['plot_num']
-        input.text = str(config.get('plot_num', 1))
+        self.config = settings()
+        input.text = str(self.config.get('plot_num', 1))
         input.validate()
 
     def on_enter(self):
@@ -35,8 +36,8 @@ class ROD_PlotScreen(BaseScreen):
         input = self.ids['plot_num']
         valid = input.validate()
         if valid:
-            config.set('plot_num', int(input.text))
-            config.set('curr_test_num', 0)
+            self.config.set('plot_num', int(input.text))
+            self.config.set('curr_test_num', 0)
             return True
         else:
             input.focus = True

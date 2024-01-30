@@ -1,6 +1,6 @@
 from kivy.lang import Builder
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from Devices.Rodney.Sensors import Sensor

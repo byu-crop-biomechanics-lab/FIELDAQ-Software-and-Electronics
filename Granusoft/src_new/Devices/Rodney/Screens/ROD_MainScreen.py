@@ -14,7 +14,7 @@ import datetime
 import os 
 from util.getKVPath import getKVPath
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = .004
@@ -28,6 +28,7 @@ class ROD_MainScreen(BaseScreen):
     load_cell_height = StringProperty("0.00")
     #time_zone = StringProperty("N/A")
     loadCellHeightUnits = 'cm'
+    config = settings()
 
     # def __init__(self):
     #     super(MainScreen).__init__()
@@ -35,7 +36,7 @@ class ROD_MainScreen(BaseScreen):
 
     def on_pre_enter(self):
         #self.time_zone = self.find_time_zone()
-        config.load() # Load our own app preferences
+        self.config.load() # Load our own app preferences
         self.test_time = 0
         self.event = Clock.schedule_interval(self.update_time, INTERVAL)
         self.event2 = Clock.schedule_interval(self.update_values, INTERVAL2)

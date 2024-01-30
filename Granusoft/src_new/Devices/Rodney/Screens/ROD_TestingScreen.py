@@ -11,7 +11,7 @@ from Devices.Rodney.Sensors import Sensor
 
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.elements import *
 import datetime
 from util.getKVPath import getKVPath
@@ -41,13 +41,14 @@ class ROD_TestingScreen(BaseScreen):
         # self.time_zone = self.find_time_zone()
         self.event = Clock.schedule_interval(self.update_time, ONE_SEC)
         self.load_cell_height = self.get_height()
-        config.set('height', float(self.load_cell_height))
-        self.plot = str(config.get('plot_num', 0))
-        self.operator = str(config.get('operator', 'N/A'))
-        self.folder = str(config.get('folder', 'N/A'))
+        self.config = settings()
+        self.config.set('height', float(self.load_cell_height))
+        self.plot = str(self.config.get('plot_num', 0))
+        self.operator = str(self.config.get('operator', 'N/A'))
+        self.folder = str(self.config.get('folder', 'N/A'))
         self.current_date = datetime.date.today().strftime("%d/%m/%Y")
         # Get notes from config file
-        notes = config.get('notes', {
+        notes = self.config.get('notes', {
             "pretest": [],
             "posttest": [],
             "bank": []
@@ -69,16 +70,16 @@ class ROD_TestingScreen(BaseScreen):
 
     def on_leave(self):
         self.event.cancel()
-        folder_list = config.get('folders', "")
-        input = config.get('folder', "")
+        folder_list = self.config.get('folders', "")
+        input = self.config.get('folder', "")
         if folder_list == 0 or input not in folder_list:
             try:
-                os.mkdir('Tests/'+str(config.get('folder', 0)))
+                os.mkdir('Tests/'+str(self.config.get('folder', 0)))
             except:
                 pass
             folder_list = folder_list + " " + input
-            config.set('folders', folder_list)
+            self.config.set('folders', folder_list)
 
 
     def get_height(self):
-        return str(config.get('height', 0))
+        return str(self.config.get('height', 0))

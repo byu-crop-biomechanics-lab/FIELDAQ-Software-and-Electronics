@@ -2,7 +2,7 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.clock import Clock
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
 from util.elements import *
@@ -45,13 +45,14 @@ class ROD_TestNotesScreen(BaseScreen):
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         list of notes. Show the default buttons."""
-        current_notes = config.get('notes', {
+        self.config = settings()
+        current_notes = self.config.get('notes', {
             "pretest": [],
             "posttest": [],
             "bank": []
         })
         # Get notes from config file
-        foldername = "Tests/"+config.get('selected_folder',0)+'/'
+        foldername = "Tests/"+self.config.get('selected_folder',0)+'/'
         with open(foldername + str(self.fileName)) as testFile:
             readCSV = csv.reader(testFile, delimiter=',')
             testData = 0
@@ -80,7 +81,7 @@ class ROD_TestNotesScreen(BaseScreen):
 
     def _save_config(self):
         '''Save the notes to the configuration file.'''
-        config.set('test_notes', {
+        self.config.set('test_notes', {
             "pretest": self.ids['pre_test_notes'].list_data,
             "posttest": self.ids['post_test_notes'].list_data,
             "bank": []# self.ids['notes_bank'].list_data

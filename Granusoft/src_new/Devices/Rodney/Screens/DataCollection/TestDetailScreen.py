@@ -16,7 +16,7 @@ from Devices.Rodney.Data.TestSingleton import TestSingleton
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from util.elements import *
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 import csv
 import numpy as np
 try:
@@ -60,6 +60,7 @@ class TestDetailScreen(BaseScreen):
         sensor = Sensor()
         sensor.clear_gps_memory()
         self.screenTitle = self.ids['testTitle']
+        self.config = settings()
         
   
     def on_enter(self):
@@ -70,7 +71,7 @@ class TestDetailScreen(BaseScreen):
         self.toggle_button = self.ids['imu_pot_toggle']
         self.toggle_button.bind(on_release = self.toggleButton)
         self.title_Text = self.ids['title_text']
-        foldername = "Tests/"+config.get('selected_folder',0)+'/'
+        foldername = "Tests/"+self.config.get('selected_folder',0)+'/'
         with open(foldername + str(self.fileName)) as testFile:
             readCSV = csv.reader(testFile, delimiter=',')
             testData = 0
