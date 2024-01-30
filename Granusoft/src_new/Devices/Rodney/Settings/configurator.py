@@ -6,10 +6,12 @@ configuration to persist beyond the application lifecycle.
 
 import os
 import json
+import inspect
 
 CONFIG_FILE = 'Devices/Rodney/Settings/config.json'
 
 data = {}
+
 
 def load():
     """Loads data from the configuration file, if it exists."""
@@ -62,16 +64,27 @@ def save_as(filepath):
 
 def set(key, value):
     """Set a key to value in the configuration JSON file."""
-    print("Setting key, with value", key, value)
+    stack = inspect.stack()
+    caller = stack[1]
+    print(f"Caller function name: {caller.function}")
+    print(f"Caller function name: {caller.filename}")
+    print(f"Caller function name: {caller.lineno}")
+    print(f"key: value", key, value)
     data[key] = value
     save()
 
 def get(key, default):
     """Get a value from the configuration JSON file using a key.  If the value does not
     exist, save the default value into the JSON file and return the default."""
+    print("key, data", key, default)
     if key in data:
         return data.get(key)
     else:
+        stack = inspect.stack()
+        caller = stack[1]
+        print(f"Caller function name: {caller.function}")
+        print(f"Caller function name: {caller.filename}")
+        print(f"Caller function name: {caller.lineno}")
         set(key, default)
         return default
 
