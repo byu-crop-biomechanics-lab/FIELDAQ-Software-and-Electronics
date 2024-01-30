@@ -3,6 +3,8 @@ import os
 import json
 import inspect
 
+#Switch shared_borg_state to data
+
 class Singleton(object):
   _shared_borg_state = {}
    
@@ -19,12 +21,12 @@ class SettingsSingleton(Singleton):
     def __init__(self):
         super(SettingsSingleton, self).__init__()
         self.device = ""
-        self.CONFIG_FILE = 'config.json'
+        self.CONFIG_FILE = 'Devices/Rodney/Settings/config.json'
         
     def clear_all(self):
         self._shared_borg_state = {}
         self.device = ""
-        self.CONFIG_FILE = 'config.json'
+        self.CONFIG_FILE = 'Devices/Rodney/Settings/config.json'
         
     def load(self):
         """Loads data from the configuration file, if it exists."""
@@ -37,8 +39,8 @@ class SettingsSingleton(Singleton):
 
     def load_from(self, filepath):
         '''Loads data from a specified configuration file.  Overwrites CONFIG_FILE'''
-        if os.path.isfile(filepath):
-            with open(filepath) as f:
+        if os.path.isfile("Devices/Rodney/Settings/config.json"):
+            with open("Devices/Rodney/Settings/config.json") as f:
                 self._shared_borg_state.update(json.load(f))
                 self.save()
         else:
