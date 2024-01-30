@@ -7,7 +7,7 @@ stored in our settings file .
 
 from kivy.lang import Builder
 import os
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
@@ -15,11 +15,14 @@ from util.getKVPath import getKVPath
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_FolderScreen(BaseScreen):
+
+
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         operator and set the TextInput text."""
         input = self.ids['folder']
-        input.text = str(config.get('folder', "Default Folder"))
+        self.config = settings()
+        input.text = str(self.config.get('folder', "Default Folder"))
         input.validate()
 
     def on_enter(self):
@@ -30,18 +33,18 @@ class ROD_FolderScreen(BaseScreen):
 
     def save(self):
         """Save button was pressed: save the new operator in the configuration file."""
-        folder_list = config.get('folders', "default")
+        folder_list = self.config.get('folders', "default")
         input = self.ids['folder']
         valid = input.validate()
         if valid:
-            config.set('folder', str(input.text))
+            self.config.set('folder', str(input.text))
             if folder_list == 0 or str(input.text) not in folder_list:
                 try:
-                    os.mkdir('Tests/'+str(config.get('folder', 0)))
+                    os.mkdir('Tests/'+str(self.config.get('folder', 0)))
                 except:
                     pass
                 folder_list = folder_list + " " + (str(input.text))
-                config.set('folders', folder_list)
+                self.config.set('folders', folder_list)
             return True
         else:
             input.focus = True

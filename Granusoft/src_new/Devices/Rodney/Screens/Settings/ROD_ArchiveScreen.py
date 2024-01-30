@@ -7,7 +7,7 @@ from kivy.lang import Builder
 
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
 from Devices.Rodney.Data.TestSingleton import TestSingleton
 from shutil import copyfile

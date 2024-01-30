@@ -1,7 +1,7 @@
 from kivy.lang import Builder
 from kivy.properties import ListProperty
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
 from util.elements import *
@@ -40,9 +40,10 @@ class ROD_NoteScreen(BaseScreen):
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         list of notes. Show the default buttons."""
+        self.config = settings()
 
         # Get notes from config file
-        notes = config.get('notes', {
+        notes = self.config.get('notes', {
             "pretest": [],
             "posttest": [],
             "bank": []
@@ -57,7 +58,7 @@ class ROD_NoteScreen(BaseScreen):
 
     def _save_config(self):
         '''Save the notes to the configuration file.'''
-        config.set('notes', {
+        self.config.set('notes', {
             "pretest": self.ids['pretest'].list_data,
             "posttest": self.ids['posttest'].list_data,
             "bank": self.ids['bank'].list_data

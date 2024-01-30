@@ -9,7 +9,7 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 from kivy.clock import Clock
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
 from Devices.Rodney.Data.TestSingleton import TestSingleton
 from shutil import copyfile
@@ -28,6 +28,8 @@ from kivy.garden.graph import Graph, MeshLinePlot
 from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
+
+config = settings()
 
 FOLDERNAME = "Tests/"+"config.get('selected_folder',0)"
 
@@ -77,17 +79,17 @@ class ROD_TestFoldersScreen(BaseScreen):
 
     def delete_folder(self, obj):
         selected = self.folder_list.get_selected()
-        config.set('unwanted_folder', str(selected[0]))
+        self.config.set('unwanted_folder', str(selected[0]))
         self.parent_screen.move_to('rod_delete_folder_confirmation')
 
     def view_tests(self, obj):
         selected = self.folder_list.get_selected()
-        config.set('selected_folder', str(selected[0]))
+        self.config.set('selected_folder', str(selected[0]))
         self.parent_screen.move_to('rod_tests_screen')
 
     def rename_folder(self,obj):
         selected = self.folder_list.get_selected()
-        config.set('selected_folder', str(selected[0]))
+        self.config.set('selected_folder', str(selected[0]))
         self.parent_screen.move_to('rod_rename_folder_screen')
 
     def default_folders_buttons(self):

@@ -7,7 +7,7 @@ stored in our settings file .
 
 from kivy.lang import Builder
 import os
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
@@ -25,7 +25,8 @@ class ROD_RenameFolderScreen(BaseScreen):
         """Before the Screen loads, read the configuration file to get the current
         operator and set the TextInput text."""
         input = self.ids['folder']
-        input.text = str(config.get('selected_folder', "Default Folder"))
+        self.config = settings()
+        input.text = str(self.config.get('selected_folder', "Default Folder"))
         self.previous_name = input.text
         input.validate()
 
@@ -36,14 +37,14 @@ class ROD_RenameFolderScreen(BaseScreen):
 
     def save(self):
         """Save button was pressed: save the new operator in the configuration file."""
-        folder_list = config.get('folders',0)
+        folder_list = self.config.get('folders',0)
         input = self.ids['folder']
         valid = input.validate()
         if valid:
             os.rename('Tests/'+self.previous_name,"Tests/"+str(input.text))
             folder_list = folder_list.replace(self.previous_name, "")
             folder_list = folder_list + input.text
-            config.set('folders', folder_list)
+            self.config.set('folders', folder_list)
         else:
             input.focus = True
             return False

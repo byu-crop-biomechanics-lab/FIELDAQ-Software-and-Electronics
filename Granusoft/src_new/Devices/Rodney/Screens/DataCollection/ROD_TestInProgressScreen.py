@@ -14,7 +14,7 @@ from Devices.Rodney.Sensors import Sensor
 from Devices.Rodney.Data.TestSingleton import TestSingleton
 
 from util.BaseScreen import BaseScreen
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.elements import *
 import datetime
 import time
@@ -54,6 +54,7 @@ class ROD_TestInProgressScreen(BaseScreen):
     start_timestamp = datetime.datetime.now().strftime("%I:%M:%S %p")
 
     def on_pre_enter(self):
+        self.config = settings()
         self.test_time = 0
         self.temperature = 0
         self.humidity = 0
@@ -141,11 +142,11 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.event.cancel()
         ts = TestSingleton()
         ts.clear_all()
-        ts.set_height(str(config.get('height', "")))
-        ts.set_plot(str(config.get('plot_num', "")))
-        config.set('break_height', "N/A")
+        ts.set_height(str(self.config.get('height', "")))
+        ts.set_plot(str(self.config.get('plot_num', "")))
+        self.config.set('break_height', "N/A")
 
-        ts.set_operator(str(config.get('operator', "")))
+        ts.set_operator(str(self.config.get('operator', "")))
         ts.set_timestamp(self.start_timestamp)
         ts.set_datasets(self.datasets)
         self.datasets = []

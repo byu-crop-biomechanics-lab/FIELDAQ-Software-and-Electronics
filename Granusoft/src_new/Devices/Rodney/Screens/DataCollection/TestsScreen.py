@@ -8,7 +8,7 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 from kivy.clock import Clock
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
 from Devices.Rodney.Data.TestSingleton import TestSingleton
 from shutil import copyfile
@@ -75,7 +75,8 @@ class TestsScreen(BaseScreen):
         Clock.schedule_once(gui_init)
 
     def on_pre_enter(self):
-        foldername = "Tests/"+config.get('selected_folder',0)
+        self.config = settings()
+        foldername = "Tests/"+self.config.get('selected_folder',0)
         self.test_filenames = [f for f in listdir(foldername) if (isfile(join(foldername, f)) and f != ".gitignore")]
 
         self.default_buttons()
@@ -122,7 +123,7 @@ class TestsScreen(BaseScreen):
         dt = datetime.datetime.now()
         configName = 'config_' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '.txt'
         subFold = 'Tests_' + dt.strftime('%Y_%m_%d')
-        foldername = config.get('selected_folder',0)
+        foldername = self.config.get('selected_folder',0)
         try:
             if not os.path.exists(path+'/'+subFold):
                 os.makedirs(path + '/' + subFold)
@@ -130,7 +131,7 @@ class TestsScreen(BaseScreen):
         except:
             pass
         try:
-            config.save_as(os.path.join(path + '/' + subFold, configName))
+            self.config.save_as(os.path.join(path + '/' + subFold, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('Tests/' + foldername+'/'+ name, path + '/' + subFold + "/" + name)
@@ -138,7 +139,7 @@ class TestsScreen(BaseScreen):
                     os.rename('Tests/' + name, 'TestArchive/' + subFold + '/' + name)
                 self.dismiss_popup()
         except:
-            config.save_as(os.path.join(path, configName))
+            self.config.save_as(os.path.join(path, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
                     print(path)

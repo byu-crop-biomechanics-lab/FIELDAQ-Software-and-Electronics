@@ -7,7 +7,8 @@ stored in our settings file.
 
 from kivy.lang import Builder
 
-import Rodney.settings.configurator as config
+
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
 from util.getKVPath import getKVPath
@@ -20,7 +21,8 @@ class ROD_HeightScreen(BaseScreen):
         """Before the Screen loads, read the configuration file to get the current
         height."""
         input = self.ids['height']
-        input.text = str(config.get('height', 0))
+        self.config = settings()
+        input.text = str(self.config.get('height', 0))
         input.validate()
 
     def on_enter(self):
@@ -35,7 +37,7 @@ class ROD_HeightScreen(BaseScreen):
         input = self.ids['height']
         valid = input.validate()
         if valid:
-            config.set('height', float(input.text))
+            self.config.set('height', float(input.text))
             return True
         else:
             input.focus = True
