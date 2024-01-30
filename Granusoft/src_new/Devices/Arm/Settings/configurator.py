@@ -49,6 +49,7 @@ def set(key, value):
 def get(key, default):
     """Get a value from the configuration JSON file using a key.  If the value does not
     exist, save the default value into the JSON file and return the default."""
+    print(data)
     if key in data:
         return data.get(key)
     else:
