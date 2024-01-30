@@ -20,6 +20,8 @@ def load():
     else:
         data = {}
 
+load()
+
 def load_from(filepath):
     '''Loads data from a specified configuration file.  Overwrites CONFIG_FILE'''
     global data
