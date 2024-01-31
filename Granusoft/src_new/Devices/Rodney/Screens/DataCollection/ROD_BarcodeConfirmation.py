@@ -8,6 +8,7 @@ from util.getKVPath import getKVPath
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_BarcodeConfirmation(BaseScreen):
+    config = settings()
     def use_barcode_yes(self):
         self.config.set('barcode_scan',"ON")
 
