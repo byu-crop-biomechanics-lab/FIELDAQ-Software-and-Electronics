@@ -1,9 +1,6 @@
 
 import os
 import json
-import inspect
-
-#Switch shared_borg_state to data
 
 class Singleton(object):
   _shared_borg_state = {}
@@ -30,12 +27,12 @@ class SettingsSingleton(Singleton):
         
     def load(self):
         """Loads data from the configuration file, if it exists."""
-        self._shared_borg_state = {}
+        self.data = {}
         if os.path.isfile(self.CONFIG_FILE):
             with open(self.CONFIG_FILE) as f:
-                self._shared_borg_state.update(json.load(f))
+                self.data.update(json.load(f))
         else:
-            self._shared_borg_state = {}
+            self.data = {}
 
     def load_from(self, filepath):
         '''Loads data from a specified configuration file.  Overwrites CONFIG_FILE'''
@@ -44,29 +41,29 @@ class SettingsSingleton(Singleton):
                 self._shared_borg_state.update(json.load(f))
                 self.save()
         else:
-            self._shared_borg_state = {}
+            self.data = {}
 
     def save(self):
         """Saves data to the configuration file."""
         with open(self.CONFIG_FILE, 'w') as outfile:
-            json.dump(self._shared_borg_state, outfile, indent=4)
+            json.dump(self.data, outfile, indent=4)
 
     def save_as(self, filepath):
         '''Saves data to the specified file.'''
         with open(filepath, 'w') as outfile:
-            json.dump(self._shared_borg_state, outfile, indent=4)
+            json.dump(self.data, outfile, indent=4)
 
     def set(self, key, value):
         """Set a key to value in the configuration JSON file."""
         # Set key to value
-        self._shared_borg_state[key] = value
+        self.data[key] = value
         self.save()
 
     def get(self, key, default):
         """Get a value from the configuration JSON file using a key.  If the value does not
         exist, save the default value into the JSON file and return the default."""
-        if key in self._shared_borg_state:
-            return self._shared_borg_state.get(key)
+        if key in self.data:
+            return self.data.get(key)
         else:
             self.set(key, default)
             return default
@@ -163,9 +160,9 @@ class SettingsSingleton(Singleton):
 #         return default
 
 # if __name__ == "__main__":
-#     """If the configuration module is run as the main program, test the configuration
+#     """If the configuration module is run as the main program, test the configurationzzzzz
 #     module.  These tests ensure the module returns and saves the default value if a key
-#     is not defined, returns the saved value if a key is defined, and that the
+#     is not defined, returns the saved value if a key is defined, and that thez
 #     configuration file contains the values saved.
 
 #     WARNING: This will override the configuration file."""
