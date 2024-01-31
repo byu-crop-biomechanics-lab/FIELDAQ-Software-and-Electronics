@@ -2,22 +2,6 @@
 import os
 import json
 
-# class Singleton(object):
-#   data = {}
-#   device = ""
-#   CONFIG_FILE = 'Devices/Rodney/Settings/config.json'
-
-#   def __new__(cls, *args, **kwargs):
-#     obj = super(Singleton, cls).__new__(cls, *args, **kwargs)
-#     obj.data = cls.data
-#     obj.device = cls.device
-#     obj.CONFIG_FILE = cls.CONFIG_FILE
-#     return obj
-
-
-# class SettingsSingleton(Singleton):
-#     def __init__(self):
-#         super(SettingsSingleton, self).__init__()
 
 class SettingsSingleton():
     _instance = None
