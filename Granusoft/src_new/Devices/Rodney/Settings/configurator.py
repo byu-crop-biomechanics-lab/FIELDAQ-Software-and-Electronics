@@ -19,11 +19,13 @@ class SettingsSingleton(Singleton):
         super(SettingsSingleton, self).__init__()
         self.device = ""
         self.CONFIG_FILE = 'Devices/Rodney/Settings/config.json'
+        self.data = {}
         
     def clear_all(self):
         self._shared_borg_state = {}
         self.device = ""
         self.CONFIG_FILE = 'Devices/Rodney/Settings/config.json'
+        self.data = {}
         
     def load(self):
         """Loads data from the configuration file, if it exists."""
