@@ -7,6 +7,8 @@ from util.getKVPath import getKVPath
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_HeightSensor(BaseScreen):
+    config = settings()
+
     def use_height_sensor_yes(self):
         self.config.set('height_sensor',"ON")
 
