@@ -1,5 +1,4 @@
 from .connections import *
-# from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
 
