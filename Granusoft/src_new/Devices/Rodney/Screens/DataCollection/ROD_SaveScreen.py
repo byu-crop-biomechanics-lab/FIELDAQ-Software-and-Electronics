@@ -68,6 +68,7 @@ class ROD_SaveScreen(BaseScreen):
             "pretest": [],
             "bank": []
         })
+        print(notes)
         pre_notes = notes["pretest"]
         post_notes = ts.get_post_notes()
         dt = datetime.datetime.now()

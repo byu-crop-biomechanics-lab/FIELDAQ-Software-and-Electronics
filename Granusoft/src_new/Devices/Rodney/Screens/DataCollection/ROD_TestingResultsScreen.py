@@ -50,7 +50,7 @@ class ROD_TestingResultsScreen(BaseScreen):
 
         # Get notes from config file
         self.config = settings()
-        notes = self.config.get('notes', {"posttest": []})
+        notes = self.config.get('notes', {"posttest": [], "pretest": [], "bank":[]})
 
         # Set the data
         self.ids['posttest'].list_data = notes["posttest"]
