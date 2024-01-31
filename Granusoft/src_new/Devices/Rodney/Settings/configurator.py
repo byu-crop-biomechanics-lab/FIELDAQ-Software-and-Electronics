@@ -2,7 +2,6 @@
 import os
 import json
 
-
 class SettingsSingleton():
     _instance = None
 
