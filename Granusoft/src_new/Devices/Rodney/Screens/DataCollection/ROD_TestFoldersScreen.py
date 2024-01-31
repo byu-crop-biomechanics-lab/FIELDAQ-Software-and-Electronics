@@ -51,6 +51,7 @@ class ROD_TestFoldersScreen(BaseScreen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        self.config = settings()
         self.back_button = GranuSideButton(text='Back')
         self.back_button.bind(on_release=self.go_back)
         self.delete_button = GranuSideButton(text='Delete\nFolder')
