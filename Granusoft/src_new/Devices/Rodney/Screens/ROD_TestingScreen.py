@@ -39,6 +39,7 @@ class ROD_TestingScreen(BaseScreen):
         """Before the Screen loads, read the configuration file to get the current
         list of notes. Show the default buttons."""
         # self.time_zone = self.find_time_zone()
+        self.config = settings()
         self.event = Clock.schedule_interval(self.update_time, ONE_SEC)
         self.load_cell_height = self.get_height()
         self.config = settings()
