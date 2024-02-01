@@ -1,6 +1,5 @@
 from connections import *
 
-
 """
 Set global/default values for Reading ADCs: 
 
@@ -18,6 +17,15 @@ gain = 128                          # Set to programmed gain (not used currently
 #####################################################################################
 
 
+# This function reads the voltage from the ADC and converts it to a strain value
+def read_voltage(adc):
+    if not adc.available():  # While the ADC is not available, do nothing
+        pass
+    return (
+        adc.read() * supply_voltage / (ADC_Res_Dec)
+    )  # 23-bit resolution, gain before ADC, ENOB is effectve number of bits taken from nau7802 datasheet
+
+
 class Strain8:
 
     def __init__(self):
@@ -27,9 +35,9 @@ class Strain8:
     # pass in the desired time period over which data will be recorded
     # pass in the desired number of samples over the time period
     # note: time period will be approximate because it takes time to read the ADC
-    def read_gauges(sampPer=config.readPeriod, samples=config.samplesPerRead):
+    def read_gauges(sampPer=readPeriod, samples=samplesPerRead):
         delayTime = sampPer / (
-            config.num_ADCs * samples
+            num_ADCs * samples
         )  # what is this 3 for?? Number of ADCs? YES
         # initialize lists for storing data
         g1 = []
