@@ -10,6 +10,8 @@ import adafruit_lis3dh
 #import adafruit_am2320
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
+from cedargrove_nau7802 import NAU7802
+import adafruit_tca9548a
 
 GPIO.setmode(GPIO.BCM)
 i2c = busio.I2C(board.SCL, board.SDA, 115200)
