@@ -92,5 +92,5 @@ class ROD_TestingScreenAuto(BaseScreen):
     #                 os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
     #             except:
     #                 print("USB Not Mounted")
-    #         self._popup = SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
+    #         self._popup = ROD_SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
     #         self._popup.open()

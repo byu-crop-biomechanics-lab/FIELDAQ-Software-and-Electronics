@@ -38,13 +38,13 @@ class ROD_TestList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
 
-class SaveTestDialog(Popup):
+class ROD_SaveTestDialog(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
-class SaveConfirmDialog(Popup):
+class ROD_SaveConfirmDialog(Popup):
     '''A dialog to save a file.  The save and cancel properties point to the
     functions called when the save or cancel buttons are pressed.'''
     save = ObjectProperty(None)
@@ -99,13 +99,14 @@ class ROD_TestsScreen(BaseScreen):
                 os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
             except:
                 print("USB Not Mounted")
-        self._popup = SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
+                return
+        self._popup = ROD_SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
         self._popup.open()
         # print("We should export all tests!")
 
     def pathSelector(self): # , obj):
         self.dismiss_popup()
-        self._popup = SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
+        self._popup = ROD_SaveTestDialog(save=self.save, cancel=self.dismiss_popup)
         self._popup.open()
 
     def usbSave(self, path):
@@ -131,12 +132,12 @@ class ROD_TestsScreen(BaseScreen):
         except:
             pass
         try:
-            config.save_as(os.path.join(path + '/' + subFold, configName))
+            self.config.save_as(os.path.join(path + '/' + subFold, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('Tests/' + foldername+'/'+ name, path + '/' + subFold + "/" + name)
                     # os.remove('Tests/' + name)
-                    os.rename('Tests/' + name, 'TestArchive/' + subFold + '/' + name)
+                    # os.rename('Tests/' + name, 'TestArchive/' + subFold + '/' + name)
                 self.dismiss_popup()
         except:
             self.config.save_as(os.path.join(path, configName))
@@ -145,7 +146,7 @@ class ROD_TestsScreen(BaseScreen):
                     print(path)
                     copyfile('Tests/'+foldername+'/' + name, path + '/' + name)
                     # os.remove('Tests/' + name)
-                    os.rename('Tests/'+foldername+'/' + name, 'TestArchive/' + subFold + '/' + name)
+                    # os.rename('Tests/'+foldername+'/' + name, 'TestArchive/' + subFold + '/' + name)
                 self.dismiss_popup()
         self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
         self.ids['tests_list'].list_data = self.test_filenames
