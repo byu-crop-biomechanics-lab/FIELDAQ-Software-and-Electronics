@@ -111,7 +111,7 @@ class ROD_TestInProgressScreen(BaseScreen):
             last_index = len(self.datasets) - 1
             
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
-            self.y_min1 = max(self.y_min1, math.ceil(self.datasets[last_index].strain1)*0.8)
+            self.y_min1 = max(self.y_min1, math.ceil(self.datasets[last_index].strain1)*0.8) # why are these 80% and 120% ?
             self.y_min2 = max(self.y_min2, math.ceil(self.datasets[last_index].strain2)*0.8)
             self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].strain1)*1.2)
             self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].strain2)*1.2)

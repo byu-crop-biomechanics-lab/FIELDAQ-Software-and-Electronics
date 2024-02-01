@@ -10,6 +10,8 @@ import adafruit_lis3dh
 #import adafruit_am2320
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
+from cedargrove_nau7802 import NAU7802
+import adafruit_tca9548a
 
 GPIO.setmode(GPIO.BCM)
 i2c = busio.I2C(board.SCL, board.SDA, 115200)
@@ -54,6 +56,35 @@ CHAN4 = AnalogIn(ads2, ADS.P0)
 CHAN5 = AnalogIn(ads2, ADS.P1)
 CHAN6 = AnalogIn(ads2, ADS.P2)
 CHAN7 = AnalogIn(ads2, ADS.P3)
+
+# initialize the multiplexer
+mux = adafruit_tca9548a.PCA9546A(i2c)
+for channel in range(4):
+    if mux[channel].try_lock():
+        print("Channel {}:".format(channel), end="")
+        addresses = mux[channel].scan()
+        print([hex(address) for address in addresses if address != 0x70])
+        mux[channel].unlock()
+
+# ADC on rodney PCB
+adc1 = NAU7802(mux[1], address=0x70, active_channels=1)  # 0
+adc2 = NAU7802(mux[2], address=0x70, active_channels=1)  # 1
+adc3 = NAU7802(mux[3], address=0x70, active_channels=1)  # 2
+adc4 = NAU7802(mux[4], address=0x70, active_channels=1)  # 3
+
+print("*** Instantiate and calibrate ADCs")
+enabled1 = adc1.enable(True)
+enabled2 = adc2.enable(True)
+enabled3 = adc3.enable(True)
+enabled4 = adc4.enable(True)
+print("Digital and analog power enabled 1:", enabled1)
+print("Digital and analog power enabled 2:", enabled2)
+print("Digital and analog power enabled 3:", enabled3)
+print("Digital and analog power enabled 3:", enabled4)
+# Calibrate and zero the ADC's
+print("REMOVE WEIGHTS FROM LOAD CELLS")
+time.sleep(3) # wait 3 seconds for zeroing ADCs
+
 
 # Channels for the pot and force sensors
 
