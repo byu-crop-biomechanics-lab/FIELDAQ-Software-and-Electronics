@@ -105,37 +105,3 @@ for in1, in2, pwm in zip(IN1, IN2, PWM):
     GPIO.setup(in1, GPIO.OUT)
     GPIO.setup(in2, GPIO.OUT)
     GPIO.setup(pwm, GPIO.OUT)
-
-gps.send_command(b'PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
-gps.send_command(b'PMTK220,500')
-try:
-    gps.update()
-except:
-    print("GPS may have a problem. Try Rebooting")
-
-# MOTORS
-PWMA = 16 #BOARD 36, BCM 16
-AIN1 = 25 #BOARD 22, BCM 25
-AIN2 = 20 #BOARD 38, BCM 20
-
-PWMB = 21 #BOARD 40, BCM 21
-BIN1 = 5 #BOARD 29, BCM 5
-BIN2 = 12 #BOARD 32, BCM 12
-
-PWMC = 13 #BOARD 33, BCM 13
-CIN1 = 26 #BOARD 37, BCM 26
-CIN2 = 19 #BOARD 35, BCM 19
-
-PWMD = 24 #BOARD 18, BCM 24
-DIN1 = 18 #BOARD 12, BCM 18
-DIN2 = 23 #BOARD 16, BCM 23
-
-MOTORS = ['A', 'B', 'C', 'D']
-IN1 = [AIN1, BIN1, CIN1, DIN1]
-IN2 = [AIN2, BIN2, CIN2, DIN2]
-PWM = [PWMA, PWMB, PWMC, PWMD]
-
-for in1, in2, pwm in zip(IN1, IN2, PWM):
-    GPIO.setup(in1, GPIO.OUT)
-    GPIO.setup(in2, GPIO.OUT)
-    GPIO.setup(pwm, GPIO.OUT)
