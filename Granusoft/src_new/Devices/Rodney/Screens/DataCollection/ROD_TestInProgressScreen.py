@@ -110,11 +110,12 @@ class ROD_TestInProgressScreen(BaseScreen):
             self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
             last_index = len(self.datasets) - 1
             
+            # Setting the min and max of the visual plot
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
-            self.y_min1 = max(self.y_min1, math.ceil(self.datasets[last_index].strain1)*0.8) # why are these 80% and 120% ?
-            self.y_min2 = max(self.y_min2, math.ceil(self.datasets[last_index].strain2)*0.8)
-            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].strain1)*1.2)
-            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].strain2)*1.2)
+            self.y_min1 = max(self.y_min1, math.ceil(self.datasets[last_index].strain8[0])*0.8)
+            self.y_min2 = max(self.y_min2, math.ceil(self.datasets[last_index].strain8[1])*0.8)
+            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].strain8[0])*1.2)
+            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].strain8[1])*1.2)
             
 
             self.x_major = int((self.x_max-self.x_min)/5)
@@ -128,8 +129,8 @@ class ROD_TestInProgressScreen(BaseScreen):
             self.graph2.add_plot(self.plot2)
 
         sensor_values = self.test_sensor.get_sensor_data(adc_out=1) # FIXME THIS GETS RAW VOLTAGES
-        self.strain8 = sensor_values["strain8"]
-        self.whiskers = sensor_values["whiskers"]
+        self.strain8 = sensor_values["Strain8"]
+        self.whiskers = sensor_values["Whiskers"]
 
         new_dataset = Dataset(total_time_passed, self.strain8, self.whiskers)
         self.datasets.append(new_dataset)
