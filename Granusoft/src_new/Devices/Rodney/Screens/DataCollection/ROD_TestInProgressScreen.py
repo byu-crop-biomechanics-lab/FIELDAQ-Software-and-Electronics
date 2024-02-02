@@ -121,21 +121,17 @@ class ROD_TestInProgressScreen(BaseScreen):
             self.y_major1 = int((self.y_max1-self.y_min1)/5)
             self.y_major2 = int((self.y_max2-self.y_min2)/5)
 
-            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].strain1) for i in range(0, len(self.datasets), 5)]
-            self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].strain2) for i in range(0, len(self.datasets), 5)]
+            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].strain8[0]) for i in range(0, len(self.datasets), 5)]
+            self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].strain8[1]) for i in range(0, len(self.datasets), 5)]
             
             self.graph1.add_plot(self.plot1)
             self.graph2.add_plot(self.plot2)
 
         sensor_values = self.test_sensor.get_sensor_data(adc_out=1) # FIXME THIS GETS RAW VOLTAGES
-        self.x_load = sensor_values["X Load"]
-        self.y_load = sensor_values["Y Load"]
-        self.pot_angle = sensor_values["Pot Angle"]
-        self.imu_angle = sensor_values["IMU Angle"]
-        self.strain1 = sensor_values["Strain 1"]
-        self.strain2 = sensor_values["Strain 2"]
+        self.strain8 = sensor_values["strain8"]
+        self.whiskers = sensor_values["whiskers"]
 
-        new_dataset = Dataset(total_time_passed, self.x_load, self.y_load, self.pot_angle, self.imu_angle, self.data_rate, self.strain1, self.strain2)
+        new_dataset = Dataset(total_time_passed, self.strain8, self.whiskers)
         self.datasets.append(new_dataset)
 
     def on_pre_leave(self):

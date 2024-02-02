@@ -94,10 +94,10 @@ class ROD_SaveScreen(BaseScreen):
                     str("%.7f" % sensor_data["Location"][1])]
 
         self.config_data = self.config.get('sensors', {})
-        self.NAMES = ['X Load', 'Y Load', 'IMU Angle', 'Pot Angle', 'Strain 1', 'Strain 2']
-        self.SENSOR = ['LOAD_X', 'LOAD_Y', 'IMU', 'POT', 'STRAIN_1', 'STRAIN_2']
-        self.UNITS = ['Pounds', 'Pounds', 'Deg', 'Deg', 'Volts', 'Volts']
-        self.IDS = ['loadx1', 'loady1', 'imu1', 'pot1', 'strain1', 'strain2']
+        self.NAMES = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle']
+        self.SENSOR = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle']
+        self.UNITS = ['V', 'V', 'V', 'V', 'Deg', 'Deg']
+        self.IDS = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle']
 
         with open(filename, 'w+', newline='') as csvFile:
             writer = csv.writer(csvFile)
@@ -144,12 +144,11 @@ class ROD_SaveScreen(BaseScreen):
                     writer.writerow([self.SENSOR[j], '1', '0',
                                     self.UNITS[j], self.IDS[j]])
             writer.writerow(['----------TEST DATA-----------'])
-            writer.writerow(['TIME (milliseconds)', 'ANGLE_POT',
-                            'ANGLE_IMU', 'LOAD_X', 'LOAD_Y', 'Strain 1', 'Strain 2'])
+            writer.writerow(['TIME (milliseconds)', 'Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle'])
             datasets = ts.get_datasets()
             for ds in datasets:
                 writer.writerow(
-                    [(ds.timestamp * 1000), ds.pot_angle, ds.imu_angle, ds.x_load, ds.y_load, ds.strain1, ds.strain2])
+                    [(ds.timestamp * 1000), ds.strain8[0], ds.strain8[1], ds.strain8[2], ds.strain8[3], ds.whiskers[0], ds.whiskers[1]])
 
         csvFile.close()
 
