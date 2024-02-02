@@ -38,7 +38,7 @@ class Strain8:
     def read_gauges(sampPer=readPeriod, samples=samplesPerRead):
         delayTime = sampPer / (
             num_ADCs * samples
-        )  # what is this 3 for?? Number of ADCs? YES
+        ) 
         # initialize lists for storing data
         g1 = []
         g2 = []

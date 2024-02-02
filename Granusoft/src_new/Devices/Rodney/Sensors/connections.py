@@ -46,16 +46,16 @@ for pin in GPIO_PINS:
 
 
 # ADC
-ads1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
-ads2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=2)
-CHAN0 = AnalogIn(ads1, ADS.P0)
-CHAN1 = AnalogIn(ads1, ADS.P1)
-CHAN2 = AnalogIn(ads1, ADS.P2)
-CHAN3 = AnalogIn(ads1, ADS.P3)
-CHAN4 = AnalogIn(ads2, ADS.P0)
-CHAN5 = AnalogIn(ads2, ADS.P1)
-CHAN6 = AnalogIn(ads2, ADS.P2)
-CHAN7 = AnalogIn(ads2, ADS.P3)
+onBoardAds1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
+onBoardAds2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=2)
+CHAN0 = AnalogIn(onBoardAds1, ADS.P0)
+CHAN1 = AnalogIn(onBoardAds1, ADS.P1)
+CHAN2 = AnalogIn(onBoardAds1, ADS.P2)
+CHAN3 = AnalogIn(onBoardAds1, ADS.P3)
+CHAN4 = AnalogIn(onBoardAds2, ADS.P0)
+CHAN5 = AnalogIn(onBoardAds2, ADS.P1)
+CHAN6 = AnalogIn(onBoardAds2, ADS.P2)
+CHAN7 = AnalogIn(onBoardAds2, ADS.P3)
 
 # initialize the multiplexer
 mux = adafruit_tca9548a.PCA9546A(i2c)
@@ -67,10 +67,15 @@ for channel in range(4):
         mux[channel].unlock()
 
 # ADC on rodney PCB
-adc1 = NAU7802(mux[1], address=0x70, active_channels=1)  # 0
-adc2 = NAU7802(mux[2], address=0x70, active_channels=1)  # 1
-adc3 = NAU7802(mux[3], address=0x70, active_channels=1)  # 2
-adc4 = NAU7802(mux[4], address=0x70, active_channels=1)  # 3
+adc1 = NAU7802(mux[0], address=0x70, active_channels=1)  # 0
+adc2 = NAU7802(mux[1], address=0x70, active_channels=1)  # 1
+adc3 = NAU7802(mux[2], address=0x70, active_channels=1)  # 2
+adc4 = NAU7802(mux[3], address=0x70, active_channels=1)  # 3
+
+adc1.channel = 1 # I think this can be one or two.
+adc2.channel = 1
+adc3.channel = 1
+adc4.channel = 1
 
 print("*** Instantiate and calibrate ADCs")
 enabled1 = adc1.enable(True)
