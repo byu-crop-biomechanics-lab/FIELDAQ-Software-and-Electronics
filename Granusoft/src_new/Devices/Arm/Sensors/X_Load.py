@@ -1,11 +1,9 @@
 from .connections import *
 import Devices.Arm.Settings.configurator as config
-from Devices.Arm.Settings.configurator import SettingsSingleton as settings
 
 class X_Load:
 
     def __init__(self):
-        config = settings()
         print("X Load init")
         self.config_data = config.get('sensors', {})
         self.load = 0.0
