@@ -4,16 +4,13 @@ import Devices.Arm.Settings.configurator as config
 class X_Load:
 
     def __init__(self):
-        print("X Load init")
         self.config_data = config.get('sensors', {})
         self.load = 0.0
         self.load_adc = 0.0
         try:
             self.slope = self.config_data['X Load']['slope']
             self.intercept = self.config_data['X Load']['intercept']
-            print('X Load configured')
         except:
-            print('X Load not configured')
             self.slope = 1.0
             self.intercept = 0
 

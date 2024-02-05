@@ -58,36 +58,32 @@ CHAN6 = AnalogIn(onBoardAds2, ADS.P2)
 CHAN7 = AnalogIn(onBoardAds2, ADS.P3)
 
 # initialize the multiplexer
-mux = adafruit_tca9548a.PCA9546A(i2c)
+mux = adafruit_tca9548a.PCA9546A(i2c, address=0x70)
+channels = []
 for channel in range(4):
     if mux[channel].try_lock():
         print("Channel {}:".format(channel), end="")
         addresses = mux[channel].scan()
         print([hex(address) for address in addresses if address != 0x70])
+        channels = addresses
         mux[channel].unlock()
 
 # ADC on rodney PCB
-adc1 = NAU7802(mux[0], address=0x70, active_channels=1)  # 0
-adc2 = NAU7802(mux[1], address=0x70, active_channels=1)  # 1
-adc3 = NAU7802(mux[2], address=0x70, active_channels=1)  # 2
-adc4 = NAU7802(mux[3], address=0x70, active_channels=1)  # 3
+ADC0 = NAU7802(mux[0], address=0x2a, active_channels=1)  # 0
+ADC1 = NAU7802(mux[1], address=0x2a, active_channels=1)  # 1
+ADC2 = NAU7802(mux[2], address=0x2a, active_channels=1)  # 2
+ADC3 = NAU7802(mux[3], address=0x2a, active_channels=1)  # 3
 
-adc1.channel = 1 # I think this can be one or two.
-adc2.channel = 1
-adc3.channel = 1
-adc4.channel = 1
+ADC0.channel = 1 # I think this can be one or two.
+ADC1.channel = 1
+ADC2.channel = 1
+ADC3.channel = 1
 
-print("*** Instantiate and calibrate ADCs")
-enabled1 = adc1.enable(True)
-enabled2 = adc2.enable(True)
-enabled3 = adc3.enable(True)
-enabled4 = adc4.enable(True)
-print("Digital and analog power enabled 1:", enabled1)
-print("Digital and analog power enabled 2:", enabled2)
-print("Digital and analog power enabled 3:", enabled3)
-print("Digital and analog power enabled 3:", enabled4)
+enabled1 = ADC0.enable(True)
+enabled2 = ADC1.enable(True)
+enabled3 = ADC2.enable(True)
+enabled4 = ADC3.enable(True)
 # Calibrate and zero the ADC's
-print("REMOVE WEIGHTS FROM LOAD CELLS")
 time.sleep(3) # wait 3 seconds for zeroing ADCs
 
 # Channels for the pot and force sensors

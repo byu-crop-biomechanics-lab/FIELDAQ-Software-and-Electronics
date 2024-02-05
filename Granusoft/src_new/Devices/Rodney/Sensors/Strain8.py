@@ -1,4 +1,4 @@
-from connections import *
+from .connections import *
 
 """
 Set global/default values for Reading ADCs: 
@@ -47,10 +47,10 @@ class Strain8:
 
         # populate g1,g2,g3, and g4 with the data from the ADCs
         for x in range(samples):
-            g1.append(read_voltage(adc1))
-            g2.append(read_voltage(adc2))
-            g3.append(read_voltage(adc3))
-            g4.append(read_voltage(adc4))
+            g1.append(read_voltage(ADC0))
+            g2.append(read_voltage(ADC1))
+            g3.append(read_voltage(ADC2))
+            g4.append(read_voltage(ADC3))
             time.sleep(delayTime)
 
         # put g1,g2,g3 in a list to return to user
