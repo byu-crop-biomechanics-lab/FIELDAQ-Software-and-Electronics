@@ -16,7 +16,7 @@ class Sensor:
 
     def __init__(self):
         self.REAL_DATA = True
-        self.keys = ["Temperature","Humidity","Location","Time","Strain8","Whiskers","IMU Angle", "Load Cell Height"]
+        self.keys = ["Temperature","Humidity","Location","Time","strain8","whiskers","IMU Angle", "Load Cell Height"]
         self.temp = 0.0 #Temperature()
         self.hum = 0.0 #Humidity()
         self.location = Location()
@@ -39,8 +39,10 @@ class Sensor:
         self.sensor_data["Location"] = self.location.get_data()
 
     def get_sensor_data(self, adc_out = 0):
-        self.sensor_data["strain8"] = round(self.x_load.get_data(adc_out),4)
-        self.sensor_data["whiskers"] = round(self.y_load.get_data(adc_out),4)
+        self.sensor_data["strain8"] = [round(strain, 4) for strain in self.strain8.read_gauges()]
+        self.sensor_data["whiskers"] = [round(whisker, 4) for whisker in self.whiskers.get_data(adc_out)]
+        self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
+        self.sensor_data["Load Cell Height"] = round(self.load_cell_height.get_data(adc_out),2)
         return self.sensor_data
 
     def clear_gps_memory(self):

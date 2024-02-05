@@ -6,7 +6,7 @@ class Sensor:
 
     def __init__(self):
         self.REAL_DATA = False
-        self.keys = ["Temperature","Humidity","Location","Time","Strain8","Whiskers","IMU Angle", "Load Cell Height"]
+        self.keys = ["Temperature","Humidity","Location","Time","strain8","whiskers","IMU Angle", "Load Cell Height"]
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
         self.sensor_data = {}
         self.cpu_time = 0
@@ -43,8 +43,8 @@ class Sensor:
         self.sensor_data["Temperature"] = self.temp_fake
         self.sensor_data["Humidity"] = self.hum_fake
         self.sensor_data["Location"] = self.loc_fake
-        self.sensor_data["Strain8"] = self.strain8_fake
-        self.sensor_data["Whiskers"] = self.whiskers_fake
+        self.sensor_data["strain8"] = self.strain8_fake
+        self.sensor_data["whiskers"] = self.whiskers_fake
         self.sensor_data["IMU Angle"] = self.imu_fake
         self.sensor_data["Load Cell Height"] = self.load_cell_height_fake
         return self.sensor_data

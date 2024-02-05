@@ -19,6 +19,8 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 INTERVAL = .004
 SECOND_CAP = 1/INTERVAL
 
+# FIXME: This has not been updated to show strain values, or whisker angles yet, and just has old code in it
+
 class ROD_LiveFeedScreen(BaseScreen):
     sensor = Sensor()
 
@@ -73,17 +75,8 @@ class ROD_LiveFeedScreen(BaseScreen):
             self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
             self.current_date = datetime.date.today().strftime("%d/%m/%Y")
-            self.y_load = str("%.1f" % sensor_data["Y Load"])
-            if self.adc_out == 0:
-                self.x_load = str("%.3f" % sensor_data["X Load"])
-                self.pot_angle = str("%.3f" % sensor_data["Pot Angle"])
-            else:
-                self.x_load = str("%.0f" % sensor_data["X Load"])
-                self.pot_angle = str("%.0f" % sensor_data["Pot Angle"])
             self.imu_angle = str("%.3f" % sensor_data["IMU Angle"])
             self.load_cell_height = str("%.2f" % sensor_data["Load Cell Height"])
-            self.strain1 = str("%.3f" % sensor_data["Strain 1"])
-            self.strain2 = str("%.3f" % sensor_data["Strain 2"])
             # Calculate Data Acquisition Rate
             now = datetime.datetime.now()
             new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)

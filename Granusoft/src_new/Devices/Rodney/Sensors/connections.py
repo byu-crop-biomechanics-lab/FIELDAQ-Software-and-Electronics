@@ -62,22 +62,21 @@ mux = adafruit_tca9548a.PCA9546A(i2c, address=0x70)
 channels = []
 for channel in range(4):
     if mux[channel].try_lock():
-        print("Channel {}:".format(channel), end="")
         addresses = mux[channel].scan()
-        print([hex(address) for address in addresses if address != 0x70])
         channels = addresses
         mux[channel].unlock()
 
 # ADC on rodney PCB
-ADC0 = NAU7802(mux[0], address=0x2a, active_channels=1)  # 0
-ADC1 = NAU7802(mux[1], address=0x2a, active_channels=1)  # 1
-ADC2 = NAU7802(mux[2], address=0x2a, active_channels=1)  # 2
-ADC3 = NAU7802(mux[3], address=0x2a, active_channels=1)  # 3
+ADC0 = NAU7802(mux[0], address=0x2a, active_channels=2)  # 0
+ADC1 = NAU7802(mux[1], address=0x2a, active_channels=2)  # 1
+ADC2 = NAU7802(mux[2], address=0x2a, active_channels=2)  # 2
+ADC3 = NAU7802(mux[3], address=0x2a, active_channels=2)  # 3
 
-ADC0.channel = 1 # I think this can be one or two.
-ADC1.channel = 1
-ADC2.channel = 1
-ADC3.channel = 1
+# Set to channel 2 for half bridge, 1 for full bridge
+ADC0.channel = 2
+ADC1.channel = 2
+ADC2.channel = 2
+ADC3.channel = 2
 
 enabled1 = ADC0.enable(True)
 enabled2 = ADC1.enable(True)
@@ -85,6 +84,11 @@ enabled3 = ADC2.enable(True)
 enabled4 = ADC3.enable(True)
 # Calibrate and zero the ADC's
 time.sleep(3) # wait 3 seconds for zeroing ADCs
+
+print(f'ADC0: {ADC0.read()}')
+print(f'ADC1: {ADC1.read()}')
+print(f'ADC2: {ADC2.read()}')
+print(f'ADC3: {ADC3.read()}')
 
 # Channels for the pot and force sensors
 

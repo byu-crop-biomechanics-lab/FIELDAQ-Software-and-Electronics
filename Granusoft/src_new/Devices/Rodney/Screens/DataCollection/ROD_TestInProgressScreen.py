@@ -129,8 +129,8 @@ class ROD_TestInProgressScreen(BaseScreen):
             self.graph2.add_plot(self.plot2)
 
         sensor_values = self.test_sensor.get_sensor_data(adc_out=1) # FIXME THIS GETS RAW VOLTAGES
-        self.strain8 = sensor_values["Strain8"]
-        self.whiskers = sensor_values["Whiskers"]
+        self.strain8 = sensor_values["strain8"]
+        self.whiskers = sensor_values["whiskers"]
 
         new_dataset = Dataset(total_time_passed, self.strain8, self.whiskers)
         self.datasets.append(new_dataset)

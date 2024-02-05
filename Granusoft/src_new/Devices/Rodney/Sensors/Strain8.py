@@ -35,23 +35,17 @@ class Strain8:
     # pass in the desired time period over which data will be recorded
     # pass in the desired number of samples over the time period
     # note: time period will be approximate because it takes time to read the ADC
-    def read_gauges(sampPer=readPeriod, samples=samplesPerRead):
+    def read_gauges(self, sampPer=readPeriod, samples=samplesPerRead):
         delayTime = sampPer / (
             num_ADCs * samples
         ) 
-        # initialize lists for storing data
-        g1 = []
-        g2 = []
-        g3 = []
-        g4 = []
 
         # populate g1,g2,g3, and g4 with the data from the ADCs
-        for x in range(samples):
-            g1.append(read_voltage(ADC0))
-            g2.append(read_voltage(ADC1))
-            g3.append(read_voltage(ADC2))
-            g4.append(read_voltage(ADC3))
-            time.sleep(delayTime)
+        g1 = (read_voltage(ADC0))
+        g2 = (read_voltage(ADC1))
+        g3 = (read_voltage(ADC2))
+        g4 = (read_voltage(ADC3))
+        time.sleep(delayTime)
 
         # put g1,g2,g3 in a list to return to user
         result = [g1, g2, g3, g4]
