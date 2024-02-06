@@ -40,7 +40,7 @@ class ROD_SensorsScreen(BaseScreen):
             calib_screen = self.manager.get_screen('rod_calibrate_screen')
             for s in self.senseMan.get_sensor_keys():
                 # Perhaps Location and Time should be accessed in some other way?
-                if s=='Location' or s=='Time' or s=='Temperature' or s=='Humidity': continue
+                if s=='Location' or s=='Time' or s=='Temperature' or s=='Humidity' or s=='strain8': continue
                 if s=='Load Cell Height': s='Load Cell\nHeight'
                 # Sensor name, parent screen (of button), calibration screen
                 self.ids['sensor_list'].add_widget(ROD_SensorButton(s, self, calib_screen))

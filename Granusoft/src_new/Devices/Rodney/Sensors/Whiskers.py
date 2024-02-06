@@ -22,8 +22,8 @@ class Whiskers:
                 self.pot_adc[1] = POT_CHAN.value
                 return self.pot_adc
             else:
-                self.pot[0] = (POT_CHAN.value * self.slope) + self.intercept
-                self.pot[1] = (POT_CHAN.value * self.slope) + self.intercept
+                self.pot[0] = (POT_CHAN.value * self.slope[0]) + self.intercept[0]
+                self.pot[1] = (POT_CHAN.value * self.slope[1]) + self.intercept[1]
                 return self.pot
         except:
             if adc_out == 1:
