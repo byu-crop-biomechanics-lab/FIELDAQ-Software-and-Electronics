@@ -94,10 +94,10 @@ class ROD_SaveScreen(BaseScreen):
                     str("%.7f" % sensor_data["Location"][1])]
 
         self.config_data = self.config.get('sensors', {})
-        self.NAMES = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle']
-        self.SENSOR = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle']
+        self.NAMES = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back']
+        self.SENSOR = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back']
         self.UNITS = ['V', 'V', 'V', 'V', 'Deg', 'Deg']
-        self.IDS = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle']
+        self.IDS = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back']
 
         with open(filename, 'w+', newline='') as csvFile:
             writer = csv.writer(csvFile)
@@ -144,11 +144,11 @@ class ROD_SaveScreen(BaseScreen):
                     writer.writerow([self.SENSOR[j], '1', '0',
                                     self.UNITS[j], self.IDS[j]])
             writer.writerow(['----------TEST DATA-----------'])
-            writer.writerow(['TIME (milliseconds)', 'Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker 1 Angle', 'Whisker 2 Angle'])
+            writer.writerow(['TIME (milliseconds)', 'Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back'])
             datasets = ts.get_datasets()
             for ds in datasets:
                 writer.writerow(
-                    [(ds.timestamp * 1000), ds.strain8[0], ds.strain8[1], ds.strain8[2], ds.strain8[3], ds.whiskers[0], ds.whiskers[1]])
+                    [(ds.timestamp * 1000), ds.strain8[0], ds.strain8[1], ds.strain8[2], ds.strain8[3], ds.whiskerFront, ds.whiskerBack])
 
         csvFile.close()
 

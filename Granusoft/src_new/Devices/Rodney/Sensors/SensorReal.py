@@ -5,8 +5,8 @@ from Devices.Rodney.Sensors.Pot import Pot
 from Devices.Rodney.Sensors.IMU import IMU
 from Devices.Rodney.Sensors.Height import HeightPoT
 from Devices.Rodney.Sensors.Strain8 import Strain8
-from Devices.Rodney.Sensors.WhiskerFront import whiskerfront
-from Devices.Rodney.Sensors.WhiskerBack import whiskerback
+from Devices.Rodney.Sensors.WhiskerFront import WhiskerFront
+from Devices.Rodney.Sensors.WhiskerBack import WhiskerBack
 import datetime
 import board
 import busio
@@ -22,8 +22,8 @@ class Sensor:
         self.hum = 0.0 #Humidity()
         self.location = Location()
         self.strain8 = Strain8()
-        self.WhiskerFront =  whiskerfront()
-        self.WhiskerBack =  whiskerback()
+        self.WhiskerFront =  WhiskerFront()
+        self.WhiskerBack =  WhiskerBack()
         self.imu_angle = IMU()
         self.load_cell_height = HeightPoT()
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")

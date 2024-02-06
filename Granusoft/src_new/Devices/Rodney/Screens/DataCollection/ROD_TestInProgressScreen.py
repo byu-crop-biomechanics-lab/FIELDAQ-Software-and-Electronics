@@ -82,6 +82,8 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.test_sensor = Sensor()
         self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
         self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.graph1 = self.ids['graph_test1']
+        self.graph2 = self.ids['graph_test2']
 
         self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
@@ -130,9 +132,10 @@ class ROD_TestInProgressScreen(BaseScreen):
 
         sensor_values = self.test_sensor.get_sensor_data(adc_out=1) # FIXME THIS GETS RAW VOLTAGES
         self.strain8 = sensor_values["strain8"]
-        self.whiskers = sensor_values["whiskers"]
+        self.whiskerFront = sensor_values["WhiskerFront"]
+        self.whiskerBack  = sensor_values['WhiskerBack']
 
-        new_dataset = Dataset(total_time_passed, self.strain8, self.whiskers)
+        new_dataset = Dataset(total_time_passed, self.strain8, self.whiskerFront, self.whiskerBack)
         self.datasets.append(new_dataset)
 
     def on_pre_leave(self):

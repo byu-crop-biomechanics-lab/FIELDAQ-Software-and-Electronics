@@ -15,7 +15,8 @@ class Sensor:
         #self.loc_fake = [40.2463, -111.6475]
         self.loc_fake=[24.52485137129533, 54.434341223292826]
         self.strain8_fake = [0.0, 0.0, 0.0, 0.0]
-        self.whiskers_fake = [0.0, 0.0]
+        self.whiskers_front = 0.0
+        self.whiskers_back  = 0.0
         self.imu_fake = 21.9
         self.elapsed_time = 20
         self.load_cell_height_fake = 95.5
@@ -44,7 +45,8 @@ class Sensor:
         self.sensor_data["Humidity"] = self.hum_fake
         self.sensor_data["Location"] = self.loc_fake
         self.sensor_data["strain8"] = self.strain8_fake
-        self.sensor_data["whiskers"] = self.whiskers_fake
+        self.sensor_data["WhiskerFront"] = self.whiskers_front
+        self.sensor_data["WhiskerBack"] = self.whiskers_back
         self.sensor_data["IMU Angle"] = self.imu_fake
         self.sensor_data["Load Cell Height"] = self.load_cell_height_fake
         return self.sensor_data
