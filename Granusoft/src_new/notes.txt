@@ -1,0 +1,17 @@
+#Todo Lists
+
+Add the ability to manually input the following constants in order to solve for force.
+k, d, c (with 4 versions of each kv1 kv2 kh1 kh2...)
+
+Add function to process the data into force inside testinprogressscreen 
+Nate sent email with data processing file 
+Calculate force horizontally and vertically then vector add together 
+
+
+Possible build a system to calulate the constants using other file that nate sent.... only if we have time 
+
+Fixe github update button 
+adding loading screen when exporting files 
+fix the path that the export initially starts at 
+Try fixing warning on boot up 
+Start documentation by march 1st 
