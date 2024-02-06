@@ -29,7 +29,18 @@ def read_voltage(adc):
 class Strain8:
 
     def __init__(self):
-        pass
+        self.c11 = 0.0
+        self.c12 = 0.0
+        self.c21 = 0.0
+        self.c22 = 0.0
+        self.d11 = 0.0
+        self.d12 = 0.0
+        self.d21 = 0.0
+        self.d22 = 0.0
+        self.k11 = 0.0
+        self.k12 = 0.0
+        self.k21 = 0.0
+        self.k22 = 0.0
     
     # call this function to read all four of the strain gauges x amount of times over x amount of seconds
     # pass in the desired time period over which data will be recorded
