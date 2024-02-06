@@ -1,7 +1,7 @@
 from .connections import *
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
-class Whiskers:
+class WhiskerFront:
 
     def __init__(self):
         self.config = settings()
