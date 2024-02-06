@@ -85,11 +85,6 @@ enabled4 = ADC3.enable(True)
 # Calibrate and zero the ADC's
 time.sleep(3) # wait 3 seconds for zeroing ADCs
 
-print(f'ADC0: {ADC0.read()}')
-print(f'ADC1: {ADC1.read()}')
-print(f'ADC2: {ADC2.read()}')
-print(f'ADC3: {ADC3.read()}')
-
 # Channels for the pot and force sensors
 
 HEIGHT_POT_CHAN = CHAN1
@@ -97,9 +92,6 @@ POT_CHAN = CHAN2
 
 X_LOAD_CHAN = CHAN4
 Y_LOAD_CHAN = CHAN3
-
-STRAIN_1_CHAN = CHAN4
-STRAIN_2_CHAN = CHAN3
 
 # Scaling factor for the force sensor
 FORCE_SENSOR_SCALING = 16 # 3556.1878
