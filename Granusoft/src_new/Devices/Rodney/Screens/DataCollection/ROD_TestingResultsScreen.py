@@ -11,9 +11,9 @@ from Devices.Rodney.Data.TestSingleton import TestSingleton
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from util.elements import *
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 try:
-    from sensors.connections import *
+    from Devices.Rodney.Sensors.connections import *
 except:
     pass
 
@@ -49,7 +49,8 @@ class ROD_TestingResultsScreen(BaseScreen):
         sensor.clear_gps_memory()
 
         # Get notes from config file
-        notes = config.get('notes', {"posttest": []})
+        self.config = settings()
+        notes = self.config.get('notes', {"posttest": [], "pretest": [], "bank":[]})
 
         # Set the data
         self.ids['posttest'].list_data = notes["posttest"]
@@ -62,26 +63,16 @@ class ROD_TestingResultsScreen(BaseScreen):
         self.datasets = ts.get_datasets()
         last_index = len(self.datasets) - 1
 
-        if math.ceil(max(self.datasets[i].pot_angle for i in range(0, len(self.datasets))) / 100) > 0 or math.ceil(max(self.datasets[i].imu_angle for i in range(0, len(self.datasets))) / 100) > 0:
-            self.x_max = math.ceil(max(self.datasets[i].pot_angle for i in range(
-                0, len(self.datasets))) / 100) * 100
-            self.x_max_imu = math.ceil(
-                max(self.datasets[i].imu_angle for i in range(0, len(self.datasets))) / 100) * 100
-        else:
-            self.x_max = 100
-            self.x_max_imu = 100
-        if math.ceil(max(self.datasets[i].x_load for i in range(0, len(self.datasets))) / 5) > 0:
-            self.y_max = math.ceil(
-                max(self.datasets[i].x_load for i in range(0, len(self.datasets))) / 5) * 5
-        else:
-            self.y_max = 5
+        self.x_max = 100
+        self.x_max_imu = 100
+        self.y_max = 5
         self.x_major = int(self.x_max/5)
         self.x_major_imu = int(self.x_max_imu/5)
         self.y_major = int(self.y_max/5)
 
-        self.plot.points = [(self.datasets[i].pot_angle, self.datasets[i].x_load)
+        self.plot.points = [(self.datasets[i].strain8[0], self.datasets[i].strain8[1])
                             for i in range(0, len(self.datasets))]
-        self.plot_imu.points = [(self.datasets[i].imu_angle, self.datasets[i].x_load)
+        self.plot_imu.points = [(self.datasets[i].strain8[2], self.datasets[i].strain8[3])
                                 for i in range(0, len(self.datasets))]
 
         self.xlabel = 'Pot Angle (deg)'
@@ -117,7 +108,7 @@ class ROD_TestingResultsScreen(BaseScreen):
             self.toggle = 1
 
     def check_height_sensor_status(self):
-        if str(config.get('height_sensor', 0)) == "ON":
-            self.next_screen = 'testing_screen_auto'
+        if str(self.config.get('height_sensor', 0)) == "ON":
+            self.next_screen = 'rod_testing_screen_auto'
         else:
-            self.next_screen = 'testing_screen'
+            self.next_screen = 'rod_testing_screen'

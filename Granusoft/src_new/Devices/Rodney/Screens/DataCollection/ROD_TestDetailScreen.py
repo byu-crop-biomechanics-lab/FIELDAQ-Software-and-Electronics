@@ -16,11 +16,11 @@ from Devices.Rodney.Data.TestSingleton import TestSingleton
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from util.elements import *
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 import csv
 import numpy as np
 try:
-    from sensors.connections import *
+    from Devices.Rodney.Sensors.connections import *
 except:
     pass
 
@@ -60,7 +60,7 @@ class ROD_TestDetailScreen(BaseScreen):
         sensor = Sensor()
         sensor.clear_gps_memory()
         self.screenTitle = self.ids['testTitle']
-        
+        self.config = settings()
   
     def on_enter(self):
 

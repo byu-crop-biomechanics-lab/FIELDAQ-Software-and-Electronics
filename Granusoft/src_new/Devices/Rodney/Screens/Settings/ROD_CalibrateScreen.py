@@ -12,7 +12,7 @@ from util.elements import *
 
 import numpy
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 import os
 from util.getKVPath import getKVPath
 
@@ -35,6 +35,7 @@ class ROD_CalibrateScreen(BaseScreen):
 
     def __init__(self, **kwargs):
         super(ROD_CalibrateScreen, self).__init__(**kwargs)
+        self.config = settings()
         self.config_data = {}
         def gui_init(dt):
             self.rod_calibrate_point_screen = self.manager.get_screen('rod_calibrate_point_screen')
@@ -51,7 +52,7 @@ class ROD_CalibrateScreen(BaseScreen):
 
     def set_sensor(self, name):
         self.sensor_name = name
-        self.config_data = config.get('sensors', {})
+        self.config_data = self.config.get('sensors', {})
         if name in self.config_data:
             self.points_list = self.config_data[name]['points_list']
             self.slope = self.config_data[name]['slope']
@@ -113,5 +114,5 @@ class ROD_CalibrateScreen(BaseScreen):
             'intercept': self.intercept,
             'points_list': self.points_list
         }
-        config.set('sensors', self.config_data)
+        self.config.set('sensors', self.config_data)
         return True

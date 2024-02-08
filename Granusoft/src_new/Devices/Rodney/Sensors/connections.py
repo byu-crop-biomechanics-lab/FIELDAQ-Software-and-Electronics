@@ -10,6 +10,8 @@ import adafruit_lis3dh
 #import adafruit_am2320
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
+from cedargrove_nau7802 import NAU7802
+import adafruit_tca9548a
 
 GPIO.setmode(GPIO.BCM)
 i2c = busio.I2C(board.SCL, board.SDA, 115200)
@@ -44,16 +46,44 @@ for pin in GPIO_PINS:
 
 
 # ADC
-ads1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
-ads2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=2)
-CHAN0 = AnalogIn(ads1, ADS.P0)
-CHAN1 = AnalogIn(ads1, ADS.P1)
-CHAN2 = AnalogIn(ads1, ADS.P2)
-CHAN3 = AnalogIn(ads1, ADS.P3)
-CHAN4 = AnalogIn(ads2, ADS.P0)
-CHAN5 = AnalogIn(ads2, ADS.P1)
-CHAN6 = AnalogIn(ads2, ADS.P2)
-CHAN7 = AnalogIn(ads2, ADS.P3)
+onBoardAds1 = ADS.ADS1115(i2c, address=0x49, data_rate = 860, mode=0)
+onBoardAds2 = ADS.ADS1115(i2c, address=0x48, data_rate = 860, mode=0, gain=2)
+CHAN0 = AnalogIn(onBoardAds1, ADS.P0)
+CHAN1 = AnalogIn(onBoardAds1, ADS.P1)
+CHAN2 = AnalogIn(onBoardAds1, ADS.P2)
+CHAN3 = AnalogIn(onBoardAds1, ADS.P3)
+CHAN4 = AnalogIn(onBoardAds2, ADS.P0)
+CHAN5 = AnalogIn(onBoardAds2, ADS.P1)
+CHAN6 = AnalogIn(onBoardAds2, ADS.P2)
+CHAN7 = AnalogIn(onBoardAds2, ADS.P3)
+
+# initialize the multiplexer
+mux = adafruit_tca9548a.PCA9546A(i2c, address=0x70)
+channels = []
+for channel in range(4):
+    if mux[channel].try_lock():
+        addresses = mux[channel].scan()
+        channels = addresses
+        mux[channel].unlock()
+
+# ADC on rodney PCB
+ADC0 = NAU7802(mux[0], address=0x2a, active_channels=2)  # 0
+ADC1 = NAU7802(mux[1], address=0x2a, active_channels=2)  # 1
+ADC2 = NAU7802(mux[2], address=0x2a, active_channels=2)  # 2
+ADC3 = NAU7802(mux[3], address=0x2a, active_channels=2)  # 3
+
+# Set to channel 2 for half bridge, 1 for full bridge
+ADC0.channel = 2
+ADC1.channel = 2
+ADC2.channel = 2
+ADC3.channel = 2
+
+enabled1 = ADC0.enable(True)
+enabled2 = ADC1.enable(True)
+enabled3 = ADC2.enable(True)
+enabled4 = ADC3.enable(True)
+# Calibrate and zero the ADC's
+time.sleep(3) # wait 3 seconds for zeroing ADCs
 
 # Channels for the pot and force sensors
 
@@ -62,9 +92,6 @@ POT_CHAN = CHAN2
 
 X_LOAD_CHAN = CHAN4
 Y_LOAD_CHAN = CHAN3
-
-STRAIN_1_CHAN = CHAN4
-STRAIN_2_CHAN = CHAN3
 
 # Scaling factor for the force sensor
 FORCE_SENSOR_SCALING = 16 # 3556.1878

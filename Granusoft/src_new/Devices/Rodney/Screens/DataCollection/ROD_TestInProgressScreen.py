@@ -14,7 +14,7 @@ from Devices.Rodney.Sensors import Sensor
 from Devices.Rodney.Data.TestSingleton import TestSingleton
 
 from util.BaseScreen import BaseScreen
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.elements import *
 import datetime
 import time
@@ -54,6 +54,7 @@ class ROD_TestInProgressScreen(BaseScreen):
     start_timestamp = datetime.datetime.now().strftime("%I:%M:%S %p")
 
     def on_pre_enter(self):
+        self.config = settings()
         self.test_time = 0
         self.temperature = 0
         self.humidity = 0
@@ -81,6 +82,8 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.test_sensor = Sensor()
         self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
         self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.graph1 = self.ids['graph_test1']
+        self.graph2 = self.ids['graph_test2']
 
         self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
@@ -109,43 +112,41 @@ class ROD_TestInProgressScreen(BaseScreen):
             self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
             last_index = len(self.datasets) - 1
             
+            # Setting the min and max of the visual plot
             self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
-            self.y_min1 = max(self.y_min1, math.ceil(self.datasets[last_index].strain1)*0.8)
-            self.y_min2 = max(self.y_min2, math.ceil(self.datasets[last_index].strain2)*0.8)
-            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].strain1)*1.2)
-            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].strain2)*1.2)
+            self.y_min1 = max(self.y_min1, math.ceil(self.datasets[last_index].strain8[0])*0.8)
+            self.y_min2 = max(self.y_min2, math.ceil(self.datasets[last_index].strain8[1])*0.8)
+            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].strain8[0])*1.2)
+            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].strain8[1])*1.2)
             
 
             self.x_major = int((self.x_max-self.x_min)/5)
             self.y_major1 = int((self.y_max1-self.y_min1)/5)
             self.y_major2 = int((self.y_max2-self.y_min2)/5)
 
-            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].strain1) for i in range(0, len(self.datasets), 5)]
-            self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].strain2) for i in range(0, len(self.datasets), 5)]
+            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].strain8[0]) for i in range(0, len(self.datasets), 5)]
+            self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].strain8[1]) for i in range(0, len(self.datasets), 5)]
             
             self.graph1.add_plot(self.plot1)
             self.graph2.add_plot(self.plot2)
 
         sensor_values = self.test_sensor.get_sensor_data(adc_out=1) # FIXME THIS GETS RAW VOLTAGES
-        self.x_load = sensor_values["X Load"]
-        self.y_load = sensor_values["Y Load"]
-        self.pot_angle = sensor_values["Pot Angle"]
-        self.imu_angle = sensor_values["IMU Angle"]
-        self.strain1 = sensor_values["Strain 1"]
-        self.strain2 = sensor_values["Strain 2"]
+        self.strain8 = sensor_values["strain8"]
+        self.whiskerFront = sensor_values["WhiskerFront"]
+        self.whiskerBack  = sensor_values['WhiskerBack']
 
-        new_dataset = Dataset(total_time_passed, self.x_load, self.y_load, self.pot_angle, self.imu_angle, self.data_rate, self.strain1, self.strain2)
+        new_dataset = Dataset(total_time_passed, self.strain8, self.whiskerFront, self.whiskerBack)
         self.datasets.append(new_dataset)
 
     def on_pre_leave(self):
         self.event.cancel()
         ts = TestSingleton()
         ts.clear_all()
-        ts.set_height(str(config.get('height', "")))
-        ts.set_plot(str(config.get('plot_num', "")))
-        config.set('break_height', "N/A")
+        ts.set_height(str(self.config.get('height', "")))
+        ts.set_plot(str(self.config.get('plot_num', "")))
+        self.config.set('break_height', "N/A")
 
-        ts.set_operator(str(config.get('operator', "")))
+        ts.set_operator(str(self.config.get('operator', "")))
         ts.set_timestamp(self.start_timestamp)
         ts.set_datasets(self.datasets)
         self.datasets = []

@@ -13,7 +13,7 @@ from kivy.uix.popup import Popup
 
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.elements import *
 
 import datetime
@@ -49,13 +49,14 @@ class ROD_TestingScreenAuto(BaseScreen):
         self.event = Clock.schedule_interval(self.update_time, ONE_SEC)
         self.event2 = Clock.schedule_interval(self.update_height, HEIGHT_INTERVAL)
         self.load_cell_height = self.get_load_cell_sensor_height()
-        config.set('height', float(self.load_cell_height))
-        self.plot = str(config.get('plot_num', 0))
-        self.operator = str(config.get('operator', 'N/A'))
-        self.folder = str(config.get('folder', 'N/A'))
+        self.config = settings()
+        self.config.set('height', float(self.load_cell_height))
+        self.plot = str(self.config.get('plot_num', 0))
+        self.operator = str(self.config.get('operator', 'N/A'))
+        self.folder = str(self.config.get('folder', 'N/A'))
         self.current_date = datetime.date.today().strftime("%d/%m/%Y")
         # Get notes from config file
-        notes = config.get('notes', {
+        notes = self.config.get('notes', {
             "pretest": [],
             "posttest": [],
             "bank": []
@@ -91,5 +92,5 @@ class ROD_TestingScreenAuto(BaseScreen):
     #                 os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
     #             except:
     #                 print("USB Not Mounted")
-    #         self._popup = SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
+    #         self._popup = ROD_SaveConfirmDialog(save=self.usbSave, pathSelector=self.pathSelector, cancel=self.dismiss_popup)
     #         self._popup.open()

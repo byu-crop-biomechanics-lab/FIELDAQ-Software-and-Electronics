@@ -3,7 +3,7 @@
 
 from .connections import *
 from math import acos, floor, degrees
-import configurator as config
+import Devices.Arm.Settings.configurator as config
 
 class IMU:
 

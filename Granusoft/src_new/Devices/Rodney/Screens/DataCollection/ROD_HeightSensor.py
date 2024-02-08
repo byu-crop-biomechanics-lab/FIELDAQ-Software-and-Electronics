@@ -1,14 +1,16 @@
 import os
 from kivy.lang import Builder
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_HeightSensor(BaseScreen):
+    config = settings()
+
     def use_height_sensor_yes(self):
-        config.set('height_sensor',"ON")
+        self.config.set('height_sensor',"ON")
 
     def use_height_sensor_no(self):
-        config.set('height_sensor',"OFF")
+        self.config.set('height_sensor',"OFF")

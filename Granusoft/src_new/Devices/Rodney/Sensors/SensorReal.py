@@ -1,13 +1,12 @@
 #from sensors.Temperature import Temperature
 # from sensors.Humidity import Humidity
 from Devices.Rodney.Sensors.Location import Location
-from Devices.Rodney.Sensors.X_Load import X_Load
-from Devices.Rodney.Sensors.Y_Load import Y_Load
 from Devices.Rodney.Sensors.Pot import Pot
 from Devices.Rodney.Sensors.IMU import IMU
 from Devices.Rodney.Sensors.Height import HeightPoT
-from Devices.Rodney.Sensors.Strain1 import Strain1
-from Devices.Rodney.Sensors.Strain2 import Strain2
+from Devices.Rodney.Sensors.Strain8 import Strain8
+from Devices.Rodney.Sensors.WhiskerFront import WhiskerFront
+from Devices.Rodney.Sensors.WhiskerBack import WhiskerBack
 import datetime
 import board
 import busio
@@ -18,15 +17,13 @@ class Sensor:
 
     def __init__(self):
         self.REAL_DATA = True
-        self.keys = ["Temperature","Humidity","Location","Time","X Load","Y Load","Pot Angle","IMU Angle", "Load Cell Height"]
+        self.keys = ["Temperature","Humidity","Location","Time","strain8","WhiskerFront","WhiskerBack", "IMU Angle", "Load Cell Height"]
         self.temp = 0.0 #Temperature()
         self.hum = 0.0 #Humidity()
         self.location = Location()
-        self.x_load = X_Load()
-        self.y_load = Y_Load()
-        self.strain1 = Strain1()
-        self.strain2 = Strain2()
-        self.pot_angle = Pot()
+        self.strain8 = Strain8()
+        self.WhiskerFront =  WhiskerFront()
+        self.WhiskerBack =  WhiskerBack()
         self.imu_angle = IMU()
         self.load_cell_height = HeightPoT()
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")
@@ -44,11 +41,9 @@ class Sensor:
         self.sensor_data["Location"] = self.location.get_data()
 
     def get_sensor_data(self, adc_out = 0):
-        self.sensor_data["X Load"] = round(self.x_load.get_data(adc_out),4)
-        self.sensor_data["Y Load"] = round(self.y_load.get_data(adc_out),4)
-        self.sensor_data["Strain 1"] = round(self.strain1.get_data(adc_out),4)
-        self.sensor_data["Strain 2"] = round(self.strain2.get_data(adc_out),4)
-        self.sensor_data["Pot Angle"] = round(self.pot_angle.get_data(adc_out),3)
+        self.sensor_data["strain8"] = [round(strain, 4) for strain in self.strain8.read_gauges()]
+        self.sensor_data["WhiskerFront"] = round(self.WhiskerFront.get_data(adc_out), 4)
+        self.sensor_data["WhiskerBack"] = round(self.WhiskerBack.get_data(adc_out), 4)
         self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
         self.sensor_data["Load Cell Height"] = round(self.load_cell_height.get_data(adc_out),2)
         return self.sensor_data

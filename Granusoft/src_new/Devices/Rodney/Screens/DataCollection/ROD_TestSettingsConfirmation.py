@@ -7,7 +7,7 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 
 from util.BaseScreen import BaseScreen
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.elements import *
 from util.getKVPath import getKVPath
 import os
@@ -18,10 +18,18 @@ class ROD_TestSettingsConfirmation(BaseScreen):
     height_num = StringProperty("N/A")
     plot = StringProperty("N/A")
     operator = StringProperty("N/A")
+    folder = StringProperty("Default")
 
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         list of notes. Show the default buttons."""
-        self.height_num = str(config.get('height',0))
-        self.plot = str(config.get('plot_num',0))
-        self.operator = str(config.get('operator','N/A'))
+        self.config = settings()
+        self.height_num = str(self.config.get('height',0))
+        self.plot = str(self.config.get('plot_num',0))
+        self.operator = str(self.config.get('operator','N/A'))
+        self.folder = str(self.config.get('folder','Default'))
+
+    def on_leave(self):
+        """When the screen leaves, save the current notes to the configuration file."""
+        # if "Default" not in os.listdir('Tests/'):
+        #     os.mkdir('Tests/Default')

@@ -5,7 +5,7 @@ screen keyboard that will pop up. The input text box will iniinputally be empty.
 
 from kivy.lang import Builder
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
 import os
@@ -17,6 +17,7 @@ class ROD_NewNoteScreen(BaseScreen):
     def on_pre_enter(self):
         input = self.ids['note']
         input.text = ''
+        self.config = settings()
 
     def on_enter(self):
         """Once the Screen loads, focus the Texinputnput"""
@@ -24,7 +25,7 @@ class ROD_NewNoteScreen(BaseScreen):
         input.focus = True
 
     def save(self):
-        notes = config.get('notes', {
+        notes = self.config.get('notes', {
             "pretest": [],
             "posttest": [],
             "bank": []
@@ -38,7 +39,7 @@ class ROD_NewNoteScreen(BaseScreen):
 
         if valid and not exists:
             notes['bank'].append(input.text)
-            config.set('notes', notes)
+            self.config.set('notes', notes)
             return True
         else:
             input.show_invalid()

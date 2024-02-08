@@ -30,7 +30,7 @@
     bold: True
 
 <ROD_TestInProgressScreen>:
-	name: 'test_in_progress_screen'
+	name: 'rod_test_in_progress_screen'
     GranuContainer:
         GranuContent:
             GridLayout:
@@ -47,7 +47,7 @@
                         text: 'Stop'
                         size_hint_x: .37
                         on_release:
-                            root.move_to('testing_results_screen')
+                            root.move_to('rod_testing_results_screen')
                     ROD_TestInProgressInfoBox:
                         id: test_time_box
                         text: "Test in progress for\n" + str(root.test_time) + " seconds"

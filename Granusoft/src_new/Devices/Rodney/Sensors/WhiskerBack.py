@@ -1,7 +1,7 @@
 from .connections import *
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
-class Pot:
+class WhiskerBack:
 
     def __init__(self):
         self.config = settings()

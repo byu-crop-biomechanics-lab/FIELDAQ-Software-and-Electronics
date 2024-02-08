@@ -1,5 +1,5 @@
 from .connections import *
-import configurator as config
+import Devices.Camera.Settings.configurator as config
 
 class HeightPoT:
 

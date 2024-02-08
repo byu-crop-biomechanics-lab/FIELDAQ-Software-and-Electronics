@@ -1,11 +1,11 @@
 <ROD_RenameFolderScreen>:
-	name: 'rename_folder_screen'
+	name: 'rod_rename_folder_screen'
     GranuContainer:
         GranuSideArea:
             GranuSideButton:
                 text: 'Save'
 	    		on_release:
-	    		    if root.save(): root.back()
+	    		    root.save()
             GranuSideButton:
                 text: 'Cancel'
                 on_release:

@@ -1,10 +1,11 @@
 from .connections import *
-import configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
 class HeightPoT:
 
     def __init__(self):
-        self.config_data = config.get('sensors', {})
+        self.config = settings()
+        self.config_data = self.config.get('sensors', {})
         self.height_pot = 0.0
         self.height_pot_adc = 0.0
         try:

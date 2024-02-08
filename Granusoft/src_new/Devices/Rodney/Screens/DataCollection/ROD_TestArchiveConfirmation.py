@@ -5,6 +5,7 @@ set of buttons so it is very obvious there was a change in screen.
 """
 
 import os
+import json
 
 from kivy.lang import Builder
 
@@ -17,12 +18,15 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_TestArchiveConfirmation(BaseScreen):
     def on_pre_enter(self):
-        self.test_filenames = [f for f in listdir("Tests") if (isfile(join("Tests", f)) and f != ".gitignore")]
+        with open('Devices/Rodney/Settings/config.json') as f:
+            data = json.load(f)
+            self.current_folder = data['selected_folder']
+        self.test_filenames = [f for f in listdir("Tests/" + self.current_folder) if (isfile(join("Tests/" + self.current_folder, f)) and f != ".gitignore")]
 
     def archive_all(self):
         for name in self.test_filenames:
             if name != '.gitignore':
-                os.rename('Tests/' + name, 'TestArchive/' + name)
+                os.rename('Tests/' + self.current_folder + "/" + name, 'TestArchive/' + name)
         super(ROD_TestArchiveConfirmation, self).back()
 
     def cancel(self):

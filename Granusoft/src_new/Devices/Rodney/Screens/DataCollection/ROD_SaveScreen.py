@@ -7,10 +7,10 @@ from Devices.Rodney.Data.TestSingleton import TestSingleton
 from util.BaseScreen import BaseScreen
 from kivy.properties import StringProperty
 from util.elements import *
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 import csv
 try:
-    from sensors.connections import *
+    from Devices.Rodney.Sensors.connections import *
 except:
     pass
 
@@ -25,11 +25,12 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 
 class ROD_SaveScreen(BaseScreen):
+    config = settings()
     use_height_sensor = config.get('height_sensor', 0)
 
     def on_pre_enter(self):
         """Prior to the screen loading, check if barcode needs to be scanned"""
-        use_barcode = config.get('barcode_scan', "OFF")
+        use_barcode = self.config.get('barcode_scan', "OFF")
         barcode = self.ids['barcode']
         barcode.text = ""
 
@@ -60,10 +61,10 @@ class ROD_SaveScreen(BaseScreen):
 
         ts = TestSingleton()
         self.datasets = ts.get_datasets()
-        ts.set_break_height(str(config.get('break_height', 0)))
+        ts.set_break_height(str(self.config.get('break_height', 0)))
 
         # Prepare the notes
-        notes = config.get('notes', {
+        notes = self.config.get('notes', {
             "pretest": [],
             "bank": []
         })
@@ -72,15 +73,15 @@ class ROD_SaveScreen(BaseScreen):
         dt = datetime.datetime.now()
 
         # Sets the filename to save the csv file as
-        folder_name = 'Tests/'+str(config.get('folder', 0))
+        folder_name = 'Tests/'+str(self.config.get('folder', 0))
 
         #get mac address
         mac_address = gma()
 
         #try:
-        config.set('curr_test_num', (config.get('curr_test_num', 0) + 1))
-        filename = folder_name+'/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '_P' + str(config.get('plot_num', 0)) \
-        + '_T' + str(config.get('curr_test_num', 0)).zfill(2) + '.csv'
+        self.config.set('curr_test_num', (self.config.get('curr_test_num', 0) + 1))
+        filename = folder_name+'/' + dt.strftime('%Y_%m_%d_%H_%M_%S') + '_P' + str(self.config.get('plot_num', 0)) \
+        + '_T' + str(self.config.get('curr_test_num', 0)).zfill(2) + '.csv'
             
         try:
             gps.update()
@@ -92,18 +93,18 @@ class ROD_SaveScreen(BaseScreen):
         location = [str("%.7f" % sensor_data["Location"][0]),
                     str("%.7f" % sensor_data["Location"][1])]
 
-        self.config_data = config.get('sensors', {})
-        self.NAMES = ['X Load', 'Y Load', 'IMU Angle', 'Pot Angle', 'Strain 1', 'Strain 2']
-        self.SENSOR = ['LOAD_X', 'LOAD_Y', 'IMU', 'POT', 'STRAIN_1', 'STRAIN_2']
-        self.UNITS = ['Pounds', 'Pounds', 'Deg', 'Deg', 'Volts', 'Volts']
-        self.IDS = ['loadx1', 'loady1', 'imu1', 'pot1', 'strain1', 'strain2']
+        self.config_data = self.config.get('sensors', {})
+        self.NAMES = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back']
+        self.SENSOR = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back']
+        self.UNITS = ['V', 'V', 'V', 'V', 'Deg', 'Deg']
+        self.IDS = ['Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back']
 
         with open(filename, 'w+', newline='') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerow(['----------META DATA----------'])
             writer.writerow(['SOFTWARE VERSION', '2.3.0','DEVICE MAC ADDRESS',mac_address])
             writer.writerow(
-                ['DEVICE OPERATOR', str(config.get('operator', 0))])
+                ['DEVICE OPERATOR', str(self.config.get('operator', 0))])
             writer.writerow(['----------TEST ATTRIBUTES----------'])
             writer.writerow(['FIELD', 'VALUE', 'UNIT'])
             writer.writerow(['YEAR', dt.strftime("%Y")])
@@ -111,8 +112,8 @@ class ROD_SaveScreen(BaseScreen):
             writer.writerow(['DAY', dt.strftime("%d")])
             writer.writerow(
                 ['TIME', self.current_time(), 'Local Time'])
-            writer.writerow(['PLOT', str(config.get('plot_num', 0)), '#'])
-            writer.writerow(['HEIGHT', str(config.get('height', 0)), 'cm'])
+            writer.writerow(['PLOT', str(self.config.get('plot_num', 0)), '#'])
+            writer.writerow(['HEIGHT', str(self.config.get('height', 0)), 'cm'])
             writer.writerow(['BARCODE', str(barcode.text)])
             writer.writerow(['LATITUDE', location[0], 'angular degrees'])
             writer.writerow(['LONGITUDE', location[1], 'angular degrees'])
@@ -130,7 +131,7 @@ class ROD_SaveScreen(BaseScreen):
                 except:
                     writer.writerow(['POST_TEST_NOTE_' + str(i+1), ''])
             writer.writerow(['BREAK_HEIGHT', str(
-                config.get('break_height', 0)), 'cm'])
+                self.config.get('break_height', 0)), 'cm'])
             writer.writerow(['LCA_WEIGTH', '0', 'g'])
             writer.writerow(
                 ['----------SENSOR CALIBRATION DATA (stored_value*A + B = raw_data)------'])
@@ -143,18 +144,17 @@ class ROD_SaveScreen(BaseScreen):
                     writer.writerow([self.SENSOR[j], '1', '0',
                                     self.UNITS[j], self.IDS[j]])
             writer.writerow(['----------TEST DATA-----------'])
-            writer.writerow(['TIME (milliseconds)', 'ANGLE_POT',
-                            'ANGLE_IMU', 'LOAD_X', 'LOAD_Y', 'Strain 1', 'Strain 2'])
+            writer.writerow(['TIME (milliseconds)', 'Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back'])
             datasets = ts.get_datasets()
             for ds in datasets:
                 writer.writerow(
-                    [(ds.timestamp * 1000), ds.pot_angle, ds.imu_angle, ds.x_load, ds.y_load, ds.strain1, ds.strain2])
+                    [(ds.timestamp * 1000), ds.strain8[0], ds.strain8[1], ds.strain8[2], ds.strain8[3], ds.whiskerFront, ds.whiskerBack])
 
         csvFile.close()
 
 
     def check_height_sensor_status(self):
-        if str(config.get('height_sensor', 0)) == "ON":
+        if str(self.config.get('height_sensor', 0)) == "ON":
             self.next_screen = 'rod_testing_screen_auto'
         else:
             self.next_screen = 'rod_testing_screen'

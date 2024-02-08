@@ -6,7 +6,7 @@ from Devices.Rodney.Sensors import Sensor
 from util.BaseScreen import BaseScreen
 from util.elements import *
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.getKVPath import getKVPath
 import os
 
@@ -22,7 +22,8 @@ class ROD_IMUCalibrateScreen(BaseScreen):
     def on_pre_enter(self):
         self.event = Clock.schedule_interval(self.update_data, ONE_SEC / 2)
         self.sensor = Sensor()
-        self.config_data = config.get('sensors', {})
+        self.config = settings()
+        self.config_data = self.config.get('sensors', {})
         if 'IMU Angle' in self.config_data:
             self.offset = self.config_data['IMU Angle']['offset']
         else:
@@ -41,6 +42,6 @@ class ROD_IMUCalibrateScreen(BaseScreen):
         self.config_data['IMU Angle'] = {
             'offset': self.offset
         }
-        config.set('sensors', self.config_data)
+        self.config.set('sensors', self.config_data)
         self.event.cancel()
         return True

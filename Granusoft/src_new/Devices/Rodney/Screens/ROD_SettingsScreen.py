@@ -11,7 +11,7 @@ from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivy.uix.popup import Popup
 
-import Devices.Rodney.Settings.configurator as config
+from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
 
@@ -31,6 +31,9 @@ class SaveDialog(Popup):
     cancel = ObjectProperty(None)
 
 class ROD_SettingsScreen(BaseScreen):
+    def on_pre_enter(self):
+        self.config = settings()
+
     def dismiss_popup(self):
         self._popup.dismiss()
 
@@ -43,11 +46,12 @@ class ROD_SettingsScreen(BaseScreen):
         self._popup.open()
 
     def load(self, path, filename):
-        config.load_from(os.path.join(path, filename))
+        self.config.load_from(os.path.join(path, filename))
         self.dismiss_popup()
+        pass
 
     def save(self, path, filename):
-        config.save_as(os.path.join(path, filename))
+        self.config.save_as(os.path.join(path, filename))
         self.dismiss_popup()
 
     def update_os_git(self):
