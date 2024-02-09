@@ -51,6 +51,10 @@ class ROD_CalibratePointScreen(BaseScreen):
         for i in range(100):
             if self.sensor_name=='Load Cell\nHeight':
                 self.sensor_name = 'Load Cell Height'
+            elif self.sensor_name=='Whisker\nFront':
+                self.sensor_name = 'WhiskerFront'
+            elif self.sensor_name=='Whisker\nBack':
+                self.sensor_name = 'WhiskerBack'
             sensor_data = sensor.get_sensor_data(1)
             vals.append(sensor_data[self.sensor_name])
         med_val = median(vals)

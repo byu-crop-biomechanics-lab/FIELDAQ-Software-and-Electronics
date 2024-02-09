@@ -73,10 +73,10 @@ ADC2 = NAU7802(mux[2], address=0x2a, active_channels=2)  # 2
 ADC3 = NAU7802(mux[3], address=0x2a, active_channels=2)  # 3
 
 # Set to channel 2 for half bridge, 1 for full bridge
-ADC0.channel = 2
-ADC1.channel = 2
-ADC2.channel = 2
-ADC3.channel = 2
+ADC0.channel = 1
+ADC1.channel = 1
+ADC2.channel = 1
+ADC3.channel = 1
 
 enabled1 = ADC0.enable(True)
 enabled2 = ADC1.enable(True)
