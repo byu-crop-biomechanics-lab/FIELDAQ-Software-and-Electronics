@@ -40,12 +40,15 @@
         GranuContent:
             GranuTitle:
                 text: root.sensor_name + ' Calibration'
+                halign: 'center'
             BoxLayout:
                 orientation: 'horizontal'
                 BoxLayout:
                     size_hint_x: 0.3
+                    padding: [20, 20, 20, 20]  # Padding inside the BoxLayout: [left, top, right, bottom]
                     orientation: 'vertical'
                     ROD_PointListTitle:
+                        padding: 5
                         text: 'Calibration Points'
                     ROD_PointListTitle:
                         text: '(ADC, Real)'
