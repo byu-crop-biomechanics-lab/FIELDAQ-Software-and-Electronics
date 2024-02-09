@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CROP_BYU
+Exec=/home/caleb/projects/FIELDAQ-Software-and-Electronics/crop.sh
+Icon=/home/caleb/projects/FIELDAQ-Software-and-Electronics/crop.png
+Terminal=true
+Comment=My custom script launcher
+Categories=Utility;
+
