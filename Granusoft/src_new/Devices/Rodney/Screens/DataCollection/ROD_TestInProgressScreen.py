@@ -73,8 +73,8 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.x_min = 0
         self.y_min1 = 0
         self.y_min2 = 0
-        self.y_max1 = 100
-        self.y_max2 = 100
+        self.y_max1 = 1
+        self.y_max2 = 1
         self.x_major = int((self.x_max-self.x_min)/5)
         self.y_major1 = int((self.y_max1-self.y_min1)/5)
         self.y_major2 = int((self.y_max2-self.y_min2)/5)
