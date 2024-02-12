@@ -58,13 +58,13 @@
                 GridLayout:
                     rows: 2
                     ROD_GraphTitle:
-                        text: 'Strain 1'
+                        text: 'Far Strain (Red - TB, Blue - LR)'
                     Graph:
                         id: graph_test1
                         plot: MeshLinePlot
                         background_color: 0, 0, 0, 1
                         xlabel:'Time (s)'
-                        ylabel:'Angle (pot)'
+                        ylabel:'Voltage'
                         x_ticks_major:root.x_major
                         y_ticks_major:root.y_major1
                         y_grid_label:True
@@ -79,13 +79,13 @@
                 GridLayout:
                     rows: 2
                     ROD_GraphTitle:
-                        text: 'Strain 2'
+                        text: 'Close Strain (Red - TB, Blue - LR)'
                     Graph:
                         id: graph_test2
                         plot: MeshLinePlot
                         background_color: 0, 0, 0, 1
                         xlabel:'Time (s)'
-                        ylabel:'X Load (lbs)'
+                        ylabel:'Voltage'
                         x_ticks_major:root.x_major
                         y_ticks_major:root.y_major2
                         y_grid_label:True

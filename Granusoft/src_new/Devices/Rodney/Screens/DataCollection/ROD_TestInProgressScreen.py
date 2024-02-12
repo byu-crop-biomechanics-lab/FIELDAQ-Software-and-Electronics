@@ -19,6 +19,7 @@ from util.elements import *
 import datetime
 import time
 import math
+import numpy as np
 
 from kivy.garden.graph import MeshLinePlot
 from util.getKVPath import getKVPath
@@ -71,64 +72,68 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.start_time = datetime.datetime.now()
         self.datasets = []
         self.x_min = 0
-        self.y_min1 = 0
-        self.y_min2 = 0
-        self.y_max1 = 1
-        self.y_max2 = 1
+        self.x_max = 20
+        self.y_min1 = -6.6
+        self.y_min2 = -6.6
+        self.y_max1 = 6.6
+        self.y_max2 = 6.6
         self.x_major = int((self.x_max-self.x_min)/5)
         self.y_major1 = int((self.y_max1-self.y_min1)/5)
         self.y_major2 = int((self.y_max2-self.y_min2)/5)
         self.datasets = []
         self.test_sensor = Sensor()
-        self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
-        self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
+        self.plot1 = MeshLinePlot(color=[1, 0, 0, 1])
+        self.plot2 = MeshLinePlot(color=[0, 0, 1, 1])
+        self.plot3 = MeshLinePlot(color=[1, 0, 0, 1])
+        self.plot4 = MeshLinePlot(color=[0, 0, 1, 1])
         self.graph1 = self.ids['graph_test1']
         self.graph2 = self.ids['graph_test2']
 
+        self.plot1.points = []
+        self.plot2.points = []
+        self.plot3.points = []
+        self.plot4.points = []
+        self.graph1.add_plot(self.plot1)
+        self.graph1.add_plot(self.plot2)
+        self.graph2.add_plot(self.plot3)
+        self.graph2.add_plot(self.plot4)
+
         self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
-    def find_max_x_load(self):
-        max = 0
-        for dataset in self.datasets:
-            if(dataset.x_load > max):
-                max = dataset.x_load
-        return max
 
     def update_dataset(self, obj):
         self.second_counter += 1
         time_delta = datetime.datetime.now() - self.start_time
         total_time_passed = time_delta.seconds + (time_delta.microseconds * .000001)
         self.test_time = time_delta.seconds
-        if self.second_counter >= SECOND_CAP/2:
+        if len(self.datasets) != 0 and self.second_counter >= 5: # delay to allow plots to update
             self.double_counter += 1
             self.second_counter = 0
-            self.graph1 = self.ids['graph_test1']
-            self.graph2 = self.ids['graph_test2']
-            self.graph1.remove_plot(self.plot1)
-            self.graph2.remove_plot(self.plot2)
             self.graph1._clear_buffer()
             self.graph2._clear_buffer()
-            self.plot1 = MeshLinePlot(color=[1, 1, 1, 1])
-            self.plot2 = MeshLinePlot(color=[1, 1, 1, 1])
-            last_index = len(self.datasets) - 1
             
             # Setting the min and max of the visual plot
-            self.x_max = math.ceil(self.datasets[last_index].timestamp / 5) * 5
-            self.y_min1 = max(self.y_min1, math.ceil(self.datasets[last_index].strain8[0])*0.8)
-            self.y_min2 = max(self.y_min2, math.ceil(self.datasets[last_index].strain8[1])*0.8)
-            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[last_index].strain8[0])*1.2)
-            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[last_index].strain8[1])*1.2)
-            
+            self.x_max = max(20, math.ceil(self.datasets[-1].timestamp / 5) * 5) # set plot x to 20 or larger
+            self.x_min = max(0, self.x_max - 20) # only show last 20 seconds
 
+            self.y_min1 = min(self.y_min1, math.ceil(self.datasets[-1].strain8[0])*1.2)
+            self.y_min1 = min(self.y_min1, math.ceil(self.datasets[-1].strain8[1])*1.2)
+            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[-1].strain8[0])*1.2)
+            self.y_max1 = max(self.y_max1, math.ceil(self.datasets[-1].strain8[1])*1.2)
+
+            self.y_min2 = min(self.y_min2, math.ceil(self.datasets[-1].strain8[2])*1.2)
+            self.y_min2 = min(self.y_min2, math.ceil(self.datasets[-1].strain8[3])*1.2)
+            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[-1].strain8[2])*1.2)
+            self.y_max2 = max(self.y_max2, math.ceil(self.datasets[-1].strain8[3])*1.2)
+            
             self.x_major = int((self.x_max-self.x_min)/5)
             self.y_major1 = int((self.y_max1-self.y_min1)/5)
             self.y_major2 = int((self.y_max2-self.y_min2)/5)
 
-            self.plot1.points = [(self.datasets[i].timestamp, self.datasets[i].strain8[0]) for i in range(0, len(self.datasets), 5)]
-            self.plot2.points = [(self.datasets[i].timestamp, self.datasets[i].strain8[1]) for i in range(0, len(self.datasets), 5)]
-            
-            self.graph1.add_plot(self.plot1)
-            self.graph2.add_plot(self.plot2)
+            self.plot1.points.append((self.datasets[-1].timestamp, self.datasets[-1].strain8[0]))
+            self.plot2.points.append((self.datasets[-1].timestamp, self.datasets[-1].strain8[1]))
+            self.plot3.points.append((self.datasets[-1].timestamp, self.datasets[-1].strain8[2]))
+            self.plot4.points.append((self.datasets[-1].timestamp, self.datasets[-1].strain8[3]))
 
         sensor_values = self.test_sensor.get_sensor_data(adc_out=1) # FIXME THIS GETS RAW VOLTAGES
         self.strain8 = sensor_values["strain8"]
@@ -151,6 +156,8 @@ class ROD_TestInProgressScreen(BaseScreen):
         ts.set_datasets(self.datasets)
         self.datasets = []
         self.graph1.remove_plot(self.plot1)
+        self.graph1.remove_plot(self.plot2)
         self.graph1._clear_buffer()
-        self.graph2.remove_plot(self.plot2)
+        self.graph2.remove_plot(self.plot3)
+        self.graph2.remove_plot(self.plot4)
         self.graph2._clear_buffer()
