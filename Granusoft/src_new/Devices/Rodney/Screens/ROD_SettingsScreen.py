@@ -4,12 +4,15 @@ Folder, Notes
 """
 
 import os
+import sys
+import subprocess
 
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivy.uix.popup import Popup
+import subprocess
 
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
@@ -55,8 +58,16 @@ class ROD_SettingsScreen(BaseScreen):
         self.dismiss_popup()
 
     def update_os_git(self):
-        os.system("git pull")
-        os.system("python3 main.py")
+        try:
+            # Run git pull and wait for it to finish
+            subprocess.call(['git', 'pull'])
+
+            # Restart the program
+            os.execvp('python3', ['python3'] + sys.argv)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+
 
     def update_os_usb(self):
         os.system("sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /mnt/usbStick")
