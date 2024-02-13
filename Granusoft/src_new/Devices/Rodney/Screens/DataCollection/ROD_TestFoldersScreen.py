@@ -37,10 +37,6 @@ class ROD_Folder(SingleSelectableListBehavior, Label):
     pass
 
 
-class ROD_NavButton(Button):
-    pass
-
-
 class ROD_FolderList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]

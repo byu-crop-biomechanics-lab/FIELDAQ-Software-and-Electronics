@@ -35,10 +35,6 @@ class ARM_Folder(SingleSelectableListBehavior, Label):
     pass
 
 
-class ARM_NavButton(Button):
-    pass
-
-
 class ARM_FolderList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]

@@ -35,11 +35,6 @@ FOLDERNAME = "Tests/"+str(config.get('selected_folder',0))
 class DAR_Folder(SingleSelectableListBehavior, Label):
     pass
 
-
-class DAR_NavButton(Button):
-    pass
-
-
 class DAR_FolderList(SingleSelectableList):
     def update(self, k, val):
         self.data = [{'text': str(x)} for x in self.list_data]
