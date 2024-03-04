@@ -18,10 +18,10 @@ class WhiskerBack:
     def get_data(self, adc_out = 0):
         try:
             if adc_out == 1:
-                self.pot_adc = POT_CHAN.value
+                self.pot_adc = CHAN2.value
                 return self.pot_adc
             else:
-                self.pot = (POT_CHAN.value * self.slope) + self.intercept
+                self.pot = (CHAN2.value * self.slope) + self.intercept
                 return self.pot
         except:
             if adc_out == 1:
