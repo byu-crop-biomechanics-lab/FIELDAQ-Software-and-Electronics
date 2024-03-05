@@ -24,11 +24,8 @@ class ROD_SensorButton(Button):
         self.text = name
 
     def on_release(self):
-        if self.name == "IMU Angle":
-            self.parent_screen.move_to('imu_calibrate_screen')
-        else:
-            self.calib_screen.set_sensor(self.name)
-            self.parent_screen.move_to('rod_calibrate_screen')
+        self.calib_screen.set_sensor(self.name)
+        self.parent_screen.move_to('rod_calibrate_screen')
 
 class ROD_SensorsScreen(BaseScreen):
     def __init__(self, **kwargs):
