@@ -2,8 +2,6 @@ from kivy.config import Config as KivyConfig
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
 
-import configurator as config
-
 # Kivy Configuration
 KivyConfig.set('kivy', 'desktop', 0) # Disable OS-specific features for testing
 KivyConfig.set('kivy', 'keyboard_mode', 'systemanddock') # Allow barcode scanner and
@@ -24,6 +22,16 @@ class MainApp(App):
         return sm
 
 if __name__ == "__main__":
-    config.load() # Load our own app preferences
+    import sys
+
+
+    root_directory = sys.base_prefix
+    print("Root Python directory:", root_directory)
+
     # Run the App
-    MainApp().run()
+    try:
+        MainApp().run()
+    except KeyboardInterrupt:
+        print("Closing Application...")
+        sys.exit()
+
