@@ -7,7 +7,7 @@ stored in our settings file .
 
 from kivy.lang import Builder
 
-import Granusoft.src_new.Devices.Arm.settings.configurator as config
+import Granusoft.src.Devices.Arm.settings.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
