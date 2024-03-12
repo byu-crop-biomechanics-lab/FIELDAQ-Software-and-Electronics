@@ -70,6 +70,7 @@ class ROD_ArchiveScreen(BaseScreen):
         self.test_details_button.bind(on_release = self.test_details)
 
     def on_pre_enter(self):
+        self.config = settings()
         self.test_filenames = [f for f in listdir("TestArchive") if (isfile(join("TestArchive", f)) and f != ".gitignore")]
 
         self.default_buttons()
@@ -121,14 +122,14 @@ class ROD_ArchiveScreen(BaseScreen):
         except:
             pass
         try:
-            config.save_as(os.path.join(path + '/' + subFold, configName))
+            self.config.save_as(os.path.join(path + '/' + subFold, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('TestArchive/' + name, path + '/' + subFold + "/" + name)
                     # os.remove('TestArchive/' + name)
                 self.dismiss_popup()
         except:
-            config.save_as(os.path.join(path, configName))
+            self.config.save_as(os.path.join(path, configName))
             for name in self.test_filenames:
                 if name != '.gitignore':
                     copyfile('TestArchive/' + name, path + "/" + name)

@@ -24,6 +24,9 @@ class ROD_TestArchiveConfirmation(BaseScreen):
         self.test_filenames = [f for f in listdir("Tests/" + self.current_folder) if (isfile(join("Tests/" + self.current_folder, f)) and f != ".gitignore")]
 
     def archive_all(self):
+        if not os.path.exists('TestArchive'):
+            os.makedirs('TestArchive', exist_ok=True)
+
         for name in self.test_filenames:
             if name != '.gitignore':
                 os.rename('Tests/' + self.current_folder + "/" + name, 'TestArchive/' + name)

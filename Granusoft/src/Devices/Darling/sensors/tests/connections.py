@@ -14,7 +14,7 @@ from adafruit_ads1x15.analog_in import AnalogIn
 # THIS IS AN EXACT DUPLICATE OF THE CONNECTIONS.PY FILE IN src/sensors
 
 GPIO.setmode(GPIO.BCM)
-i2c = busio.I2C(board.SCL, board.SDA, 115200)
+i2c = busio.I2C(board.SCL, board.SDA)
 uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
 
 # Temperature and Humidity sensor, off of the I2C pins on bottom right of board

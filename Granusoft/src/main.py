@@ -24,10 +24,6 @@ class MainApp(App):
 if __name__ == "__main__":
     import sys
 
-
-    root_directory = sys.base_prefix
-    print("Root Python directory:", root_directory)
-
     # Run the App
     try:
         MainApp().run()

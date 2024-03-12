@@ -22,9 +22,10 @@ class ROD_HeightChangeConfirmation(BaseScreen):
     load_cell_height = StringProperty("N/A")
 
     def on_pre_enter(self):
+        self.config = settings()
         self.load_cell_height = self.get_load_cell_sensor_height()
         self.check_height_change()
-        self.config = settings()
+        
 
     def save_new_height(self):
         self._popup.dismiss()
