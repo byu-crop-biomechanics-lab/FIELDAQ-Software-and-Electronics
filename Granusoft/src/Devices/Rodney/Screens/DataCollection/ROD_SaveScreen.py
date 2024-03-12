@@ -74,6 +74,14 @@ class ROD_SaveScreen(BaseScreen):
 
         # Sets the filename to save the csv file as
         folder_name = 'Tests/'+str(self.config.get('folder', 0))
+        import os
+
+        if not os.path.exists('Tests'):
+            os.makedirs('Tests', exist_ok=True)
+
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name, exist_ok=True)
+            
 
         #get mac address
         mac_address = gma()
