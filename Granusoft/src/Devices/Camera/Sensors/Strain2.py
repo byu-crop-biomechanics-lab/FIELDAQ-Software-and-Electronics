@@ -1,0 +1,30 @@
+from .connections import *
+import Devices.Camera.Settings.configurator as config
+
+class Strain2:
+
+    def __init__(self):
+        self.config_data = config.get('sensors', {})
+        self.load = 0.0
+        self.load_adc = 0.0
+        try:
+            self.slope = self.config_data['Strain 2']['slope']
+            self.intercept = self.config_data['Strain 2']['intercept']
+        except:
+            self.slope = 1.0
+            self.intercept = 0
+
+    def get_data(self, adc_out = 0):
+        try:
+            if adc_out == 1:
+                self.load_adc = STRAIN_2_CHAN.value
+                return self.load_adc
+            else:
+                self.load = (STRAIN_2_CHAN.value * self.slope) + self.intercept
+                return self.load
+        except:
+            if adc_out == 1:
+                return self.load_adc
+            else:
+                print('Failed Strain 2')
+                return self.load

@@ -1,0 +1,39 @@
+<ROD_HeightSensor>:
+    name: 'rod_height_sensor'
+    GranuContainer:
+        GranuContent:
+            GranuTitle:
+                text: 'Does this device have a height sensor?'
+            GridLayout:
+                cols: 3
+                rows: 3
+                spacing: 10
+                row_default_height: self.height/4
+                Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
+                    text: 'No'
+                    size_hint_y: None
+                    height: self.font_size + 40
+                    size_hint_x: 0.25
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
+                    on_release:
+                        root.use_height_sensor_no()
+                        root.move_to('rod_testing_screen') # Move to testing screen
+                Button:
+                	background_color: (.42,.42,0.42,1)
+                	font_size: 25
+                    text: 'Yes'
+                    size_hint_y: None
+                    height: self.font_size + 40
+                    size_hint_x: 0.25
+                	halign: 'center'
+                	valign: 'middle'
+                	markup: True
+                	bold: True
+                    on_release:
+                        root.use_height_sensor_yes()
+                        root.move_to('rod_testing_screen_auto') # Move to testing screen
