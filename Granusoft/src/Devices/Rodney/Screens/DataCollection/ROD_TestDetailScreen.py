@@ -57,10 +57,11 @@ class ROD_TestDetailScreen(BaseScreen):
                 max = dataset.x_load
         return max
     def on_pre_enter(self):
+        self.config = settings()
         sensor = Sensor()
         sensor.clear_gps_memory()
         self.screenTitle = self.ids['testTitle']
-        self.config = settings()
+        
   
     def on_enter(self):
 
@@ -70,7 +71,7 @@ class ROD_TestDetailScreen(BaseScreen):
         self.toggle_button = self.ids['imu_pot_toggle']
         self.toggle_button.bind(on_release = self.toggleButton)
         self.title_Text = self.ids['title_text']
-        foldername = "Tests/"+config.get('selected_folder',0)+'/'
+        foldername = "Tests/"+self.config.get('selected_folder',0)+'/'
         with open(foldername + str(self.fileName)) as testFile:
             readCSV = csv.reader(testFile, delimiter=',')
             testData = 0
