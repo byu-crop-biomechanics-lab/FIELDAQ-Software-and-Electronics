@@ -16,7 +16,7 @@ import os
 from util.getKVPath import getKVPath
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-INTERVAL = .004
+INTERVAL = .5
 SECOND_CAP = 1/INTERVAL
 
 # FIXME: This has not been updated to show strain values, or whisker angles yet, and just has old code in it
@@ -27,29 +27,27 @@ class ROD_LiveFeedScreen(BaseScreen):
     run_count = 0
     transition_to_state = StringProperty("Pause")
 
-    #temperature_label = StringProperty("Temperature")
-    humidity_label = StringProperty("Humidity")
-    location_label = StringProperty("Location")
     time_label = StringProperty("Time")
-    strain1_label = StringProperty("Strain 1, volts")
-    strain2_label = StringProperty("Strain 2, volts")
-    pot_angle_label = StringProperty("Pot Angle")
-    imu_angle_label = StringProperty("IMU Angle")
+    strainAx_label = StringProperty("Strain Ax, volts")
+    strainAy_label = StringProperty("Strain Ay, volts")
+    strainBx_label = StringProperty("Strain Bx, volts")
+    strainBy_label = StringProperty("Strain By, volts")
+    whisker_front_angle_label = StringProperty("Whisker Front \nAngle")
+    whisker_back_angle_label = StringProperty("Whisker Back \nAngle")
     data_rate_label = StringProperty("Data Rate")
-    load_cell_height_label = StringProperty("Load Cell Height")
     current_date_label = StringProperty("Date")
 
     #temperature = StringProperty("0")
-    humidity = StringProperty("0")
-    location = StringProperty("0.00, 0.00")
     time = StringProperty("00:00:00 AM")
-    strain1 = StringProperty("0.00")
-    strain2 = StringProperty("0.00")
-    pot_angle = StringProperty("0")
-    imu_angle = StringProperty("0")
+    strainAx = StringProperty("0.00")
+    strainAy = StringProperty("0.00")
+    strainBx = StringProperty("0.00")
+    strainBy = StringProperty("0.00")
+    whisker_front_angle = StringProperty("0")
+    whisker_back_angle = StringProperty("0")
     data_rate = StringProperty("0")
     current_date = StringProperty("01/01/2000")
-    load_cell_height = StringProperty("0.00")
+
 
     old_time = 0
     xUnits = " lbs"
@@ -70,13 +68,9 @@ class ROD_LiveFeedScreen(BaseScreen):
         if self.run_count >= SECOND_CAP:
             self.sensor.get_header_data()
             sensor_data = self.sensor.get_sensor_data(self.adc_out)
-            #self.temperature = str("%.1f" % sensor_data["Temperature"])
-            #self.humidity = str("%.1f" % sensor_data["Humidity"])
-            self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
             self.current_date = datetime.date.today().strftime("%d/%m/%Y")
-            self.imu_angle = str("%.3f" % sensor_data["IMU Angle"])
-            self.load_cell_height = str("%.2f" % sensor_data["Load Cell Height"])
+            self.whsiker_front_angle = str("%.3f" % sensor_data["IMU Angle"])
             # Calculate Data Acquisition Rate
             now = datetime.datetime.now()
             new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)

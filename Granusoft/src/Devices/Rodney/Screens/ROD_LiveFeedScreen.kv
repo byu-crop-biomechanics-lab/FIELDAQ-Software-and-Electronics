@@ -43,25 +43,25 @@
                     id: time
                     text: root.time_label + ':\n' + root.time
                 ROD_LiveFeedInfoBox:
-                    id: location
-                    size_hint_x: 1.25
-                    text: root.location_label + ':\n' + root.location
-                ROD_LiveFeedInfoBox:
-                    id: strain1
-                    text: root.strain1_label + ':\n' + root.strain1 + root.xUnits
-                ROD_LiveFeedInfoBox:
-                    id: strain2
-                    text: root.strain2_label + ':\n' + root.strain2
-                ROD_LiveFeedInfoBox:
-                    id: load_cell_height
-                    text: root.load_cell_height_label + ':\n' + root.load_cell_height + root.loadCellHeightUnits
-                ROD_LiveFeedInfoBox:
-                    id: pot_angle
-                    text: root.pot_angle_label + ':\n' + root.pot_angle + root.potUnits
-                ROD_LiveFeedInfoBox:
-                    id: imu_angle
-                    text: root.imu_angle_label + ':\n' + root.imu_angle + root.imuUnits
-                ROD_LiveFeedInfoBox:
                     id: cpu_time
                     text: root.data_rate_label + ':\n' + root.data_rate + " Hz"
+                ROD_LiveFeedInfoBox:
+                    id: strainAx
+                    text: root.strainAx_label + ':\n' + root.strainAx + root.xUnits
+                ROD_LiveFeedInfoBox:
+                    id: strainAy
+                    text: root.strainAy_label + ':\n' + root.strainAy
+                ROD_LiveFeedInfoBox:
+                    id: strainBx
+                    text: root.strainBx_label + ':\n' + root.strainBx + root.xUnits
+                ROD_LiveFeedInfoBox:
+                    id: strainAy
+                    text: root.strainBy_label + ':\n' + root.strainBy
+                ROD_LiveFeedInfoBox:
+                    id: whisker_front_angle
+                    text: root.whisker_front_angle_label + ':\n' + root.whisker_front_angle + root.potUnits
+                ROD_LiveFeedInfoBox:
+                    id: whisker_back_angle
+                    text: root.whisker_back_angle_label + ':\n' + root.whisker_back_angle + root.imuUnits
+       
                 
