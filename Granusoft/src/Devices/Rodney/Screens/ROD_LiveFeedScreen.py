@@ -16,7 +16,7 @@ import os
 from util.getKVPath import getKVPath
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-INTERVAL = .5
+INTERVAL = .04
 SECOND_CAP = 1/INTERVAL
 
 # FIXME: This has not been updated to show strain values, or whisker angles yet, and just has old code in it
@@ -28,12 +28,12 @@ class ROD_LiveFeedScreen(BaseScreen):
     transition_to_state = StringProperty("Pause")
 
     time_label = StringProperty("Time")
-    strainAx_label = StringProperty("Strain Ax, volts")
-    strainAy_label = StringProperty("Strain Ay, volts")
-    strainBx_label = StringProperty("Strain Bx, volts")
-    strainBy_label = StringProperty("Strain By, volts")
-    whisker_front_angle_label = StringProperty("Whisker Front \nAngle")
-    whisker_back_angle_label = StringProperty("Whisker Back \nAngle")
+    strainAx_label = StringProperty("Strain Ax\n volts")
+    strainAy_label = StringProperty("Strain Ay\n volts")
+    strainBx_label = StringProperty("Strain Bx\n volts")
+    strainBy_label = StringProperty("Strain By\n volts")
+    whisker_front_angle_label = StringProperty("Whisker Front")
+    whisker_back_angle_label = StringProperty("Whisker Back")
     data_rate_label = StringProperty("Data Rate")
     current_date_label = StringProperty("Date")
 
@@ -66,11 +66,18 @@ class ROD_LiveFeedScreen(BaseScreen):
     def update_values(self, obj):
 
         if self.run_count >= SECOND_CAP:
+            # Get Data Values
             self.sensor.get_header_data()
             sensor_data = self.sensor.get_sensor_data(self.adc_out)
+            self.strain8 = sensor_data["strain8"]
+            self.whiskerFront = sensor_data["WhiskerFront"]
+            self.whisker_front_angle = str(self.whiskerFront)
+            self.whiskerBack  = sensor_data['WhiskerBack']
+            self.whisker_back_angle = str(self.whiskerBack)
+
+            # Calculate Frequency
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
             self.current_date = datetime.date.today().strftime("%d/%m/%Y")
-            self.whsiker_front_angle = str("%.3f" % sensor_data["IMU Angle"])
             # Calculate Data Acquisition Rate
             now = datetime.datetime.now()
             new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
