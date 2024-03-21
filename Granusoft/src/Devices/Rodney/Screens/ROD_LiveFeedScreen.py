@@ -16,8 +16,10 @@ import os
 from util.getKVPath import getKVPath
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-INTERVAL = .04
-SECOND_CAP = 1/INTERVAL
+SAMPLING_RATE = 150
+UPDATE_INTERVAL = 1/SAMPLING_RATE
+SCREEN_REFRESH_RATE = 5 #Maximun refresh rate of kivy plot
+REFRESH_COUNT = SAMPLING_RATE/SCREEN_REFRESH_RATE
 
 # FIXME: This has not been updated to show strain values, or whisker angles yet, and just has old code in it
 
@@ -57,7 +59,7 @@ class ROD_LiveFeedScreen(BaseScreen):
 
 
     def on_pre_enter(self):
-        self.event = Clock.schedule_interval(self.update_values, INTERVAL)
+        self.event = Clock.schedule_interval(self.update_values, UPDATE_INTERVAL)
         self.transition_to_state = "Pause"
         self.sensor.clear_gps_memory()
         self.ids['adc_button_text'].text = 'ADC\nValues'
@@ -65,7 +67,7 @@ class ROD_LiveFeedScreen(BaseScreen):
 
     def update_values(self, obj):
 
-        if self.run_count >= SECOND_CAP:
+        if self.run_count >= REFRESH_COUNT:
             # Get Data Values
             self.sensor.get_header_data()
             sensor_data = self.sensor.get_sensor_data(self.adc_out)
@@ -79,16 +81,23 @@ class ROD_LiveFeedScreen(BaseScreen):
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
             self.current_date = datetime.date.today().strftime("%d/%m/%Y")
             # Calculate Data Acquisition Rate
-            now = datetime.datetime.now()
-            new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
-            time_dif = new_time - self.old_time
-            self.data_rate = str("%.0f" % round(SECOND_CAP/time_dif,2))
-            self.old_time = new_time
+            # now = datetime.datetime.now()
+            # new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
+            # time_dif = new_time - self.old_time
+            # print(time_dif)
+            # self.data_rate = str("%.0f" % round(REFRESH_COUNT/time_dif,2))
+            # self.old_time = new_time
             # Reset run_count
             self.run_count = 0
         else:
             sensor_data = self.sensor.get_sensor_data()
             self.run_count = self.run_count + 1
+
+        now = datetime.datetime.now()
+        new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
+        time_dif = new_time - self.old_time
+        print(time_dif)
+        self.old_time = new_time
 
     def adc_button_press(self):
         adcButton = self.ids['adc_button_text']

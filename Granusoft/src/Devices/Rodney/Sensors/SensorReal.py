@@ -44,8 +44,13 @@ class Sensor:
         self.sensor_data["strain8"] = [round(strain, 4) for strain in self.strain8.read_gauges()]
         self.sensor_data["WhiskerFront"] = round(self.WhiskerFront.get_data(adc_out), 4)
         self.sensor_data["WhiskerBack"] = round(self.WhiskerBack.get_data(adc_out), 4)
-        self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
-        self.sensor_data["Load Cell Height"] = round(self.load_cell_height.get_data(adc_out),2)
+        # self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
+        # self.sensor_data["Load Cell Height"] = round(self.load_cell_height.get_data(adc_out),2)
+        # self.sensor_data["strain8"] = [0, 0, 0, 0]
+        # self.sensor_data["WhiskerFront"] = 0
+        # self.sensor_data["WhiskerBack"] = 0
+        self.sensor_data["IMU Angle"] = 0
+        self.sensor_data["Load Cell Height"] = 0
         return self.sensor_data
 
     def clear_gps_memory(self):

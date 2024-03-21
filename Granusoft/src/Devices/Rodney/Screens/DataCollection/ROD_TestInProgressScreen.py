@@ -27,8 +27,10 @@ import os
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-INTERVAL = .003
-SECOND_CAP = 1/INTERVAL
+SAMPLING_RATE = 150
+UPDATE_INTERVAL = 1/SAMPLING_RATE
+SCREEN_REFRESH_RATE = 60 #Maximun refresh rate of kivy plot
+REFRESH_COUNT = SAMPLING_RATE/SCREEN_REFRESH_RATE
 
 class ROD_TestInProgressScreen(BaseScreen):
     test_time = NumericProperty(0)
@@ -98,7 +100,7 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.graph2.add_plot(self.plot3)
         self.graph2.add_plot(self.plot4)
 
-        self.event = Clock.schedule_interval(self.update_dataset, INTERVAL)
+        self.event = Clock.schedule_interval(self.update_dataset, UPDATE_INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
 
     def update_dataset(self, obj):
@@ -106,7 +108,7 @@ class ROD_TestInProgressScreen(BaseScreen):
         time_delta = datetime.datetime.now() - self.start_time
         total_time_passed = time_delta.seconds + (time_delta.microseconds * .000001)
         self.test_time = time_delta.seconds
-        if len(self.datasets) != 0 and self.second_counter >= 5: # delay to allow plots to update
+        if len(self.datasets) != 0 and self.second_counter >= REFRESH_COUNT: # delay to allow plots to update
             self.double_counter += 1
             self.second_counter = 0
             self.graph1._clear_buffer()
