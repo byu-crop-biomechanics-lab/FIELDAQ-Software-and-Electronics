@@ -81,23 +81,23 @@ class ROD_LiveFeedScreen(BaseScreen):
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
             self.current_date = datetime.date.today().strftime("%d/%m/%Y")
             # Calculate Data Acquisition Rate
-            # now = datetime.datetime.now()
-            # new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
-            # time_dif = new_time - self.old_time
+            now = datetime.datetime.now()
+            new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
+            time_dif = new_time - self.old_time
             # print(time_dif)
-            # self.data_rate = str("%.0f" % round(REFRESH_COUNT/time_dif,2))
-            # self.old_time = new_time
+            self.data_rate = str("%.0f" % round(REFRESH_COUNT/time_dif,2))
+            self.old_time = new_time
             # Reset run_count
             self.run_count = 0
         else:
             sensor_data = self.sensor.get_sensor_data()
             self.run_count = self.run_count + 1
 
-        now = datetime.datetime.now()
-        new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
-        time_dif = new_time - self.old_time
-        print(time_dif)
-        self.old_time = new_time
+        # now = datetime.datetime.now()
+        # new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
+        # time_dif = new_time - self.old_time
+        # print(time_dif)
+        # self.old_time = new_time
 
     def adc_button_press(self):
         adcButton = self.ids['adc_button_text']
