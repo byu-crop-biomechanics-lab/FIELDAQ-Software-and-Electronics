@@ -4,7 +4,7 @@ from .connections import *
 Set global/default values for Reading ADCs: 
 
 """
-num_ADCs = 4                        # number of ADCs in the system
+num_ADCs = 2                        # number of ADCs in the system
 readPeriod = 1                      # seconds
 samplesPerRead = 50                 # number of samples to take per read    
 frequency = 115200
@@ -56,7 +56,6 @@ class Strain8:
         g2 = (read_voltage(ADC1))
         g3 = (read_voltage(ADC2))
         g4 = (read_voltage(ADC3))
-        # time.sleep(delayTime)
 
         # put g1,g2,g3 in a list to return to user
         result = [g1, g2, g3, g4]

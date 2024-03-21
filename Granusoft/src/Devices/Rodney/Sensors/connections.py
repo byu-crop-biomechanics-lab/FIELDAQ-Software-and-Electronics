@@ -59,29 +59,27 @@ CHAN7 = AnalogIn(onBoardAds2, ADS.P3)
 
 # initialize the multiplexer
 mux = adafruit_tca9548a.PCA9546A(i2c, address=0x70)
-channels = []
-for channel in range(4):
+for channel in range(2):
     if mux[channel].try_lock():
         addresses = mux[channel].scan()
-        channels = addresses
         mux[channel].unlock()
 
 # ADC on rodney PCB
 ADC0 = NAU7802(mux[0], address=0x2a, active_channels=2)  # 0
 ADC1 = NAU7802(mux[1], address=0x2a, active_channels=2)  # 1
-ADC2 = NAU7802(mux[2], address=0x2a, active_channels=2)  # 2
-ADC3 = NAU7802(mux[3], address=0x2a, active_channels=2)  # 3
+ADC2 = NAU7802(mux[0], address=0x2a, active_channels=2)  # 2
+ADC3 = NAU7802(mux[1], address=0x2a, active_channels=2)  # 3
 ADC0.poll_rate = 320
 ADC1.poll_rate = 320
 ADC2.poll_rate = 320
 ADC3.poll_rate = 320
-print(ADC0.poll_rate)
 
 # Set to channel 2 for half bridge, 1 for full bridge
+# Use 1 for one channel and 2 for the other channel
 ADC0.channel = 1
 ADC1.channel = 1
-ADC2.channel = 1
-ADC3.channel = 1
+ADC2.channel = 2
+ADC3.channel = 2
 
 ADC0.calibrate()
 ADC1.calibrate()

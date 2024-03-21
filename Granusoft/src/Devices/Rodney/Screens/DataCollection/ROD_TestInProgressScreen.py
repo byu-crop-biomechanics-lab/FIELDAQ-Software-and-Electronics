@@ -29,7 +29,7 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 SAMPLING_RATE = 150
 UPDATE_INTERVAL = 1/SAMPLING_RATE
-SCREEN_REFRESH_RATE = 60 #Maximun refresh rate of kivy plot
+SCREEN_REFRESH_RATE = 5 #Maximun refresh rate of kivy plot
 REFRESH_COUNT = SAMPLING_RATE/SCREEN_REFRESH_RATE
 
 class ROD_TestInProgressScreen(BaseScreen):
