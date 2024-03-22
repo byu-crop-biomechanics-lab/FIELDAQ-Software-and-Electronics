@@ -122,5 +122,5 @@ class ROD_LiveFeedScreen(BaseScreen):
             self.event.cancel()
             self.transition_to_state = "Resume"
         else:
-            self.event = Clock.schedule_interval(self.update_values, INTERVAL)
+            self.event = Clock.schedule_interval(self.update_values, UPDATE_INTERVAL)
             self.transition_to_state = "Pause"
