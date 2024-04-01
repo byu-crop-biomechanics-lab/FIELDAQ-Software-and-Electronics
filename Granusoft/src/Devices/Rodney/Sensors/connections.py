@@ -67,31 +67,36 @@ for channel in range(2):
 # ADC on rodney PCB
 ADC0 = NAU7802(mux[0], address=0x2a, active_channels=2)  # 0
 ADC1 = NAU7802(mux[1], address=0x2a, active_channels=2)  # 1
-ADC2 = NAU7802(mux[0], address=0x2a, active_channels=2)  # 2
-ADC3 = NAU7802(mux[1], address=0x2a, active_channels=2)  # 3
-ADC0.poll_rate = 320
-ADC1.poll_rate = 320
-ADC2.poll_rate = 320
-ADC3.poll_rate = 320
-
-# Set to channel 2 for half bridge, 1 for full bridge
-# Use 1 for one channel and 2 for the other channel
 ADC0.channel = 1
 ADC1.channel = 1
-ADC2.channel = 2
-ADC3.channel = 2
-
-ADC0.calibrate()
-ADC1.calibrate()
-ADC2.calibrate()
-ADC3.calibrate()
-
+time.sleep(0.02)
+ADC0.poll_rate = 320
+ADC1.poll_rate = 320
+ADC0.gain = 64
+ADC1.gain = 64
+ADC0.calibrate('INTERNAL')
+ADC1.calibrate('INTERNAL')
+# ADC0.calibrate('OFFSET')
+# ADC1.calibrate('OFFSET')
 enabled1 = ADC0.enable(True)
 enabled2 = ADC1.enable(True)
-enabled3 = ADC2.enable(True)
-enabled4 = ADC3.enable(True)
-# Calibrate and zero the ADC's
-time.sleep(3) # wait 3 seconds for zeroing ADCs
+
+ADC0.channel = 2
+ADC1.channel = 2
+time.sleep(0.02)
+ADC0.poll_rate = 320
+ADC1.poll_rate = 320
+ADC0.gain = 64
+ADC1.gain = 64
+ADC0.calibrate('INTERNAL')
+ADC1.calibrate('INTERNAL')
+# ADC0.calibrate('OFFSET')
+# ADC1.calibrate('OFFSET')
+enabled3 = ADC0.enable(True)
+enabled4 = ADC1.enable(True)
+
+ADC0.channel = 1
+ADC1.channel = 1
 
 # Channels for the pot and force sensors
 

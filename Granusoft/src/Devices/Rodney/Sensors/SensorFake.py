@@ -14,7 +14,7 @@ class Sensor:
         self.hum_fake = 0
         #self.loc_fake = [40.2463, -111.6475]
         self.loc_fake=[24.52485137129533, 54.434341223292826]
-        self.strain8_fake = [0.0, 0.0, 0.0, 0.0]
+        self.strain8_fake = {'Ax': 0.0, 'Ay': 0.0, 'Bx': 0.0, 'By': 0.0}
         self.whiskers_front = 0.0
         self.whiskers_back  = 0.0
         self.imu_fake = 21.9
@@ -32,10 +32,10 @@ class Sensor:
         self.hum_fake = float("nan")
         self.loc_fake[0] += 0.00000003
         self.loc_fake[1] += 0.00000005
-        self.strain8_fake[0] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
-        self.strain8_fake[1] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
-        self.strain8_fake[2] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
-        self.strain8_fake[3] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
+        self.strain8_fake['Ax'] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
+        self.strain8_fake['Ay'] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
+        self.strain8_fake['Bx'] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
+        self.strain8_fake['By'] = 900 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
         self.whiskers_front = 9000 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
         self.whiskers_back = 9000 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2), 2*90))
         self.imu_fake = 90 + math.fabs(90 - math.fmod(2*(self.elapsed_time - 90/2.1), 2*90))

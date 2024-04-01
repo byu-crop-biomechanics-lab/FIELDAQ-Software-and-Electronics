@@ -18,7 +18,7 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 SAMPLING_RATE = 150
 UPDATE_INTERVAL = 1/SAMPLING_RATE
-SCREEN_REFRESH_RATE = 5 #Maximun refresh rate of kivy plot
+SCREEN_REFRESH_RATE = 60 #Maximun refresh rate of kivy plot
 REFRESH_COUNT = SAMPLING_RATE/SCREEN_REFRESH_RATE
 
 # FIXME: This has not been updated to show strain values, or whisker angles yet, and just has old code in it
@@ -72,6 +72,10 @@ class ROD_LiveFeedScreen(BaseScreen):
             self.sensor.get_header_data()
             sensor_data = self.sensor.get_sensor_data(self.adc_out)
             self.strain8 = sensor_data["strain8"]
+            self.strainAx = str(round(self.strain8['Ax'], 4))
+            self.strainAy = str(round(self.strain8['Ay'], 4))
+            self.strainBx = str(round(self.strain8['Bx'], 4))
+            self.strainBy = str(round(self.strain8['By'], 4))
             self.whiskerFront = sensor_data["WhiskerFront"]
             self.whisker_front_angle = str(self.whiskerFront)
             self.whiskerBack  = sensor_data['WhiskerBack']
@@ -92,12 +96,6 @@ class ROD_LiveFeedScreen(BaseScreen):
         else:
             sensor_data = self.sensor.get_sensor_data()
             self.run_count = self.run_count + 1
-
-        # now = datetime.datetime.now()
-        # new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
-        # time_dif = new_time - self.old_time
-        # print(time_dif)
-        # self.old_time = new_time
 
     def adc_button_press(self):
         adcButton = self.ids['adc_button_text']

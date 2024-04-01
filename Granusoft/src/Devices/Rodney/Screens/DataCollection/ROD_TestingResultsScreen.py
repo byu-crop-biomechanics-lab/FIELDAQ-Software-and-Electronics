@@ -71,9 +71,8 @@ class ROD_TestingResultsScreen(BaseScreen):
         self.x_major_imu = int(self.x_max_imu/5)
         self.y_major = int(self.y_max/5)
 
-        self.plot.points = [(self.datasets[i].strain8[0], self.datasets[i].strain8[1])
-                            for i in range(0, len(self.datasets))]
-        self.plot_imu.points = [(self.datasets[i].strain8[2], self.datasets[i].strain8[3])
+        self.plot.points = [(self.datasets[i].strain8['Ax'], self.datasets[i].strain8['Bx'])                            for i in range(0, len(self.datasets))]
+        self.plot_imu.points = [(self.datasets[i].strain8['Ay'], self.datasets[i].strain8['By'])
                                 for i in range(0, len(self.datasets))]
 
         self.xlabel = 'Time (s)'
