@@ -30,7 +30,7 @@ This was built as a why to allow prcesses to communicated with eachother through
 There are several kivy widgets that are used across all devices. These base models are stored here to be referenced by the other projects. They are not the specific widgets on the screens however they are inherited from to build the current screens. 
 
 # TODO: 
-1. Fix the option to see the contents of a file from the device. It attempts to re-graph the data. However when we changed the variable names and set up of the strain gauges it caused this build process to fail. To fix this I would look under the darling device to see how they did it. Then come back to the rodney, find the new variable names and match what they did. 
+1. Fix the option to see the contents of a file from the device. This is what appears imeedietly after finishing a test or when looking at a file and you click "Test details".  It attempts to re-graph the data. However when we changed the variable names and set up of the strain gauges it caused this build process to fail. To fix this I would look under the darling device to see how they did it. Then come back to the rodney, find the new variable names and match what they did. 
 
 2. Exporting to USB. This function does currently work if you go through "Select location" and find the USB plugged in under the media directory. The save to USB button was hardcoded all over the project by the previous lab and the path that it's using is no longer valid. It goes through the /mount folder however the PI now stores USB devices under /media. So to fix this these hard coded paths need to be changed or you can remove that button and just have the "Select location" option start in the /media folder. 
 
