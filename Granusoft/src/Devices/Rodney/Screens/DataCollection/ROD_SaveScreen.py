@@ -152,11 +152,11 @@ class ROD_SaveScreen(BaseScreen):
                     writer.writerow([self.SENSOR[j], '1', '0',
                                     self.UNITS[j], self.IDS[j]])
             writer.writerow(['----------TEST DATA-----------'])
-            writer.writerow(['TIME (milliseconds)', 'Strain 0', 'Strain 1', 'Strain 2', 'Strain 3', 'Whisker Front', 'Whisker Back'])
+            writer.writerow(['TIME (milliseconds)', 'Strain Ax', 'Strain Bx', 'Strain Ay', 'Strain By', 'Whisker Front', 'Whisker Back'])
             datasets = ts.get_datasets()
             for ds in datasets:
                 writer.writerow(
-                    [(ds.timestamp * 1000), ds.strain8[0], ds.strain8[1], ds.strain8[2], ds.strain8[3], ds.whiskerFront, ds.whiskerBack])
+                    [f'{(ds.timestamp * 1000):.3f}', ds.strain8['Ax'], ds.strain8['Bx'], ds.strain8['Ay'], ds.strain8['By'], ds.whiskerFront, ds.whiskerBack])
 
         csvFile.close()
 

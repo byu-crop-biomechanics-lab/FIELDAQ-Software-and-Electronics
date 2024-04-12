@@ -59,31 +59,44 @@ CHAN7 = AnalogIn(onBoardAds2, ADS.P3)
 
 # initialize the multiplexer
 mux = adafruit_tca9548a.PCA9546A(i2c, address=0x70)
-channels = []
-for channel in range(4):
+for channel in range(2):
     if mux[channel].try_lock():
         addresses = mux[channel].scan()
-        channels = addresses
         mux[channel].unlock()
 
 # ADC on rodney PCB
 ADC0 = NAU7802(mux[0], address=0x2a, active_channels=2)  # 0
 ADC1 = NAU7802(mux[1], address=0x2a, active_channels=2)  # 1
-ADC2 = NAU7802(mux[2], address=0x2a, active_channels=2)  # 2
-ADC3 = NAU7802(mux[3], address=0x2a, active_channels=2)  # 3
-
-# Set to channel 2 for half bridge, 1 for full bridge
 ADC0.channel = 1
 ADC1.channel = 1
-ADC2.channel = 1
-ADC3.channel = 1
-
+time.sleep(0.02)
+ADC0.poll_rate = 320
+ADC1.poll_rate = 320
+ADC0.gain = 64
+ADC1.gain = 64
+ADC0.calibrate('INTERNAL')
+ADC1.calibrate('INTERNAL')
+# ADC0.calibrate('OFFSET')
+# ADC1.calibrate('OFFSET')
 enabled1 = ADC0.enable(True)
 enabled2 = ADC1.enable(True)
-enabled3 = ADC2.enable(True)
-enabled4 = ADC3.enable(True)
-# Calibrate and zero the ADC's
-time.sleep(3) # wait 3 seconds for zeroing ADCs
+
+ADC0.channel = 2
+ADC1.channel = 2
+time.sleep(0.02)
+ADC0.poll_rate = 320
+ADC1.poll_rate = 320
+ADC0.gain = 64
+ADC1.gain = 64
+ADC0.calibrate('INTERNAL')
+ADC1.calibrate('INTERNAL')
+# ADC0.calibrate('OFFSET')
+# ADC1.calibrate('OFFSET')
+enabled3 = ADC0.enable(True)
+enabled4 = ADC1.enable(True)
+
+ADC0.channel = 1
+ADC1.channel = 1
 
 # Channels for the pot and force sensors
 

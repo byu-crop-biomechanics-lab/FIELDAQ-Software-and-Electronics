@@ -57,6 +57,7 @@ class ROD_TestingResultsScreen(BaseScreen):
 
     def on_enter(self):
         self.graph = self.ids['graph_test']
+        self.graph.xmin = 0
         self.plot = MeshLinePlot(color=[1, 1, 1, 1])
         self.plot_imu = MeshLinePlot(color=[1, 1, 1, 1])
         ts = TestSingleton()
@@ -70,12 +71,11 @@ class ROD_TestingResultsScreen(BaseScreen):
         self.x_major_imu = int(self.x_max_imu/5)
         self.y_major = int(self.y_max/5)
 
-        self.plot.points = [(self.datasets[i].strain8[0], self.datasets[i].strain8[1])
-                            for i in range(0, len(self.datasets))]
-        self.plot_imu.points = [(self.datasets[i].strain8[2], self.datasets[i].strain8[3])
+        self.plot.points = [(self.datasets[i].strain8['Ax'], self.datasets[i].strain8['Bx'])                            for i in range(0, len(self.datasets))]
+        self.plot_imu.points = [(self.datasets[i].strain8['Ay'], self.datasets[i].strain8['By'])
                                 for i in range(0, len(self.datasets))]
 
-        self.xlabel = 'Pot Angle (deg)'
+        self.xlabel = 'Time (s)'
         self.xmajor = self.x_major
         self.xmax = self.x_max
 
@@ -94,14 +94,14 @@ class ROD_TestingResultsScreen(BaseScreen):
     def toggle_button(self):
         if  self.toggle:
             self.graph.remove_plot(self.plot_imu)
-            self.xlabel = 'Pot Angle (deg)'
+            self.xlabel = 'Time (s)'
             self.xmajor = self.x_major
             self.xmax = self.x_max
             self.graph.add_plot(self.plot)
             self.toggle = 0
         else:
             self.graph.remove_plot(self.plot)
-            self.xlabel = 'IMU Angle (deg)'
+            self.xlabel = 'Time (s)'
             self.xmajor = self.x_major_imu
             self.xmax = self.x_max_imu
             self.graph.add_plot(self.plot_imu)

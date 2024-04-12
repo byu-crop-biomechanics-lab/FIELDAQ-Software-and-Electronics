@@ -16,8 +16,10 @@ import os
 from util.getKVPath import getKVPath
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
-INTERVAL = .004
-SECOND_CAP = 1/INTERVAL
+SAMPLING_RATE = 150
+UPDATE_INTERVAL = 1/SAMPLING_RATE
+SCREEN_REFRESH_RATE = 60 #Maximun refresh rate of kivy plot
+REFRESH_COUNT = SAMPLING_RATE/SCREEN_REFRESH_RATE
 
 # FIXME: This has not been updated to show strain values, or whisker angles yet, and just has old code in it
 
@@ -27,29 +29,27 @@ class ROD_LiveFeedScreen(BaseScreen):
     run_count = 0
     transition_to_state = StringProperty("Pause")
 
-    #temperature_label = StringProperty("Temperature")
-    humidity_label = StringProperty("Humidity")
-    location_label = StringProperty("Location")
     time_label = StringProperty("Time")
-    strain1_label = StringProperty("Strain 1, volts")
-    strain2_label = StringProperty("Strain 2, volts")
-    pot_angle_label = StringProperty("Pot Angle")
-    imu_angle_label = StringProperty("IMU Angle")
+    strainAx_label = StringProperty("Strain Ax\n volts")
+    strainAy_label = StringProperty("Strain Ay\n volts")
+    strainBx_label = StringProperty("Strain Bx\n volts")
+    strainBy_label = StringProperty("Strain By\n volts")
+    whisker_front_angle_label = StringProperty("Whisker Front")
+    whisker_back_angle_label = StringProperty("Whisker Back")
     data_rate_label = StringProperty("Data Rate")
-    load_cell_height_label = StringProperty("Load Cell Height")
     current_date_label = StringProperty("Date")
 
     #temperature = StringProperty("0")
-    humidity = StringProperty("0")
-    location = StringProperty("0.00, 0.00")
     time = StringProperty("00:00:00 AM")
-    strain1 = StringProperty("0.00")
-    strain2 = StringProperty("0.00")
-    pot_angle = StringProperty("0")
-    imu_angle = StringProperty("0")
+    strainAx = StringProperty("0.00")
+    strainAy = StringProperty("0.00")
+    strainBx = StringProperty("0.00")
+    strainBy = StringProperty("0.00")
+    whisker_front_angle = StringProperty("0")
+    whisker_back_angle = StringProperty("0")
     data_rate = StringProperty("0")
     current_date = StringProperty("01/01/2000")
-    load_cell_height = StringProperty("0.00")
+
 
     old_time = 0
     xUnits = " lbs"
@@ -59,7 +59,7 @@ class ROD_LiveFeedScreen(BaseScreen):
 
 
     def on_pre_enter(self):
-        self.event = Clock.schedule_interval(self.update_values, INTERVAL)
+        self.event = Clock.schedule_interval(self.update_values, UPDATE_INTERVAL)
         self.transition_to_state = "Pause"
         self.sensor.clear_gps_memory()
         self.ids['adc_button_text'].text = 'ADC\nValues'
@@ -67,21 +67,29 @@ class ROD_LiveFeedScreen(BaseScreen):
 
     def update_values(self, obj):
 
-        if self.run_count >= SECOND_CAP:
+        if self.run_count >= REFRESH_COUNT:
+            # Get Data Values
             self.sensor.get_header_data()
             sensor_data = self.sensor.get_sensor_data(self.adc_out)
-            #self.temperature = str("%.1f" % sensor_data["Temperature"])
-            #self.humidity = str("%.1f" % sensor_data["Humidity"])
-            self.location = ('(' + str("%.3f" % sensor_data["Location"][0]) + ', ' + str("%.3f" % sensor_data["Location"][1]) + ')')
+            self.strain8 = sensor_data["strain8"]
+            self.strainAx = str(round(self.strain8['Ax'], 4))
+            self.strainAy = str(round(self.strain8['Ay'], 4))
+            self.strainBx = str(round(self.strain8['Bx'], 4))
+            self.strainBy = str(round(self.strain8['By'], 4))
+            self.whiskerFront = sensor_data["WhiskerFront"]
+            self.whisker_front_angle = str(self.whiskerFront)
+            self.whiskerBack  = sensor_data['WhiskerBack']
+            self.whisker_back_angle = str(self.whiskerBack)
+
+            # Calculate Frequency
             self.time = datetime.datetime.now().strftime("%H:%M:%S %p")
             self.current_date = datetime.date.today().strftime("%d/%m/%Y")
-            self.imu_angle = str("%.3f" % sensor_data["IMU Angle"])
-            self.load_cell_height = str("%.2f" % sensor_data["Load Cell Height"])
             # Calculate Data Acquisition Rate
             now = datetime.datetime.now()
             new_time = (int(now.strftime("%M")) * 60) + int(now.strftime("%S")) + (int(now.strftime("%f"))/1000000)
             time_dif = new_time - self.old_time
-            self.data_rate = str("%.0f" % round(SECOND_CAP/time_dif,2))
+            # print(time_dif)
+            self.data_rate = str("%.0f" % round(REFRESH_COUNT/time_dif,2))
             self.old_time = new_time
             # Reset run_count
             self.run_count = 0
@@ -112,5 +120,5 @@ class ROD_LiveFeedScreen(BaseScreen):
             self.event.cancel()
             self.transition_to_state = "Resume"
         else:
-            self.event = Clock.schedule_interval(self.update_values, INTERVAL)
+            self.event = Clock.schedule_interval(self.update_values, UPDATE_INTERVAL)
             self.transition_to_state = "Pause"
