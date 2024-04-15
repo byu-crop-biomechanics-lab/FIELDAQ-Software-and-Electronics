@@ -1,11 +1,11 @@
 #from sensors.Temperature import Temperature
 # from sensors.Humidity import Humidity
-from sensors.Location import Location
-from sensors.X_Load import X_Load
-from sensors.Y_Load import Y_Load
-from sensors.Pot import Pot
-from sensors.IMU import IMU
-from sensors.Height import HeightPoT
+from Devices.Darling.sensors.Location import Location
+from Devices.Darling.sensors.X_Load import X_Load
+from Devices.Darling.sensors.Y_Load import Y_Load
+from Devices.Darling.sensors.Pot import Pot
+from Devices.Darling.sensors.IMU import IMU
+from Devices.Darling.sensors.Height import HeightPoT
 import datetime
 import board
 import busio

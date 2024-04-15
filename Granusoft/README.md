@@ -1,4 +1,4 @@
-# Plant Stalk Measurement Device Software
+## Plant Stalk Measurement Device Software
 
 To run the software, you must have python3 and Kivy installed.
 
@@ -14,7 +14,3 @@ Navigate to the src/ folder in terminal and run:
 - Add LaTeX's binaries and scripts to your PATH
 - Run the make file in the LaTeX folder to generate a PDF
 
-
-## TODO LIST
-- When you press save when changing the folder name it crashes. Look at the get and set function and the config.json file 
-- Figure out why the config.json is being reset every time the application runs 
