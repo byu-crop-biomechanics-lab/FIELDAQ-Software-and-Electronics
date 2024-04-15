@@ -12,6 +12,7 @@ import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from cedargrove_nau7802 import NAU7802
 import adafruit_tca9548a
+import spidev
 
 GPIO.setmode(GPIO.BCM)
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -97,6 +98,10 @@ enabled4 = ADC1.enable(True)
 
 ADC0.channel = 1
 ADC1.channel = 1
+
+# Connect to SPI
+
+spi = spidev.SpiDev()
 
 # Channels for the pot and force sensors
 
