@@ -21,6 +21,7 @@ class WhiskerFront:
         GPIO.output(SPI_CE0, False)
         time.sleep(0.003)
         out = spi.xfer2([hex_command], self.speed_hz, self.delay_us)
+        print(out)
         time.sleep(0.003)
         spi.close()
         GPIO.output(SPI_CE0, True)
@@ -40,12 +41,13 @@ class WhiskerFront:
     def set_zero_point(self):
         rtrn = self.send_command(self.SET_ZERO_POINT_CMD)
         while rtrn != '80':
-            print('back zero:', rtrn)
+            print('front zero:', rtrn)
             rtrn = self.send_command(self.NO_OP_CMD)
+            time.sleep(1)
 
     def get_data(self, adc_out = 0):
         try:
-            self.angle = self.get_angle()
+            self.angle = self.read_angle()
         except Exception as e:
             print(f'Front Whisker Error: {e}')
             return self.angle

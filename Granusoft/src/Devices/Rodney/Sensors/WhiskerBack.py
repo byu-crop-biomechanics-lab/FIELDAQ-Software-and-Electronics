@@ -45,7 +45,7 @@ class WhiskerBack:
 
     def get_data(self, adc_out = 0):
         try:
-            self.angle = self.get_angle()
+            self.angle = self.read_angle()
         except Exception as e:
             print(f'Back Whisker Error: {e}')
             return self.angle
