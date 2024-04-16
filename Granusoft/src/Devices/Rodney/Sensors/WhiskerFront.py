@@ -7,22 +7,27 @@ class WhiskerFront:
         self.NO_OP_CMD = 0x00
         self.READ_POSITION_CMD = 0x10
         self.SET_ZERO_POINT_CMD = 0x70
-        self.speed_hz = 500000
+        self.speed_hz = 1000000
         self.delay_us = 20
         self.config = settings()
         self.config_data = self.config.get('sensors', {})
         self.angle = 0.0
-        self.set_zero_point()
 
     def send_command(self, hex_command):
         spi.open(0, 0)
         spi.max_speed_hz = self.speed_hz
         spi.mode = 0b00
+        spi.cshigh = False
+        spi.bits_per_word = 8
+        spi.lsbfirst = False
+
         GPIO.output(SPI_CE0, False)
-        time.sleep(0.003)
-        out = spi.xfer2([hex_command], self.speed_hz, self.delay_us)
+        time.sleep(2e-5)
+        spi.writebytes([hex_command])
+        out = spi.readbytes(16)
+        # out = spi.xfer2([hex_command], self.speed_hz, self.delay_us)
         print(out)
-        time.sleep(0.003)
+        time.sleep(2e-5)
         spi.close()
         GPIO.output(SPI_CE0, True)
         return bytes(out).hex()
@@ -39,13 +44,14 @@ class WhiskerFront:
         return int(angle_in_hex_str, 16)
 
     def set_zero_point(self):
+        # Requires that the encoder is power cycled after this command
+        # https://www.cuidevices.com/resource/amt20-v.pdf
         rtrn = self.send_command(self.SET_ZERO_POINT_CMD)
         while rtrn != '80':
             print('front zero:', rtrn)
             rtrn = self.send_command(self.NO_OP_CMD)
-            time.sleep(1)
 
-    def get_data(self, adc_out = 0):
+    def get_data(self, adc_out=0):
         try:
             self.angle = self.read_angle()
         except Exception as e:

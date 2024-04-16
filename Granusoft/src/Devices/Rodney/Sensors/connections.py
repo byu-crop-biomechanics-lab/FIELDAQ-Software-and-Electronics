@@ -102,6 +102,8 @@ ADC1.channel = 1
 # Connect to SPI
 
 spi = spidev.SpiDev()
+GPIO.output(SPI_CE0, True)
+GPIO.output(SPI_CE1, True)
 
 # Channels for the pot and force sensors
 

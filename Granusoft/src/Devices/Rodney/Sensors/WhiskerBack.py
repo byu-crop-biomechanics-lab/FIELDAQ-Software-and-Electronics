@@ -7,23 +7,22 @@ class WhiskerBack:
         self.NO_OP_CMD = 0x00
         self.READ_POSITION_CMD = 0x10
         self.SET_ZERO_POINT_CMD = 0x70
-        self.speed_hz = 500000
+        self.speed_hz = 1000000
         self.delay_us = 20
         self.config = settings()
         self.config_data = self.config.get('sensors', {})
         self.angle = 0.0
-        self.set_zero_point()
 
     def send_command(self, hex_command):
         spi.open(0, 1)
         spi.max_speed_hz = self.speed_hz
         spi.mode = 0b00
-        GPIO.output(SPI_CE0, False)
+        GPIO.output(SPI_CE1, False)
         time.sleep(0.003)
         out = spi.xfer2([hex_command], self.speed_hz, self.delay_us)
         time.sleep(0.003)
         spi.close()
-        GPIO.output(SPI_CE0, True)
+        GPIO.output(SPI_CE1, True)
         return bytes(out).hex()
 
     def read_angle(self):
@@ -38,6 +37,8 @@ class WhiskerBack:
         return int(angle_in_hex_str, 16)
 
     def set_zero_point(self):
+        # Requires that the encoder is power cycled after this command
+        # https://www.cuidevices.com/resource/amt20-v.pdf
         rtrn = self.send_command(self.SET_ZERO_POINT_CMD)
         while rtrn != '80':
             print('back zero:', rtrn)

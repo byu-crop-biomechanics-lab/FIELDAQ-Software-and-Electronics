@@ -43,7 +43,8 @@ class Sensor:
     def get_sensor_data(self, adc_out = 0):
         self.sensor_data["strain8"] = self.strain8.read_gauges()
         self.sensor_data["WhiskerFront"] = round(self.WhiskerFront.get_data(adc_out), 4)
-        self.sensor_data["WhiskerBack"] = round(self.WhiskerBack.get_data(adc_out), 4)
+        # self.sensor_data["WhiskerBack"] = round(self.WhiskerBack.get_data(adc_out), 4)
+        self.sensor_data['WhiskerBack'] = int(0)
         # self.sensor_data["IMU Angle"] = round(self.imu_angle.get_data(adc_out),3)
         # self.sensor_data["Load Cell Height"] = round(self.load_cell_height.get_data(adc_out),2)
         self.sensor_data["IMU Angle"] = 0
