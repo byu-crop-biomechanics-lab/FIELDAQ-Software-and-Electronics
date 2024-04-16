@@ -1,6 +1,10 @@
 from .connections import *
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 
+# NOT WORKING
+# This is likley because the encoders usea 5.0v spi and the board runs off of 3.3v.
+# Need to try this with a new SPI interface then this code should be close to correct.
+
 class WhiskerFront:
 
     def __init__(self):
