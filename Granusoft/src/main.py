@@ -1,6 +1,8 @@
 from kivy.config import Config as KivyConfig
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition, NoTransition
+from kivy.logger import Logger,LOG_LEVELS
+
 
 # Kivy Configuration
 KivyConfig.set('kivy', 'desktop', 0) # Disable OS-specific features for testing
@@ -12,6 +14,7 @@ CLOCK_TYPE = "default"
 KivyConfig.set('kivy', 'kivy_clock', CLOCK_TYPE)
 KivyConfig.set('graphics', 'maxfps', 250)
 KivyConfig.write()
+Logger.setLevel(LOG_LEVELS["debug"])
 
 class GranuScreenManager(ScreenManager):
     pass
