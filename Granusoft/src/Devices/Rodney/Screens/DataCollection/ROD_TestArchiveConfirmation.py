@@ -8,7 +8,7 @@ import os
 import json
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from os import listdir
 from os.path import isfile, join
@@ -22,6 +22,11 @@ class ROD_TestArchiveConfirmation(BaseScreen):
             data = json.load(f)
             self.current_folder = data['selected_folder']
         self.test_filenames = [f for f in listdir("Tests/" + self.current_folder) if (isfile(join("Tests/" + self.current_folder, f)) and f != ".gitignore")]
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestArchiveConfirmation")
 
     def archive_all(self):
         if not os.path.exists('TestArchive'):

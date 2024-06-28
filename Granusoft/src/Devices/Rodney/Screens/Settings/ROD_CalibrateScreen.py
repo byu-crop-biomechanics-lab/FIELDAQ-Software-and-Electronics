@@ -11,7 +11,7 @@ from util.SelectableList import SelectableList, SelectableListBehavior
 from util.elements import *
 
 import numpy
-
+from util.TestLog import TestLog
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 import os
 from util.getKVPath import getKVPath
@@ -41,6 +41,11 @@ class ROD_CalibrateScreen(BaseScreen):
             self.rod_calibrate_point_screen = self.manager.get_screen('rod_calibrate_point_screen')
             self.parent_screen = self
         Clock.schedule_once(gui_init)
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_CalibrateScreen")
 
     def on_pre_enter(self):
         self.points_List = self.ids['point_list']

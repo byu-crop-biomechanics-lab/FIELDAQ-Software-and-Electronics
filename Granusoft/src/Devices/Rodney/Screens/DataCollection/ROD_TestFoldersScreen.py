@@ -10,7 +10,7 @@ from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 from kivy.clock import Clock
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
-
+from util.TestLog import TestLog
 from Devices.Rodney.Data.TestSingleton import TestSingleton
 from shutil import copyfile
 import datetime
@@ -47,6 +47,7 @@ class ROD_TestFoldersScreen(BaseScreen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        self.fp = "/home/raspberry/projects/FIELDAQ-Software-and-Electronics/Granusoft/src/Devices/Rodney/Data/Tests"
         self.config = settings()
         self.back_button = GranuSideButton(text='Back')
         self.back_button.bind(on_release=self.go_back)
@@ -63,8 +64,13 @@ class ROD_TestFoldersScreen(BaseScreen):
         Clock.schedule_once(gui_init)
 
     def on_pre_enter(self):
-        self.test_folder_names = [f for f in listdir("Tests") if (
-            isdir(join("Tests", f)) and f != ".gitignore")]
+        self.test_folder_names = [f for f in listdir(self.fp) if (
+            isdir(join(self.fp, f)) and f != ".gitignore")]
+        
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestFoldersScreen")
 
         self.default_folders_buttons()
 

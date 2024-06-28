@@ -3,7 +3,7 @@ An input text box that, when selected, allows the user to type in the Break Heig
 """
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 import Devices.Darling.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
@@ -22,6 +22,9 @@ class DAR_BreakHeightScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log=TestLog()
+        log.connection("Entered DAR_BreakHeightScreen")
         input = self.ids['break_height']
         input.focus = True
 

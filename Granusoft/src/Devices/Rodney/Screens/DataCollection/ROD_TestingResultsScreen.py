@@ -16,7 +16,7 @@ try:
     from Devices.Rodney.Sensors.connections import *
 except:
     pass
-
+from util.TestLog import TestLog
 from kivy.garden.graph import MeshLinePlot
 from util.getKVPath import getKVPath
 import os 
@@ -56,6 +56,9 @@ class ROD_TestingResultsScreen(BaseScreen):
         self.ids['posttest'].list_data = notes["posttest"]
 
     def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestingResultsScreen")
         self.graph = self.ids['graph_test']
         self.graph.xmin = 0
         self.plot = MeshLinePlot(color=[1, 1, 1, 1])

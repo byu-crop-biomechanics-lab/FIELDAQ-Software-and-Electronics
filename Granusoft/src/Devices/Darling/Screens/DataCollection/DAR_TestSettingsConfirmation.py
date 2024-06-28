@@ -5,7 +5,7 @@ data for the test.
 
 from kivy.lang import Builder
 from kivy.properties import StringProperty
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 import Devices.Darling.configurator as config
 from util.elements import *
@@ -25,3 +25,8 @@ class DAR_TestSettingsConfirmation(BaseScreen):
         self.height_num = str(config.get('height',0))
         self.plot = str(config.get('plot_num',0))
         self.operator = str(config.get('operator','N/A'))
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_TestSettingsConfirmation")

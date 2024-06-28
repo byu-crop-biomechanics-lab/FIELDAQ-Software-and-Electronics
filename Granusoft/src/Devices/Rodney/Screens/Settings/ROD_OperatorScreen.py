@@ -6,7 +6,7 @@ stored in our settings file .
 """
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
@@ -26,6 +26,9 @@ class ROD_OperatorScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering Settings/ROD_OperatorScreen")
         input = self.ids['operator']
         input.focus = True
         #input.select_all()

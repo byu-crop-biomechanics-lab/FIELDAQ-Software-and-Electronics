@@ -23,7 +23,7 @@ from util.elements import *
 import os
 from os import listdir
 from os.path import isfile, join
-
+from util.TestLog import TestLog
 from kivy.garden.graph import Graph, MeshLinePlot
 from util.getKVPath import getKVPath
 import os
@@ -45,6 +45,7 @@ class DAR_TestFoldersScreen(BaseScreen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        self.fp = "/home/raspberry/projects/FIELDAQ-Software-and-Electronics/Granusoft/src/Devices/Darling/Tests"
         self.back_button = GranuSideButton(text='Back')
         self.back_button.bind(on_release=self.go_back)
         self.delete_button = GranuSideButton(text='Delete\nFolder')
@@ -60,13 +61,18 @@ class DAR_TestFoldersScreen(BaseScreen):
         Clock.schedule_once(gui_init)
 
     def on_pre_enter(self):
-        self.test_folder_names = [f for f in listdir("Tests") if (
-            isdir(join("Tests", f)) and f != ".gitignore")]
+        self.test_folder_names = [f for f in listdir(self.fp) if (
+            isdir(join(self.fp, f)) and f != ".gitignore")]
 
         self.default_folders_buttons()
 
         self.ids['folders_list'].list_data = self.test_folder_names
         self.folder_list = self.ids['folders_list']
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_TestFolderScreen")
 
     def go_back(self, obj):
         super(DAR_TestFoldersScreen, self).back()

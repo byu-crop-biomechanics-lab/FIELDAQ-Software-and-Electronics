@@ -12,6 +12,7 @@ from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
 from util.getKVPath import getKVPath
 import os
+from util.TestLog import TestLog
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
@@ -26,6 +27,9 @@ class ROD_HeightScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering ROD_HeightScreen")
         input = self.ids['height']
         input.focus = True
         #input.select_all()
