@@ -8,7 +8,7 @@ from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.elements import *
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_HeightChangeConfirmDialog(Popup):
@@ -20,6 +20,11 @@ class ROD_HeightChangeConfirmation(BaseScreen):
 
     sensor = Sensor()
     load_cell_height = StringProperty("N/A")
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_HeightChangeConfirmation")
 
     def on_pre_enter(self):
         self.config = settings()

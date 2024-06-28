@@ -12,7 +12,7 @@ from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
 from util.elements import *
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_RenameFolderScreen(BaseScreen):
@@ -32,6 +32,9 @@ class ROD_RenameFolderScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering ROD_RenameFolderScreen")
         input = self.ids['folder']
         input.focus = True
 

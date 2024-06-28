@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from Devices.Rodney.Sensors import Sensor
 import datetime
 from Devices.Rodney.Data.TestSingleton import TestSingleton
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from kivy.properties import StringProperty
 from util.elements import *
@@ -41,6 +41,9 @@ class ROD_SaveScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering ROD_SaveScreen")
         barcode = self.ids['barcode']
         barcode.focus = True
 
