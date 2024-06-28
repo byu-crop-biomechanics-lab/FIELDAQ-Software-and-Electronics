@@ -10,7 +10,7 @@ from kivy.properties import ObjectProperty
 from kivy.clock import Clock
 from Devices.Darling.Sensor import Sensor
 from kivy.uix.popup import Popup
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 import Devices.Darling.configurator as config
@@ -81,6 +81,10 @@ class DAR_TestingScreenAuto(BaseScreen):
     def update_height(self,obj):
         self.load_cell_height = self.get_load_cell_sensor_height()
 
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entered TestingScreen")
     def on_leave(self):
         self.event.cancel()
 

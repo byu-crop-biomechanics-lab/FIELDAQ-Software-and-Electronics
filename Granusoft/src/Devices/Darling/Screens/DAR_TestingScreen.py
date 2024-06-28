@@ -8,7 +8,7 @@ from kivy.properties import StringProperty
 from kivy.properties import ListProperty
 from kivy.clock import Clock
 from Devices.Darling.Sensor import Sensor
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 import Devices.Darling.configurator as config
@@ -64,6 +64,10 @@ class DAR_TestingScreen(BaseScreen):
     #     sensor_data = self.sensor.get_sensor_data()
     #     obj = TimezoneFinder()
     #     return obj.timezone_at(lat = sensor_data["Location"][0], lng = sensor_data["Location"][1])
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entered TestingScreen")
 
     def update_time(self,obj):
         # tz = pytz.timezone(self.time_zone) 

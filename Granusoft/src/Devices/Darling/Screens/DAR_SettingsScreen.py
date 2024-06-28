@@ -4,7 +4,7 @@ Folder, Notes
 """
 
 import os
-
+from util.TestLog import TestLog
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
@@ -32,6 +32,11 @@ class DAR_SaveDialog(Popup):
     cancel = ObjectProperty(None)
 
 class DAR_SettingsScreen(BaseScreen):
+    def on_enter(self):
+                
+        log = TestLog()
+        log.connection("Entered SettingScreen") 
+
     def dismiss_popup(self):
         self._popup.dismiss()
 

@@ -13,6 +13,7 @@ from Devices.Darling.Sensor import Sensor
 import datetime
 from util.getKVPath import getKVPath
 import os
+from util.TestLog import TestLog
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
@@ -38,6 +39,8 @@ class DAR_MainScreen(BaseScreen):
             self.ids['warning_text'].text = 'WARNING: Using fake data.  Check console for stack trace.'
 
     def on_enter(self):
+        log = TestLog()
+        log.connection("Entered DAR_MainScreen")
         self.event3 = Clock.schedule_interval(self.update_values, 0.01)
 
     def update_time(self, obj):
