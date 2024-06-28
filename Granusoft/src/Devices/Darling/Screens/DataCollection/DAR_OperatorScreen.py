@@ -6,7 +6,7 @@ stored in our settings file .
 """
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 import Devices.Darling.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
@@ -24,6 +24,9 @@ class DAR_OperatorScreen(BaseScreen):
         input.validate()
 
     def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_settings/OperatorScreen")
         """Once the Screen loads, focus the TextInput"""
         input = self.ids['operator']
         input.focus = True

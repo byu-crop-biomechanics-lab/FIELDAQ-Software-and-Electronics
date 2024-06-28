@@ -7,7 +7,7 @@ from kivy.properties import NumericProperty, StringProperty
 from Devices.Darling.Sensor import Sensor
 import math
 from Devices.Darling.TestSingleton import TestSingleton
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from util.elements import *
@@ -56,6 +56,9 @@ class DAR_TestingResultsScreen(BaseScreen):
         self.ids['posttest'].list_data = notes["posttest"]
 
     def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_TestingResultsScreen")
         self.graph = self.ids['graph_test']
         self.plot = MeshLinePlot(color=[1, 1, 1, 1])
         self.plot_imu = MeshLinePlot(color=[1, 1, 1, 1])

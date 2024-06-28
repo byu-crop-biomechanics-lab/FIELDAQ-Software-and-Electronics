@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from Devices.Darling.Sensor import Sensor
 import datetime
 from Devices.Darling.TestSingleton import TestSingleton
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from kivy.properties import StringProperty
 from util.elements import *
@@ -40,6 +40,9 @@ class DAR_SaveScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log=TestLog()
+        log.connection("Entered DAR_SaveScreen")
         barcode = self.ids['barcode']
         barcode.focus = True
 

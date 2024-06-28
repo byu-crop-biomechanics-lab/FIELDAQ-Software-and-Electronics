@@ -4,7 +4,7 @@ import Devices.Darling.configurator as config
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class DAR_DeleteFolderConfirmation(BaseScreen):
@@ -18,4 +18,9 @@ class DAR_DeleteFolderConfirmation(BaseScreen):
             config.set('folders', folder_list)
         except:
             pass
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_DeleteFolderConfirmation")
 
