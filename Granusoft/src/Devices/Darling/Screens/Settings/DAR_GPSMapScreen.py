@@ -22,12 +22,18 @@ except:
 import csv
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = 5
 
 class DAR_GPSMapScreen(BaseScreen):
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_GPSMapScreen")
+
     sensor = Sensor()
     def update_gps_location(self):
         uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)

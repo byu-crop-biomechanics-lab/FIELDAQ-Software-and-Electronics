@@ -8,7 +8,7 @@ from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.properties import ObjectProperty
 import Devices.Darling.configurator as config
-
+from util.TestLog import TestLog
 from Devices.Darling.TestSingleton import TestSingleton
 from shutil import copyfile
 import datetime
@@ -61,6 +61,7 @@ class DAR_ArchiveScreen(BaseScreen):
 
     def __init__(self, **kwargs):
         super(BaseScreen, self).__init__(**kwargs)
+        self.fp ="/home/raspberry/projects/FIELDAQ-Software-and-Electronics/Granusoft/src/Devices/Darling/TestArchive"
         self.back_button = GranuSideButton(text = 'Back')
         self.back_button.bind(on_release = self.go_back)
         self.remove_button = GranuSideButton(text = 'Remove\nAll')
@@ -71,7 +72,7 @@ class DAR_ArchiveScreen(BaseScreen):
         self.test_details_button.bind(on_release = self.test_details)
 
     def on_pre_enter(self):
-        self.test_filenames = [f for f in listdir("TestArchive") if (isfile(join("TestArchive", f)) and f != ".gitignore")]
+        self.test_filenames = [f for f in listdir(self.fp) if (isfile(join(self.fp, f)) and f != ".gitignore")]
 
         self.default_buttons()
 
@@ -85,6 +86,11 @@ class DAR_ArchiveScreen(BaseScreen):
 
     def dismiss_popup(self):
         self._popup.dismiss()
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_ArchiveScreen")
 
     def export_tests(self, obj):
         if not os.path.ismount(self.USB_TEST_FOLDERS_PATH):

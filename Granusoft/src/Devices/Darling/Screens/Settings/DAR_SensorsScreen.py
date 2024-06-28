@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.uix.button import Button
 from kivy.properties import ObjectProperty
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from Devices.Darling.Sensor import Sensor
 from util.getKVPath import getKVPath
@@ -46,6 +46,11 @@ class DAR_SensorsScreen(BaseScreen):
                 # Sensor name, parent screen (of button), calibration screen
                 self.ids['sensor_list'].add_widget(DAR_SensorButton(s, self, calib_screen))
         Clock.schedule_once(gui_init)
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_SensorsScreen")
 
     def restart_OS(self):
         #os.system("python3 main.py")
