@@ -10,7 +10,7 @@ from kivy.properties import ObjectProperty
 from kivy.clock import Clock
 from Devices.Rodney.Sensors import Sensor
 from kivy.uix.popup import Popup
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from util.StaticList import StaticList
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
@@ -64,6 +64,11 @@ class ROD_TestingScreenAuto(BaseScreen):
         # Set the data
         self.ids['pretest'].list_data = notes["pretest"]
         self.ids['posttest'].list_data = notes["posttest"]
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering Rod_testingScreenAuto")
 
     # def find_time_zone(self):
     #     self.sensor.get_header_data()
