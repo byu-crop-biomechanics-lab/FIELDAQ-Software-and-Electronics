@@ -13,7 +13,7 @@ from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivy.uix.popup import Popup
 import subprocess
-
+from util.TestLog import TestLog
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
@@ -36,6 +36,11 @@ class SaveDialog(Popup):
 class ROD_SettingsScreen(BaseScreen):
     def on_pre_enter(self):
         self.config = settings()
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering Rod_SettingScreen")
 
     def dismiss_popup(self):
         self._popup.dismiss()
