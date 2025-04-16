@@ -7,7 +7,7 @@ stored in our settings file.
 
 from kivy.lang import Builder
 
-
+from util.TestLog import TestLog
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
@@ -27,6 +27,9 @@ class ROD_HeightScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering ROD_HeigthScreen")
         input = self.ids['height']
         input.focus = True
         #input.select_all()

@@ -12,7 +12,7 @@ from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class DAR_FolderScreen(BaseScreen):
@@ -25,6 +25,9 @@ class DAR_FolderScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log=TestLog()
+        log.connection("Entered DAR_CalibrateScreen")
         input = self.ids['folder']
         input.focus = True
 

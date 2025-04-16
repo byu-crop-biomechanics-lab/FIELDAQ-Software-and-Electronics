@@ -9,7 +9,7 @@ from kivy.properties import ListProperty
 from kivy.clock import Clock
 from Devices.Rodney.Sensors import Sensor
 import datetime
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from util.elements import *
 import os
@@ -64,6 +64,11 @@ class ROD_LiveFeedScreen(BaseScreen):
         self.sensor.clear_gps_memory()
         self.ids['adc_button_text'].text = 'ADC\nValues'
         self.adc_out = 0
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering Rod_LiveFeedScreen")
 
     def update_values(self, obj):
 

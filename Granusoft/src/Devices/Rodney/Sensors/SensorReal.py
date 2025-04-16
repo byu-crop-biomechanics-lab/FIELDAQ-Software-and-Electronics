@@ -12,10 +12,13 @@ import board
 import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
+from util.SingletonClass import SingletonClass
+from kivy.logger import Logger
 
-class Sensor:
+class Sensor(SingletonClass):
 
     def __init__(self):
+        Logger.debug('Sensor: init SensorFake')
         self.REAL_DATA = True
         self.keys = ["Temperature","Humidity","Location","Time","strain8","WhiskerFront","WhiskerBack", "IMU Angle", "Load Cell Height"]
         self.temp = 0.0 #Temperature()

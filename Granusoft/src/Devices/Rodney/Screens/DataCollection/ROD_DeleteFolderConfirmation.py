@@ -5,11 +5,17 @@ from util.BaseScreen import BaseScreen
 from util.getKVPath import getKVPath
 import os
 import traceback
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_DeleteFolderConfirmation(BaseScreen):
     
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_DeleteFolderConfirmation")
+
+
     def delete_folder_yes(self):
         self.config = settings()
         folder_list = self.config.get('folders', 0)

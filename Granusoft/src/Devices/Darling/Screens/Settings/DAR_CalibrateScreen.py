@@ -11,7 +11,7 @@ from util.SelectableList import SelectableList, SelectableListBehavior, Selectab
 from util.elements import *
 
 import numpy
-
+from util.TestLog import TestLog
 import Devices.Darling.configurator as config
 from util.getKVPath import getKVPath
 import os
@@ -47,6 +47,12 @@ class DAR_CalibrateScreen(BaseScreen):
         removeButton.bind(on_release = self.remove_point)
         addPointButton = self.ids['add_point_button']
         addPointButton.bind(on_release = self.to_points_screen)
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_CalibrateScreen")
+    
 
     def set_sensor(self, name):
         self.sensor_name = name

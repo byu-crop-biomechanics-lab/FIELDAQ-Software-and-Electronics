@@ -11,7 +11,7 @@ from kivy.lang import Builder
 from util.BaseScreen import BaseScreen
 from os import listdir
 from os.path import isfile, join
-
+from util.TestLog import TestLog
 from util.getKVPath import getKVPath
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
@@ -19,6 +19,11 @@ Builder.load_file(getKVPath(os.getcwd(), __file__))
 class ROD_TestDeleteConfirmation(BaseScreen):
     def on_pre_enter(self):
         self.test_filenames = [f for f in listdir("TestArchive") if (isfile(join("TestArchive", f)) and f != ".gitignore")]
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestDeleteConfirmation")
 
     def remove_all(self):
         for name in self.test_filenames:

@@ -3,7 +3,7 @@ An input text box that, when selected, allows the user to type in the Break Heig
 """
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.FloatInput import FloatInput
@@ -23,6 +23,9 @@ class ROD_BreakHeightScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering ROD_BreakHieghtScreen")
         input = self.ids['break_height']
         input.focus = True
 

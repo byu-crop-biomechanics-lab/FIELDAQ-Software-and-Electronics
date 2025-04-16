@@ -5,7 +5,7 @@ data for the test.
 
 from kivy.lang import Builder
 from kivy.properties import StringProperty
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.elements import *
@@ -29,7 +29,14 @@ class ROD_TestSettingsConfirmation(BaseScreen):
         self.operator = str(self.config.get('operator','N/A'))
         self.folder = str(self.config.get('folder','Default'))
 
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestingSettingsConfirmation")
+
     def on_leave(self):
         """When the screen leaves, save the current notes to the configuration file."""
         # if "Default" not in os.listdir('Tests/'):
         #     os.mkdir('Tests/Default')
+
+    

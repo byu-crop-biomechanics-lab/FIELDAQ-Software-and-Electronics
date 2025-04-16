@@ -27,7 +27,7 @@ except:
 from kivy.garden.graph import Graph, MeshLinePlot
 import os 
 from util.getKVPath import getKVPath
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 ONE_SEC = 1
@@ -64,7 +64,9 @@ class ROD_TestDetailScreen(BaseScreen):
         
   
     def on_enter(self):
-
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestDetailScreen")
         self.graph = self.ids['graph_test']
         self.results_plot = MeshLinePlot(color=[1, 1, 1, 1])
         self.screenTitle.text = str(self.fileName[:-4])

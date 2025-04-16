@@ -9,12 +9,12 @@ from kivy.properties import ListProperty
 from kivy.clock import Clock
 from Devices.Darling.Sensor import Sensor
 import datetime
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from util.elements import *
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = .004
@@ -55,6 +55,10 @@ class DAR_LiveFeedScreen(BaseScreen):
     potUnits = u'\N{DEGREE SIGN}'
     imuUnits = u'\N{DEGREE SIGN}'
     loadCellHeightUnits = 'cm'
+
+    def on_enter(self):
+        log=TestLog()
+        log.connection("Entered DAR_LiveFeedScreen")
 
 
     def on_pre_enter(self):
@@ -111,6 +115,9 @@ class DAR_LiveFeedScreen(BaseScreen):
             self.imuUnits = u'\N{DEGREE SIGN}'
 
     def on_leave(self):
+                
+        log = TestLog()
+        log.connection("Entered DAR_LiveFeedScreen") 
         self.event.cancel()
 
     def transition(self):

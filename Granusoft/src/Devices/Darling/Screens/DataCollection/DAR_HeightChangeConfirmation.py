@@ -8,7 +8,7 @@ import Devices.Darling.configurator as config
 from util.elements import *
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class DAR_HeightChangeConfirmDialog(Popup):
@@ -24,6 +24,11 @@ class DAR_HeightChangeConfirmation(BaseScreen):
     def on_pre_enter(self):
         self.load_cell_height = self.get_load_cell_sensor_height()
         self.check_height_change()
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_HeightChangeConfirmation")
 
     def save_new_height(self):
         self._popup.dismiss()

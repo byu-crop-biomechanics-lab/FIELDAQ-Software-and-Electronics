@@ -1,10 +1,13 @@
 import datetime
 from math import sin
 import math
+from util.SingletonClass import SingletonClass
+from kivy.logger import Logger
 
-class Sensor:
+class Sensor(SingletonClass):
 
     def __init__(self):
+        Logger.debug('Sensor: init SensorFake')
         self.REAL_DATA = False
         self.keys = ["Temperature","Humidity","Location","Time","X Load","Y Load","Pot Angle","IMU Angle","Load Cell Height"]
         self.time = datetime.datetime.now().strftime("%I:%M:%S %p")

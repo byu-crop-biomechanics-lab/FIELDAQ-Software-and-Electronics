@@ -11,7 +11,7 @@ from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_FolderScreen(BaseScreen):
@@ -27,6 +27,9 @@ class ROD_FolderScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering ROD_FolderScreen")
         input = self.ids['folder']
         input.focus = True
 

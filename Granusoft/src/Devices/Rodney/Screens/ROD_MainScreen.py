@@ -13,7 +13,8 @@ from Devices.Rodney.Sensors import Sensor
 import datetime
 import os 
 from util.getKVPath import getKVPath
-
+from util.TestLog import TestLog
+from util.TestLog import TestLog
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
@@ -33,6 +34,10 @@ class ROD_MainScreen(BaseScreen):
     # def __init__(self):
     #     super(MainScreen).__init__()
 
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering Rod_MainScreen")
 
     def on_pre_enter(self):
         #self.time_zone = self.find_time_zone()
@@ -45,6 +50,8 @@ class ROD_MainScreen(BaseScreen):
             self.ids['warning_text'].text = 'WARNING: Using fake data.  Check console for stack trace.'
 
     def on_enter(self):
+        log = TestLog()
+        log.connection("Entered ROD_MainScreen")
         self.event3 = Clock.schedule_interval(self.update_values, 0.01)
 
     def update_time(self, obj):

@@ -6,7 +6,7 @@ in our settings file.
 """
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 import Devices.Darling.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.IntInput import IntInput
@@ -25,6 +25,9 @@ class DAR_PlotScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log=TestLog()
+        log.connection("Entered DAR_settings/PlotScreen")
         input = self.ids['plot_num']
         input.focus = True
         #input.select_all()

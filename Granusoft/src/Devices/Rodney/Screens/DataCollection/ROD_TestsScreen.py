@@ -13,7 +13,7 @@ from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from Devices.Rodney.Data.TestSingleton import TestSingleton
 from shutil import copyfile
 import datetime
-
+from util.TestLog import TestLog
 from kivy.uix.popup import Popup
 
 from util.BaseScreen import BaseScreen
@@ -83,6 +83,11 @@ class ROD_TestsScreen(BaseScreen):
 
         self.ids['tests_list'].list_data = self.test_filenames
         self.test_list = self.ids['tests_list']
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestsScreen")
 
     def go_back(self, obj):
         super(ROD_TestsScreen, self).back()

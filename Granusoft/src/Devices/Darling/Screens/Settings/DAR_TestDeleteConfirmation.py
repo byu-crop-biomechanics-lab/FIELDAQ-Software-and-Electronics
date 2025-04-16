@@ -7,7 +7,7 @@ set of buttons so it is very obvious there was a change in screen.
 import os
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 from util.BaseScreen import BaseScreen
 from os import listdir
 from os.path import isfile, join
@@ -28,3 +28,8 @@ class DAR_TestDeleteConfirmation(BaseScreen):
 
     def cancel(self):
         super(DAR_TestDeleteConfirmation, self).back()
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_TestDeleteConfirmation")

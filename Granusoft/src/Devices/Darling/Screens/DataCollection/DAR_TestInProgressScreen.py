@@ -21,7 +21,7 @@ from util.elements import *
 import datetime
 import time
 import math
-
+from util.TestLog import TestLog
 from kivy.garden.graph import Graph, MeshLinePlot
 from util.getKVPath import getKVPath
 import os
@@ -145,3 +145,8 @@ class DAR_TestInProgressScreen(BaseScreen):
         self.graph1._clear_buffer()
         self.graph2.remove_plot(self.plot2)
         self.graph2._clear_buffer()
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_TestInProgressScreen")

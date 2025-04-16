@@ -23,7 +23,7 @@ try:
     from sensors.connections import *
 except:
     pass
-
+from util.TestLog import TestLog
 from kivy.garden.graph import Graph, MeshLinePlot
 from util.getKVPath import getKVPath
 import os
@@ -63,7 +63,9 @@ class DAR_TestDetailScreen(BaseScreen):
         
   
     def on_enter(self):
-
+        
+        log=TestLog()
+        log.connection("Entered DAR_TestDetailScreen")
         self.graph = self.ids['graph_test']
         self.results_plot = MeshLinePlot(color=[1, 1, 1, 1])
         self.screenTitle.text = str(self.fileName[:-4])

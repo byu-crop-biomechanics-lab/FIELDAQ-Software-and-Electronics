@@ -1,5 +1,5 @@
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 import Devices.Darling.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
@@ -28,6 +28,9 @@ class DAR_CalibratePointScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the Texinputnput"""
+        
+        log=TestLog()
+        log.connection("Entered DAR_CalibratePointScreen")
         input = self.ids['real']
         input.focus = True
 

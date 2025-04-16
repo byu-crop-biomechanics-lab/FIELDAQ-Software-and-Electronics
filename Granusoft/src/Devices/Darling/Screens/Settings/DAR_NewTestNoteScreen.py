@@ -4,7 +4,7 @@ screen keyboard that will pop up. The input text box will iniinputally be empty.
 """
 
 from kivy.lang import Builder
-
+from util.TestLog import TestLog
 import Devices.Darling.configurator as config
 from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
@@ -20,6 +20,9 @@ class DAR_NewTestNoteScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the Texinputnput"""
+        
+        log=TestLog()
+        log.connection("Entered DAR_NewTestNoteScreen")
         input = self.ids['note']
         input.focus = True
 

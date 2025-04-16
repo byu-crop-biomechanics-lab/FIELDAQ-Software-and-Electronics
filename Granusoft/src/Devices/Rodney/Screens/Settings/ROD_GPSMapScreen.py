@@ -22,7 +22,7 @@ except:
 import csv
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 INTERVAL = 5
@@ -47,6 +47,11 @@ class ROD_GPSMapScreen(BaseScreen):
                 gps = adafruit_gps.GPS(uart, debug=False)
                 gps.send_command(b'PMTK184,1')
         self.ids['test_text'].text = 'GPS MEMORY\nCLEARED'
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering GPSMapScreen")
 
     def start_gps_test(self):
         self.ids['test_text'].text = 'GPS TESTING\nIN PROGRESS'

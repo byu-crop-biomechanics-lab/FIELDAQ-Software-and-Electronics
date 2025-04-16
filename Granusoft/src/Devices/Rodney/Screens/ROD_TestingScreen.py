@@ -16,7 +16,7 @@ from util.elements import *
 import datetime
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 ONE_SEC = 1
@@ -63,6 +63,11 @@ class ROD_TestingScreen(BaseScreen):
     #     sensor_data = self.sensor.get_sensor_data()
     #     obj = TimezoneFinder()
     #     return obj.timezone_at(lat = sensor_data["Location"][0], lng = sensor_data["Location"][1])
+        
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering Rod_TestingScreen")
 
     def update_time(self,obj):
         # tz = pytz.timezone(self.time_zone) 

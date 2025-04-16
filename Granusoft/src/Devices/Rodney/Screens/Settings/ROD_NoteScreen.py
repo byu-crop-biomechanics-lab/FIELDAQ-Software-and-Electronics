@@ -1,6 +1,6 @@
 from kivy.lang import Builder
 from kivy.properties import ListProperty
-
+from util.TestLog import TestLog
 from Devices.Rodney.Settings.configurator import SettingsSingleton as settings
 from util.BaseScreen import BaseScreen
 from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
@@ -55,6 +55,11 @@ class ROD_NoteScreen(BaseScreen):
 
         # Add Buttons
         self.default_buttons()
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_NoteScreen")
 
     def _save_config(self):
         '''Save the notes to the configuration file.'''

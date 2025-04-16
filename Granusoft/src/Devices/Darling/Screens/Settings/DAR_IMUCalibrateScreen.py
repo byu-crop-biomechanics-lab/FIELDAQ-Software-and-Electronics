@@ -1,7 +1,7 @@
 from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ListProperty, NumericProperty
-
+from util.TestLog import TestLog
 from Devices.Darling.Sensor import Sensor
 from util.BaseScreen import BaseScreen
 from util.elements import *
@@ -27,6 +27,11 @@ class DAR_IMUCalibrateScreen(BaseScreen):
             self.offset = self.config_data['IMU Angle']['offset']
         else:
             self.offset = 0
+
+    def on_enter(self):
+        
+        log=TestLog()
+        log.connection("Entered DAR_IMUCalibrateScreen")
 
     def set_to_zero(self):
         sensor_data = self.sensor.get_sensor_data(1)

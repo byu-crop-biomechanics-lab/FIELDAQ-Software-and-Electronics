@@ -20,7 +20,7 @@ import datetime
 import time
 import math
 import numpy as np
-
+from util.TestLog import TestLog
 from kivy.garden.graph import MeshLinePlot
 from util.getKVPath import getKVPath
 import os
@@ -103,6 +103,11 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.event = Clock.schedule_interval(self.update_dataset, UPDATE_INTERVAL)
         #ClockBaseInterruptBehavior.interupt_next_only = True
 
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_TestInProgressScreen")
+
     def update_dataset(self, obj):
         self.second_counter += 1
         time_delta = datetime.datetime.now() - self.start_time
@@ -163,3 +168,5 @@ class ROD_TestInProgressScreen(BaseScreen):
         self.graph2.remove_plot(self.plot3)
         self.graph2.remove_plot(self.plot4)
         self.graph2._clear_buffer()
+
+    

@@ -12,7 +12,7 @@ from util.BaseScreen import BaseScreen
 from util.input.StrInput import StrInput
 from util.getKVPath import getKVPath
 import os
-
+from util.TestLog import TestLog
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
 class ROD_OperatorScreen(BaseScreen):
@@ -26,6 +26,9 @@ class ROD_OperatorScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the TextInput"""
+        
+        log = TestLog()
+        log.connection("Entering DataCollection/ROD_OperatorScreen")
         input = self.ids['operator']
         input.focus = True
         #input.select_all()

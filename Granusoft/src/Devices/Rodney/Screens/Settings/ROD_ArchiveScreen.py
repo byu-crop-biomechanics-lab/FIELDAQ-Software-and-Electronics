@@ -21,7 +21,7 @@ from util.elements import *
 import os
 from os import listdir
 from os.path import isfile, join
-
+from util.TestLog import TestLog
 from kivy.garden.graph import Graph, MeshLinePlot
 from util.getKVPath import getKVPath
 
@@ -71,11 +71,16 @@ class ROD_ArchiveScreen(BaseScreen):
 
     def on_pre_enter(self):
         self.config = settings()
-        self.test_filenames = [f for f in listdir("TestArchive") if (isfile(join("TestArchive", f)) and f != ".gitignore")]
+        self.test_filenames = [f for f in listdir("/home/raspberry/projects/FIELDAQ-Software-and-Electronics/Granusoft/src/Devices/Rodney/Data/TestArchive") if (isfile(join("/home/raspberry/projects/FIELDAQ-Software-and-Electronics/Granusoft/src/Devices/Rodney/Data/TestArchive", f)) and f != ".gitignore")]
 
         self.default_buttons()
 
         self.ids['tests_list'].list_data = self.test_filenames
+
+    def on_enter(self):
+        
+        log = TestLog()
+        log.connection("Entering ROD_ArchiveScreen")
 
     def go_back(self, obj):
         super(ROD_ArchiveScreen, self).back()

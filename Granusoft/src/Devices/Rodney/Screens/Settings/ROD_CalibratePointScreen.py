@@ -8,6 +8,7 @@ from kivy.properties import StringProperty
 from statistics import median
 from util.getKVPath import getKVPath
 import os
+from util.TestLog import TestLog
 
 Builder.load_file(getKVPath(os.getcwd(), __file__))
 
@@ -28,6 +29,9 @@ class ROD_CalibratePointScreen(BaseScreen):
 
     def on_enter(self):
         """Once the Screen loads, focus the Texinputnput"""
+        
+        log = TestLog()
+        log.connection("Entering ROD_CalibratePointScreen")
         input = self.ids['real']
         input.focus = True
 

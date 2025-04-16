@@ -1,7 +1,7 @@
 from kivy.lang import Builder
 from kivy.properties import ListProperty
 from kivy.clock import Clock
-
+from util.TestLog import TestLog
 import Devices.Darling.configurator as config
 from util.BaseScreen import BaseScreen
 from util.SelectableList import SelectableList, SelectableListBehavior, SelectableRecycleBoxLayout
@@ -46,6 +46,9 @@ class DAR_TestNotesScreen(BaseScreen):
     def on_pre_enter(self):
         """Before the Screen loads, read the configuration file to get the current
         list of notes. Show the default buttons."""
+        
+        log=TestLog()
+        log.connection("Entered DAR_TestNotesScreen")
         current_notes = config.get('notes', {
             "pretest": [],
             "posttest": [],
